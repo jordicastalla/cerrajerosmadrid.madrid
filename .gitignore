@@ -5,3 +5,7 @@ node_modules/
 .DS_Store
 npm-debug.log*
 .vscode/
+
+# Eixida de compilació: es genera amb npm run build
+dist/
+inventario.md
