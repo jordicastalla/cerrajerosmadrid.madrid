@@ -1,0 +1,452 @@
+---
+import Layout from '@layouts/Layout.astro';
+import PortadaServicio from '@components/PortadaServicio.astro';
+import Capitulo from '@components/Capitulo.astro';
+import Dentado from '@components/ui/Dentado.astro';
+import Faq from '@components/Faq.astro';
+import CtaFinal from '@components/CtaFinal.astro';
+import { empresa, telHref } from '@data/empresa';
+import { servicioPorSlug } from '@data/servicios';
+import { servicioSchema, migas as migasSchema } from '@lib/schema';
+
+const s = servicioPorSlug('reparacion-persianas-cierres-metalicos');
+const ruta = `/${s.slug}/`;
+const migas = [
+  { nombre: 'Inicio', ruta: '/' },
+  { nombre: s.nombre, ruta },
+];
+
+const lamas = [
+  {
+    clase: 'ciega',
+    nombre: 'Lama ciega',
+    texto: 'Aporta máxima opacidad y privacidad, ideal para almacenes y locales que buscan un blindaje visual total.',
+  },
+  {
+    clase: 'micro',
+    nombre: 'Lama microperforada',
+    texto: 'Permite ver el interior del escaparate iluminado sin perder resistencia física frente a impactos.',
+  },
+  {
+    clase: 'troquelada',
+    nombre: 'Lama troquelada',
+    texto: 'Ofrece alta visibilidad del producto expuesto con ventanas de ventilación directa.',
+  },
+  {
+    clase: 'concha',
+    nombre: 'Cierre de concha',
+    texto: 'Aros de varilla, muy habituales en joyerías y boutiques por su estética elegante y gran transparencia.',
+  },
+  {
+    clase: 'ballesta',
+    nombre: 'Ballesta o tijera',
+    texto: 'Persianas articuladas de recogida lateral, perfectas para accesos peatonales, galerías comerciales y viviendas a pie de calle.',
+  },
+];
+
+const materiales = [
+  {
+    clase: 'galvanizado',
+    nombre: 'Acero galvanizado',
+    texto: 'El estándar del mercado por su inmejorable relación entre dureza, resistencia al apalancamiento y coste ajustado.',
+  },
+  {
+    clase: 'inox',
+    nombre: 'Acero inoxidable',
+    texto: 'Excelente acabado estético y máxima resistencia frente a la corrosión en zonas de alta humedad o intemperie.',
+  },
+  {
+    clase: 'aluminio',
+    nombre: 'Aluminio extruido',
+    texto: 'Ligero, silencioso y resistente, idóneo para acabados personalizados y lacados en cualquier color de la carta RAL.',
+  },
+];
+
+const faqs = [
+  {
+    p: '¿Qué averías de cierres metálicos reparáis?',
+    r: 'Rotura de muelles o flejes en el eje superior, descarrilamiento de las lamas por impacto o desgaste, fallo del electrofreno del motor, deformación de las guías laterales y fallo del cuadro de maniobras o del receptor del mando.',
+  },
+  {
+    p: 'Mi persiana no sube. ¿Intento levantarla?',
+    r: 'No. No fuerces la estructura ni intentes levantarla a tirones: podrías doblar las lamas o quemar el motor. Llámanos y lo diagnosticamos.',
+  },
+  {
+    p: '¿Podéis motorizar una persiana manual?',
+    r: 'Sí. Instalamos motores centro de eje o tubulares adaptados al peso y las dimensiones de la persiana, con electrofreno y electrocerradura de desbloqueo manual exterior para poder abrir aunque se corte el suministro eléctrico.',
+  },
+  {
+    p: '¿Hacéis mantenimiento preventivo?',
+    r: 'Sí: revisiones periódicas de engrase, tensado de muelles, comprobación de anclajes de seguridad y calibración de finales de carrera.',
+  },
+  {
+    p: '¿Reparáis también puertas de garaje?',
+    r: 'Sí. En puertas de garaje comunitarias o privadas reparamos ejes, sustituimos rodamientos y calibramos las fotocélulas de seguridad.',
+  },
+  {
+    p: '¿Atendéis si el local se queda sin poder cerrar?',
+    r: 'Sí. Un cierre que no baja deja tu local expuesto, por eso atendemos urgencias las 24 horas, los 365 días del año, y llegamos en unos 20 minutos a cualquier punto de Chamartín.',
+  },
+];
+---
+
+<Layout
+  titulo={s.titulo}
+  descripcion={s.metaDescripcion}
+  ruta={ruta}
+  schemasExtra={[
+    servicioSchema({ nombre: s.nombre, descripcion: s.metaDescripcion, ruta }),
+    migasSchema(migas),
+  ]}
+>
+  <PortadaServicio
+    num="04"
+    antetitulo="Servicio 04 · Cierres metálicos"
+    titulo="Reparación de cierres metálicos en Chamartín: <em>desbloquea el acceso a tu negocio</em> sin perder ventas"
+    entrada="Cuando la persiana de tu local se queda atascada a primera hora de la mañana, el tiempo se mide en dinero perdido."
+    migas={migas}
+    imagen={{ src: s.imagen, alt: s.alt, pie: 'Reparación de un cierre enrollable en un comercio.' }}
+    ficha={[
+      { k: 'Servicio', v: 'Cierres metálicos y persianas' },
+      { k: 'Para', v: 'comercios, garajes y naves' },
+      { k: 'Mantenimiento', v: 'planes preventivos' },
+      { k: 'Guardia', v: '24 h · 365 días' },
+      { k: 'Llegada', v: 'unos 20 minutos' },
+    ]}
+  />
+
+  <section class="intro">
+    <div class="envoltura intro__rejilla">
+      <p class="rotulo intro__rotulo">El tiempo es dinero</p>
+      <div>
+        <p class="entradilla">
+          La <strong>reparación de cierres metálicos</strong> en un distrito con tanta actividad
+          comercial como Chamartín requiere respuesta inmediata y manos expertas. Si tu persiana se
+          ha descolgado o el motor ha dejado de responder cerca del Mercado de Prosperidad o en las
+          inmediaciones de la calle Corazón de María, no desesperes. Nos especializamos en la
+          <strong>reparación de cierres metálicos</strong> de todo tipo para que puedas subir la
+          persiana y atender a tus clientes sin demoras.
+        </p>
+        <div class="prosa columnas">
+          <p>
+            Llevamos años atendiendo el <strong>arreglo de persianas metálicas</strong> en comercios,
+            garajes y oficinas de todo el distrito. Conocemos las particularidades de los locales de
+            la zona, desde las tiendas a pie de calle en López de Hoyos hasta los accesos comerciales
+            en las inmediaciones de la Plaza de Castilla y el Paseo de la Castellana. Ofrecer una
+            <strong>reparación de cierres metálicos</strong> rápida y profesional es nuestra seña de
+            identidad, respaldada por una <strong>experiencia demostrable</strong> en la resolución de
+            averías complejas.
+          </p>
+          <p>
+            Nos encargamos del <strong>arreglo de persianas metálicas</strong> con la máxima precisión
+            técnica, diagnosticando la causa exacta del fallo para evitar soluciones temporales. Al
+            confiar en nosotros la <strong>reparación de cierres metálicos</strong>, garantizas la
+            seguridad de tu escaparate y la operatividad de tu negocio. Somos un equipo de
+            <strong>confianza</strong> volcado en ofrecer un servicio impecable a nuestros vecinos
+            comerciantes.
+          </p>
+          <p>
+            Ya se trate de la <strong>reparación de persianas</strong> de ballesta en un pequeño
+            comercio tradicional o del <strong>arreglo de persianas metálicas</strong> automatizadas
+            en un gran garaje comunitario, acudimos equipados con los repuestos adecuados. Contamos
+            con <strong>técnicos en constante formación</strong> para resolver cualquier fallo
+            mecánico o eléctrico de forma limpia y duradera.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="envoltura capitulos">
+    <Capitulo
+      n={1}
+      total={6}
+      titulo="Servicio urgente de reparación y arreglo de cierres metálicos <em>para locales</em>"
+    >
+      <div class="prosa">
+        <p class="capitular">
+          Un cierre metálico bloqueado es una emergencia comercial. Si la persiana no sube a las ocho
+          de la mañana, no puedes abrir tu negocio; si no baja al cierre, tu local queda expuesto.
+          Por eso prestamos un servicio especializado en <strong>urgencias</strong> las
+          <strong>24 horas</strong> del día, los 365 días del año. Estamos situados estratégicamente
+          <strong>cerca de ti</strong> para intervenir en cuanto nos necesites.
+        </p>
+        <p>
+          Destacamos por ser increíblemente <strong>rápidos</strong>: en situaciones de emergencia
+          <strong>llegamos en 20 minutos</strong> a cualquier punto de Chamartín, ya sea en
+          Hispanoamérica, Nueva España o Ciudad Jardín. Nos desplazamos con talleres móviles
+          preparados para ejecutar el arreglo en el acto.
+        </p>
+        <h3>Principales averías en persianas de comercios y negocios</h3>
+        <p>
+          Entre los problemas más frecuentes que resolvemos a diario se encuentran la rotura de
+          muelles o flejes en el eje superior, el descarrilamiento de las lamas por impacto o
+          desgaste, el fallo del electrofreno del motor, la deformación de las guías laterales y el
+          fallo del cuadro de maniobras o receptor de mando. Diagnosticar correctamente estos fallos
+          evita sustituciones innecesarias de la estructura completa.
+        </p>
+        <h3>Mantenimiento preventivo para cierres comerciales e industriales</h3>
+        <p>
+          Para evitar sorpresas desagradables que paralicen la actividad de tu empresa, ofrecemos
+          planes de mantenimiento preventivo. Realizamos revisiones periódicas de engrase, tensado
+          de muelles, comprobación de anclajes de seguridad y calibración de finales de carrera.
+          Mantener los componentes ajustados prolonga la vida útil de la persiana y previene
+          bloqueos imprevistos.
+        </p>
+      </div>
+    </Capitulo>
+  </div>
+
+  <Dentado arriba="var(--papel)" abajo="var(--tinta)" />
+  <section class="oscuro banda-muestras">
+    <div class="envoltura">
+      <Capitulo n={2} total={6} titulo="Tipos de cierres metálicos <em>que reparamos e instalamos</em>">
+        <div class="prosa">
+          <p>
+            Nos adaptamos a cualquier tipología de persiana enrollable o de seguridad del mercado,
+            utilizando recambios homologados para garantizar un funcionamiento fluido.
+          </p>
+        </div>
+      </Capitulo>
+
+      <h3 class="banda-muestras__sub">Según el modelo de lama</h3>
+      <ul class="muestrario" aria-label="Modelos de lama">
+        {
+          lamas.map((l) => (
+            <li>
+              <span class:list={['muestra', `muestra--${l.clase}`]} aria-hidden="true" />
+              <h4>{l.nombre}</h4>
+              <p>{l.texto}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <h3 class="banda-muestras__sub">Según el material</h3>
+      <ul class="tablero">
+        {
+          materiales.map((m) => (
+            <li class="etiqueta">
+              <span class:list={['metal', `metal--${m.clase}`]} aria-hidden="true" />
+              <h4>{m.nombre}</h4>
+              <p>{m.texto}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+  <Dentado arriba="var(--tinta)" abajo="var(--papel)" cortes={[4, 1, 5, 3, 6, 2, 7, 3, 5, 1, 4, 6, 2, 5, 3, 7, 1, 4, 6, 2, 5, 3]} />
+
+  <div class="envoltura capitulos">
+    <Capitulo n={3} total={6} titulo="Motorización y automatización <em>de cierres enrollables</em>">
+      <div class="prosa">
+        <p class="capitular">
+          Convertir un cierre manual en una persiana automatizada no solo ahorra esfuerzo físico,
+          sino que alarga la vida útil de los componentes al evitar tirones y bajadas bruscas.
+        </p>
+        <h3>Instalación de motores para persianas de local comercial</h3>
+        <p>
+          Instalamos motores centro de eje o motores tubulares adaptados al peso y dimensiones de tu
+          persiana. Incorporamos sistemas de electrofreno para bloquear mecánicamente el cierre
+          cuando está abajo y electrocerraduras de desbloqueo manual exterior para que puedas abrir
+          sin problemas incluso si se produce un corte en el suministro eléctrico.
+        </p>
+        <h3>Reparación de motores, cuadros de mando y mandos a distancia</h3>
+        <p>
+          Si tu motor actual emite ruidos extraños, no sube con fuerza o no responde al pulsar el
+          mando, revisamos el condensador de arranque, la centralita receptora y el cableado. Somos
+          <strong>resolutivos</strong> y reparamos la parte electrónica o sustituimos el motor
+          averiado por uno de alta gama en un tiempo récord.
+        </p>
+      </div>
+    </Capitulo>
+
+    <Capitulo n={4} total={6} titulo="Soluciones específicas para comercios, <em>garajes y naves industriales</em>">
+      <div class="prosa">
+        <p class="capitular">
+          Cada tipo de acceso requiere una respuesta técnica diferente. Diseñamos e intervenimos en
+          estructuras comerciales e industriales respetando la normativa de seguridad vigente.
+        </p>
+        <h3>Puertas y cierres enrollables para garajes</h3>
+        <p>
+          Las puertas de garaje comunitarias o privadas en barrios como El Viso o las cercanías del
+          Auditorio Nacional sufren un uso intensivo constante. Reparamos ejes, sustituimos
+          rodamientos y calibramos las fotocélulas de seguridad para evitar accidentes y garantizar
+          una apertura suave a cualquier hora.
+        </p>
+        <h3>Cierres de alta seguridad para escaparates y accesos comerciales</h3>
+        <p>
+          Instalamos y reforzamos persianas con lamas autoblocantes que impiden que el cierre pueda
+          ser levantado desde el exterior mediante palancas o gatos hidráulicos. Complementamos la
+          instalación con pivotes de suelo de alta resistencia y cerrojos de anclaje lateral.
+        </p>
+      </div>
+    </Capitulo>
+
+    <Capitulo n={5} total={6} titulo="¿Por qué elegir nuestro servicio de reparación <em>de cierres en Chamartín?</em>">
+      <div class="prosa">
+        <p class="capitular">
+          Trabajar en el distrito nos exige responder con unos niveles de exigencia impecables.
+          Destacamos por ofrecer una atención directa, sin intermediarios que encarezcan el servicio
+          ni retrasen las salidas.
+        </p>
+        <p>
+          Nuestra amplia experiencia nos permite diagnosticar cualquier avería en cuestión de
+          minutos. Contamos con <strong>técnicos altamente cualificados</strong> que cuidan cada
+          detalle del montaje, asegurando que la alineación de las guías y la tensión de los muelles
+          sean perfectas para evitar desgastes prematuros.
+        </p>
+      </div>
+    </Capitulo>
+
+    <Capitulo
+      n={6}
+      total={6}
+      titulo="¿Tu persiana se ha quedado atascada? <em>Recupera la actividad de tu negocio en minutos</em>"
+    >
+      <div class="prosa">
+        <p class="capitular">
+          Sabemos la frustración que produce llegar a tu local cerca de la calle Príncipe de Vergara
+          o junto al estadio Santiago Bernabéu y descubrir que la persiana no responde. No fuerces la
+          estructura ni intentes levantarla a tirones, ya que podrías doblar las lamas o quemar el
+          motor. Pon la solución en manos de verdaderos profesionales.
+        </p>
+        <p>
+          Somos <strong>la mejor empresa</strong> en reparación de persianas comerciales del
+          distrito, respaldados por la confianza de decenas de comerciantes que nos consideran
+          <strong>los mejores</strong> en momentos de urgencia. Nos enorgullece ser la opción
+          <strong>la mejor valorada</strong> de la zona gracias a nuestro compromiso constante con la
+          rapidez y la transparencia.
+        </p>
+      </div>
+
+      <div class="aviso-llamada">
+        <p>
+          Llama ahora al <a href={telHref} data-cta="telefono-texto-persianas">{empresa.telefono}</a> y
+          dinos qué ocurre con tu cierre. Te daremos un presupuesto claro y enviaremos de inmediato
+          un equipo especializado que estará en tu portal antes de lo que imaginas.
+        </p>
+      </div>
+
+      <div class="prosa">
+        <p>
+          Mantén nuestro teléfono guardado en la agenda de tu local. Somos <strong>líderes</strong> en
+          el sector y estamos preparados para ofrecerte la respuesta profesional y rápida que
+          necesitas para mantener tu negocio siempre abierto y protegido.
+        </p>
+      </div>
+    </Capitulo>
+  </div>
+
+  <Faq faqs={faqs} titulo="Dudas sobre cierres y persianas" />
+
+  <CtaFinal titulo="¿Persiana atascada? <em>No la fuerces: llama.</em>" />
+</Layout>
+
+<style>
+  .banda-muestras {
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .banda-muestras :global(.capitulo) {
+    padding-bottom: 0;
+  }
+
+  .banda-muestras__sub {
+    margin: 3rem 0 0;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--laton);
+  }
+
+  /* --- Muestrario de lamas dibujadas con CSS ------------------------- */
+  .muestrario {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr));
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .muestrario h4,
+  .etiqueta h4 {
+    margin-top: 0.9rem;
+    font-size: 1.25rem;
+  }
+
+  .muestrario p {
+    margin-top: 0.4rem;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--cromo);
+  }
+
+  .muestra {
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: 0.3rem 0.3rem 0 0;
+    border-bottom: 6px solid #4b5261;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  }
+
+  .muestra--ciega {
+    background:
+      linear-gradient(90deg, rgb(0 0 0 / 0.25), transparent 12%, transparent 88%, rgb(0 0 0 / 0.25)),
+      repeating-linear-gradient(180deg, #b7bec9 0 10px, #8d95a3 10px 15px, #5f6776 15px 17px);
+  }
+
+  .muestra--micro {
+    background:
+      radial-gradient(circle, rgb(12 20 36 / 0.85) 0.9px, transparent 1.3px) 0 0 / 5px 5px,
+      linear-gradient(90deg, rgb(0 0 0 / 0.25), transparent 12%, transparent 88%, rgb(0 0 0 / 0.25)),
+      repeating-linear-gradient(180deg, #c3c9d3 0 12px, #7d8594 12px 14px),
+      #c3c9d3;
+  }
+
+  .muestra--troquelada {
+    background:
+      repeating-linear-gradient(180deg, transparent 0 4px, #aab1bd 4px 16px, transparent 16px 20px),
+      repeating-linear-gradient(90deg, #aab1bd 0 6px, rgb(214 163 40 / 0.55) 6px 30px, #aab1bd 30px 36px),
+      #aab1bd;
+  }
+
+  .muestra--concha {
+    background:
+      radial-gradient(circle at 50% 50%, transparent 6px, #c3c9d3 6.5px 8px, transparent 8.5px) 0 0 / 16px 16px,
+      radial-gradient(circle at 50% 50%, transparent 6px, #9aa2af 6.5px 8px, transparent 8.5px) 8px 8px / 16px 16px,
+      rgb(214 163 40 / 0.35);
+  }
+
+  .muestra--ballesta {
+    background:
+      repeating-linear-gradient(45deg, transparent 0 11px, #b7bec9 11px 14px),
+      repeating-linear-gradient(-45deg, transparent 0 11px, #8d95a3 11px 14px),
+      linear-gradient(90deg, #6b7382 0 5px, transparent 5px calc(100% - 5px), #6b7382 0),
+      rgb(214 163 40 / 0.3);
+  }
+
+  .banda-muestras .tablero {
+    margin-top: 1.5rem;
+  }
+
+  .metal {
+    display: block;
+    height: 0.6rem;
+    margin-top: 0.3rem;
+    border-radius: 999px;
+  }
+
+  .metal--galvanizado {
+    background: linear-gradient(90deg, #8d95a3, #c3c9d3 30%, #9aa2af 55%, #d5dae1 80%, #8d95a3);
+  }
+
+  .metal--inox {
+    background: linear-gradient(90deg, #d5dae1, #ffffff 35%, #b7bec9 60%, #f1f3f6 85%, #c3c9d3);
+  }
+
+  .metal--aluminio {
+    background: linear-gradient(90deg, var(--cobalto), #d6a328 35%, #b8322a 65%, #2f7d4f);
+  }
+</style>

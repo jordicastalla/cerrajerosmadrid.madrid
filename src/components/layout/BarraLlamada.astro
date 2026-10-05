@@ -1,0 +1,29 @@
+---
+import BotonLlamar from '@components/ui/BotonLlamar.astro';
+import { empresa } from '@data/empresa';
+---
+
+<div class="barra-llamada no-imprimir">
+  <BotonLlamar cta="telefono-barra-movil" texto={`Llamar · ${empresa.telefono}`} sub="24 h · llegamos en 20 min" clase="barra-llamada__llave" />
+</div>
+
+<style>
+  .barra-llamada {
+    position: fixed;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    z-index: 70;
+    filter: drop-shadow(0 10px 18px rgb(12 20 36 / 0.35));
+  }
+
+  .barra-llamada :global(.barra-llamada__llave) {
+    width: 100%;
+  }
+
+  @media (min-width: 1100px) and (min-height: 700px) {
+    .barra-llamada {
+      display: none;
+    }
+  }
+</style>

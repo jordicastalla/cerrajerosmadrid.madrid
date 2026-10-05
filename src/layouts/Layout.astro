@@ -1,0 +1,137 @@
+---
+import '@/styles/global.css';
+
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import BarraLlamada from '@components/layout/BarraLlamada.astro';
+import Cookies from '@components/layout/Cookies.astro';
+import BotonArriba from '@components/ui/BotonArriba.astro';
+import { empresa } from '@data/empresa';
+import { negocioLocal } from '@lib/schema';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  ruta: string;
+  imagen?: string;
+  noindex?: boolean;
+  schemasExtra?: unknown[];
+}
+
+const {
+  titulo,
+  descripcion,
+  ruta,
+  imagen = empresa.imagen,
+  noindex = false,
+  schemasExtra = [],
+} = Astro.props;
+
+const canonical = new URL(ruta, Astro.site ?? empresa.dominio).toString();
+const ogImagen = new URL(imagen, Astro.site ?? empresa.dominio).toString();
+const schemas = [negocioLocal(), ...schemasExtra];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonical} />
+    <meta name="google-site-verification" content="l6f1vJ4XgMVWH_CNGME39m85-ZeE6KrICCtKKHDIEH8" />
+    {
+      noindex ? (
+        <meta name="robots" content="noindex, follow" />
+      ) : (
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+      )
+    }
+
+    <meta name="geo.region" content="ES-M" />
+    <meta name="geo.placename" content="Chamartín, Madrid" />
+    <meta name="geo.position" content={`${empresa.geo.lat};${empresa.geo.lng}`} />
+    <meta name="ICBM" content={`${empresa.geo.lat}, ${empresa.geo.lng}`} />
+    <meta name="author" content={empresa.nombre} />
+    <meta name="theme-color" content="#0C1424" />
+    <meta name="format-detection" content="telephone=yes" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content={empresa.nombre} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImagen} />
+    <meta property="og:image:alt" content={`${empresa.nombre} · ${empresa.telefono}`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link
+      rel="preload"
+      href="/fuentes/fraunces-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fuentes/schibsted-grotesk-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/icon-192.png" sizes="192x192" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {
+      schemas.map((s) => (
+        <script type="application/ld+json" set:html={JSON.stringify(s)} />
+      ))
+    }
+  </head>
+
+  <body>
+    <a href="#contenido" class="saltar">Saltar al contenido</a>
+
+    <Header ruta={ruta} />
+
+    <div class="lienzo">
+      <main id="contenido">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+
+    <BarraLlamada />
+    <BotonArriba />
+    <Cookies />
+
+    <style>
+      .saltar {
+        position: fixed;
+        top: 0.75rem;
+        left: 0.75rem;
+        z-index: 300;
+        padding: 0.6rem 1rem;
+        background: var(--laton);
+        color: var(--tinta);
+        font-weight: 650;
+        transform: translateY(-200%);
+      }
+
+      .saltar:focus {
+        transform: none;
+      }
+    </style>
+  </body>
+</html>

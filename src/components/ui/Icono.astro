@@ -1,0 +1,52 @@
+---
+interface Props {
+  nombre: keyof typeof trazos;
+  tam?: number;
+  clase?: string;
+  relleno?: boolean;
+}
+
+const { nombre, tam = 24, clase = '', relleno = false } = Astro.props;
+
+const trazos = {
+  puerta: '<rect x="5" y="2.5" width="14" height="19" rx="1"/><circle cx="14.5" cy="12" r="1.1"/>',
+  candado:
+    '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.4"/>',
+  bombin: '<circle cx="12" cy="8.5" r="4"/><path d="M9.6 12 8 20h8l-1.6-8"/>',
+  llave:
+    '<path d="M14.5 3a6.5 6.5 0 1 0 5.2 10.4L21 15l-1.5 1.5L21 18l-2 2-1.5-1.5L16 20l-1.6-1.3A6.5 6.5 0 0 0 14.5 3Z"/><circle cx="11" cy="9.5" r="1.5"/>',
+  telefono:
+    '<path d="M21 16.9v2.6a2 2 0 0 1-2.2 2 19.5 19.5 0 0 1-8.5-3 19.2 19.2 0 0 1-5.9-5.9 19.5 19.5 0 0 1-3-8.6A2 2 0 0 1 3.4 2H6a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L7 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6A2 2 0 0 1 21 16.9Z"/>',
+  check: '<path d="m4 12.5 5 5L20 6.5"/>',
+  flecha: '<path d="M4 12h15"/><path d="m13 6 6 6-6 6"/>',
+  reloj: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5.5l3.5 2"/>',
+  mapa: '<path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
+  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  estrella: '<path d="m12 3 2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8L12 3Z"/>',
+  factura:
+    '<path d="M6 3h12v18l-2-1.5L14 21l-2-1.5L10 21l-2-1.5L6 21V3Z"/><path d="M9 8h6M9 12h6M9 16h3"/>',
+  dni: '<rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2.3"/><path d="M5 17c.6-1.7 1.8-2.5 3-2.5s2.4.8 3 2.5"/><path d="M14 9.5h6M14 13h6M14 16.5h4"/>',
+  rayo: '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/>',
+  'flecha-arriba': '<path d="M12 19V6"/><path d="m5.5 12.5 6.5-6.5 6.5 6.5"/>',
+  persiana: '<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 8h18M3 13h18M3 18h18"/>',
+  /** Escudo de armadura: motivo del "Guardián de Argüelles" */
+  escudo:
+    '<path d="M12 2.5 4 5.5v6c0 5.2 3.4 8.9 8 10 4.6-1.1 8-4.8 8-10v-6L12 2.5Z"/><path d="m9 12 2 2 4-4.5"/>',
+} as const;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={tam}
+  height={tam}
+  viewBox="0 0 24 24"
+  fill={relleno ? 'currentColor' : 'none'}
+  stroke={relleno ? 'none' : 'currentColor'}
+  stroke-width="1.7"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={clase || undefined}
+  aria-hidden="true"
+  focusable="false"
+  set:html={trazos[nombre]}
+/>

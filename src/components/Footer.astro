@@ -1,0 +1,174 @@
+---
+import { empresa, telHref } from '@data/empresa';
+import { servicios } from '@data/servicios';
+
+const anio = new Date().getFullYear();
+---
+
+<footer class="pie oscuro">
+  <div class="envoltura">
+    <div class="pie__rejilla">
+      <div class="pie__marca">
+        <img
+          src="/cerrajeros-chamartin.logo.webp"
+          width="366"
+          height="157"
+          alt={empresa.nombre}
+          loading="lazy"
+          decoding="async"
+        />
+        <p>
+          Cerrajería de guardia en el distrito de Chamartín. Hablas directamente con el técnico,
+          sin centralitas ni intermediarios.
+        </p>
+      </div>
+
+      <nav class="pie__col" aria-label="Servicios">
+        <p class="pie__rotulo">Servicios</p>
+        <ul>
+          <li><a href="/#urgencias">Apertura de puertas 24 h</a></li>
+          {servicios.map((s) => <li><a href={`/${s.slug}/`}>{s.nombre}</a></li>)}
+        </ul>
+      </nav>
+
+      <nav class="pie__col" aria-label="Empresa">
+        <p class="pie__rotulo">Empresa</p>
+        <ul>
+          <li><a href="/quienes-somos/">Quiénes somos</a></li>
+          <li><a href="/contacto/">Contacto y zona</a></li>
+          <li><a href={empresa.fichaGoogle} target="_blank" rel="noopener">Ficha de Google</a></li>
+          <li><a href={telHref} class="pie__tel" data-cta="telefono-pie">{empresa.telefono}</a></li>
+        </ul>
+      </nav>
+
+      <div class="pie__col">
+        <p class="pie__rotulo">Barrios de Chamartín</p>
+        <ul class="pie__barrios">
+          {empresa.zonaServicio.barrios.map((b) => <li>{b}</li>)}
+        </ul>
+      </div>
+    </div>
+
+    <div class="pie__legal">
+      <p>
+        © {anio} {empresa.titular} · NIF {empresa.nif} · {empresa.direccion.calle}, {empresa.direccion.cp}
+        {empresa.direccion.ciudad}
+      </p>
+      <ul>
+        <li><a href="/aviso-legal/">Aviso legal</a></li>
+        <li><a href="/politica-de-privacidad/">Privacidad</a></li>
+        <li><a href="/politica-de-cookies/">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pie {
+    padding-block: clamp(3rem, 6vw, 5rem) 2rem;
+    border-top: 1px solid rgb(214 163 40 / 0.3);
+  }
+
+  .pie__rejilla {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 760px) {
+    .pie__rejilla {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1180px) {
+    .pie__rejilla {
+      grid-template-columns: 1.4fr 1fr 0.8fr 0.8fr;
+      gap: 3rem;
+    }
+  }
+
+  .pie__marca img {
+    width: 13.5rem;
+    height: auto;
+  }
+
+  .pie__marca p {
+    margin-top: 1.25rem;
+    max-width: 22rem;
+    color: var(--cromo);
+    font-size: 0.9688rem;
+  }
+
+  .pie__rotulo {
+    margin-bottom: 1rem;
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--laton);
+  }
+
+  .pie ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pie__col li + li {
+    margin-top: 0.55rem;
+  }
+
+  .pie__col a {
+    color: var(--papel);
+    text-decoration: none;
+    background: linear-gradient(var(--laton), var(--laton)) 0 100% / 0 1px no-repeat;
+    transition: background-size 0.3s ease;
+  }
+
+  .pie__col a:hover {
+    background-size: 100% 1px;
+  }
+
+  .pie__tel {
+    font-family: var(--f-mono);
+    font-weight: 600;
+    color: var(--laton) !important;
+  }
+
+  .pie__barrios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .pie__barrios li {
+    margin: 0 !important;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.875rem;
+    color: var(--cromo);
+    border: 1px solid var(--linea-clara);
+    border-radius: 999px;
+  }
+
+  .pie__legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--linea-clara);
+    font-size: 0.8125rem;
+    color: var(--cromo-osc);
+  }
+
+  .pie__legal ul {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .pie__legal a {
+    color: var(--cromo);
+  }
+</style>

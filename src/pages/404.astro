@@ -1,0 +1,74 @@
+---
+import Layout from '@layouts/Layout.astro';
+import BotonLlamar from '@components/ui/BotonLlamar.astro';
+import { empresa } from '@data/empresa';
+---
+
+<Layout
+  titulo={`Página no encontrada | ${empresa.nombre}`}
+  descripcion="La página que buscas no existe o se ha movido."
+  ruta="/404/"
+  noindex
+>
+  <section class="error envoltura">
+    <svg class="error__ojo" viewBox="0 0 100 140" aria-hidden="true">
+      <path d="M50 4a42 42 0 0 1 20 79l12 55H18l12-55A42 42 0 0 1 50 4Z" />
+    </svg>
+    <div>
+      <p class="rotulo">Error 404</p>
+      <h1 class="error__titulo">Esta puerta <em>no existe</em></h1>
+      <p class="error__texto">
+        La página que buscas no está disponible o ha cambiado de sitio. Si necesitas un cerrajero
+        urgente, llámanos directamente.
+      </p>
+      <div class="error__acciones">
+        <BotonLlamar cta="telefono-404" />
+        <a href="/" class="enlace">Volver al inicio →</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .error {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+    min-height: 70vh;
+    padding-block: clamp(3rem, 8vw, 6rem);
+  }
+
+  @media (min-width: 860px) {
+    .error {
+      grid-template-columns: minmax(10rem, 0.4fr) 1fr;
+      gap: 5rem;
+    }
+  }
+
+  .error__ojo {
+    width: min(12rem, 40vw);
+    fill: var(--tinta);
+    stroke: var(--laton);
+    stroke-width: 1.5;
+  }
+
+  .error__titulo {
+    margin-top: 1.25rem;
+    font-size: clamp(2.8rem, 1.5rem + 5vw, 6rem);
+  }
+
+  .error__texto {
+    margin-top: 1.25rem;
+    max-width: 32rem;
+    font-size: 1.125rem;
+    color: var(--suave);
+  }
+
+  .error__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem 2rem;
+    margin-top: 2rem;
+  }
+</style>

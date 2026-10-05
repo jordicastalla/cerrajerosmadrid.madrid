@@ -1,0 +1,189 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Migas from '@components/ui/Migas.astro';
+import { empresa } from '@data/empresa';
+import { cookiesAnaliticas, cookiesTecnicas, cookiesMapa } from '@data/analitica';
+import { migas as migasSchema } from '@lib/schema';
+
+const tabla = [
+  { grupo: 'Técnicas (no requieren consentimiento)', filas: cookiesTecnicas },
+  { grupo: 'Analíticas (solo si las acepta)', filas: cookiesAnaliticas },
+  { grupo: 'De terceros (solo si abre el mapa)', filas: cookiesMapa },
+];
+---
+
+<Layout
+  titulo={`Política de cookies | ${empresa.nombre}`}
+  descripcion={`Información sobre el uso de cookies en el sitio web de ${empresa.nombre}.`}
+  ruta="/politica-de-cookies/"
+  noindex
+  schemasExtra={[
+    migasSchema([
+      { nombre: 'Inicio', ruta: '/' },
+      { nombre: 'Política de cookies', ruta: '/politica-de-cookies/' },
+    ]),
+  ]}
+>
+  <Migas
+    items={[
+      { nombre: 'Inicio', ruta: '/' },
+      { nombre: 'Política de cookies', ruta: '/politica-de-cookies/' },
+    ]}
+  />
+
+  <section class="tramo">
+    <div class="envoltura legal">
+      <p class="rotulo">Información legal</p>
+      <h1>Política de cookies</h1>
+
+      <div class="prosa legal__cuerpo">
+        <h2>Qué es una cookie</h2>
+        <p>
+          Una cookie es un archivo pequeño que una web guarda en su navegador para recordar algo
+          entre una visita y otra. Unas son imprescindibles para que el sitio funcione y otras
+          sirven para medir el uso; estas últimas solo se instalan si usted da permiso.
+        </p>
+
+        <h2>Qué hace {empresa.dominio}</h2>
+        <p>
+          Al entrar por primera vez aparece un aviso con dos opciones que pesan lo mismo: aceptar
+          o rechazar. <strong>
+            Hasta que usted elige, no se instala ninguna cookie de analítica ni se contacta con
+            los servidores de Google.
+          </strong> Si rechaza, la web funciona exactamente igual: no se pierde ninguna función, y
+          tampoco hay formularios ni publicidad en ningún caso.
+        </p>
+
+        <h2>El mapa de la página de contacto</h2>
+        <p>
+          En <a href="/contacto/">contacto</a> hay un mapa de Google Maps que{' '}
+          <strong>no se carga con la página</strong>. Lo que se ve de entrada es un recuadro
+          propio con un botón; el mapa solo se inserta si usted lo pulsa. Mientras no lo haga,
+          Google no recibe su dirección IP ni instala ninguna cookie.
+        </p>
+        <p>
+          Si lo abre, Google puede instalar las cookies de la tercera tabla. Esa decisión es
+          independiente de la del aviso de cookies: aunque haya rechazado la analítica, puede
+          abrir el mapa, y al revés. Para deshacerla basta con borrar las cookies del navegador.
+        </p>
+      </div>
+
+      {
+        tabla.map((bloque) => (
+          <div class="legal__bloque">
+            <h2 class="legal__grupo">{bloque.grupo}</h2>
+            <div class="legal__tabla">
+              <table class="tabla-legal">
+                <thead>
+                  <tr>
+                    <th>Cookie</th>
+                    <th>Titular</th>
+                    <th>Finalidad</th>
+                    <th>Duración</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {bloque.filas.map((c) => (
+                    <tr>
+                      <td>
+                        <code>{c.nombre}</code>
+                      </td>
+                      <td>{c.titular}</td>
+                      <td>{c.finalidad}</td>
+                      <td>{c.duracion}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))
+      }
+
+      <div class="aviso-llamada legal__decision">
+        <p>Cambiar su decisión</p>
+        <span>
+          Puede revocar o conceder el permiso en cualquier momento. Al rechazar, las cookies de
+          analítica que hubiera se eliminan de su navegador.
+        </span>
+        <button type="button" class="llave llave--tinta" data-abrir-cookies>
+          <span class="llave__cabeza" aria-hidden="true">⚙</span>
+          <span class="llave__texto">Configurar cookies</span>
+        </button>
+      </div>
+
+      <div class="prosa legal__cuerpo">
+        <p>
+          Google no publica una lista cerrada de las cookies del mapa, y pueden variar según el
+          país o si usted tiene la sesión de Google iniciada. Arriba figura la principal; el
+          detalle completo y actualizado está en{' '}
+          <a
+            href="https://policies.google.com/technologies/cookies"
+            target="_blank"
+            rel="noopener nofollow"
+          >
+            la documentación de cookies de Google
+          </a>.
+        </p>
+
+        <h2>Quién trata los datos de analítica</h2>
+        <p>
+          La herramienta es Google Analytics 4, de Google Ireland Ltd. Recoge datos de navegación
+          de forma agregada —páginas vistas, procedencia, tipo de dispositivo— y puede implicar
+          transferencias internacionales de datos amparadas en el Marco de Privacidad de Datos
+          UE-EE. UU. Puede consultar su{' '}
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener nofollow">
+            política de privacidad
+          </a> y, si lo prefiere, instalar el{' '}
+          <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener nofollow">
+            complemento de inhabilitación
+          </a> para bloquearla en todas las webs.
+        </p>
+
+        <h2>Servicios externos sin cookies</h2>
+        <p>
+          Este sitio no tiene formularios: los enlaces de teléfono abren la aplicación
+          correspondiente de su dispositivo, gobernada por sus propias condiciones, y no
+          instalan ninguna cookie.
+        </p>
+
+        <h2>Gestión desde el navegador</h2>
+        <p>
+          Con independencia de lo que haga cada sitio web, puede bloquear o eliminar las cookies
+          desde las preferencias de su navegador (Chrome, Firefox, Safari, Edge).
+        </p>
+      </div>
+
+      <script is:inline>
+        document.querySelectorAll('[data-abrir-cookies]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            if (window.abrirPreferenciasCookies) window.abrirPreferenciasCookies();
+          });
+        });
+      </script>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal__bloque {
+    margin-top: 3rem;
+  }
+
+  .legal__grupo {
+    font-size: 1.5rem;
+  }
+
+  .legal__tabla {
+    margin-top: 1rem;
+    overflow-x: auto;
+  }
+
+  .legal__decision {
+    justify-items: start;
+  }
+
+  .legal__decision span {
+    color: var(--suave);
+  }
+</style>

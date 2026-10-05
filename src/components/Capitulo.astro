@@ -1,0 +1,22 @@
+---
+interface Props {
+  n: number;
+  total: number;
+  titulo: string;
+  id?: string;
+}
+
+const { n, total, titulo, id } = Astro.props;
+const dos = (x: number) => String(x).padStart(2, '0');
+---
+
+<section class="capitulo" id={id}>
+  <header class="capitulo__cabeza">
+    <p class="capitulo__num"><b>{dos(n)}</b><span>/ {dos(total)}</span></p>
+    <h2 class="capitulo__titulo" set:html={titulo} />
+    <slot name="lateral" />
+  </header>
+  <div class="capitulo__cuerpo">
+    <slot />
+  </div>
+</section>

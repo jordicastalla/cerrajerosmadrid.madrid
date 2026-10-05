@@ -1,0 +1,51 @@
+---
+/**
+ * Transición entre dos franjas con el perfil de una llave: los dientes de
+ * la franja inferior asoman sobre la superior, cada uno a una profundidad
+ * de corte distinta, como en el código de dentado de una llave real.
+ */
+interface Props {
+  arriba?: string;
+  abajo?: string;
+  alto?: number;
+  cortes?: number[];
+}
+
+const {
+  arriba = 'var(--papel)',
+  abajo = 'var(--tinta)',
+  alto = 30,
+  cortes = [3, 6, 2, 5, 4, 7, 1, 5, 3, 6, 2, 4, 6, 3, 5, 2, 7, 4, 3, 6, 2, 5],
+} = Astro.props;
+
+const U = 10;
+const ancho = cortes.length * U;
+const d =
+  `M0 9 ` +
+  cortes
+    .map((c, i) => {
+      const x = i * U;
+      const y = 8 - c;
+      return `L${x + 1.5} ${y} L${x + 7} ${y} L${x + U} 8`;
+    })
+    .join(' ') +
+  ` L${ancho} 9 Z`;
+---
+
+<div class="dentado" style={`background:${arriba}`} aria-hidden="true">
+  <svg viewBox={`0 0 ${ancho} 9`} preserveAspectRatio="none" style={`height:${alto}px;fill:${abajo}`}>
+    <path d={d}></path>
+  </svg>
+</div>
+
+<style>
+  .dentado {
+    line-height: 0;
+    margin-bottom: -1px;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,562 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Cinta from '@components/ui/Cinta.astro';
+import Figura from '@components/ui/Figura.astro';
+import BotonLlamar from '@components/ui/BotonLlamar.astro';
+import IndiceServicios from '@components/IndiceServicios.astro';
+import Capitulo from '@components/Capitulo.astro';
+import Faq from '@components/Faq.astro';
+import CtaFinal from '@components/CtaFinal.astro';
+import { empresa, telHref } from '@data/empresa';
+
+const faqs = [
+  {
+    p: '¿Cuánto tardáis en llegar?',
+    r: 'Llegamos en unos 20 minutos a cualquier punto del distrito de Chamartín, gracias a que estamos ubicados muy cerca: de El Viso y Nueva España a Castellana, Prosperidad o las cercanías de la estación.',
+  },
+  {
+    p: '¿Atendéis de madrugada, en fin de semana y en festivos?',
+    r: 'Sí. Mantenemos un servicio de guardia permanente las 24 horas, los 365 días del año: también de madrugada, en fin de semana y en festivos.',
+  },
+  {
+    p: '¿Sabré el precio antes de que empecéis?',
+    r: 'Sí. Antes de empezar cualquier trabajo te explicamos qué vamos a hacer y el coste exacto del servicio. Presupuesto transparente y sin letra pequeña.',
+  },
+  {
+    p: '¿Vais a romper la puerta para abrirla?',
+    r: 'Nuestro servicio de apertura está pensado para resolver la urgencia sin causar daños innecesarios en la estructura ni en la carpintería, con herramientas de última generación y técnicos en constante formación.',
+  },
+  {
+    p: '¿Hablaré con una centralita?',
+    r: 'No. Tratas directamente con nuestros técnicos: no hay intermediarios ni centrales telefónicas de por medio.',
+  },
+  {
+    p: '¿Me pediréis algún documento antes de abrir?',
+    r: 'Sí. Antes de una apertura te pedimos que acredites de forma razonable tu relación con la vivienda o el local. Es una medida de seguridad que aplicamos siempre.',
+  },
+];
+---
+
+<Layout
+  titulo="Cerrajeros Chamartín 24 Horas | Apertura de Puertas"
+  descripcion="¿Problemas con tu puerta? Cerrajeros Chamartín acuden en 20 min. Servicio 24h, económico y sin destrozos. Llama al 919 933 193."
+  ruta="/"
+>
+  <section class="portada">
+    <div class="envoltura portada__rejilla">
+      <div class="portada__texto">
+        <p class="rotulo">Cerrajería 24 h · Distrito de Chamartín, Madrid</p>
+        <h1 class="portada__titulo">
+          <span class="portada__marca">Cerrajeros Chamartín:</span>
+          la tranquilidad de volver a casa <em>sin sorpresas ni destrozos</em>
+        </h1>
+        <p class="portada__entrada">
+          Guardia permanente las 24 horas, los 365 días del año. Llegamos en unos 20 minutos a
+          cualquier punto del distrito y te damos un presupuesto transparente antes de empezar.
+        </p>
+        <div class="portada__acciones">
+          <BotonLlamar cta="telefono-portada" />
+          <a href="#urgencias" class="enlace">Cómo trabajamos ↓</a>
+        </div>
+      </div>
+
+      <div class="portada__visual">
+        <div class="cerradura">
+          <svg class="cerradura__eco" viewBox="0 0 100 140" aria-hidden="true">
+            <path d="M50 4a42 42 0 0 1 20 79l12 55H18l12-55A42 42 0 0 1 50 4Z" />
+          </svg>
+          <img
+            src="/cerrajeria-urgencia-chamartin.webp"
+            alt="Manilla y cerradura de seguridad en una puerta de madera clásica"
+            width="480"
+            height="334"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+
+        <svg class="sello" viewBox="0 0 160 160" aria-hidden="true">
+          <circle cx="80" cy="80" r="78" class="sello__disco" />
+          <defs>
+            <path id="sello-giro" d="M80 80m-60 0a60 60 0 1 1 120 0a60 60 0 1 1-120 0" />
+          </defs>
+          <g class="sello__texto">
+            <text>
+              <textPath href="#sello-giro" textLength="372">GUARDIA 24 HORAS · 365 DÍAS · CHAMARTÍN ·</textPath>
+            </text>
+          </g>
+          <text x="80" y="92" text-anchor="middle" class="sello__centro">24h</text>
+        </svg>
+      </div>
+    </div>
+
+    <ul class="envoltura cifras">
+      <li><b>20<i>′</i></b><span>minutos para llegar a cualquier punto del distrito</span></li>
+      <li><b>24<i>h</i></b><span>de guardia, también de madrugada y en festivos</span></li>
+      <li><b>365</b><span>días al año con el servicio activo</span></li>
+      <li><b>0</b><span>intermediarios: tratas directamente con el técnico</span></li>
+    </ul>
+  </section>
+
+  <Cinta
+    frases={[
+      'Apertura de puertas',
+      'Cambio de cerradura',
+      'Cerrojos de seguridad',
+      'Cierres metálicos',
+      'Guardia 24 horas',
+      'Distrito de Chamartín',
+    ]}
+  />
+
+  <section class="intro">
+    <div class="envoltura intro__rejilla">
+      <p class="rotulo intro__rotulo">Cerrajeros del barrio</p>
+      <div>
+        <p class="entradilla">
+          Te has despistado un segundo al salir a por el pan en el Mercado de Prosperidad o venías
+          despacio tras un concierto en el Auditorio Nacional y, al llegar a tu puerta, la llave no
+          gira. O peor: se ha quedado dentro. En ese instante exacto en el que la prisa aprieta,
+          contar con <strong>cerrajeros Chamartín</strong> de confianza marca la diferencia entre una
+          tarde arruinada y un problema resuelto en un pestañeo. Somos un equipo local con
+          <strong>experiencia demostrable</strong> en el distrito, preparados para acudir donde nos
+          necesites con la máxima rapidez.
+        </p>
+
+        <div class="prosa columnas">
+          <p>
+            Llevamos años recorriendo cada rincón del barrio, desde las calles residenciales de El
+            Viso y Nueva España hasta el bullicio empresarial de Castellana y las cercanías de la
+            estación. Como <strong>cerrajeros Chamartín</strong>, entendemos perfectamente la
+            arquitectura de los edificios de la zona, la diversidad de accesos y la urgencia de
+            quien necesita recuperar el control de su vivienda o local sin perder un minuto.
+          </p>
+          <p>
+            No nos limitamos a abrir cierres; nos aseguramos de darte una solución limpia,
+            profesional y sin sobresaltos. Trabajar como <strong>cerrajeros Chamartín</strong> exige
+            un nivel de rigor alto porque conocemos a nuestros vecinos y sabemos que la puntualidad
+            y la honestidad no son negociables cuando alguien se encuentra en la calle a deshoras.
+          </p>
+          <p>
+            Por eso, cuando buscas <strong>cerrajeros Chamartín</strong>, no estás contratando un
+            servicio anónimo de intermediarios. Tratas directamente con
+            <strong>técnicos en constante formación</strong>, equipados con herramientas de última
+            generación para realizar intervenciones impecables que respeten tu puerta y tu
+            tranquilidad desde el primer momento.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <IndiceServicios />
+
+  <div class="envoltura capitulos">
+    <Capitulo
+      n={1}
+      total={3}
+      id="urgencias"
+      titulo="Asistencia inmediata las 24 horas para cuando <em>la puerta decide no abrir</em>"
+    >
+      <div class="prosa">
+        <p class="capitular">
+          Una cerradura atascada no entiende de horarios ni avisa antes de fallar. Puede ocurrir un
+          domingo de paseo por el Parque de Berlín o a altas horas de la madrugada al regresar de
+          cenar por Pío XII. Para esos momentos de auténtica urgencia, mantenemos activo un
+          servicio de <strong>guardia</strong> permanente los <strong>365 días</strong> del año,
+          garantizando atención inmediata a <strong>cualquier hora</strong>.
+        </p>
+        <p>
+          Sabemos que cuando te quedas fuera de casa, cada minuto de espera cuenta el doble. Por
+          eso somos <strong>rápidos</strong> y nos desplazamos con agilidad:
+          <strong>llegamos en 20 minutos</strong> a cualquier punto del distrito gracias a nuestra
+          ubicación estratégica <strong>cerca de ti</strong>. Sin rodeos ni esperas innecesarias en
+          la acera.
+        </p>
+      </div>
+
+      <Figura
+        src="/cambio-bombin-chamartin.webp"
+        alt="Llave partida junto al cilindro de una cerradura de seguridad"
+        num="01"
+        pie="Llave partida junto al cilindro de una cerradura."
+      />
+
+      <div class="prosa">
+        <p>
+          Nuestro servicio de <strong>24 horas</strong> está diseñado específicamente para resolver
+          <strong>urgencias</strong> y <strong>emergencias</strong> de apertura sin causar daños
+          innecesarios en la estructura o la carpintería. Contamos con
+          <strong>técnicos en constante formación</strong> capaces de afrontar desde el resbalón más
+          simple hasta los mecanismos de acceso más exigentes con absoluta precisión.
+        </p>
+        <p>
+          Si te encuentras en una situación crítica a deshoras, mantén la calma. Nuestra
+          <strong>amplia experiencia</strong> en el sector nos permite actuar con soltura y eficacia
+          para devolverte el acceso a tu hogar en tiempo récord y con la total garantía de estar en
+          manos de profesionales <strong>resolutivos</strong>.
+        </p>
+      </div>
+    </Capitulo>
+
+    <Capitulo
+      n={2}
+      total={3}
+      titulo="Cuentas claras desde el primer minuto: <em>trabajo profesional a precios ajustados</em>"
+    >
+      <div class="recibo" slot="lateral" aria-label="Cómo presupuestamos">
+        <p class="recibo__cabeza">Presupuesto · Chamartín</p>
+        <ul>
+          <li><span>Lo que vamos a hacer, explicado</span><b>✓</b></li>
+          <li><span>Coste exacto antes de empezar</span><b>✓</b></li>
+          <li><span>Letra pequeña</span><b>0</b></li>
+          <li><span>Intermediarios</span><b>0</b></li>
+        </ul>
+        <p class="recibo__pie">Sin sorpresas en la factura</p>
+      </div>
+
+      <div class="prosa">
+        <p class="capitular">
+          Es habitual sentir cierta incertidumbre sobre cuánto costará un servicio de cerrajería
+          urgente. Queremos que te sientas seguro desde el primer momento, y por eso apostamos por
+          un presupuesto transparente y sin letra pequeña. Nos esforzamos por ofrecer tarifas de
+          <strong>cerrajeros económicos</strong> sin restar un ápice de calidad ni rigor a nuestras
+          intervenciones.
+        </p>
+        <p>
+          Creemos firmemente que la confianza se construye con hechos y precios justos. Contar con
+          un equipo de cerrajeros <strong>baratos</strong> no significa aceptar chapuzas ni sorpresas
+          desagradables en la factura final. Antes de empezar cualquier trabajo te explicamos el
+          detalle de lo que vamos a hacer y el coste exacto del servicio.
+        </p>
+        <p>
+          Al eliminar intermediarios innecesarios y optimizar nuestras rutas por Castilla o Ciudad
+          Jardín, logramos mantener precios <strong>económicos</strong> adaptados a las necesidades
+          reales de los vecinos. Ofrecemos alternativas al alcance de cualquier bolsillo que
+          aseguran la máxima protección sin inflar los costes de salida.
+        </p>
+        <p>
+          Si buscas cerrajeros <strong>baratos</strong> pero exigentes con el acabado, aquí
+          encontrarás la combinación perfecta entre herramientas adecuadas y un trato honesto. Tu
+          tranquilidad y el cuidado de tu presupuesto son nuestras prioridades en cada salida.
+        </p>
+      </div>
+    </Capitulo>
+
+    <Capitulo
+      n={3}
+      total={3}
+      titulo="Un grupo de profesionales de confianza <em>a una sola llamada de distancia</em>"
+    >
+      <div class="prosa">
+        <p class="capitular">
+          No dejes que un contratiempo con la llave arruine tu día o te quite el sueño. Ya sea un
+          despiste mañanero o una complicación a medianoche cerca del Bernabéu, tienes a tu
+          disposición a <strong>la mejor empresa</strong> del sector en la zona, reconocidos como
+          <strong>líderes</strong> en rapidez y respaldados por la satisfacción de vecinos que ya han
+          comprobado nuestra eficacia.
+        </p>
+        <p>
+          Nos enorgullece ser la opción <strong>la mejor valorada</strong> del barrio gracias a un
+          compromiso diario basado en la seriedad, la puntualidad y la empatía con el cliente.
+          Contamos con especialistas <strong>altamente cualificados</strong> listos para responder
+          con contundencia a lo que tu puerta necesite.
+        </p>
+      </div>
+
+      <Figura
+        src="/cerrajeros-chamartin.webp"
+        alt="Cerrojo de seguridad Fichet dorado en una puerta de madera"
+        num="02"
+        pie="Cerrojo Fichet de sobreponer en una puerta de madera."
+      />
+
+      <div class="aviso-llamada">
+        <p>
+          Llámanos ahora mismo al <a href={telHref} data-cta="telefono-texto-home">{empresa.telefono}</a>
+          y cuéntanos qué ha ocurrido. Te daremos una respuesta clara, un presupuesto transparente y
+          enviaremos de inmediato a un técnico que estará en tu portal antes de que te des cuenta.
+        </p>
+      </div>
+
+      <div class="prosa">
+        <p>
+          Guarda nuestro número en la agenda o marca directamente si la urgencia aprieta. Estamos
+          listos para demostrarte por qué somos <strong>los mejores</strong> aliados para cuidar del
+          acceso a tu hogar y ofrecerte la <strong>confianza</strong> y tranquilidad que mereces en
+          Chamartín.
+        </p>
+      </div>
+    </Capitulo>
+  </div>
+
+  <Faq faqs={faqs} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  /* --- Portada ------------------------------------------------------ */
+  .portada {
+    padding-top: clamp(2rem, 5vw, 4.5rem);
+    overflow: hidden;
+  }
+
+  .portada__rejilla {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 980px) {
+    .portada__rejilla {
+      grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+      gap: clamp(2rem, 5vw, 5rem);
+    }
+  }
+
+  .portada__titulo {
+    margin-top: 1.5rem;
+    font-size: clamp(2.6rem, 1.2rem + 5.4vw, 6.4rem);
+    font-weight: 430;
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+  }
+
+  .portada__marca {
+    display: block;
+    margin-bottom: 0.55em;
+    font-family: var(--f-mono);
+    font-size: max(0.8rem, 0.17em);
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--tinta);
+  }
+
+  .portada__entrada {
+    margin-top: 1.75rem;
+    max-width: 34rem;
+    font-size: 1.1875rem;
+    color: var(--suave);
+  }
+
+  .portada__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem 2rem;
+    margin-top: 2.25rem;
+  }
+
+  .portada__visual {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 21rem);
+  }
+
+  /* La foto se ve a través del ojo de una cerradura */
+  .cerradura {
+    position: relative;
+    aspect-ratio: 100 / 140;
+  }
+
+  .cerradura img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 44% 50%;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'%3E%3Cpath d='M50 4a42 42 0 0 1 20 79l12 55H18l12-55A42 42 0 0 1 50 4Z'/%3E%3C/svg%3E")
+      center / 100% 100% no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'%3E%3Cpath d='M50 4a42 42 0 0 1 20 79l12 55H18l12-55A42 42 0 0 1 50 4Z'/%3E%3C/svg%3E")
+      center / 100% 100% no-repeat;
+  }
+
+  .cerradura__eco {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: translate(1.1rem, 0.9rem);
+    fill: none;
+    stroke: var(--laton);
+    stroke-width: 0.8;
+  }
+
+  .sello {
+    position: absolute;
+    left: -0.75rem;
+    bottom: 1.5rem;
+    width: 8.5rem;
+    height: 8.5rem;
+  }
+
+  .sello__disco {
+    fill: var(--tinta);
+  }
+
+  .sello__texto {
+    transform-origin: 80px 80px;
+    animation: girar 28s linear infinite;
+  }
+
+  .sello__texto text {
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    fill: var(--laton);
+  }
+
+  .sello__centro {
+    font-family: var(--f-display);
+    font-size: 34px;
+    font-style: italic;
+    font-weight: 400;
+    fill: var(--papel);
+  }
+
+  @keyframes girar {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (min-width: 980px) {
+    .sello {
+      left: -2.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sello__texto {
+      animation: none;
+    }
+  }
+
+  .cifras {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-top: 0;
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+    list-style: none;
+  }
+
+  @media (min-width: 900px) {
+    .cifras {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .cifras li {
+    padding: 1.5rem 1.25rem 0 0;
+    border-top: 2px solid var(--tinta);
+  }
+
+  .cifras li + li {
+    padding-left: 1.25rem;
+    border-left: 1px solid var(--linea);
+  }
+
+  @media (max-width: 899px) {
+    .cifras li + li:nth-child(3) {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  .cifras b {
+    display: block;
+    font-family: var(--f-display);
+    font-size: clamp(3rem, 2rem + 3vw, 4.75rem);
+    font-style: italic;
+    font-weight: 330;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--laton-texto);
+  }
+
+  .cifras i {
+    font-size: 0.5em;
+    letter-spacing: 0;
+  }
+
+  .cifras span {
+    display: block;
+    margin-top: 0.6rem;
+    max-width: 14rem;
+    font-family: var(--f-mono);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: var(--suave);
+  }
+
+  /* --- Capítulos ---------------------------------------------------- */
+  /* --- Recibo con borde dentado ------------------------------------- */
+  .recibo {
+    max-width: 21rem;
+    margin-top: 2rem;
+    padding: 1.4rem 1.4rem 2.2rem;
+    background: #fbf9f4;
+    box-shadow: 0 16px 30px -22px rgb(12 20 36 / 0.5);
+    transform: rotate(-1.5deg);
+    -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 1rem 100%;
+    mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 1rem 100%;
+    font-family: var(--f-mono);
+    font-size: 0.78rem;
+  }
+
+  .recibo__cabeza,
+  .recibo__pie {
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .recibo__cabeza {
+    padding-bottom: 0.8rem;
+    font-weight: 700;
+    border-bottom: 1px dashed var(--tinta);
+  }
+
+  .recibo ul {
+    margin: 0.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .recibo li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .recibo li span {
+    display: flex;
+    flex: 1;
+    gap: 0.4rem;
+  }
+
+  .recibo li span::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px dotted var(--cromo-osc);
+    transform: translateY(-0.3em);
+  }
+
+  .recibo li b {
+    color: var(--laton-texto);
+  }
+
+  .recibo__pie {
+    margin-top: 0.6rem;
+    padding-top: 0.8rem;
+    font-weight: 700;
+    border-top: 1px dashed var(--tinta);
+  }
+</style>

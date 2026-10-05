@@ -1,0 +1,27 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  num: string;
+  pie: string;
+  prioridad?: boolean;
+  clase?: string;
+}
+
+const { src, alt, num, pie, prioridad = false, clase } = Astro.props;
+---
+
+<figure class:list={['figura', clase]}>
+  <div class="figura__marco">
+    <img
+      src={src}
+      alt={alt}
+      width="480"
+      height="334"
+      loading={prioridad ? 'eager' : 'lazy'}
+      fetchpriority={prioridad ? 'high' : undefined}
+      decoding="async"
+    />
+  </div>
+  <figcaption><b>Fig. {num}</b><span>{pie}</span></figcaption>
+</figure>

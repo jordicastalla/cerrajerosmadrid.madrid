@@ -1,0 +1,281 @@
+---
+/**
+ * Aviso de cookies con bloqueo previo.
+ *
+ * Google Analytics NO se carga hasta que el visitante acepta: el script ni
+ * siquiera se pide a los servidores de Google. Es la única forma de cumplir
+ * el artículo 22.2 de la LSSI, que exige consentimiento *antes* de instalar
+ * cookies que no sean estrictamente necesarias.
+ *
+ * El diálogo bloquea la página hasta que hay una decisión, pero las dos
+ * salidas pesan lo mismo: aceptar y rechazar son botones equivalentes. Un
+ * muro que solo dejara aceptar sería un "cookie wall" y la AEPD lo considera
+ * consentimiento no válido, porque no sería libre.
+ */
+import { analitica } from '@data/analitica';
+---
+
+<div
+  id="aviso-cookies"
+  class="aviso hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="cookies-titulo"
+  aria-describedby="cookies-texto"
+>
+  <div class="aviso__caja">
+    <p class="rotulo">Privacidad</p>
+    <h2 id="cookies-titulo" class="aviso__titulo">Cookies de analítica</h2>
+
+    <p id="cookies-texto" class="aviso__texto">
+      Usamos cookies propias y de terceros para analizar tu navegación y mejorar la web. Puedes
+      aceptar todas las cookies, rechazarlas o configurar tus preferencias.
+    </p>
+
+    <div class="aviso__botones">
+      <button type="button" data-cookies="aceptar" class="aviso__btn aviso__btn--si">Aceptar todas</button>
+      <button type="button" data-cookies="rechazar" class="aviso__btn">Rechazar</button>
+      <a href="/politica-de-cookies/" class="aviso__btn aviso__btn--suave">Configurar</a>
+    </div>
+
+    <p class="aviso__pie">
+      Puede cambiar de opinión cuando quiera desde la
+      <a href="/politica-de-cookies/">política de cookies</a>.
+    </p>
+  </div>
+</div>
+
+<style>
+  /* La visibilidad la gobiernan las clases hidden/flex que alterna el script */
+  .aviso {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    align-items: flex-end;
+    justify-content: center;
+    background: rgb(12 20 36 / 0.7);
+  }
+
+  @media (min-width: 640px) {
+    .aviso {
+      align-items: center;
+      padding: 1.5rem;
+    }
+  }
+
+  .aviso__caja {
+    width: 100%;
+    max-width: 40rem;
+    padding: 1.75rem 1.5rem 1.5rem;
+    color: var(--papel);
+    background: var(--tinta);
+    border-top: 4px solid var(--laton);
+    border-radius: 1.25rem 1.25rem 0 0;
+  }
+
+  @media (min-width: 640px) {
+    .aviso__caja {
+      padding: 2.25rem;
+      border-radius: 0.5rem;
+    }
+  }
+
+  .aviso .rotulo {
+    color: var(--laton);
+  }
+
+  .aviso__titulo {
+    margin-top: 0.75rem;
+    font-size: 1.9rem;
+  }
+
+  .aviso__texto {
+    margin-top: 0.75rem;
+    color: var(--cromo);
+  }
+
+  .aviso__botones {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .aviso__botones {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .aviso__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0 1rem;
+    font-family: var(--f-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--papel);
+    background: transparent;
+    border: 1px solid rgb(242 238 229 / 0.4);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .aviso__btn:hover {
+    border-color: var(--papel);
+  }
+
+  .aviso__btn--si {
+    color: var(--tinta);
+    background: var(--laton);
+    border-color: var(--laton);
+  }
+
+  .aviso__btn--si:hover {
+    background: var(--laton-claro);
+  }
+
+  .aviso__btn--suave {
+    color: var(--cromo);
+    border-color: rgb(242 238 229 / 0.18);
+  }
+
+  .aviso__pie {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--cromo-osc);
+    border-top: 1px solid var(--linea-clara);
+  }
+
+  .aviso__pie a {
+    color: var(--papel);
+    text-decoration-color: var(--laton);
+  }
+</style>
+
+<script is:inline define:vars={{ ID: analitica.id, CLAVE: analitica.clave, MESES: analitica.mesesVigencia }}>
+  (function () {
+    var aviso = document.getElementById('aviso-cookies');
+    var ultimoFoco = null;
+
+    function guardar(valor) {
+      var caduca = new Date();
+      caduca.setMonth(caduca.getMonth() + MESES);
+      try {
+        localStorage.setItem(CLAVE, JSON.stringify({ valor: valor, caduca: caduca.getTime() }));
+      } catch (e) {
+        /* navegación privada con almacenamiento bloqueado: se preguntará otra vez */
+      }
+    }
+
+    function leer() {
+      try {
+        var crudo = localStorage.getItem(CLAVE);
+        if (!crudo) return null;
+        var dato = JSON.parse(crudo);
+        if (!dato || Date.now() > dato.caduca) return null;
+        return dato.valor;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function cargarAnalitica() {
+      if (window.__analiticaEnMarcha) return;
+      window.__analiticaEnMarcha = true;
+
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
+      document.head.appendChild(s);
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+      };
+      window.gtag('js', new Date());
+      window.gtag('config', ID);
+    }
+
+    // Al revocar hay que borrar lo que ya se hubiera instalado; si no, las
+    // cookies de Google seguirían ahí hasta caducar dentro de dos años.
+    function borrarCookiesGoogle() {
+      var dominio = location.hostname.replace(/^www\./, '');
+      document.cookie.split(';').forEach(function (c) {
+        var nombre = c.split('=')[0].trim();
+        if (nombre.indexOf('_ga') !== 0) return;
+        ['/', location.pathname].forEach(function (ruta) {
+          [dominio, '.' + dominio, ''].forEach(function (d) {
+            document.cookie =
+              nombre +
+              '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=' +
+              ruta +
+              (d ? '; domain=' + d : '');
+          });
+        });
+      });
+    }
+
+    function abrir() {
+      ultimoFoco = document.activeElement;
+      aviso.classList.remove('hidden');
+      aviso.classList.add('flex');
+      document.documentElement.style.overflow = 'hidden';
+
+      // El foco se pide en el fotograma siguiente, no aquí mismo. Enfocar
+      // justo después de cambiar clases obliga al navegador a recalcular la
+      // maqueta en el acto para saber dónde está el botón, y eso aparecía en
+      // PageSpeed como recomposición forzada.
+      requestAnimationFrame(function () {
+        var primero = aviso.querySelector('[data-cookies="aceptar"]');
+        if (primero) primero.focus();
+      });
+    }
+
+    function cerrar() {
+      aviso.classList.add('hidden');
+      aviso.classList.remove('flex');
+      document.documentElement.style.overflow = '';
+      if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
+    }
+
+    // El diálogo bloquea la página, así que el tabulador no puede escaparse a
+    // los enlaces de detrás: quedarían fuera de vista pero enfocables.
+    aviso.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab') return;
+      var focosables = aviso.querySelectorAll('button, a[href]');
+      if (!focosables.length) return;
+      var primero = focosables[0];
+      var ultimo = focosables[focosables.length - 1];
+      if (e.shiftKey && document.activeElement === primero) {
+        e.preventDefault();
+        ultimo.focus();
+      } else if (!e.shiftKey && document.activeElement === ultimo) {
+        e.preventDefault();
+        primero.focus();
+      }
+    });
+
+    aviso.addEventListener('click', function (e) {
+      var boton = e.target.closest('[data-cookies]');
+      if (!boton) return;
+      var eleccion = boton.getAttribute('data-cookies');
+      guardar(eleccion);
+      if (eleccion === 'aceptar') cargarAnalitica();
+      else borrarCookiesGoogle();
+      cerrar();
+    });
+
+    // Desde la política de cookies se puede reabrir para cambiar la decisión
+    window.abrirPreferenciasCookies = abrir;
+
+    var decision = leer();
+    if (decision === 'aceptar') cargarAnalitica();
+    else if (decision !== 'rechazar') abrir();
+  })();
+</script>

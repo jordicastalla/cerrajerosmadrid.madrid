@@ -1,0 +1,210 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Migas from '@components/ui/Migas.astro';
+import Icono from '@components/ui/Icono.astro';
+import FichaTecnica from '@components/ui/FichaTecnica.astro';
+import Mapa from '@components/Mapa.astro';
+import Faq from '@components/Faq.astro';
+import { empresa, telHref } from '@data/empresa';
+import { migas as migasSchema } from '@lib/schema';
+
+const migas = [
+  { nombre: 'Inicio', ruta: '/' },
+  { nombre: 'Contacto', ruta: '/contacto/' },
+];
+
+const faqs = [
+  {
+    p: '¿Tenéis local abierto al público?',
+    r: 'No. Trabajamos siempre a domicilio, en tu vivienda o en tu local, en todo el distrito de Chamartín.',
+  },
+  {
+    p: '¿Puedo pedir presupuesto sin compromiso?',
+    r: 'Sí. Llámanos, cuéntanos qué necesitas y te daremos un presupuesto claro antes de empezar cualquier trabajo.',
+  },
+  {
+    p: '¿Hay algún formulario o correo para escribir en vez de llamar?',
+    r: 'No: el teléfono es el único canal de contacto de esta web, a propósito. Así hablas directamente con quien va a resolver tu caso, sin esperar a que alguien lea un mensaje.',
+  },
+];
+---
+
+<Layout
+  titulo={`Contacto | ${empresa.nombre}`}
+  descripcion={`Teléfono, horario y zona de trabajo de ${empresa.nombre}. Guardia 24 horas en todo el distrito de Chamartín. Llama al ${empresa.telefono}.`}
+  ruta="/contacto/"
+  schemasExtra={[migasSchema(migas)]}
+>
+  <Migas items={migas} />
+
+  <section class="contacto envoltura">
+    <p class="rotulo">Contacto</p>
+    <h1 class="contacto__titulo">Habla con el técnico, <em>no con una centralita</em></h1>
+
+    <div class="contacto__rejilla">
+      <div>
+        <a href={telHref} class="contacto__numero" data-cta="telefono-contacto">
+          <span class="contacto__icono"><Icono nombre="telefono" tam={26} /></span>
+          <span>
+            <small>Urgencias y avisos · 24 h</small>
+            {empresa.telefono}
+          </span>
+        </a>
+
+        <FichaTecnica
+          clase="contacto__ficha"
+          filas={[
+            { k: 'Horario', v: empresa.horario },
+            { k: 'Zona', v: 'Distrito de Chamartín, Madrid' },
+            { k: 'Llegada', v: empresa.tiempoLlegada },
+            { k: 'Canal', v: 'solo teléfono, sin formularios' },
+          ]}
+        />
+
+        <a href={empresa.fichaGoogle} target="_blank" rel="noopener" class="enlace contacto__google" data-cta="ficha-google-contacto">
+          Ver nuestra ficha de Google ↗
+        </a>
+      </div>
+
+      <div class="contacto__lista">
+        <h2>Antes de llamar, <em>ten a mano</em></h2>
+        <ol>
+          <li>
+            <Icono nombre="dni" tam={22} />
+            <span>
+              Algo que acredite tu relación con la vivienda: DNI, un recibo a tu nombre o la
+              confirmación de un vecino conocido.
+            </span>
+          </li>
+          <li>
+            <Icono nombre="bombin" tam={22} />
+            <span>
+              El modelo o una foto de la cerradura, si puedes conseguirla: ayuda a llevar el material
+              adecuado.
+            </span>
+          </li>
+          <li>
+            <Icono nombre="mapa" tam={22} />
+            <span>La dirección exacta y una referencia si el número del portal no se ve bien de noche.</span>
+          </li>
+        </ol>
+        <p class="contacto__barrios">
+          Trabajamos en los seis barrios del distrito:
+          {empresa.zonaServicio.barrios.join(', ')}.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Mapa titulo="Dónde trabajamos" />
+
+  <Faq faqs={faqs} titulo="Dudas sobre cómo contactarnos" />
+</Layout>
+
+<style>
+  .contacto {
+    padding-top: clamp(2rem, 5vw, 4rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .contacto__titulo {
+    margin-top: 1.25rem;
+    max-width: 15ch;
+    font-size: clamp(2.6rem, 1.3rem + 5vw, 6rem);
+    line-height: 0.98;
+  }
+
+  .contacto__rejilla {
+    display: grid;
+    gap: 3rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  @media (min-width: 960px) {
+    .contacto__rejilla {
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+  }
+
+  .contacto__numero {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    color: var(--papel);
+    text-decoration: none;
+    background: var(--tinta);
+    border-radius: 999px 0.4rem 0.4rem 999px;
+    font-family: var(--f-display);
+    font-size: clamp(2rem, 1.4rem + 2.4vw, 3.2rem);
+    font-style: italic;
+    font-weight: 330;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    transition: background-color 0.2s ease;
+  }
+
+  .contacto__numero:hover {
+    background: var(--tinta-3);
+  }
+
+  .contacto__numero small {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--f-mono);
+    font-size: 0.72rem;
+    font-style: normal;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--laton);
+  }
+
+  .contacto__icono {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 3.75rem;
+    height: 3.75rem;
+    border-radius: 50%;
+    color: var(--tinta);
+    background: var(--laton);
+  }
+
+  .contacto :global(.contacto__ficha) {
+    margin-top: 2rem;
+  }
+
+  .contacto__google {
+    margin-top: 1.5rem;
+  }
+
+  .contacto__lista h2 {
+    font-size: clamp(1.8rem, 1.3rem + 1.5vw, 2.5rem);
+  }
+
+  .contacto__lista ol {
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--tinta);
+  }
+
+  .contacto__lista li {
+    display: flex;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .contacto__lista li :global(svg) {
+    flex: none;
+    margin-top: 0.15rem;
+    color: var(--laton-texto);
+  }
+
+  .contacto__barrios {
+    margin-top: 1.75rem;
+    color: var(--suave);
+  }
+</style>
