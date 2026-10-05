@@ -1,0 +1,140 @@
+---
+/**
+ * Botón de llamada (spec §23 motivo 2, §41). Los «pines» del bombín están
+ * desalineados y se alinean al pasar el ratón o con el foco: la cerradura se
+ * abre. Solo CSS; sin animación con prefers-reduced-motion.
+ */
+import Icono from '@components/ui/Icono.astro';
+import { site, telHref } from '@data/site';
+
+interface Props {
+  /** Bloque de origen para la medición (data-cta) */
+  cta: string;
+  sub?: string;
+  variante?: 'oro' | 'contorno';
+  clase?: string;
+}
+
+const { cta, sub, variante = 'oro', clase = '' } = Astro.props;
+---
+
+<a href={telHref} class={`llamar llamar--${variante} ${clase}`} data-cta={cta} aria-label={`Llamar al ${site.telefono}`}>
+  <span class="llamar__icono"><Icono nombre="telefono" tam={20} /></span>
+  <span class="llamar__texto">
+    Llamar al <b>{site.telefono}</b>
+    {sub && <small>{sub}</small>}
+  </span>
+  <span class="llamar__pines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+</a>
+
+<style>
+  .llamar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-height: 3.5rem;
+    padding: 0.4rem 1.1rem 0.4rem 0.4rem;
+    font-weight: 650;
+    font-size: 1.0625rem;
+    line-height: 1.1;
+    text-decoration: none;
+    border-radius: 999px;
+    transition:
+      transform 0.25s cubic-bezier(0.3, 0.7, 0.2, 1),
+      box-shadow 0.25s ease,
+      filter 0.2s ease;
+  }
+
+  .llamar b {
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .llamar small {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    opacity: 0.85;
+  }
+
+  /* Oro con texto obsidiana: 8,44:1 */
+  .llamar--oro {
+    color: var(--obsidiana-profunda);
+    background: var(--grad-oro);
+    box-shadow:
+      0 0 0 1px rgb(212 175 55 / 0.4),
+      0 14px 34px -16px rgb(245 158 11 / 0.65);
+  }
+
+  .llamar--oro:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+  }
+
+  .llamar--contorno {
+    color: var(--blanco);
+    border: 1px solid var(--linea-oro);
+    background: rgb(3 7 18 / 0.4);
+  }
+
+  .llamar--contorno:hover {
+    border-color: var(--oro);
+  }
+
+  .llamar__icono {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 50%;
+    color: var(--oro);
+    background: var(--obsidiana-profunda);
+  }
+
+  .llamar--contorno .llamar__icono {
+    color: var(--obsidiana-profunda);
+    background: var(--grad-oro);
+  }
+
+  /* Pines del bombín */
+  .llamar__pines {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 3px;
+    height: 1.1rem;
+    margin-left: 0.2rem;
+  }
+
+  .llamar__pines i {
+    display: block;
+    width: 3px;
+    height: 0.7rem;
+    border-radius: 2px;
+    background: currentColor;
+    opacity: 0.75;
+    transition: transform 0.35s cubic-bezier(0.3, 0.7, 0.2, 1.4);
+  }
+
+  .llamar__pines i:nth-child(1) { transform: translateY(0.35rem); }
+  .llamar__pines i:nth-child(2) { transform: translateY(0.1rem); }
+  .llamar__pines i:nth-child(3) { transform: translateY(0.4rem); }
+  .llamar__pines i:nth-child(4) { transform: translateY(0.05rem); }
+  .llamar__pines i:nth-child(5) { transform: translateY(0.3rem); }
+
+  .llamar:hover .llamar__pines i,
+  .llamar:focus-visible .llamar__pines i {
+    transform: translateY(0.2rem);
+  }
+
+  .llamar:hover .llamar__pines i:nth-child(2),
+  .llamar:focus-visible .llamar__pines i:nth-child(2) { transition-delay: 0.04s; }
+  .llamar:hover .llamar__pines i:nth-child(3),
+  .llamar:focus-visible .llamar__pines i:nth-child(3) { transition-delay: 0.08s; }
+  .llamar:hover .llamar__pines i:nth-child(4),
+  .llamar:focus-visible .llamar__pines i:nth-child(4) { transition-delay: 0.12s; }
+  .llamar:hover .llamar__pines i:nth-child(5),
+  .llamar:focus-visible .llamar__pines i:nth-child(5) { transition-delay: 0.16s; }
+</style>

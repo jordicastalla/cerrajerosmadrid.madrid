@@ -1,5 +1,9 @@
 ---
-import { empresa, telHref } from '@data/empresa';
+/**
+ * Preguntas frecuentes en HTML visible (spec §6). Sin marcado FAQPage: no
+ * aporta resultados visibles en Google (spec §14).
+ */
+import { site, telHref } from '@data/site';
 
 export interface PreguntaFaq {
   p: string;
@@ -9,49 +13,50 @@ export interface PreguntaFaq {
 interface Props {
   faqs: PreguntaFaq[];
   titulo?: string;
+  id?: string;
 }
 
-const { faqs, titulo = 'Lo que nos preguntan por teléfono' } = Astro.props;
+const { faqs, titulo = 'Preguntas frecuentes', id = 'faq' } = Astro.props;
 ---
 
-<section class="faq tramo" id="preguntas">
-  <div class="envoltura faq__rejilla">
-    <div class="faq__cabeza">
-      <p class="rotulo">Preguntas frecuentes</p>
-      <h2 class="faq__titulo">{titulo}</h2>
-      <p class="faq__nota">
-        ¿Tu caso no está aquí? Llama al <a href={telHref} data-cta="telefono-faq">{empresa.telefono}</a> y
-        lo hablas directamente con un técnico.
-      </p>
-    </div>
+{
+  faqs.length > 0 && (
+    <section class="faq tramo claro" id={id} aria-labelledby={`${id}-titulo`}>
+      <div class="envoltura faq__rejilla">
+        <div class="faq__cabeza">
+          <p class="rotulo">Dudas habituales</p>
+          <h2 class="seccion__titulo" id={`${id}-titulo`}>
+            {titulo}
+          </h2>
+          <p class="faq__nota">
+            ¿Tu caso no está aquí? Llama al{' '}
+            <a href={telHref} data-cta="faq">
+              {site.telefono}
+            </a>{' '}
+            y lo hablamos.
+          </p>
+        </div>
 
-    <div class="faq__lista" itemscope itemtype="https://schema.org/FAQPage">
-      {
-        faqs.map((f, i) => (
-          <details class="faq__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-            <summary>
-              <span class="faq__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-              <h3 itemprop="name">{f.p}</h3>
-              <svg class="faq__llave" viewBox="0 0 44 18" width="44" height="18" aria-hidden="true">
-                <circle cx="8" cy="9" r="6" />
-                <path d="M14 9h28v3.5h-3.5V16h-4v-3.5h-3V17h-4v-4.5h-3" />
-              </svg>
-            </summary>
-            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">{f.r}</p>
-            </div>
-          </details>
-        ))
-      }
-    </div>
-  </div>
-</section>
+        <div class="faq__lista">
+          {faqs.map((f) => (
+            <details class="faq__item">
+              <summary>
+                <h3>{f.p}</h3>
+                <svg class="faq__llave" viewBox="0 0 44 18" width="44" height="18" aria-hidden="true">
+                  <circle cx="8" cy="9" r="6" />
+                  <path d="M14 9h28v3.5h-3.5V16h-4v-3.5h-3V17h-4v-4.5h-3" />
+                </svg>
+              </summary>
+              <p>{f.r}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
 
 <style>
-  .faq {
-    background: var(--papel-2);
-  }
-
   .faq__rejilla {
     display: grid;
     gap: 2.5rem;
@@ -65,63 +70,50 @@ const { faqs, titulo = 'Lo que nos preguntan por teléfono' } = Astro.props;
 
     .faq__cabeza {
       position: sticky;
-      top: 2rem;
+      top: 6.5rem;
       align-self: start;
     }
-  }
-
-  .faq__titulo {
-    margin-top: 1rem;
-    font-size: clamp(2rem, 1.4rem + 2vw, 3rem);
   }
 
   .faq__nota {
     margin-top: 1.25rem;
     max-width: 24rem;
-    color: var(--suave);
+    color: var(--pizarra);
   }
 
   .faq__nota a {
-    font-family: var(--f-mono);
-    font-weight: 600;
-    color: var(--tinta);
+    font-weight: 800;
+    color: var(--obsidiana);
     white-space: nowrap;
   }
 
   .faq__lista {
-    border-top: 2px solid var(--tinta);
+    border-top: 2px solid var(--obsidiana);
   }
 
   .faq__item {
-    border-bottom: 1px solid var(--linea);
+    border-bottom: 1px solid var(--linea-clara);
   }
 
   summary {
     display: grid;
-    grid-template-columns: 2.25rem 1fr auto;
+    grid-template-columns: 1fr auto;
     align-items: center;
     gap: 1rem;
-    padding: 1.35rem 0;
+    padding: 1.3rem 0;
     list-style: none;
     cursor: pointer;
   }
 
-  .faq__n {
-    font-family: var(--f-mono);
-    font-size: 0.75rem;
-    color: var(--laton-texto);
-  }
-
   summary h3 {
-    font-size: clamp(1.15rem, 1rem + 0.5vw, 1.4rem);
-    font-weight: 460;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
+    font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem);
+    font-weight: 700;
+    line-height: 1.3;
   }
 
   .faq__llave {
     fill: none;
-    stroke: var(--tinta);
+    stroke: var(--obsidiana);
     stroke-width: 2;
     stroke-linejoin: round;
     transform-origin: 8px 9px;
@@ -131,32 +123,13 @@ const { faqs, titulo = 'Lo que nos preguntan por teléfono' } = Astro.props;
   /* Al abrir la pregunta, la llave gira como en la cerradura */
   details[open] .faq__llave {
     transform: rotate(90deg);
-    stroke: var(--laton-texto);
-  }
-
-  summary:hover h3 {
-    color: var(--cobalto);
+    stroke: var(--oro-texto);
   }
 
   details p {
-    max-width: 38rem;
-    padding: 0 3.5rem 1.6rem 3.25rem;
+    max-width: 40rem;
+    padding: 0 3.5rem 1.5rem 0;
     line-height: 1.7;
-    color: var(--suave);
-  }
-
-  @media (max-width: 559px) {
-    summary {
-      grid-template-columns: 1fr auto;
-    }
-
-    .faq__n {
-      display: none;
-    }
-
-    details p {
-      padding-left: 0;
-      padding-right: 0;
-    }
+    color: var(--pizarra);
   }
 </style>

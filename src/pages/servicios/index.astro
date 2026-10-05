@@ -1,0 +1,78 @@
+---
+/**
+ * Hub de servicios (spec §36): página real a la que enlazan los breadcrumbs.
+ * Resúmenes propios, sin copiar párrafos de la Home ni de los servicios.
+ */
+import { getCollection } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import CallButton from '@components/CallButton.astro';
+import InterlinkingGrid from '@components/InterlinkingGrid.astro';
+import ComoTrabajamos from '@components/ComoTrabajamos.astro';
+import CtaFinal from '@components/CtaFinal.astro';
+
+const servicios = (await getCollection('servicios', (s) => s.data.status === 'ready')).sort((a, b) => a.data.orden - b.data.orden);
+
+const items = [
+  {
+    href: '/#apertura-de-puertas',
+    titulo: 'Apertura de puertas',
+    texto: 'Para cuando te quedas fuera: llaves dentro, perdidas o puerta cerrada de golpe.',
+  },
+  ...servicios.map((s) => ({ href: `/servicios/${s.id}/`, titulo: `${s.data.titulo} en Madrid`, texto: s.data.resumen })),
+  {
+    href: '/#cerrajero-urgente-24-horas',
+    titulo: 'Cerrajero urgente 24 horas',
+    texto: 'Atención a cualquier hora, también de madrugada, en fin de semana y en festivos.',
+  },
+];
+---
+
+<Layout
+  titulo="Servicios de Cerrajería en Madrid | Openservi"
+  descripcion="Apertura de puertas, cambio de cerraduras, cerrojos de seguridad y cerrajero urgente 24 horas en Madrid. Presupuesto sin compromiso. Llama al 912 918 462."
+  ruta="/servicios/"
+>
+  <Breadcrumbs
+    items={[
+      { nombre: 'Inicio', ruta: '/' },
+      { nombre: 'Servicios', ruta: '/servicios/' },
+    ]}
+  />
+
+  <section class="tramo hub">
+    <div class="envoltura">
+      <h1 class="titular hub__h1 metal">Servicios de cerrajería en Madrid</h1>
+      <p class="seccion__entrada">
+        Cuatro servicios, una forma de trabajar: te explicamos qué vamos a hacer y el presupuesto, sin compromiso, antes de
+        empezar.
+      </p>
+      <div class="hub__accion"><CallButton cta="hub-servicios" sub="24 horas" /></div>
+      <div class="hub__rejilla"><InterlinkingGrid items={items} /></div>
+    </div>
+  </section>
+
+  <ComoTrabajamos />
+  <CtaFinal cta="final-hub-servicios" />
+</Layout>
+
+<style>
+  .hub {
+    padding-top: clamp(1.5rem, 4vw, 3rem);
+    background:
+      radial-gradient(40rem 24rem at 85% 10%, rgb(212 175 55 / 0.1), transparent 62%),
+      var(--obsidiana-profunda);
+  }
+
+  .hub__h1 {
+    font-size: clamp(1.7rem, 1.1rem + 2.8vw, 3.3rem);
+  }
+
+  .hub__accion {
+    margin-top: 1.75rem;
+  }
+
+  .hub__rejilla {
+    margin-top: 2.75rem;
+  }
+</style>

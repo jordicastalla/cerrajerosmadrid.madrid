@@ -1,0 +1,41 @@
+---
+/**
+ * Separador con el perfil de cortes de una llave (spec §23, motivo 1).
+ * Toma el color del texto: oro sobre fondos oscuros, oro-texto sobre blanco.
+ */
+interface Props {
+  clase?: string;
+}
+const { clase = '' } = Astro.props;
+---
+
+<div class={`corte ${clase}`} aria-hidden="true">
+  <svg viewBox="0 0 420 22" width="420" height="22" focusable="false">
+    <path
+      d="M0 11H150V5h10v6h8V2h12v9h10V7h10v4h10V3h12v8h10V6h10v5h10V4h12v7H420"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.6"
+      stroke-linejoin="round"
+    />
+    <circle cx="140" cy="11" r="3.2" fill="currentColor" />
+  </svg>
+</div>
+
+<style>
+  .corte {
+    display: flex;
+    justify-content: center;
+    color: var(--oro);
+    opacity: 0.85;
+  }
+
+  .corte svg {
+    width: min(420px, 80%);
+    height: auto;
+  }
+
+  :global(.claro) .corte {
+    color: var(--oro-texto);
+  }
+</style>

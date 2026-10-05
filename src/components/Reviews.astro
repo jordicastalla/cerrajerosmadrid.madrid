@@ -1,0 +1,187 @@
+---
+/**
+ * Opiniones reales del perfil de Google (spec §18). Recuento y media siempre
+ * con enlace al perfil; tarjetas solo con ≥ 3 reseñas literales. Sin
+ * AggregateRating ni Review en schema.org: Google no muestra estrellas para
+ * reseñas que el propio negocio publica sobre sí mismo.
+ */
+import { resenas, mediaTexto } from '@data/resenas';
+
+interface Props {
+  maximo?: number;
+}
+
+const { maximo = 6 } = Astro.props;
+const tarjetas = resenas.items.length >= 3 ? resenas.items.slice(0, maximo) : [];
+const relleno = resenas.media ? (resenas.media / 5) * 100 : 0;
+---
+
+<section class="opiniones tramo tramo--profundo" id="opiniones" aria-labelledby="opiniones-titulo">
+  <div class="envoltura">
+    <div class="opiniones__cabeza">
+      <div>
+        <p class="rotulo">Reseñas de Google</p>
+        <h2 class="seccion__titulo" id="opiniones-titulo">Opiniones de clientes</h2>
+      </div>
+
+      <div class="nota">
+        {
+          mediaTexto && (
+            <p class="nota__cifra">
+              <span class="dorado">{mediaTexto}</span>
+              <span class="nota__de">de 5</span>
+            </p>
+          )
+        }
+        {
+          resenas.media && (
+            <span class="estrellas" aria-hidden="true">
+              <span class="estrellas__fondo">★★★★★</span>
+              <span class="estrellas__oro" style={`width:${relleno}%`}>
+                ★★★★★
+              </span>
+            </span>
+          )
+        }
+        <p class="nota__total">{resenas.total} opiniones en Google</p>
+        <a
+          class="enlace"
+          href={resenas.perfilUrl}
+          target="_blank"
+          rel="noopener"
+          data-evento="perfil_google"
+          data-cta="opiniones"
+        >
+          Ver las opiniones en Google Maps ↗
+        </a>
+      </div>
+    </div>
+
+    {
+      tarjetas.length > 0 && (
+        <ul class="opiniones__lista">
+          {tarjetas.map((r) => (
+            <li class="tarjeta opinion">
+              <blockquote>
+                <p>{r.texto}</p>
+              </blockquote>
+              <p class="opinion__autor">
+                {r.autor}
+                <span>Reseña de Google</span>
+              </p>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .opiniones__cabeza {
+    display: grid;
+    gap: 2rem;
+    align-items: end;
+  }
+
+  @media (min-width: 860px) {
+    .opiniones__cabeza {
+      grid-template-columns: 1fr auto;
+    }
+  }
+
+  .nota {
+    display: grid;
+    justify-items: start;
+    gap: 0.4rem;
+  }
+
+  .nota__cifra {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-family: var(--f-marca);
+    font-size: clamp(2.6rem, 2rem + 2vw, 3.6rem);
+    line-height: 1;
+  }
+
+  .nota__de {
+    font-family: var(--f-texto);
+    font-size: 1rem;
+    color: var(--plata-2);
+  }
+
+  .estrellas {
+    position: relative;
+    display: inline-block;
+    font-size: 1.35rem;
+    letter-spacing: 0.15em;
+    line-height: 1;
+  }
+
+  .estrellas__fondo {
+    color: rgb(148 163 184 / 0.35);
+  }
+
+  .estrellas__oro {
+    position: absolute;
+    inset: 0 auto 0 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--oro);
+  }
+
+  .nota__total {
+    font-weight: 600;
+    color: var(--plata);
+  }
+
+  .opiniones__lista {
+    display: grid;
+    gap: 1.25rem;
+    margin: 2.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  }
+
+  .opinion {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+
+  .opinion blockquote {
+    margin: 0;
+  }
+
+  .opinion blockquote p {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--plata);
+  }
+
+  .opinion blockquote p::before {
+    content: '“';
+    display: block;
+    height: 1.6rem;
+    font-family: var(--f-marca);
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--oro);
+  }
+
+  .opinion__autor {
+    display: grid;
+    gap: 0.15rem;
+    font-weight: 700;
+    color: var(--blanco);
+  }
+
+  .opinion__autor span {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--plata-2);
+  }
+</style>

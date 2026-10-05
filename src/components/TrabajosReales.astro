@@ -1,0 +1,98 @@
+---
+/**
+ * «Trabajos reales» (spec §37). Solo casos con verificado: true. Si no hay
+ * suficientes, la sección no se pinta: nunca se rellena con ejemplos.
+ */
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { casosVerificados } from '@lib/casos';
+
+interface Props {
+  /** Filtra por localidad (slug) */
+  localidad?: string;
+  /** Mínimo de casos para pintar la sección */
+  minimo?: number;
+  maximo?: number;
+  titulo?: string;
+}
+
+const { localidad, minimo = 3, maximo = 6, titulo = 'Trabajos reales' } = Astro.props;
+
+const tipos: Record<CollectionEntry<'casos'>['data']['tipo'], string> = {
+  apertura: 'Apertura de puerta',
+  'cambio-cerradura': 'Cambio de cerradura',
+  cerrojo: 'Instalación de cerrojo',
+  bombin: 'Cambio de bombín',
+  'alta-seguridad': 'Alta seguridad',
+  otro: 'Trabajo de cerrajería',
+};
+
+const localidades = new Map((await getCollection('localidades')).map((l) => [l.id, l.data.nombre]));
+const casos = (await casosVerificados((c) => !localidad || c.data.localidad.id === localidad))
+  .sort((a, b) => (b.data.fecha?.getTime() ?? 0) - (a.data.fecha?.getTime() ?? 0))
+  .slice(0, maximo);
+
+const fecha = (d?: Date) => (d ? d.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' }) : null);
+---
+
+{
+  casos.length >= minimo && (
+    <section class="casos tramo" id="trabajos-reales" aria-labelledby="casos-titulo">
+      <div class="envoltura">
+        <p class="rotulo">Hecho por nuestro equipo</p>
+        <h2 class="seccion__titulo" id="casos-titulo">{titulo}</h2>
+        <ul class="casos__lista">
+          {casos.map((c) => (
+            <li class="tarjeta caso">
+              <figure>
+                <Image src={c.data.foto} alt={c.data.alt} widths={[360, 720]} sizes="(min-width: 900px) 360px, 100vw" />
+                <figcaption>
+                  {[tipos[c.data.tipo], c.data.barrio ?? localidades.get(c.data.localidad.id), fecha(c.data.fecha)]
+                    .filter(Boolean)
+                    .join(' · ')}
+                </figcaption>
+              </figure>
+              <p>{c.data.resumen}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .casos__lista {
+    display: grid;
+    gap: 1.25rem;
+    margin: 2.25rem 0 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  }
+
+  .caso figure {
+    margin: 0;
+  }
+
+  .caso :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 0.6rem;
+  }
+
+  .caso figcaption {
+    margin-top: 0.7rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--oro);
+  }
+
+  .caso p {
+    margin-top: 0.6rem;
+    font-size: 0.98rem;
+    color: var(--plata);
+  }
+</style>

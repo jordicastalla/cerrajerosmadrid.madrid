@@ -1,28 +1,21 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import BotonLlamar from '@components/ui/BotonLlamar.astro';
-import { empresa } from '@data/empresa';
+import CallButton from '@components/CallButton.astro';
+import Emblema from '@components/marca/Emblema.astro';
+import { site } from '@data/site';
 ---
 
-<Layout
-  titulo={`Página no encontrada | ${empresa.nombre}`}
-  descripcion="La página que buscas no existe o se ha movido."
-  ruta="/404/"
-  noindex
->
+<Layout titulo={`Página no encontrada | ${site.nombre}`} descripcion="La página que buscas no existe o se ha movido." ruta="/404/" noindex>
   <section class="error envoltura">
-    <svg class="error__ojo" viewBox="0 0 100 140" aria-hidden="true">
-      <path d="M50 4a42 42 0 0 1 20 79l12 55H18l12-55A42 42 0 0 1 50 4Z" />
-    </svg>
+    <Emblema tam={200} clase="error__emblema" />
     <div>
       <p class="rotulo">Error 404</p>
-      <h1 class="error__titulo">Esta puerta <em>no existe</em></h1>
+      <h1 class="titular error__titulo"><span class="metal">Esta puerta</span> <span class="dorado">no existe</span></h1>
       <p class="error__texto">
-        La página que buscas no está disponible o ha cambiado de sitio. Si necesitas un cerrajero
-        urgente, llámanos directamente.
+        La página que buscas no está disponible o ha cambiado de sitio. Si necesitas un cerrajero, llámanos directamente.
       </p>
       <div class="error__acciones">
-        <BotonLlamar cta="telefono-404" />
+        <CallButton cta="404" sub="24 horas" />
         <a href="/" class="enlace">Volver al inicio →</a>
       </div>
     </div>
@@ -40,28 +33,25 @@ import { empresa } from '@data/empresa';
 
   @media (min-width: 860px) {
     .error {
-      grid-template-columns: minmax(10rem, 0.4fr) 1fr;
-      gap: 5rem;
+      grid-template-columns: auto 1fr;
+      gap: 4rem;
     }
   }
 
-  .error__ojo {
+  :global(.error__emblema) {
     width: min(12rem, 40vw);
-    fill: var(--tinta);
-    stroke: var(--laton);
-    stroke-width: 1.5;
+    height: auto;
   }
 
   .error__titulo {
-    margin-top: 1.25rem;
-    font-size: clamp(2.8rem, 1.5rem + 5vw, 6rem);
+    margin-top: 1.1rem;
   }
 
   .error__texto {
     margin-top: 1.25rem;
     max-width: 32rem;
     font-size: 1.125rem;
-    color: var(--suave);
+    color: var(--plata-2);
   }
 
   .error__acciones {

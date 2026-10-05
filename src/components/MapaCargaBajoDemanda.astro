@@ -1,0 +1,89 @@
+---
+/**
+ * Mapa de Google con «clic para cargar» (spec §17). En el HTML inicial no hay
+ * ningún iframe: solo un recuadro propio. El mapa se inserta si el visitante
+ * lo pide. Solo en la Home y en el hub de zonas.
+ */
+import Icono from '@components/ui/Icono.astro';
+import { site } from '@data/site';
+---
+
+<div class="mapa" data-mapa>
+  <div class="mapa__caja" data-mapa-caja>
+    <span class="mapa__icono"><Icono nombre="mapa" tam={26} /></span>
+    <p class="mapa__titulo">Mapa de Google</p>
+    <p class="mapa__aviso">No se carga hasta que lo pides: así la página va más rápida.</p>
+    <button type="button" class="boton-sec" data-abrir-mapa data-evento="ver_mapa" data-cta="mapa">Ver el mapa</button>
+  </div>
+  <a class="enlace mapa__enlace" href={site.perfilGoogle} target="_blank" rel="noopener" data-evento="perfil_google" data-cta="mapa">
+    Abrir en Google Maps ↗
+  </a>
+</div>
+
+<style>
+  .mapa__caja {
+    display: grid;
+    justify-items: center;
+    gap: 0.75rem;
+    min-height: 300px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    background:
+      radial-gradient(circle at 50% 40%, rgb(212 175 55 / 0.14), transparent 60%),
+      repeating-linear-gradient(0deg, transparent 0 39px, rgb(148 163 184 / 0.08) 39px 40px),
+      repeating-linear-gradient(90deg, transparent 0 39px, rgb(148 163 184 / 0.08) 39px 40px),
+      var(--obsidiana-profunda);
+    border: 1px solid var(--linea);
+    border-radius: 12px;
+    align-content: center;
+  }
+
+  .mapa__caja.abierto {
+    display: block;
+    min-height: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+  }
+
+  .mapa__icono {
+    color: var(--oro);
+  }
+
+  .mapa__titulo {
+    font-family: var(--f-marca);
+    font-size: 1rem;
+    color: var(--blanco);
+  }
+
+  .mapa__aviso {
+    max-width: 26rem;
+    font-size: 0.92rem;
+    color: var(--plata-2);
+  }
+
+  .mapa__enlace {
+    margin-top: 1rem;
+  }
+</style>
+
+<script is:inline define:vars={{ EMBED: site.mapaEmbed, NOMBRE: site.nombre }}>
+  document.querySelectorAll('[data-mapa]').forEach(function (bloque) {
+    var caja = bloque.querySelector('[data-mapa-caja]');
+    var boton = bloque.querySelector('[data-abrir-mapa]');
+    if (!caja || !boton) return;
+    boton.addEventListener('click', function () {
+      var marco = document.createElement('iframe');
+      marco.src = EMBED;
+      marco.title = 'Mapa de ' + NOMBRE;
+      marco.width = '100%';
+      marco.height = '300';
+      marco.loading = 'lazy';
+      marco.referrerPolicy = 'strict-origin-when-cross-origin';
+      marco.setAttribute('allowfullscreen', '');
+      marco.style.cssText = 'display:block;border:0;border-radius:12px';
+      caja.replaceChildren(marco);
+      caja.classList.add('abierto');
+    });
+  });
+</script>

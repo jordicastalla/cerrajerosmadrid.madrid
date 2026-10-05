@@ -1,0 +1,96 @@
+---
+/**
+ * Logotipo en texto, a partir del borrador del cliente (marca/): «CERRAJEROS»
+ * espaciado, «MADRID» en plata con la A convertida en cerradura y «OpenServi»
+ * con «Servi» en oro. Texto real + SVG: pesa casi nada y se puede cambiar
+ * por el logotipo definitivo sin tocar las plantillas.
+ */
+import Emblema from '@components/marca/Emblema.astro';
+
+interface Props {
+  variante?: 'barra' | 'grande';
+}
+
+const { variante = 'barra' } = Astro.props;
+const uid = `a${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<span class={`logo logo--${variante}`}>
+  <Emblema tam={variante === 'grande' ? 92 : 46} clase="logo__emblema" />
+  <span class="logo__texto" aria-hidden="true">
+    <span class="logo__cerrajeros">Cerrajeros</span>
+    <span class="logo__madrid"
+      ><span class="metal">M</span><svg class="logo__a" viewBox="0 0 100 92" focusable="false"
+        ><defs
+          ><linearGradient id={`${uid}-plata`} x1="0" y1="0" x2="0" y2="1"
+            ><stop offset="0" stop-color="#FFFFFF" /><stop offset="0.48" stop-color="#E2E8F0" /><stop
+              offset="1"
+              stop-color="#94A3B8"
+            /></linearGradient
+          ></defs
+        ><path
+          fill={`url(#${uid}-plata)`}
+          fill-rule="evenodd"
+          d="M41 0h18l41 92H0ZM46 59.2A10 10 0 1 1 54 59.2L58 82H42Z"
+        /></svg
+      ><span class="metal">DRID</span></span
+    >
+    <span class="logo__openservi"><span class="metal">Open</span><span class="dorado">Servi</span></span>
+  </span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    line-height: 1;
+  }
+
+  .logo__texto {
+    display: grid;
+    justify-items: center;
+    gap: 0.18em;
+    font-size: 1rem;
+  }
+
+  .logo__cerrajeros {
+    font-family: var(--f-marca);
+    font-size: 0.42em;
+    letter-spacing: 0.62em;
+    padding-left: 0.62em;
+    text-transform: uppercase;
+    color: var(--plata-2);
+  }
+
+  .logo__madrid {
+    display: inline-flex;
+    align-items: baseline;
+    font-family: var(--f-marca);
+    font-size: 1.32em;
+    letter-spacing: 0.06em;
+  }
+
+  .logo__a {
+    display: inline-block;
+    width: 0.8em;
+    height: 0.74em;
+    margin-inline: 0.04em 0.07em;
+  }
+
+  .logo__openservi {
+    font-family: var(--f-texto);
+    font-style: italic;
+    font-weight: 850;
+    font-size: 0.8em;
+    letter-spacing: -0.01em;
+  }
+
+  .logo--grande .logo__texto {
+    font-size: 1.6rem;
+  }
+
+  .logo--grande {
+    gap: 1rem;
+  }
+</style>

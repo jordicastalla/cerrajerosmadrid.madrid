@@ -1,0 +1,63 @@
+---
+/**
+ * Migas de pan discretas + BreadcrumbList en JSON-LD (spec §10). Los tramos
+ * intermedios enlazan a páginas reales (hubs, spec §36); el último no enlaza.
+ */
+import { migas, type Miga } from '@lib/schema';
+
+interface Props {
+  items: Miga[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="migas envoltura" aria-label="Migas de pan">
+  <ol>
+    {
+      items.map((item, i) => (
+        <li>
+          {i < items.length - 1 ? <a href={item.ruta}>{item.nombre}</a> : <span aria-current="page">{item.nombre}</span>}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(migas(items))} />
+
+<style>
+  .migas {
+    padding-top: 1.25rem;
+  }
+
+  .migas ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.875rem;
+    color: var(--plata-2);
+  }
+
+  .migas li + li::before {
+    content: '›';
+    margin-right: 0.5rem;
+    color: var(--oro);
+  }
+
+  .migas a {
+    color: var(--plata);
+    text-decoration: none;
+  }
+
+  .migas a:hover {
+    color: var(--oro);
+    text-decoration: underline;
+  }
+
+  .migas [aria-current] {
+    color: var(--plata-2);
+  }
+</style>

@@ -1,0 +1,243 @@
+---
+/**
+ * Plantilla de localidad (spec §28). Misma plantilla, contenido propio: cada
+ * sección solo se pinta si la ficha de la empresa tiene datos reales.
+ * La puerta de indexación (spec §5) decide noindex, sitemap y enlaces.
+ */
+import { getCollection, getEntries, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '@layouts/Layout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import CallButton from '@components/CallButton.astro';
+import EEATBadges from '@components/EEATBadges.astro';
+import TrabajosReales from '@components/TrabajosReales.astro';
+import Faq from '@components/Faq.astro';
+import InterlinkingGrid from '@components/InterlinkingGrid.astro';
+import CtaFinal from '@components/CtaFinal.astro';
+import { comprobarPuerta, esIndexable } from '@lib/gate';
+import { casosVerificados } from '@lib/casos';
+import { servicio as servicioSchema } from '@lib/schema';
+
+export async function getStaticPaths() {
+  const localidades = await getCollection('localidades', (l) => l.data.cerrajeroPropio);
+  const casos = await casosVerificados();
+  const porLocalidad = new Map<string, number>();
+  for (const c of casos) porLocalidad.set(c.data.localidad.id, (porLocalidad.get(c.data.localidad.id) ?? 0) + 1);
+
+  // Falla el build si alguna localidad está en ready sin cumplir los mínimos
+  comprobarPuerta(localidades, porLocalidad);
+
+  return localidades.map((entrada) => ({ params: { localidad: entrada.id }, props: { entrada } }));
+}
+
+interface Props {
+  entrada: CollectionEntry<'localidades'>;
+}
+
+const { entrada } = Astro.props;
+const d = entrada.data;
+const ruta = `/cerrajeros/${entrada.id}/`;
+const indexable = esIndexable(d.status);
+
+const servicios = (await getCollection('servicios', (s) => s.data.status === 'ready')).sort((a, b) => a.data.orden - b.data.orden);
+const cercanas = (await getEntries(d.nearby)).filter((l) => l.data.status === 'ready' && l.data.cerrajeroPropio);
+---
+
+<Layout
+  titulo={d.seoTitle}
+  descripcion={d.seoDescription}
+  ruta={ruta}
+  noindex={!indexable}
+  schemas={[
+    servicioSchema({
+      nombre: `Cerrajería en ${d.nombre}`,
+      descripcion: `Apertura de puertas, cambio de cerraduras e instalación de cerrojos en ${d.nombre}.`,
+      ruta,
+      area: d.nombre,
+    }),
+  ]}
+>
+  <Breadcrumbs
+    items={[
+      { nombre: 'Inicio', ruta: '/' },
+      { nombre: 'Cerrajeros', ruta: '/cerrajeros/' },
+      { nombre: d.nombre, ruta },
+    ]}
+  />
+
+  <section class="cabeza-loc">
+    <div class="envoltura cabeza-loc__rejilla">
+      <div>
+        <h1 class="titular cabeza-loc__h1"><span class="metal">Cerrajeros en</span> <span class="dorado">{d.nombre}</span></h1>
+        <p class="cabeza-loc__propio">Uno de nuestros cerrajeros trabaja en {d.nombre}.</p>
+        {d.tiempoLlegada && <p class="cabeza-loc__dato">{d.tiempoLlegada}</p>}
+        <div class="cabeza-loc__accion"><CallButton cta={`zona-${entrada.id}`} sub="Servicio 24 horas" /></div>
+        <EEATBadges clase="cabeza-loc__insignias" />
+      </div>
+      {
+        d.image && d.imageAlt && (
+          <Image src={d.image} alt={d.imageAlt} widths={[480, 960]} sizes="(min-width: 1000px) 480px, 100vw" class="cabeza-loc__foto" loading="eager" fetchpriority="high" />
+        )
+      }
+    </div>
+  </section>
+
+  <div class="claro">
+    <div class="envoltura tramo cuerpo-loc">
+      {
+        d.intro && (
+          <div class="prosa">
+            {d.intro.split(/\n{2,}/).map((p) => (
+              <p>{p}</p>
+            ))}
+          </div>
+        )
+      }
+
+      <section aria-labelledby="loc-servicios">
+        <h2 id="loc-servicios" class="cuerpo-loc__h2">Servicios en {d.nombre}</h2>
+        <div class="cuerpo-loc__grid">
+          <InterlinkingGrid
+            items={[
+              { href: '/#apertura-de-puertas', titulo: `Apertura de puertas en ${d.nombre}`, texto: 'Si te has quedado fuera, a cualquier hora.' },
+              ...servicios.map((s) => ({ href: `/servicios/${s.id}/`, titulo: `${s.data.titulo} en ${d.nombre}`, texto: s.data.resumen })),
+            ]}
+          />
+        </div>
+      </section>
+
+      {
+        (d.barrios.length > 0 || d.observacionesLocales.length > 0) && (
+          <section aria-labelledby="loc-cobertura" class="cuerpo-loc__cobertura">
+            <h2 id="loc-cobertura" class="cuerpo-loc__h2">
+              Dónde trabajamos en {d.nombre}
+            </h2>
+            {d.barrios.length > 0 && (
+              <ul class="cuerpo-loc__barrios">
+                {d.barrios.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+            )}
+            {d.observacionesLocales.length > 0 && (
+              <div class="prosa">
+                <h3>Lo que vemos a menudo en la zona</h3>
+                <ul>
+                  {d.observacionesLocales.map((o) => (
+                    <li>{o}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
+        )
+      }
+    </div>
+  </div>
+
+  <TrabajosReales localidad={entrada.id} minimo={1} titulo={`Trabajos reales en ${d.nombre}`} />
+
+  <Faq faqs={d.faqs} titulo={`Preguntas frecuentes en ${d.nombre}`} />
+
+  {
+    cercanas.length > 0 && (
+      <section class="tramo" aria-labelledby="cercanas-titulo">
+        <div class="envoltura">
+          <h2 class="seccion__titulo" id="cercanas-titulo">
+            Zonas cercanas
+          </h2>
+          <div class="cuerpo-loc__grid">
+            <InterlinkingGrid items={cercanas.map((c) => ({ href: `/cerrajeros/${c.id}/`, titulo: `Cerrajeros en ${c.data.nombre}` }))} />
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <CtaFinal titulo={`¿Necesitas un cerrajero en ${d.nombre}?`} cta={`final-zona-${entrada.id}`} />
+</Layout>
+
+<style>
+  .cabeza-loc {
+    padding-block: clamp(1.5rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem);
+    background:
+      radial-gradient(40rem 24rem at 85% 20%, rgb(212 175 55 / 0.12), transparent 62%),
+      var(--obsidiana-profunda);
+  }
+
+  .cabeza-loc__rejilla {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1000px) {
+    .cabeza-loc__rejilla {
+      grid-template-columns: minmax(0, 1.3fr) minmax(16rem, 0.7fr);
+    }
+  }
+
+  .cabeza-loc__h1 {
+    font-size: clamp(1.8rem, 1.1rem + 3vw, 3.5rem);
+  }
+
+  .cabeza-loc__propio {
+    margin-top: 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--blanco);
+  }
+
+  .cabeza-loc__dato {
+    margin-top: 0.5rem;
+    color: var(--plata-2);
+  }
+
+  .cabeza-loc__accion {
+    margin-top: 1.75rem;
+  }
+
+  :global(.cabeza-loc__insignias) {
+    margin-top: 1.75rem !important;
+  }
+
+  :global(.cabeza-loc__foto) {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 1rem;
+    border: 1px solid var(--linea-oro);
+  }
+
+  .cuerpo-loc {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .cuerpo-loc__h2 {
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem);
+  }
+
+  .cuerpo-loc__grid {
+    margin-top: 1.5rem;
+  }
+
+  .cuerpo-loc__barrios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cuerpo-loc__barrios li {
+    padding: 0.3rem 0.85rem;
+    border: 1px solid var(--linea-clara);
+    border-radius: 999px;
+  }
+
+  .cuerpo-loc__cobertura .prosa {
+    margin-top: 1.5rem;
+  }
+</style>

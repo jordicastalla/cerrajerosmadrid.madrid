@@ -1,58 +1,69 @@
 ---
-import { empresa, telHref } from '@data/empresa';
-import { servicios } from '@data/servicios';
+/**
+ * Pie (spec §22). Sin mapa: el mapa solo va en la Home y en el hub de zonas.
+ * Las localidades solo se enlazan si están en ready (spec §5).
+ */
+import { getCollection } from 'astro:content';
+import Logo from '@components/marca/Logo.astro';
+import Skyline from '@components/marca/Skyline.astro';
+import { site, telHref } from '@data/site';
+
+const servicios = (await getCollection('servicios', (s) => s.data.status === 'ready')).sort((a, b) => a.data.orden - b.data.orden);
+const zonas = (await getCollection('localidades', (l) => l.data.status === 'ready')).sort((a, b) =>
+  a.data.nombre.localeCompare(b.data.nombre, 'es'),
+);
 
 const anio = new Date().getFullYear();
+const l = site.legal;
 ---
 
-<footer class="pie oscuro">
+<footer class="pie no-imprimir">
+  <Skyline clase="pie__skyline" />
   <div class="envoltura">
     <div class="pie__rejilla">
       <div class="pie__marca">
-        <img
-          src="/cerrajeros-chamartin.logo.webp"
-          width="366"
-          height="157"
-          alt={empresa.nombre}
-          loading="lazy"
-          decoding="async"
-        />
+        <Logo variante="grande" />
         <p>
-          Cerrajería de guardia en el distrito de Chamartín. Hablas directamente con el técnico,
-          sin centralitas ni intermediarios.
+          Cerrajería 24 horas en Madrid. En las zonas de alrededor, uno de nuestros cerrajeros trabaja en la
+          propia zona.
         </p>
+        <a href={telHref} class="pie__tel" data-cta="footer">{site.telefono}</a>
       </div>
 
       <nav class="pie__col" aria-label="Servicios">
         <p class="pie__rotulo">Servicios</p>
         <ul>
-          <li><a href="/#urgencias">Apertura de puertas 24 h</a></li>
-          {servicios.map((s) => <li><a href={`/${s.slug}/`}>{s.nombre}</a></li>)}
+          <li><a href="/#apertura-de-puertas">Apertura de puertas</a></li>
+          {servicios.map((s) => <li><a href={`/servicios/${s.id}/`}>{s.data.titulo}</a></li>)}
+          <li><a href="/#cerrajero-urgente-24-horas">Cerrajero urgente 24 horas</a></li>
         </ul>
       </nav>
 
-      <nav class="pie__col" aria-label="Empresa">
-        <p class="pie__rotulo">Empresa</p>
+      <nav class="pie__col" aria-label="Zonas">
+        <p class="pie__rotulo">Zonas</p>
         <ul>
-          <li><a href="/quienes-somos/">Quiénes somos</a></li>
-          <li><a href="/contacto/">Contacto y zona</a></li>
-          <li><a href={empresa.fichaGoogle} target="_blank" rel="noopener">Ficha de Google</a></li>
-          <li><a href={telHref} class="pie__tel" data-cta="telefono-pie">{empresa.telefono}</a></li>
+          <li><a href="/cerrajeros/">Zonas de servicio</a></li>
+          {zonas.map((z) => <li><a href={`/cerrajeros/${z.id}/`}>Cerrajeros en {z.data.nombre}</a></li>)}
         </ul>
       </nav>
 
       <div class="pie__col">
-        <p class="pie__rotulo">Barrios de Chamartín</p>
-        <ul class="pie__barrios">
-          {empresa.zonaServicio.barrios.map((b) => <li>{b}</li>)}
+        <p class="pie__rotulo">Contacto</p>
+        <ul>
+          <li><a href={telHref} data-cta="footer-contacto">Llamar al {site.telefono}</a></li>
+          <li>{site.horario}</li>
+          <li>
+            <a href={site.perfilGoogle} target="_blank" rel="noopener" data-evento="perfil_google" data-cta="footer">
+              Opiniones en Google ↗
+            </a>
+          </li>
         </ul>
       </div>
     </div>
 
     <div class="pie__legal">
       <p>
-        © {anio} {empresa.titular} · NIF {empresa.nif} · {empresa.direccion.calle}, {empresa.direccion.cp}
-        {empresa.direccion.ciudad}
+        © {anio} {l.titular} · NIF {l.nif} · {l.calle}, {l.cp} {l.ciudad} ({l.provincia})
       </p>
       <ul>
         <li><a href="/aviso-legal/">Aviso legal</a></li>
@@ -65,8 +76,15 @@ const anio = new Date().getFullYear();
 
 <style>
   .pie {
-    padding-block: clamp(3rem, 6vw, 5rem) 2rem;
-    border-top: 1px solid rgb(214 163 40 / 0.3);
+    position: relative;
+    padding-bottom: 2rem;
+    background: var(--obsidiana-profunda);
+    border-top: 1px solid var(--linea-oro);
+  }
+
+  .pie__skyline {
+    display: block;
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
   }
 
   .pie__rejilla {
@@ -80,33 +98,37 @@ const anio = new Date().getFullYear();
     }
   }
 
-  @media (min-width: 1180px) {
+  @media (min-width: 1100px) {
     .pie__rejilla {
-      grid-template-columns: 1.4fr 1fr 0.8fr 0.8fr;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
       gap: 3rem;
     }
-  }
-
-  .pie__marca img {
-    width: 13.5rem;
-    height: auto;
   }
 
   .pie__marca p {
     margin-top: 1.25rem;
     max-width: 22rem;
-    color: var(--cromo);
-    font-size: 0.9688rem;
+    font-size: 0.97rem;
+    color: var(--plata-2);
+  }
+
+  .pie__tel {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-family: var(--f-marca);
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--oro);
+    text-decoration: none;
   }
 
   .pie__rotulo {
     margin-bottom: 1rem;
-    font-family: var(--f-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
+    font-family: var(--f-marca);
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--laton);
+    color: var(--oro);
   }
 
   .pie ul {
@@ -115,40 +137,24 @@ const anio = new Date().getFullYear();
     list-style: none;
   }
 
+  .pie__col li {
+    font-size: 0.97rem;
+    color: var(--plata-2);
+  }
+
   .pie__col li + li {
-    margin-top: 0.55rem;
+    margin-top: 0.6rem;
   }
 
   .pie__col a {
-    color: var(--papel);
+    color: var(--plata);
     text-decoration: none;
-    background: linear-gradient(var(--laton), var(--laton)) 0 100% / 0 1px no-repeat;
+    background: linear-gradient(var(--oro), var(--oro)) 0 100% / 0 1px no-repeat;
     transition: background-size 0.3s ease;
   }
 
   .pie__col a:hover {
     background-size: 100% 1px;
-  }
-
-  .pie__tel {
-    font-family: var(--f-mono);
-    font-weight: 600;
-    color: var(--laton) !important;
-  }
-
-  .pie__barrios {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-
-  .pie__barrios li {
-    margin: 0 !important;
-    padding: 0.2rem 0.6rem;
-    font-size: 0.875rem;
-    color: var(--cromo);
-    border: 1px solid var(--linea-clara);
-    border-radius: 999px;
   }
 
   .pie__legal {
@@ -158,9 +164,9 @@ const anio = new Date().getFullYear();
     gap: 1rem 2rem;
     margin-top: 3.5rem;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--linea-clara);
-    font-size: 0.8125rem;
-    color: var(--cromo-osc);
+    border-top: 1px solid var(--linea);
+    font-size: 0.82rem;
+    color: var(--plata-2);
   }
 
   .pie__legal ul {
@@ -169,6 +175,6 @@ const anio = new Date().getFullYear();
   }
 
   .pie__legal a {
-    color: var(--cromo);
+    color: var(--plata);
   }
 </style>

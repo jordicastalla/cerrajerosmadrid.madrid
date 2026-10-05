@@ -1,101 +1,108 @@
 @import 'tailwindcss';
 
-/* ------------------------------------------------------------------
-   Tipografías autoalojadas (sin peticiones a Google al cargar la web).
-   Fraunces: titulares editoriales. Schibsted Grotesk: texto corrido.
-   JetBrains Mono: rótulos, cifras y fichas técnicas.
------------------------------------------------------------------- */
+/* ==================================================================
+   Cerrajeros Madrid Openservi · identidad «Victoria Alada»
+   El ángel dorado del logo en clave cerrajera: obsidiana de fondo,
+   oro imperial para lo que importa y plata para la letra del rótulo.
+
+   Tailwind 4 se configura aquí, en CSS, con @theme: un tailwind.config.mjs
+   no se aplica en v4 salvo que se cargue con @config (spec v2 §23, §33).
+   ================================================================== */
+
+/* --- Tipografías autoalojadas (OFL): sin peticiones a terceros ------ */
 @font-face {
-  font-family: 'Fraunces';
+  font-family: 'Michroma';
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 400;
   font-display: swap;
-  src: url('/fuentes/fraunces-latin.woff2') format('woff2');
+  src: url('/fuentes/michroma-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
     U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
     U+FEFF, U+FFFD;
 }
 
 @font-face {
-  font-family: 'Fraunces';
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 100 1000;
+  font-display: swap;
+  src: url('/fuentes/dm-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'DM Sans';
   font-style: italic;
-  font-weight: 100 900;
+  font-weight: 100 1000;
   font-display: swap;
-  src: url('/fuentes/fraunces-italic-latin.woff2') format('woff2');
+  src: url('/fuentes/dm-sans-italic-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
     U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
     U+FEFF, U+FFFD;
+}
+
+/* Reservas con métricas parecidas: reducen el salto al cargar la fuente */
+@font-face {
+  font-family: 'Michroma Reserva';
+  src: local('Arial Black'), local('Arial');
+  size-adjust: 112%;
+  ascent-override: 88%;
 }
 
 @font-face {
-  font-family: 'Schibsted Grotesk';
-  font-style: normal;
-  font-weight: 400 900;
-  font-display: swap;
-  src: url('/fuentes/schibsted-grotesk-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-    U+FEFF, U+FFFD;
+  font-family: 'DM Sans Reserva';
+  src: local('Arial');
+  size-adjust: 96%;
 }
 
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  src: url('/fuentes/jetbrains-mono-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-    U+FEFF, U+FFFD;
-}
-
-/* ------------------------------------------------------------------
-   Paleta "Latón y tinta", sacada del logotipo: el dorado de los dientes
-   de las llaves, el azul de las cabezas y el cromo del rótulo DBA.
------------------------------------------------------------------- */
-:root {
-  --tinta: #0c1424;
-  --tinta-2: #17223a;
-  --tinta-3: #243152;
-  --papel: #f2eee5;
-  --papel-2: #e7e0d1;
-  --papel-3: #d9cfbb;
-  --laton: #d6a328;
-  --laton-claro: #f0c75e;
-  /* Latón oscurecido para texto sobre papel: 5,3:1 */
-  --laton-texto: #7a570c;
-  --cobalto: #1e4bd2;
-  --cobalto-claro: #8fa8ff;
-  --cromo: #c3c9d3;
-  --cromo-osc: #8c95a5;
-  --suave: #475266;
-  --linea: rgb(12 20 36 / 0.16);
-  --linea-clara: rgb(242 238 229 / 0.16);
-
-  --f-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
-  --f-texto: 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --f-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-
-  --margen: clamp(1.125rem, 4.5vw, 4rem);
-  --ancho: 86rem;
-  --rail: 0rem;
-}
-
-/* El carril lateral solo aparece si hay sitio a lo ancho y a lo alto */
-@media (min-width: 1100px) and (min-height: 700px) {
-  :root {
-    --rail: 6.25rem;
-  }
-}
-
+/* --- Tokens --------------------------------------------------------- */
 @theme {
-  --color-tinta: #0c1424;
-  --color-papel: #f2eee5;
-  --color-laton: #d6a328;
-  --color-cobalto: #1e4bd2;
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-sans: 'Schibsted Grotesk', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --color-obsidiana: #111827;
+  --color-obsidiana-profunda: #030712;
+  --color-oro: #d4af37;
+  --color-oro-vivo: #f59e0b;
+  --color-oro-texto: #8b7324;
+  --color-plata: #e2e8f0;
+  --color-plata-2: #94a3b8;
+  --color-blanco: #ffffff;
+  --color-pizarra: #475569;
+
+  --font-marca: 'Michroma', 'Michroma Reserva', system-ui, sans-serif;
+  --font-sans: 'DM Sans', 'DM Sans Reserva', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/*
+  Contraste (fórmula WCAG 2.x, AA = 4,5:1 texto normal):
+  · Sobre obsidiana: oro 8,44 · oro vivo 8,26 · plata 14,39 · plata-2 6,92 · blanco 17,74 → todo vale.
+  · Botón oro con texto obsidiana: 8,44. Texto blanco sobre oro: 2,10 → prohibido.
+  · Sobre blanco: oro 2,10 y plata-2 2,56 NO valen como texto. Se usa obsidiana (17,74),
+    pizarra #475569 para lo secundario y oro-texto #8b7324 (4,59) para detalles dorados.
+*/
+:root {
+  --obsidiana: #111827;
+  --obsidiana-profunda: #030712;
+  --oro: #d4af37;
+  --oro-vivo: #f59e0b;
+  --oro-texto: #8b7324;
+  --plata: #e2e8f0;
+  --plata-2: #94a3b8;
+  --blanco: #ffffff;
+  --pizarra: #475569;
+
+  --grad-oro: linear-gradient(135deg, #d4af37 0%, #f59e0b 52%, #d4af37 100%);
+  --grad-plata: linear-gradient(180deg, #ffffff 0%, #e2e8f0 48%, #94a3b8 100%);
+  --linea: rgb(148 163 184 / 0.2);
+  --linea-oro: rgb(212 175 55 / 0.35);
+  --linea-clara: rgb(17 24 39 / 0.12);
+
+  --f-marca: 'Michroma', 'Michroma Reserva', system-ui, sans-serif;
+  --f-texto: 'DM Sans', 'DM Sans Reserva', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --margen: clamp(1rem, 4.5vw, 3.5rem);
+  --ancho: 76rem;
+  --barra-movil: 4.5rem;
 }
 
 @layer base {
@@ -103,48 +110,37 @@
     scroll-behavior: smooth;
     scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
+    background: var(--obsidiana-profunda);
   }
 
   body {
+    --foco: var(--oro-vivo);
     font-family: var(--f-texto);
     font-size: 1.0625rem;
     line-height: 1.65;
-    color: var(--tinta);
-    background-color: var(--papel);
+    color: var(--plata);
+    background: var(--obsidiana);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Grano de papel impreso, muy tenue, por encima de todo */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    pointer-events: none;
-    opacity: 0.045;
-    mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  /* La barra de llamada fija en móvil no debe tapar el final del contenido */
+  @media (max-width: 767px) {
+    body {
+      padding-bottom: calc(var(--barra-movil) + 1.5rem + env(safe-area-inset-bottom));
+    }
   }
 
   h1,
   h2,
   h3,
   h4 {
-    font-family: var(--f-display);
-    font-weight: 480;
-    font-optical-sizing: auto;
-    line-height: 1.05;
-    letter-spacing: -0.018em;
+    font-family: var(--f-texto);
+    font-weight: 760;
+    line-height: 1.08;
+    letter-spacing: -0.022em;
     text-wrap: balance;
-  }
-
-  h1 em,
-  h2 em,
-  h3 em {
-    font-style: italic;
-    font-weight: 380;
-    color: var(--laton-texto);
+    color: var(--blanco);
   }
 
   p {
@@ -155,41 +151,33 @@
     color: inherit;
   }
 
-  img {
+  img,
+  svg {
     display: block;
     max-width: 100%;
+  }
+
+  img {
     height: auto;
   }
 
   :focus-visible {
-    outline: 3px solid var(--cobalto);
+    outline: 3px solid var(--foco);
     outline-offset: 3px;
   }
 
   ::selection {
-    background: var(--laton);
-    color: var(--tinta);
+    background: var(--oro);
+    color: var(--obsidiana-profunda);
   }
 
   summary::-webkit-details-marker {
     display: none;
   }
-
-  /* La barra de llamada fija en móvil no debe tapar el final del contenido */
-  @media (max-width: 1099px), (max-height: 699px) {
-    body {
-      padding-bottom: 5.5rem;
-    }
-  }
 }
 
 @layer components {
   /* --- Estructura ------------------------------------------------- */
-  .lienzo {
-    margin-left: var(--rail);
-    min-height: 100vh;
-  }
-
   .envoltura {
     width: 100%;
     max-width: var(--ancho);
@@ -198,127 +186,90 @@
   }
 
   .tramo {
-    padding-block: clamp(4rem, 9vw, 8rem);
+    padding-block: clamp(3.5rem, 8vw, 7rem);
   }
 
-  .oscuro {
-    background: var(--tinta);
-    color: var(--papel);
+  .tramo--profundo {
+    background: var(--obsidiana-profunda);
   }
 
-  .oscuro h2 em,
-  .oscuro h3 em,
-  .oscuro h1 em {
-    color: var(--laton);
+  /* Secciones de lectura: blanco puro y texto obsidiana */
+  .claro {
+    --foco: var(--obsidiana);
+    color: var(--obsidiana);
+    background: var(--blanco);
   }
 
-  /* --- Rótulo mono con diente de llave ----------------------------- */
+  .claro h1,
+  .claro h2,
+  .claro h3,
+  .claro h4 {
+    color: var(--obsidiana);
+  }
+
+  /* --- Marca: H1 y rótulos con la letra ancha del logo ------------- */
+  .titular {
+    font-family: var(--f-marca);
+    font-weight: 400;
+    font-size: clamp(1.85rem, 1.1rem + 3.6vw, 4rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    text-transform: none;
+  }
+
+  .metal {
+    background: var(--grad-plata);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .dorado {
+    background: var(--grad-oro);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Rótulo con diente de llave delante */
   .rotulo {
     display: inline-flex;
     align-items: center;
     gap: 0.7rem;
-    font-family: var(--f-mono);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
+    font-family: var(--f-marca);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--laton-texto);
+    color: var(--oro);
   }
 
   .rotulo::before {
     content: '';
-    width: 1.6rem;
+    flex: none;
+    width: 1.7rem;
     height: 0.6rem;
     background: currentColor;
     clip-path: polygon(0 40%, 30% 40%, 30% 0, 55% 0, 55% 55%, 75% 55%, 75% 20%, 100% 20%, 100% 100%, 0 100%);
   }
 
-  .oscuro .rotulo {
-    color: var(--laton);
+  .claro .rotulo {
+    color: var(--oro-texto);
   }
 
-  /* --- Botón con forma de llave -------------------------------------
-     La cabeza redonda lleva el icono; la hoja termina en dientes. */
-  .llave {
-    --fondo: var(--laton);
-    --texto: var(--tinta);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.85rem;
-    min-height: 3.5rem;
-    padding: 0.45rem 3rem 0.45rem 0.45rem;
-    background: var(--fondo);
-    color: var(--texto);
-    font-family: var(--f-texto);
-    font-weight: 650;
-    font-size: 1.0625rem;
-    line-height: 1.1;
-    text-decoration: none;
-    border-radius: 999px 0 0 999px;
-    clip-path: polygon(
-      0 0,
-      calc(100% - 1.9rem) 0,
-      calc(100% - 1.9rem) 26%,
-      calc(100% - 1.1rem) 26%,
-      calc(100% - 1.1rem) 12%,
-      calc(100% - 0.5rem) 12%,
-      calc(100% - 0.5rem) 40%,
-      100% 40%,
-      100% 62%,
-      calc(100% - 0.8rem) 62%,
-      calc(100% - 0.8rem) 80%,
-      calc(100% - 1.9rem) 80%,
-      calc(100% - 1.9rem) 100%,
-      0 100%
-    );
-    transition:
-      transform 0.25s cubic-bezier(0.3, 0.7, 0.2, 1),
-      background-color 0.2s ease;
+  .seccion__titulo {
+    margin-top: 0.9rem;
+    font-size: clamp(1.9rem, 1.3rem + 2.2vw, 3.1rem);
   }
 
-  .llave:hover {
-    transform: translateX(0.35rem);
-    --fondo: var(--laton-claro);
+  .seccion__entrada {
+    margin-top: 1.1rem;
+    max-width: 40rem;
+    font-size: 1.125rem;
+    color: var(--plata-2);
   }
 
-  .llave:active {
-    transform: translateX(0.6rem);
-  }
-
-  .llave__cabeza {
-    display: grid;
-    place-items: center;
-    flex: none;
-    width: 2.6rem;
-    height: 2.6rem;
-    border-radius: 50%;
-    background: var(--tinta);
-    color: var(--laton);
-  }
-
-  .llave__texto small {
-    display: block;
-    margin-top: 0.15rem;
-    font-family: var(--f-mono);
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    opacity: 0.8;
-  }
-
-  .llave--tinta {
-    --fondo: var(--tinta);
-    --texto: var(--papel);
-  }
-
-  .llave--tinta .llave__cabeza {
-    background: var(--laton);
-    color: var(--tinta);
-  }
-
-  .llave--tinta:hover {
-    --fondo: var(--tinta-3);
+  .claro .seccion__entrada {
+    color: var(--pizarra);
   }
 
   /* --- Enlace de texto con flecha ---------------------------------- */
@@ -326,14 +277,11 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: var(--f-mono);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-weight: 650;
     text-decoration: none;
+    color: var(--oro);
     background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
-    padding-bottom: 0.2rem;
+    padding-bottom: 0.15rem;
     transition: background-size 0.3s ease;
   }
 
@@ -342,123 +290,126 @@
     background-position: 100% 100%;
   }
 
-  /* --- Capítulo: título fijo a la izquierda, texto a la derecha ------ */
-  .capitulo {
-    display: grid;
-    gap: 1.75rem;
-    padding-block: clamp(3rem, 6vw, 5.5rem);
-    border-top: 1px solid var(--linea);
+  .claro .enlace {
+    color: var(--obsidiana);
+    background-image: linear-gradient(var(--oro-texto), var(--oro-texto));
+    background-size: 100% 2px;
   }
 
-  .capitulo:first-child {
-    border-top: 0;
-  }
-
-  @media (min-width: 960px) {
-    .capitulo {
-      grid-template-columns: minmax(15rem, 0.85fr) minmax(0, 1.5fr);
-      gap: clamp(2.5rem, 5vw, 5.5rem);
-    }
-
-    .capitulo__cabeza {
-      position: sticky;
-      top: 2rem;
-      align-self: start;
-    }
-  }
-
-  .capitulo__cuerpo > * + * {
-    margin-top: 2rem;
-  }
-
-  .capitulo__cuerpo > .figura {
-    max-width: 34rem;
-    margin-block: 2.75rem;
-  }
-
-  .capitulo__num {
-    display: flex;
-    align-items: baseline;
+  /* --- Botón secundario ------------------------------------------- */
+  .boton-sec {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     gap: 0.6rem;
-    font-family: var(--f-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-    color: var(--suave);
+    min-height: 3rem;
+    padding: 0 1.4rem;
+    font-weight: 650;
+    text-decoration: none;
+    color: var(--plata);
+    border: 1px solid var(--linea);
+    border-radius: 999px;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease;
   }
 
-  .capitulo__num b {
-    font-family: var(--f-display);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 3.25rem;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    color: var(--laton-texto);
+  .boton-sec:hover {
+    color: var(--blanco);
+    border-color: var(--oro);
   }
 
-  .capitulo__titulo {
-    margin-top: 1rem;
-    font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.6rem);
-  }
-
-  .oscuro .capitulo {
+  .claro .boton-sec {
+    color: var(--obsidiana);
     border-color: var(--linea-clara);
   }
 
-  .oscuro .capitulo__num {
-    color: var(--cromo-osc);
+  /* --- Tarjeta ----------------------------------------------------- */
+  .tarjeta {
+    position: relative;
+    padding: 1.6rem 1.5rem 1.7rem;
+    background: rgb(255 255 255 / 0.03);
+    border: 1px solid var(--linea);
+    border-radius: 1rem;
+    transition:
+      border-color 0.25s ease,
+      transform 0.25s ease;
   }
 
-  .oscuro .capitulo__num b {
-    color: var(--laton);
+  .tarjeta::before {
+    content: '';
+    position: absolute;
+    inset: -1px -1px auto;
+    height: 2px;
+    border-radius: 1rem 1rem 0 0;
+    background: var(--grad-oro);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+
+  .tarjeta:hover::before,
+  .tarjeta:focus-within::before {
+    transform: scaleX(1);
+  }
+
+  .claro .tarjeta {
+    background: var(--blanco);
+    border-color: var(--linea-clara);
+    box-shadow: 0 18px 40px -32px rgb(3 7 18 / 0.45);
   }
 
   /* --- Texto largo ------------------------------------------------- */
   .prosa {
-    max-width: 40rem;
-    font-size: 1.0938rem;
+    max-width: 42rem;
+    font-size: 1.09rem;
     line-height: 1.72;
     overflow-wrap: break-word;
   }
 
   .prosa > * + * {
-    margin-top: 1.15em;
+    margin-top: 1.1em;
+  }
+
+  .prosa h2 {
+    margin-top: 2.2em;
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
   }
 
   .prosa h3 {
-    margin-top: 2.2em;
-    font-size: 1.55rem;
-    font-style: italic;
-    font-weight: 420;
+    margin-top: 1.8em;
+    font-size: 1.3rem;
   }
 
-  .prosa h3 + p {
-    margin-top: 0.6em;
+  .prosa h2 + *,
+  .prosa h3 + * {
+    margin-top: 0.7em;
   }
 
   .prosa strong {
-    font-weight: 650;
-    background: linear-gradient(transparent 60%, rgb(214 163 40 / 0.38) 0);
-    padding-inline: 0.08em;
+    font-weight: 700;
+    color: var(--blanco);
   }
 
-  .oscuro .prosa strong {
-    color: #fff;
-    background: linear-gradient(transparent 60%, rgb(214 163 40 / 0.45) 0);
+  .claro .prosa strong {
+    color: var(--obsidiana);
   }
 
   .prosa a {
-    color: var(--cobalto);
+    color: var(--oro);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
   }
 
-  .oscuro .prosa a {
-    color: var(--laton);
+  .claro .prosa a {
+    color: var(--obsidiana);
+    text-decoration-color: var(--oro-texto);
+    text-decoration-thickness: 2px;
   }
 
-  .prosa ul {
+  .prosa ul,
+  .prosa ol {
     padding: 0;
     list-style: none;
   }
@@ -469,360 +420,23 @@
   }
 
   .prosa li + li {
-    margin-top: 0.7em;
+    margin-top: 0.6em;
   }
 
-  .prosa li::before {
+  /* Viñeta: diente de llave dorado */
+  .prosa ul li::before {
     content: '';
     position: absolute;
     left: 0;
     top: 0.62em;
     width: 1rem;
     height: 0.45rem;
-    background: var(--laton);
+    background: var(--oro);
     clip-path: polygon(0 30%, 40% 30%, 40% 0, 70% 0, 70% 45%, 100% 45%, 100% 100%, 0 100%);
   }
 
-  .capitular::first-letter {
-    float: left;
-    margin: 0.06em 0.12em 0 0;
-    font-family: var(--f-display);
-    font-size: 4.4em;
-    font-weight: 560;
-    line-height: 0.78;
-    color: var(--laton-texto);
-  }
-
-  .oscuro .capitular::first-letter {
-    color: var(--laton);
-  }
-
-  .entradilla {
-    font-family: var(--f-display);
-    font-size: clamp(1.35rem, 1.1rem + 0.9vw, 1.85rem);
-    font-weight: 360;
-    line-height: 1.38;
-    letter-spacing: -0.01em;
-  }
-
-  /* --- Introducción a dos columnas, como en prensa ---------------- */
-  .intro {
-    padding-top: clamp(3rem, 7vw, 6rem);
-  }
-
-  .intro__rejilla {
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 960px) {
-    .intro__rejilla {
-      grid-template-columns: minmax(12rem, 0.35fr) minmax(0, 1.65fr);
-      gap: 4rem;
-    }
-
-    .intro__rotulo {
-      align-self: start;
-      margin-top: 0.8rem;
-    }
-  }
-
-  .intro .entradilla {
-    max-width: 52rem;
-  }
-
-  .intro .entradilla strong {
-    font-weight: 500;
-    background: linear-gradient(transparent 62%, rgb(214 163 40 / 0.38) 0);
-  }
-
-  .columnas {
-    max-width: none;
-    margin-top: 2.5rem;
-    columns: 2 20rem;
-    column-gap: 3rem;
-    column-rule: 1px solid var(--linea);
-  }
-
-  .columnas p {
-    break-inside: avoid;
-  }
-
-  .columnas > * + * {
-    margin-top: 0;
-  }
-
-  .columnas p + p {
-    margin-top: 1.15em;
-  }
-
-  .capitulos {
-    padding-block: clamp(1rem, 3vw, 2rem) clamp(2rem, 5vw, 4rem);
-  }
-
-  /* --- Marcas en forma de llave en bruto ---------------------------- */
-  .marcas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem 0.6rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .marcas li {
-    padding: 0.6rem 2.3rem 0.6rem 1.1rem;
-    font-family: var(--f-display);
-    font-size: 1.25rem;
-    font-weight: 460;
-    line-height: 1.2;
-    color: var(--tinta);
-    background: var(--laton);
-    border-radius: 999px 0 0 999px;
-    clip-path: polygon(
-      0 0,
-      calc(100% - 1.5rem) 0,
-      calc(100% - 1.5rem) 22%,
-      calc(100% - 0.9rem) 22%,
-      calc(100% - 0.9rem) 40%,
-      100% 40%,
-      100% 62%,
-      calc(100% - 0.6rem) 62%,
-      calc(100% - 0.6rem) 80%,
-      calc(100% - 1.5rem) 80%,
-      calc(100% - 1.5rem) 100%,
-      0 100%
-    );
-  }
-
-  .marcas li:nth-child(3n + 2) {
-    background: var(--cromo);
-  }
-
-  .marcas li:nth-child(3n) {
-    background: var(--papel);
-  }
-
-  /* --- Figura con agujero de etiqueta de llavero -------------------- */
-  .figura {
-    margin: 0;
-  }
-
-  .figura__marco {
-    position: relative;
-  }
-
-  .figura__marco img {
-    width: 100%;
-    aspect-ratio: 480 / 334;
-    object-fit: cover;
-    border-radius: 0.35rem;
-    -webkit-mask: radial-gradient(circle at 1.6rem 1.6rem, transparent 0.5rem, #000 0.55rem);
-    mask: radial-gradient(circle at 1.6rem 1.6rem, transparent 0.5rem, #000 0.55rem);
-  }
-
-  .figura__marco::after {
-    content: '';
-    position: absolute;
-    left: calc(1.6rem - 0.8rem);
-    top: calc(1.6rem - 0.8rem);
-    width: 1.6rem;
-    height: 1.6rem;
-    border-radius: 50%;
-    border: 2px solid var(--laton);
-    pointer-events: none;
-  }
-
-  .figura figcaption {
-    display: flex;
-    gap: 0.75rem;
-    margin-top: 0.8rem;
-    font-family: var(--f-mono);
-    font-size: 0.75rem;
-    line-height: 1.5;
-    letter-spacing: 0.02em;
-    color: var(--suave);
-  }
-
-  .figura figcaption b {
-    flex: none;
-    font-weight: 600;
-    color: var(--laton-texto);
-  }
-
-  .oscuro .figura figcaption {
-    color: var(--cromo);
-  }
-
-  .oscuro .figura figcaption b {
-    color: var(--laton);
-  }
-
-  /* --- Ficha técnica con puntos guía --------------------------------- */
-  .ficha {
-    margin: 0;
-    font-size: 0.9375rem;
-  }
-
-  .ficha > div {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-    padding-block: 0.55rem;
-  }
-
-  .ficha dt {
-    display: flex;
-    flex: 1;
-    align-items: baseline;
-    gap: 0.6rem;
-    min-width: 0;
-    font-family: var(--f-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--suave);
-    white-space: nowrap;
-  }
-
-  .ficha dt::after {
-    content: '';
-    flex: 1;
-    min-width: 1.5rem;
-    border-bottom: 1px dotted currentColor;
-    opacity: 0.7;
-  }
-
-  .ficha dd {
-    margin: 0;
-    max-width: 62%;
-    text-align: right;
-    font-weight: 600;
-  }
-
-  .oscuro .ficha dt {
-    color: var(--cromo-osc);
-  }
-
-  /* --- Tablero de llaves: etiquetas colgadas ---------------------- */
-  .tablero {
-    display: grid;
-    gap: clamp(1.25rem, 2.5vw, 2rem);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
-    padding: 0;
-    margin: 2.5rem 0 0;
-    list-style: none;
-  }
-
-  .etiqueta {
-    position: relative;
-    padding: 2.9rem 1.5rem 1.6rem;
-    background: var(--papel);
-    border: 1px solid var(--linea);
-    border-radius: 1.4rem 1.4rem 0.4rem 0.4rem;
-    box-shadow: 0 1px 0 var(--papel-3), 0 18px 30px -24px rgb(12 20 36 / 0.45);
-    transform: rotate(var(--giro, -0.8deg));
-    transform-origin: 50% 0.9rem;
-    transition: transform 0.4s cubic-bezier(0.3, 0.7, 0.2, 1.4);
-  }
-
-  .etiqueta:nth-child(2n) {
-    --giro: 0.9deg;
-  }
-
-  .etiqueta:nth-child(3n) {
-    --giro: -0.3deg;
-  }
-
-  .etiqueta:hover {
-    --giro: 0deg;
-  }
-
-  /* Ojal por donde pasaría la anilla */
-  .etiqueta::before {
-    content: '';
-    position: absolute;
-    top: 0.9rem;
-    left: 50%;
-    width: 1.1rem;
-    height: 1.1rem;
-    margin-left: -0.55rem;
-    border-radius: 50%;
-    background: var(--papel-2);
-    box-shadow: inset 0 0 0 2px var(--laton);
-  }
-
-  .etiqueta h3 {
-    font-size: 1.45rem;
-  }
-
-  .etiqueta p {
-    margin-top: 0.7rem;
-    font-size: 0.9688rem;
-    line-height: 1.6;
-    color: var(--suave);
-  }
-
-  .etiqueta__codigos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 0.85rem;
-  }
-
-  .codigo {
-    display: inline-block;
-    padding: 0.2rem 0.5rem;
-    font-family: var(--f-mono);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: var(--tinta);
-    background: var(--papel-2);
-    border: 1px solid var(--linea);
-    border-radius: 0.25rem;
-  }
-
-  .oscuro .etiqueta {
-    background: var(--tinta-2);
-    border-color: var(--linea-clara);
-    box-shadow: 0 18px 30px -24px #000;
-  }
-
-  .oscuro .etiqueta::before {
-    background: var(--tinta);
-  }
-
-  .oscuro .etiqueta p {
-    color: var(--cromo);
-  }
-
-  /* --- Llamada destacada dentro del texto -------------------------- */
-  .aviso-llamada {
-    display: grid;
-    gap: 1.25rem;
-    margin-top: 2.5rem;
-    padding: 1.6rem 1.6rem 1.8rem;
-    border-left: 3px solid var(--laton);
-    background: linear-gradient(90deg, rgb(214 163 40 / 0.12), transparent);
-  }
-
-  .aviso-llamada p {
-    font-family: var(--f-display);
-    font-size: 1.3rem;
-    line-height: 1.4;
-  }
-
-  .aviso-llamada a {
-    font-family: var(--f-mono);
-    font-size: 0.92em;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  .oscuro .aviso-llamada a {
-    color: var(--laton);
+  .claro .prosa ul li::before {
+    background: var(--oro-texto);
   }
 
   /* --- Texto legal ------------------------------------------------- */
@@ -831,17 +445,12 @@
   }
 
   .legal h1 {
-    margin-top: 1.25rem;
-    font-size: clamp(2.25rem, 1.6rem + 2.5vw, 3.5rem);
+    margin-top: 1.1rem;
+    font-size: clamp(2rem, 1.5rem + 2.2vw, 3.1rem);
   }
 
   .legal__cuerpo {
-    margin-top: 2.5rem;
-  }
-
-  .legal .prosa h2 {
-    margin-top: 2.4em;
-    font-size: 1.6rem;
+    margin-top: 2.25rem;
   }
 
   .tabla-legal {
@@ -853,23 +462,27 @@
 
   .tabla-legal th {
     padding: 0.6rem 1rem 0.6rem 0;
-    font-family: var(--f-mono);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    border-bottom: 2px solid var(--tinta);
+    border-bottom: 2px solid currentColor;
   }
 
   .tabla-legal td {
     padding: 0.75rem 1rem 0.75rem 0;
     vertical-align: top;
-    border-bottom: 1px solid var(--linea);
+    border-bottom: 1px solid var(--linea-clara);
   }
 
-  .tabla-legal code {
-    font-family: var(--f-mono);
-    font-size: 0.85rem;
+  /* --- Utilidades -------------------------------------------------- */
+  .solo-lector {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
 }
 
@@ -890,9 +503,5 @@
 @media print {
   .no-imprimir {
     display: none !important;
-  }
-
-  body::after {
-    display: none;
   }
 }

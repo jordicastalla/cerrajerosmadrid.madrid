@@ -1,0 +1,61 @@
+---
+/**
+ * Emblema provisional «Victoria Alada en clave cerrajera»: una llave de
+ * paletón trebolado que se alza con un ala dorada. SVG propio, sin peso de
+ * imagen. Se sustituirá por el logotipo definitivo cuando esté (marca/).
+ */
+import { geometriaEmblema } from './emblema-geometria.mjs';
+
+interface Props {
+  tam?: number;
+  clase?: string;
+  /** Título accesible; si falta, el emblema es decorativo */
+  titulo?: string;
+}
+
+const { tam = 64, clase = '', titulo } = Astro.props;
+
+// id único por instancia: un degradado dentro de un <dialog> cerrado
+// (display: none) no se pinta en otras instancias que lo referencien
+const uid = `e${Math.random().toString(36).slice(2, 8)}`;
+const g = geometriaEmblema();
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 240 240"
+  width={tam}
+  height={tam}
+  class={clase || undefined}
+  role={titulo ? 'img' : undefined}
+  aria-hidden={titulo ? undefined : 'true'}
+  focusable="false"
+>
+  {titulo && <title>{titulo}</title>}
+  <defs>
+    <!-- userSpaceOnUse: las líneas rectas de la llave tienen caja de ancho 0 y
+         un degradado relativo al objeto no se pintaría sobre ellas -->
+    <linearGradient id={`${uid}-oro`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="240" y2="240">
+      <stop offset="0" stop-color="#F59E0B" />
+      <stop offset="0.5" stop-color="#D4AF37" />
+      <stop offset="1" stop-color="#F59E0B" />
+    </linearGradient>
+  </defs>
+
+  <g transform={g.encuadre}>
+    <g fill={`url(#${uid}-oro)`} stroke="#030712" stroke-width="1.6" stroke-linejoin="round">
+      {g.plumas.map((d) => <path d={d} />)}
+      <path d={g.hombro} />
+    </g>
+
+    <!-- Llave de paletón trebolado, alzada -->
+    <g transform={g.llave} fill="none" stroke={`url(#${uid}-oro)`} stroke-width="5.5" stroke-linecap="round">
+      <circle cx="0" cy="-11" r="9.5" />
+      <circle cx="-9.5" cy="5.5" r="9.5" />
+      <circle cx="9.5" cy="5.5" r="9.5" />
+      <path d="M0 18v100" stroke-width="7" />
+      <path d="M-7 24h14" />
+      <path d="M3 98h15v7H8v6h12v8H3" stroke-width="5" stroke-linejoin="round" />
+    </g>
+  </g>
+</svg>

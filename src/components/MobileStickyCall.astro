@@ -1,0 +1,61 @@
+---
+/**
+ * Llamada fija en móvil (spec §20). Píldora con fondo semiopaco sólido, sin
+ * backdrop-blur. Un solo botón: la empresa no tiene WhatsApp. El espacio que
+ * ocupa se reserva en el body (global.css) para no tapar el pie.
+ */
+import Icono from '@components/ui/Icono.astro';
+import { site, telHref } from '@data/site';
+---
+
+<a
+  href={telHref}
+  class="barra-llamada block md:hidden fixed bottom-4 left-4 right-4 z-50 rounded-full no-imprimir"
+  aria-label={`Llamar al ${site.telefono}`}
+  data-cta="sticky"
+>
+  <span class="barra-llamada__icono"><Icono nombre="telefono" tam={20} /></span>
+  <span class="barra-llamada__texto">LLAMAR: {site.telefono}</span>
+</a>
+
+<style>
+  .barra-llamada {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    min-height: var(--barra-movil);
+    margin-bottom: env(safe-area-inset-bottom);
+    padding: 0.5rem 1rem;
+    color: var(--blanco);
+    text-decoration: none;
+    /* Alabastro/blanco sobre obsidiana: 17,74:1 */
+    background: rgb(3 7 18 / 0.95);
+    border: 1px solid var(--oro);
+    box-shadow:
+      0 0 0 4px rgb(212 175 55 / 0.12),
+      0 18px 40px -12px rgb(0 0 0 / 0.8);
+  }
+
+  @media (min-width: 768px) {
+    .barra-llamada {
+      display: none;
+    }
+  }
+
+  .barra-llamada__icono {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    color: var(--obsidiana-profunda);
+    background: var(--grad-oro);
+  }
+
+  .barra-llamada__texto {
+    font-family: var(--f-marca);
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+  }
+</style>

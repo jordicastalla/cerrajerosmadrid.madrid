@@ -18,8 +18,6 @@ DirectoryIndex index.html
   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
   RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
-  # La página de cambio de cerradura y bombín pasó a ser solo de cambio de cerradura
-  RewriteRule ^cambio-cerradura-bombin/?$ /cambio-cerradura/ [R=301,L]
 </IfModule>
 
 ErrorDocument 404 /404.html

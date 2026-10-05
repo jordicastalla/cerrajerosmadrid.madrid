@@ -1,7 +1,12 @@
 ---
+/**
+ * Cabecera (spec §21): logo, navegación corta hacia los hubs y teléfono.
+ * En móvil, menú en un <dialog> (sin dependencias).
+ */
+import Logo from '@components/marca/Logo.astro';
+import CallButton from '@components/CallButton.astro';
 import Icono from '@components/ui/Icono.astro';
-import { empresa, telHref } from '@data/empresa';
-import { servicios } from '@data/servicios';
+import { site, telHref } from '@data/site';
 
 interface Props {
   ruta: string;
@@ -10,33 +15,64 @@ interface Props {
 const { ruta } = Astro.props;
 
 const enlaces = [
-  { href: '/', corto: 'Inicio', nombre: 'Inicio' },
-  ...servicios.map((s) => ({ href: `/${s.slug}/`, corto: s.corto, nombre: s.nombre })),
-  { href: '/quienes-somos/', corto: 'Equipo', nombre: 'Quiénes somos' },
-  { href: '/contacto/', corto: 'Contacto', nombre: 'Contacto' },
+  { href: '/servicios/', nombre: 'Servicios' },
+  { href: '/cerrajeros/', nombre: 'Zonas' },
+  { href: '/#opiniones', nombre: 'Opiniones' },
+  { href: '/#faq', nombre: 'Preguntas' },
 ];
 
-const actual = (href: string) => (href === ruta ? 'page' : undefined);
+const actual = (href: string) => (ruta.startsWith(href) && href !== '/' && !href.includes('#') ? 'page' : undefined);
 ---
 
-<aside class="rail no-imprimir">
-  <a href="/" class="rail__marca" aria-label={`${empresa.nombre}, inicio`}>
-    <img src="/isotipo-dba.webp" width="64" height="43" alt="" />
-    <span class="rail__sigla" aria-hidden="true">DBA</span>
-  </a>
+<header class="cabecera no-imprimir">
+  <div class="cabecera__fila envoltura">
+    <a href="/" class="cabecera__marca" aria-label={`${site.nombre}, inicio`}>
+      <Logo />
+    </a>
 
-  <nav aria-label="Principal">
-    <ul class="rail__nav">
+    <nav class="cabecera__nav" aria-label="Principal">
+      <ul>
+        {
+          enlaces.map((e) => (
+            <li>
+              <a href={e.href} aria-current={actual(e.href)}>
+                {e.nombre}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a href={telHref} class="cabecera__tel" data-cta="header">
+      <span class="cabecera__tel-icono"><Icono nombre="telefono" tam={18} /></span>
+      <span class="cabecera__tel-num">{site.telefono}</span>
+      <span class="solo-lector">Llamar</span>
+    </a>
+
+    <button type="button" class="cabecera__menu" aria-haspopup="dialog" aria-controls="menu" data-abrir-menu>
+      <span class="cabecera__dientes" aria-hidden="true"><i></i><i></i><i></i></span>
+      Menú
+    </button>
+  </div>
+</header>
+
+<dialog id="menu" class="menu" aria-label="Menú de navegación">
+  <div class="menu__cabeza">
+    <Logo />
+    <button type="button" class="menu__cerrar" data-cerrar-menu>
+      Cerrar <span aria-hidden="true">✕</span>
+    </button>
+  </div>
+
+  <nav aria-label="Menú">
+    <ul class="menu__lista">
+      <li><a href="/">Inicio</a></li>
       {
         enlaces.map((e) => (
           <li>
-            <a
-              href={e.href}
-              aria-current={actual(e.href)}
-              aria-label={e.corto === e.nombre ? undefined : e.nombre}
-              data-titulo={e.nombre}
-            >
-              <span>{e.corto}</span>
+            <a href={e.href} aria-current={actual(e.href)} data-cerrar-menu>
+              {e.nombre}
             </a>
           </li>
         ))
@@ -44,343 +80,146 @@ const actual = (href: string) => (href === ruta ? 'page' : undefined);
     </ul>
   </nav>
 
-  <a href={telHref} class="rail__tel" aria-label={`Llamar al ${empresa.telefono}`} data-titulo={empresa.telefono} data-cta="telefono-carril">
-    <span class="rail__tel-boton"><Icono nombre="telefono" tam={20} /></span>
-    <span class="rail__tel-txt">24 h</span>
-  </a>
-</aside>
-
-<header class="barra no-imprimir">
-  <a href="/" class="barra__marca" aria-label={`${empresa.nombre}, inicio`}>
-    <img src="/isotipo-dba.webp" width="52" height="35" alt="" />
-    <span aria-hidden="true">
-      <b>DBA</b>
-      <small>Cerrajeros Chamartín</small>
-    </span>
-  </a>
-
-  <a href={telHref} class="barra__tel" data-cta="telefono-barra">
-    <Icono nombre="telefono" tam={16} />
-    {empresa.telefono}
-  </a>
-
-  <button type="button" class="barra__menu" aria-haspopup="dialog" aria-controls="menu" data-abrir-menu>
-    <span class="barra__dientes" aria-hidden="true"><i></i><i></i><i></i></span>
-    Menú
-  </button>
-</header>
-
-<dialog id="menu" class="menu" aria-label="Menú de navegación">
-  <div class="menu__cabeza">
-    <p class="rotulo">Índice</p>
-    <button type="button" class="menu__cerrar" data-cerrar-menu>
-      Cerrar <span aria-hidden="true">✕</span>
-    </button>
-  </div>
-
-  <nav aria-label="Menú">
-    <ol class="menu__lista">
-      {
-        enlaces.map((e, i) => (
-          <li>
-            <a href={e.href} aria-current={actual(e.href)}>
-              <span class="menu__num" aria-hidden="true">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <span class="menu__nombre">{e.nombre}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ol>
-  </nav>
-
-  <a href={telHref} class="llave menu__llamar" data-cta="telefono-menu">
-    <span class="llave__cabeza"><Icono nombre="telefono" tam={20} /></span>
-    <span class="llave__texto">
-      Llamar al {empresa.telefono}
-      <small>24 horas · 365 días</small>
-    </span>
-  </a>
+  <CallButton cta="menu" sub="24 horas" clase="menu__llamar" />
 </dialog>
 
 <style>
-  /* --- Carril lateral (escritorio) --------------------------------- */
-  .rail {
-    display: none;
+  .cabecera {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: rgb(3 7 18 / 0.96);
+    border-bottom: 1px solid var(--linea-oro);
   }
 
-  @media (min-width: 1100px) and (min-height: 700px) {
-    .rail {
-      position: fixed;
-      inset: 0 auto 0 0;
-      z-index: 60;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      width: var(--rail);
-      padding: 1.4rem 0;
-      background: var(--tinta);
-      color: var(--cromo);
-    }
-
-    /* El borde derecho del carril es la hoja de una llave */
-    .rail::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: -10px;
-      bottom: 0;
-      width: 10px;
-      pointer-events: none;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='132'%3E%3Cpath d='M0 0h4v16h5v18H3v14h7v20H5v16h4v22H2v26H0z' fill='%23D6A328'/%3E%3C/svg%3E")
-        0 0 / 10px 132px repeat-y;
-    }
-
-    .barra {
-      display: none !important;
-    }
+  .cabecera__fila {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 4.75rem;
   }
 
-  .rail__marca {
-    display: grid;
-    justify-items: center;
-    gap: 0.35rem;
+  .cabecera__marca {
+    margin-right: auto;
     text-decoration: none;
   }
 
-  .rail__sigla {
-    font-family: var(--f-mono);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.32em;
-    padding-left: 0.32em;
-    color: var(--papel);
+  .cabecera__nav {
+    display: none;
   }
 
-  .rail__nav {
+  @media (min-width: 1024px) {
+    .cabecera__nav {
+      display: block;
+    }
+  }
+
+  .cabecera__nav ul {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: clamp(0.6rem, 2.2vh, 1.4rem);
+    gap: 0.25rem;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .rail__nav a,
-  .rail__tel {
-    position: relative;
+  .cabecera__nav a {
     display: block;
-    text-decoration: none;
-  }
-
-  .rail__nav a {
-    padding: 0.5rem 0.55rem;
-    color: var(--cromo);
-    transition: color 0.2s ease;
-  }
-
-  .rail__nav a span {
-    display: block;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    font-family: var(--f-mono);
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
-  .rail__nav a:hover,
-  .rail__nav a[aria-current='page'] {
-    color: var(--laton);
-  }
-
-  .rail__nav a[aria-current='page']::before {
-    content: '';
-    position: absolute;
-    top: 0.5rem;
-    bottom: 0.5rem;
-    left: -0.55rem;
-    width: 3px;
-    background: var(--laton);
-  }
-
-  /* Rótulo completo que asoma al pasar por encima */
-  .rail__nav a::after,
-  .rail__tel::after {
-    content: attr(data-titulo);
-    position: absolute;
-    top: 50%;
-    left: calc(50% + var(--rail) / 2 + 0.9rem);
-    padding: 0.5rem 0.85rem;
-    white-space: nowrap;
-    font-family: var(--f-texto);
-    font-size: 0.875rem;
+    padding: 0.6rem 0.85rem;
     font-weight: 600;
-    letter-spacing: 0;
-    color: var(--tinta);
-    background: var(--laton);
-    border-radius: 0.2rem;
-    opacity: 0;
-    pointer-events: none;
-    transform: translate(-0.5rem, -50%);
+    font-size: 0.97rem;
+    color: var(--plata);
+    text-decoration: none;
+    border-radius: 999px;
     transition:
-      opacity 0.2s ease,
-      transform 0.2s ease;
+      color 0.2s ease,
+      background-color 0.2s ease;
   }
 
-  .rail__nav a:hover::after,
-  .rail__nav a:focus-visible::after,
-  .rail__tel:hover::after,
-  .rail__tel:focus-visible::after {
-    opacity: 1;
-    transform: translate(0, -50%);
+  .cabecera__nav a:hover,
+  .cabecera__nav a[aria-current='page'] {
+    color: var(--oro);
+    background: rgb(212 175 55 / 0.08);
   }
 
-  .rail__tel {
-    display: grid;
-    justify-items: center;
-    gap: 0.45rem;
-  }
-
-  .rail__tel-boton {
-    position: relative;
-    display: grid;
-    place-items: center;
-    width: 3.1rem;
-    height: 3.1rem;
-    border-radius: 50%;
-    background: var(--laton);
-    color: var(--tinta);
-  }
-
-  .rail__tel-boton::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 2px solid var(--laton);
-    animation: onda 2.4s ease-out infinite;
-  }
-
-  @keyframes onda {
-    from {
-      transform: scale(1);
-      opacity: 0.8;
-    }
-    to {
-      transform: scale(1.7);
-      opacity: 0;
-    }
-  }
-
-  .rail__tel-txt {
-    font-family: var(--f-mono);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: var(--laton);
-  }
-
-  /* --- Barra superior (móvil y tableta) ------------------------------ */
-  .barra {
-    position: sticky;
-    top: 0;
-    z-index: 60;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.6rem var(--margen);
-    background: rgb(242 238 229 / 0.92);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--linea);
-  }
-
-  .barra__marca {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-    margin-right: auto;
-    text-decoration: none;
-  }
-
-  .barra__marca b {
-    display: block;
-    font-family: var(--f-mono);
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.28em;
-    line-height: 1;
-  }
-
-  .barra__marca small {
-    display: block;
-    margin-top: 0.2rem;
-    font-family: var(--f-display);
-    font-size: 0.95rem;
-    font-style: italic;
-    line-height: 1;
-    color: var(--suave);
-  }
-
-  .barra__tel {
-    display: none;
-    align-items: center;
-    gap: 0.45rem;
-    font-family: var(--f-mono);
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  @media (min-width: 640px) {
-    .barra__tel {
-      display: inline-flex;
-    }
-  }
-
-  .barra__menu {
+  .cabecera__tel {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    min-height: 2.75rem;
+    min-height: 3rem;
+    padding: 0.3rem 1rem 0.3rem 0.3rem;
+    font-family: var(--f-marca);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: var(--blanco);
+    text-decoration: none;
+    border: 1px solid var(--linea-oro);
+    border-radius: 999px;
+    transition: border-color 0.2s ease;
+  }
+
+  .cabecera__tel:hover {
+    border-color: var(--oro);
+  }
+
+  .cabecera__tel-icono {
+    display: grid;
+    place-items: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 50%;
+    color: var(--obsidiana-profunda);
+    background: var(--grad-oro);
+  }
+
+  /* En móvil queda solo el icono: la barra fija ya lleva el número */
+  @media (max-width: 639px) {
+    .cabecera__tel {
+      padding: 0.3rem;
+      border: 0;
+    }
+
+    .cabecera__tel-num {
+      display: none;
+    }
+  }
+
+  .cabecera__menu {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 3rem;
     padding: 0 1rem;
-    font-family: var(--f-mono);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--papel);
-    background: var(--tinta);
+    color: var(--plata);
+    background: transparent;
+    border: 1px solid var(--linea);
     border-radius: 999px;
     cursor: pointer;
   }
 
-  .barra__dientes {
+  @media (min-width: 1024px) {
+    .cabecera__menu {
+      display: none;
+    }
+  }
+
+  .cabecera__dientes {
     display: grid;
     gap: 3px;
   }
 
-  .barra__dientes i {
+  .cabecera__dientes i {
     display: block;
     height: 2px;
-    background: var(--laton);
+    background: var(--oro);
   }
 
-  .barra__dientes i:nth-child(1) {
-    width: 16px;
-  }
-
-  .barra__dientes i:nth-child(2) {
-    width: 10px;
-  }
-
-  .barra__dientes i:nth-child(3) {
-    width: 13px;
-  }
+  .cabecera__dientes i:nth-child(1) { width: 16px; }
+  .cabecera__dientes i:nth-child(2) { width: 10px; }
+  .cabecera__dientes i:nth-child(3) { width: 13px; }
 
   /* --- Menú a pantalla completa ------------------------------------ */
   .menu {
@@ -389,90 +228,72 @@ const actual = (href: string) => (href === ruta ? 'page' : undefined);
     height: 100%;
     max-height: none;
     margin: 0;
-    padding: 1.1rem var(--margen) 2rem;
-    color: var(--papel);
-    background: var(--tinta);
+    padding: 1rem var(--margen) 2rem;
+    color: var(--plata);
+    background: var(--obsidiana-profunda);
     border: 0;
   }
 
   .menu[open] {
     display: flex;
     flex-direction: column;
-    animation: entrar 0.35s cubic-bezier(0.3, 0.7, 0.2, 1);
+    animation: entrar 0.3s cubic-bezier(0.3, 0.7, 0.2, 1);
   }
 
   @keyframes entrar {
     from {
       opacity: 0;
-      transform: translateY(-1.5rem);
+      transform: translateY(-1rem);
     }
   }
 
   .menu::backdrop {
-    background: rgb(12 20 36 / 0.6);
+    background: rgb(3 7 18 / 0.7);
   }
 
   .menu__cabeza {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-
-  .menu .rotulo {
-    color: var(--laton);
+    gap: 1rem;
   }
 
   .menu__cerrar {
-    min-height: 2.75rem;
+    min-height: 3rem;
     padding: 0 1rem;
-    font-family: var(--f-mono);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--tinta);
-    background: var(--laton);
+    color: var(--obsidiana-profunda);
+    background: var(--oro);
     border-radius: 999px;
     cursor: pointer;
   }
 
   .menu__lista {
-    margin: 2rem 0 2.5rem;
+    margin: 2.5rem 0;
     padding: 0;
     list-style: none;
-    counter-reset: none;
   }
 
   .menu__lista a {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    padding: 0.7rem 0;
-    text-decoration: none;
-    border-bottom: 1px solid var(--linea-clara);
-  }
-
-  .menu__num {
-    font-family: var(--f-mono);
-    font-size: 0.75rem;
-    color: var(--laton);
-  }
-
-  .menu__nombre {
-    font-family: var(--f-display);
-    font-size: clamp(1.7rem, 7vw, 2.6rem);
-    font-weight: 420;
-    line-height: 1.1;
+    display: block;
+    padding: 0.85rem 0;
+    font-size: clamp(1.6rem, 7vw, 2.3rem);
+    font-weight: 700;
     letter-spacing: -0.02em;
+    color: var(--blanco);
+    text-decoration: none;
+    border-bottom: 1px solid var(--linea);
   }
 
-  .menu__lista a:hover .menu__nombre,
-  .menu__lista a[aria-current='page'] .menu__nombre {
-    font-style: italic;
-    color: var(--laton);
+  .menu__lista a:hover,
+  .menu__lista a[aria-current='page'] {
+    color: var(--oro);
   }
 
-  .menu__llamar {
+  :global(.menu__llamar) {
     align-self: flex-start;
     margin-top: auto;
   }
@@ -481,5 +302,5 @@ const actual = (href: string) => (href === ruta ? 'page' : undefined);
 <script>
   const menu = document.getElementById('menu') as HTMLDialogElement | null;
   document.querySelector('[data-abrir-menu]')?.addEventListener('click', () => menu?.showModal());
-  document.querySelector('[data-cerrar-menu]')?.addEventListener('click', () => menu?.close());
+  menu?.querySelectorAll('[data-cerrar-menu]').forEach((el) => el.addEventListener('click', () => menu.close()));
 </script>

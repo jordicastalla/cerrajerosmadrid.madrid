@@ -1,0 +1,138 @@
+---
+/**
+ * «Cómo trabajamos» (spec §40). Sin precios: la web no los publica por
+ * decisión del cliente. Es la prueba enlazable de las insignias
+ * «Presupuesto sin compromiso» y «Garantía por escrito» (spec §19).
+ */
+import KeyCutDivider from '@components/KeyCutDivider.astro';
+import { site, telHref } from '@data/site';
+
+const g = site.garantia;
+const pasos = [
+  { t: 'Llamas', d: `Llamas al ${site.telefono} y nos cuentas qué ha pasado.` },
+  { t: 'Presupuesto', d: 'Te explicamos el trabajo y el presupuesto, sin compromiso, antes de empezar.' },
+  { t: 'Trabajo', d: 'Uno de nuestros cerrajeros realiza el trabajo.' },
+  ...(g.activa ? [{ t: 'Garantía', d: 'Recibes la factura con la garantía por escrito.' }] : []),
+];
+---
+
+<section class="como tramo claro" id="como-trabajamos" aria-labelledby="como-titulo">
+  <div class="envoltura">
+    <p class="rotulo">Sin sorpresas</p>
+    <h2 class="seccion__titulo" id="como-titulo">Cómo trabajamos</h2>
+    <p class="seccion__entrada">
+      Antes de tocar la puerta sabes qué vamos a hacer y cuál es el presupuesto. Si no te encaja, no hay compromiso.
+    </p>
+
+    <ol class="pasos">
+      {
+        pasos.map((p, i) => (
+          <li class="tarjeta">
+            <span class="pasos__num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{p.t}</h3>
+            <p>{p.d}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    {
+      g.activa && (
+        <details class="garantia" id="garantia">
+          <summary>
+            <span class="rotulo">Garantía por escrito</span>
+            <span class="garantia__ver">Leer las condiciones</span>
+          </summary>
+          <div class="prosa garantia__texto">
+            <p>
+              Cada trabajo incluye garantía por escrito. En el parte o en la factura del servicio figura la garantía
+              aplicable, con sus condiciones{g.meses ? ` y su duración: ${g.meses} meses desde la fecha de la factura` : ''}.
+            </p>
+            <p>
+              <strong>Qué cubre.</strong> Los defectos de la mano de obra y de los materiales que hemos instalado
+              nosotros.
+            </p>
+            <p>
+              <strong>Qué no cubre.</strong> Los daños por mal uso, por manipulaciones de terceros posteriores al
+              servicio y por el desgaste normal. Tampoco los elementos que no hemos instalado nosotros.
+            </p>
+            <p>
+              <strong>Cómo reclamar.</strong> Llama al{' '}
+              <a href={telHref} data-cta="garantia">
+                {site.telefono}
+              </a>{' '}
+              e indica la dirección y la fecha del servicio.
+            </p>
+          </div>
+        </details>
+      )
+    }
+
+    <KeyCutDivider clase="como__corte" />
+  </div>
+</section>
+
+<style>
+  .pasos {
+    display: grid;
+    gap: 1rem;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  }
+
+  .pasos__num {
+    font-family: var(--f-marca);
+    font-size: 0.85rem;
+    color: var(--oro-texto);
+  }
+
+  .pasos h3 {
+    margin-top: 0.75rem;
+    font-size: 1.3rem;
+  }
+
+  .pasos p {
+    margin-top: 0.5rem;
+    color: var(--pizarra);
+  }
+
+  .garantia {
+    margin-top: 2rem;
+    border: 1px solid var(--linea-clara);
+    border-radius: 1rem;
+  }
+
+  .garantia summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-height: 3.25rem;
+    padding: 0.9rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .garantia__ver {
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--oro-texto);
+    text-underline-offset: 0.2em;
+  }
+
+  .garantia[open] .garantia__ver {
+    text-decoration: none;
+  }
+
+  .garantia__texto {
+    padding: 0 1.25rem 1.5rem;
+    color: var(--obsidiana);
+  }
+
+  :global(.como__corte) {
+    margin-top: 3rem;
+  }
+</style>

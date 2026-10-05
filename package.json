@@ -1,5 +1,5 @@
 {
-  "name": "cerrajeros-chamartin",
+  "name": "cerrajeros-madrid-openservi",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -8,7 +8,11 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview --host",
-    "check": "astro check"
+    "check": "astro check",
+    "audit": "node scripts/seo-audit.mjs",
+    "audit:strict": "node scripts/seo-audit.mjs --strict",
+    "inventario": "node scripts/inventario-fotos.mjs",
+    "iconos": "node scripts/generar-iconos.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
@@ -21,6 +25,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "yaml": "^2.9.1"
   }
 }

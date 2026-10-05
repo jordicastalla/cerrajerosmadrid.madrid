@@ -1,0 +1,15 @@
+---
+/**
+ * Entidad completa del negocio en JSON-LD (spec §14). Solo en la Home; el
+ * resto de páginas la referencian por @id.
+ */
+import { negocio } from '@lib/schema';
+
+interface Props {
+  zonasReady: string[];
+}
+
+const { zonasReady } = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(negocio(zonasReady))} />

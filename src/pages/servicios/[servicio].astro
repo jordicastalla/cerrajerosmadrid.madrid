@@ -1,0 +1,186 @@
+---
+/**
+ * Plantilla de servicio (spec §7, §29). Página especialista: no repite la Home.
+ */
+import { getCollection, getEntries, render } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import CallButton from '@components/CallButton.astro';
+import EEATBadges from '@components/EEATBadges.astro';
+import Faq from '@components/Faq.astro';
+import InterlinkingGrid from '@components/InterlinkingGrid.astro';
+import CtaFinal from '@components/CtaFinal.astro';
+import { servicio as servicioSchema } from '@lib/schema';
+import { site } from '@data/site';
+
+export async function getStaticPaths() {
+  const servicios = await getCollection('servicios');
+  return servicios.map((entrada) => ({ params: { servicio: entrada.id }, props: { entrada } }));
+}
+
+const { entrada } = Astro.props;
+const { Content } = await render(entrada);
+const d = entrada.data;
+const ruta = `/servicios/${entrada.id}/`;
+
+// Si la empresa no aplica la garantía, el paso desaparece (spec anexo B)
+const proceso = site.garantia.activa ? d.proceso : d.proceso.filter((p) => !/garant/i.test(p));
+
+const relacionados = (await getEntries(d.relacionados)).filter((r) => r.data.status === 'ready');
+---
+
+<Layout
+  titulo={d.seoTitle}
+  descripcion={d.seoDescription}
+  ruta={ruta}
+  noindex={d.status !== 'ready'}
+  schemas={[servicioSchema({ nombre: d.titulo, descripcion: d.resumen, ruta })]}
+>
+  <Breadcrumbs
+    items={[
+      { nombre: 'Inicio', ruta: '/' },
+      { nombre: 'Servicios', ruta: '/servicios/' },
+      { nombre: d.titulo, ruta },
+    ]}
+  />
+
+  <section class="cabeza-servicio">
+    <div class="envoltura">
+      <h1 class="titular cabeza-servicio__h1 metal">{d.h1}</h1>
+      <p class="cabeza-servicio__intro">{d.intro}</p>
+      <div class="cabeza-servicio__acciones">
+        <CallButton cta={`servicio-${entrada.id}`} sub="Presupuesto sin compromiso" />
+      </div>
+      <EEATBadges clase="cabeza-servicio__insignias" />
+    </div>
+  </section>
+
+  <div class="claro">
+    <div class="envoltura tramo cuerpo-servicio">
+      <article class="prosa">
+        <Content />
+      </article>
+
+      {
+        proceso.length > 0 && (
+          <aside class="tarjeta proceso" aria-labelledby="proceso-titulo">
+            <h2 id="proceso-titulo">Cómo lo hacemos</h2>
+            <ol>
+              {proceso.map((p) => (
+                <li>{p}</li>
+              ))}
+            </ol>
+          </aside>
+        )
+      }
+    </div>
+  </div>
+
+  <Faq faqs={d.faqs} titulo={`Preguntas sobre ${d.titulo.toLowerCase()}`} />
+
+  {
+    relacionados.length > 0 && (
+      <section class="tramo" aria-labelledby="relacionados-titulo">
+        <div class="envoltura">
+          <p class="rotulo">También hacemos</p>
+          <h2 class="seccion__titulo" id="relacionados-titulo">
+            Otros servicios
+          </h2>
+          <div class="relacionados">
+            <InterlinkingGrid
+              items={[
+                ...relacionados.map((r) => ({ href: `/servicios/${r.id}/`, titulo: `${r.data.titulo} en Madrid`, texto: r.data.resumen })),
+                { href: '/#apertura-de-puertas', titulo: 'Apertura de puertas', texto: 'Si te has quedado fuera de casa, a cualquier hora.' },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <CtaFinal cta={`final-${entrada.id}`} />
+</Layout>
+
+<style>
+  .cabeza-servicio {
+    padding-block: clamp(1.5rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem);
+    background:
+      radial-gradient(40rem 24rem at 85% 20%, rgb(212 175 55 / 0.12), transparent 62%),
+      var(--obsidiana-profunda);
+  }
+
+  .cabeza-servicio__h1 {
+    max-width: 52rem;
+    font-size: clamp(1.7rem, 1.1rem + 2.8vw, 3.3rem);
+  }
+
+  .cabeza-servicio__intro {
+    margin-top: 1.25rem;
+    max-width: 44rem;
+    font-size: 1.15rem;
+    color: var(--plata);
+  }
+
+  .cabeza-servicio__acciones {
+    margin-top: 1.75rem;
+  }
+
+  :global(.cabeza-servicio__insignias) {
+    margin-top: 1.75rem !important;
+  }
+
+  .cuerpo-servicio {
+    display: grid;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  @media (min-width: 1000px) {
+    .cuerpo-servicio {
+      grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 0.75fr);
+      gap: 4.5rem;
+    }
+
+    .proceso {
+      position: sticky;
+      top: 6.5rem;
+    }
+  }
+
+  .cuerpo-servicio .prosa > :first-child {
+    margin-top: 0;
+  }
+
+  .proceso h2 {
+    font-size: 1.35rem;
+  }
+
+  .proceso ol {
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: paso;
+  }
+
+  .proceso li {
+    position: relative;
+    padding: 0 0 1rem 2.6rem;
+    color: var(--obsidiana);
+    counter-increment: paso;
+  }
+
+  .proceso li::before {
+    content: counter(paso, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    font-family: var(--f-marca);
+    font-size: 0.78rem;
+    color: var(--oro-texto);
+  }
+
+  .relacionados {
+    margin-top: 2rem;
+  }
+</style>

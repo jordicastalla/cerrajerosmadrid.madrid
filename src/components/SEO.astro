@@ -1,0 +1,45 @@
+---
+/**
+ * Metadatos de cada página (spec §11, §12, §26): title único, description,
+ * canonical absoluto, robots según la puerta de indexación, Open Graph y X.
+ */
+import { site, absoluta } from '@data/site';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  ruta: string;
+  imagen?: string;
+  imagenAlt?: string;
+  noindex?: boolean;
+}
+
+const { titulo, descripcion, ruta, imagen = site.imagenOg, imagenAlt, noindex = false } = Astro.props;
+
+const canonical = absoluta(ruta);
+const ogImagen = absoluta(imagen);
+---
+
+<title>{titulo}</title>
+<meta name="description" content={descripcion} />
+<link rel="canonical" href={canonical} />
+{
+  noindex ? (
+    <meta name="robots" content="noindex, follow" />
+  ) : (
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  )
+}
+{site.verificacionGoogle && <meta name="google-site-verification" content={site.verificacionGoogle} />}
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content={site.nombre} />
+<meta property="og:title" content={titulo} />
+<meta property="og:description" content={descripcion} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImagen} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={imagenAlt ?? `${site.nombre} · ${site.telefono}`} />
+<meta name="twitter:card" content="summary_large_image" />

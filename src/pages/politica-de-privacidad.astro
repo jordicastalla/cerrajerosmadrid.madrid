@@ -1,67 +1,62 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import { empresa } from '@data/empresa';
+import { site } from '@data/site';
+
+const l = site.legal;
+const dominio = new URL(site.dominio).host;
 ---
 
 <Layout
-  titulo={`Política de privacidad | ${empresa.nombre}`}
-  descripcion={`Política de privacidad y protección de datos del sitio web de ${empresa.nombre}.`}
+  titulo={`Política de privacidad | ${dominio}`}
+  descripcion={`Política de privacidad y protección de datos del sitio web ${dominio}.`}
   ruta="/politica-de-privacidad/"
   noindex
 >
-  <section class="tramo">
+  <section class="tramo claro">
     <div class="envoltura legal">
       <p class="rotulo">Información legal</p>
       <h1>Política de privacidad</h1>
 
       <div class="prosa legal__cuerpo">
         <p>
-          En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD),
-          se informa al usuario de cómo se tratan sus datos personales al utilizar este sitio web.
+          En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD), se informa al usuario de
+          cómo se tratan sus datos personales al utilizar este sitio web.
         </p>
 
         <h2>1. Responsable del tratamiento</h2>
         <ul>
-          <li>Titular: {empresa.titular}</li>
-          <li>NIF: {empresa.nif}</li>
-          <li>
-            Domicilio: {empresa.direccion.calle}, {empresa.direccion.cp} {empresa.direccion.ciudad}
-            ({empresa.direccion.provincia})
-          </li>
-          <li>Correo electrónico: {empresa.emailLegal}</li>
+          <li>Titular: {l.titular}</li>
+          <li>NIF: {l.nif}</li>
+          <li>Domicilio: {l.calle}, {l.cp} {l.ciudad} ({l.provincia})</li>
+          <li>Correo electrónico: {l.email}</li>
         </ul>
 
         <h2>2. Único canal de contacto: el teléfono</h2>
         <p>
-          Este sitio no incorpora formularios ni recoge datos personales a través de la web: el
-          único canal de contacto es la llamada telefónica al {empresa.telefono}. Los datos que el
-          usuario facilite por teléfono (nombre, dirección de la intervención y datos de
-          facturación) se tratan con la única finalidad de prestar el servicio de cerrajería
-          solicitado y emitir la factura correspondiente.
+          Este sitio no incorpora formularios ni recoge datos personales a través de la web: el canal de contacto es la
+          llamada telefónica al {site.telefono}. Los datos que el usuario facilite por teléfono (nombre, dirección de la
+          intervención y datos de facturación) se tratan con la única finalidad de prestar el servicio solicitado y emitir
+          la factura correspondiente.
         </p>
 
         <h2>3. Base jurídica y conservación</h2>
         <p>
-          La base jurídica del tratamiento es la ejecución del servicio contratado por teléfono y
-          el cumplimiento de obligaciones fiscales y contables. Los datos se conservan durante el
-          plazo legalmente exigido para dichas obligaciones y no se ceden a terceros salvo
-          obligación legal.
+          La base jurídica del tratamiento es la ejecución del servicio contratado y el cumplimiento de obligaciones
+          fiscales y contables. Los datos se conservan durante el plazo legalmente exigido para dichas obligaciones y no se
+          ceden a terceros salvo obligación legal.
         </p>
 
         <h2>4. Derechos del usuario</h2>
         <p>
-          El usuario puede ejercer sus derechos de acceso, rectificación, supresión, oposición,
-          limitación del tratamiento y portabilidad escribiendo a {empresa.emailLegal} o
-          llamando al {empresa.telefonoLegal}, acreditando su identidad.
+          El usuario puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento
+          y portabilidad escribiendo a {l.email} o llamando al {l.telefono}, acreditando su identidad.
         </p>
 
-        <h2>5. Analítica y cookies</h2>
+        <h2>5. Cookies</h2>
         <p>
-          Este sitio utiliza Google Analytics para conocer de forma agregada cómo se usa el
-          sitio, pero solo si el usuario lo consiente expresamente en el aviso de cookies: hasta
-          entonces no se instala ninguna cookie de analítica ni se contacta con los servidores de
-          Google. Para más información, consulta la{' '}
-          <a href="/politica-de-cookies/">política de cookies</a>.
+          Este sitio no utiliza cookies de analítica ni de publicidad. Más información en la <a href="/politica-de-cookies/"
+            >política de cookies</a
+          >.
         </p>
       </div>
     </div>

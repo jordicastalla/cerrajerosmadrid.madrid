@@ -1,0 +1,100 @@
+---
+/**
+ * Insignias de confianza (spec §19): afirmación + prueba. Cada insignia
+ * enlaza a su prueba; sin prueba, no se muestra. «Atención profesional» no
+ * tiene prueba enlazable y no aparece.
+ */
+import { getCollection } from 'astro:content';
+import Icono from '@components/ui/Icono.astro';
+import { site } from '@data/site';
+import { resenas, mediaTexto } from '@data/resenas';
+
+interface Props {
+  clase?: string;
+}
+const { clase = '' } = Astro.props;
+
+type Insignia = { texto: string; href: string; icono: 'mapa' | 'estrella' | 'reloj' | 'factura' | 'check'; externo?: boolean };
+
+const zonas = (await getCollection('localidades', (l) => l.data.cerrajeroPropio)).length;
+
+const insignias: Insignia[] = [
+  { texto: `Cerrajeros propios en ${zonas} zonas`, href: '/cerrajeros/', icono: 'mapa' },
+  { texto: 'Servicio 24 horas', href: '/#cerrajero-urgente-24-horas', icono: 'reloj' },
+  { texto: 'Presupuesto sin compromiso', href: '/#como-trabajamos', icono: 'check' },
+];
+
+if (site.garantia.activa) insignias.push({ texto: 'Garantía por escrito', href: '/#garantia', icono: 'factura' });
+
+if (resenas.total > 0)
+  insignias.splice(1, 0, {
+    texto: mediaTexto ? `${mediaTexto} en Google (${resenas.total} opiniones)` : `${resenas.total} opiniones en Google`,
+    href: resenas.perfilUrl,
+    icono: 'estrella',
+    externo: true,
+  });
+---
+
+<ul class={`insignias ${clase}`}>
+  {
+    insignias.map((i) => (
+      <li>
+        <a
+          href={i.href}
+          {...(i.externo ? { target: '_blank', rel: 'noopener', 'data-evento': 'perfil_google', 'data-cta': 'insignia' } : {})}
+        >
+          <Icono nombre={i.icono} tam={16} relleno={i.icono === 'estrella'} />
+          {i.texto}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .insignias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .insignias a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.5rem;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--plata);
+    text-decoration: none;
+    background: rgb(255 255 255 / 0.04);
+    border: 1px solid var(--linea);
+    border-radius: 999px;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .insignias a:hover {
+    color: var(--blanco);
+    border-color: var(--oro);
+  }
+
+  .insignias :global(svg) {
+    color: var(--oro);
+  }
+
+  :global(.claro) .insignias a {
+    color: var(--obsidiana);
+    background: var(--blanco);
+    border-color: var(--linea-clara);
+  }
+
+  :global(.claro) .insignias :global(svg) {
+    color: var(--oro-texto);
+  }
+</style>

@@ -1,31 +1,33 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import { leerEstadoContenido } from './scripts/contenido.mjs';
+
+/** TODO-CLIENTE: dominio definitivo. Única fuente: src/data/site.ts lo lee de aquí. */
+const SITE = 'https://cerrajerosmadrid.madrid';
+
+// Qué URLs son noindex (draft, legales, 404) y fecha real de cada contenido
+const estado = leerEstadoContenido();
 
 export default defineConfig({
-  site: 'https://cerrajeroschamartin.es',
+  site: SITE,
   trailingSlash: 'always',
   compressHTML: true,
   build: {
     format: 'directory',
     inlineStylesheets: 'always',
   },
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'hover',
-  },
   integrations: [
     sitemap({
-      changefreq: 'weekly',
-      lastmod: new Date(),
-      filter: (page) =>
-        !page.includes('/politica-de-cookies/') &&
-        !page.includes('/politica-de-privacidad/') &&
-        !page.includes('/aviso-legal/'),
+      // Solo URLs indexables (spec §5, §13)
+      filter: (page) => !estado.noIndexables.has(new URL(page).pathname),
+      // Sin changefreq ni priority (Google los ignora); lastmod solo si es real
       serialize(item) {
-        if (new URL(item.url).pathname === '/') item.priority = 1.0;
-        else if (item.url.endsWith('/contacto/')) item.priority = 0.5;
-        else item.priority = 0.9;
+        const lastmod = estado.lastmod.get(new URL(item.url).pathname);
+        if (lastmod) item.lastmod = lastmod;
+        else delete item.lastmod;
+        delete item.changefreq;
+        delete item.priority;
         return item;
       },
     }),

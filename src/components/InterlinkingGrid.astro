@@ -1,0 +1,67 @@
+---
+/**
+ * Rejilla de enlaces internos con anchors descriptivos (spec §9). Limpia,
+ * nunca una nube de etiquetas.
+ */
+interface Item {
+  href: string;
+  titulo: string;
+  texto?: string;
+}
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="enlaces">
+  {
+    items.map((i) => (
+      <li>
+        <a class="tarjeta enlaces__item" href={i.href}>
+          <span class="enlaces__titulo">{i.titulo} →</span>
+          {i.texto && <span class="enlaces__texto">{i.texto}</span>}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .enlaces {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  }
+
+  .enlaces__item {
+    display: grid;
+    gap: 0.5rem;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  .enlaces__titulo {
+    font-size: 1.15rem;
+    font-weight: 750;
+    color: var(--blanco);
+  }
+
+  .enlaces__texto {
+    font-size: 0.97rem;
+    color: var(--plata-2);
+  }
+
+  :global(.claro) .enlaces__titulo {
+    color: var(--obsidiana);
+  }
+
+  :global(.claro) .enlaces__texto {
+    color: var(--pizarra);
+  }
+</style>

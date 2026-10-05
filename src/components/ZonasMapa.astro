@@ -1,0 +1,193 @@
+---
+/**
+ * Mapa de cobertura estilo plano de metro (spec §23, motivo 3). Esquema
+ * orientativo, NO a escala: no implica distancias ni tiempos de llegada.
+ * Las localidades ready son enlaces; las draft, texto sin enlace (spec §5).
+ * Debajo va una lista HTML equivalente para accesibilidad y rastreo.
+ */
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  localidades: CollectionEntry<'localidades'>[];
+}
+
+const { localidades } = Astro.props;
+
+const C = { x: 380, y: 216 };
+const PASO = 60;
+const r2 = Math.SQRT1_2;
+const dirs = {
+  noroeste: { u: [-r2, -r2], lado: 'izq', inicio: 0, paso: PASO },
+  este: { u: [r2, -r2], lado: 'der', inicio: 0, paso: PASO },
+  oeste: { u: [-r2, r2], lado: 'izq', inicio: 0, paso: PASO },
+  // La línea sur arranca más abajo para que sus rótulos no crucen la del sureste
+  sur: { u: [0, 1], lado: 'der', inicio: 1, paso: 56 },
+  sureste: { u: [r2, r2], lado: 'der', inicio: 1, paso: PASO },
+} as const;
+
+const estaciones = localidades.map((l) => {
+  const d = dirs[l.data.grupoMapa];
+  const k = l.data.ordenMapa + d.inicio;
+  return {
+    id: l.id,
+    nombre: l.data.nombre,
+    grupo: l.data.grupoMapa,
+    ready: l.data.status === 'ready',
+    x: C.x + d.u[0] * d.paso * k,
+    y: C.y + d.u[1] * d.paso * k,
+    lado: d.lado,
+  };
+});
+
+const lineas = Object.keys(dirs).map((g) => {
+  const del = estaciones.filter((e) => e.grupo === g);
+  const ultima = del.reduce((a, b) => (Math.hypot(b.x - C.x, b.y - C.y) > Math.hypot(a.x - C.x, a.y - C.y) ? b : a), del[0]);
+  return ultima ? `M${C.x} ${C.y}L${ultima.x.toFixed(1)} ${ultima.y.toFixed(1)}` : '';
+});
+
+const orden = [...estaciones].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+---
+
+<div class="metro-bloque">
+<figure class="metro">
+  <svg viewBox="0 -20 760 490" role="img" aria-labelledby="metro-titulo metro-desc">
+    <title id="metro-titulo">Zonas donde uno de nuestros cerrajeros trabaja en la propia zona</title>
+    <desc id="metro-desc">Esquema orientativo de 16 zonas alrededor de Madrid, no a escala. No indica distancias ni tiempos.</desc>
+
+    {lineas.map((d) => <path d={d} class="metro__linea" />)}
+
+    <circle cx={C.x} cy={C.y} r="13" class="metro__centro-aro" />
+    <circle cx={C.x} cy={C.y} r="8" class="metro__centro" />
+    <text x={C.x - 22} y={C.y + 5} text-anchor="end" class="metro__madrid">MADRID</text>
+
+    {
+      estaciones.map((e) => {
+        const tx = e.lado === 'izq' ? e.x - 14 : e.x + 14;
+        const anchor = e.lado === 'izq' ? 'end' : 'start';
+        const contenido = (
+          <>
+            <circle cx={e.x.toFixed(1)} cy={e.y.toFixed(1)} r="7" class={e.ready ? 'metro__est metro__est--ready' : 'metro__est'} />
+            <text x={tx.toFixed(1)} y={(e.y + 5).toFixed(1)} text-anchor={anchor} class={e.ready ? 'metro__txt metro__txt--ready' : 'metro__txt'}>
+              {e.nombre}
+            </text>
+          </>
+        );
+        return e.ready ? <a href={`/cerrajeros/${e.id}/`}>{contenido}</a> : <g>{contenido}</g>;
+      })
+    }
+  </svg>
+  <figcaption>Esquema orientativo, no a escala.</figcaption>
+</figure>
+
+<ul class="metro__lista">
+  {
+    orden.map((e) => (
+      <li>{e.ready ? <a href={`/cerrajeros/${e.id}/`}>Cerrajeros en {e.nombre}</a> : <span>{e.nombre}</span>}</li>
+    ))
+  }
+</ul>
+</div>
+
+<style>
+  .metro {
+    margin: 0;
+  }
+
+  .metro svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .metro__linea {
+    fill: none;
+    stroke: var(--oro);
+    stroke-width: 5;
+    stroke-linecap: round;
+    opacity: 0.85;
+  }
+
+  .metro__centro-aro {
+    fill: none;
+    stroke: var(--oro);
+    stroke-width: 2;
+  }
+
+  .metro__centro {
+    fill: var(--oro);
+  }
+
+  .metro__madrid {
+    font-family: var(--f-marca);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    fill: var(--oro);
+  }
+
+  .metro__est {
+    fill: var(--obsidiana-profunda);
+    stroke: var(--plata);
+    stroke-width: 2.5;
+  }
+
+  .metro__est--ready {
+    fill: var(--oro);
+    stroke: var(--obsidiana-profunda);
+  }
+
+  .metro__txt {
+    font-family: var(--f-texto);
+    font-size: 14px;
+    font-weight: 600;
+    fill: var(--plata);
+  }
+
+  .metro__txt--ready {
+    fill: var(--blanco);
+    text-decoration: underline;
+  }
+
+  .metro a:hover .metro__txt,
+  .metro a:focus-visible .metro__txt {
+    fill: var(--oro);
+  }
+
+  .metro figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--plata-2);
+    text-align: center;
+  }
+
+  .metro__lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .metro__lista li {
+    font-size: 0.92rem;
+  }
+
+  .metro__lista span,
+  .metro__lista a {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    color: var(--plata);
+    border: 1px solid var(--linea);
+    border-radius: 999px;
+  }
+
+  .metro__lista a {
+    color: var(--blanco);
+    border-color: var(--linea-oro);
+    text-decoration: none;
+  }
+
+  .metro__lista a:hover {
+    border-color: var(--oro);
+  }
+</style>

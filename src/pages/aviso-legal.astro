@@ -1,97 +1,82 @@
 ---
+/**
+ * Aviso legal (spec §16): solo los datos legales facilitados; sin nombres
+ * comerciales en el texto.
+ */
 import Layout from '@layouts/Layout.astro';
-import { empresa } from '@data/empresa';
+import { site } from '@data/site';
+
+const l = site.legal;
+const dominio = new URL(site.dominio).host;
 ---
 
-<Layout
-  titulo={`Aviso legal | ${empresa.nombre}`}
-  descripcion={`Aviso legal y condiciones de uso del sitio web de ${empresa.nombre}.`}
-  ruta="/aviso-legal/"
-  noindex
->
-  <section class="tramo">
+<Layout titulo={`Aviso legal | ${dominio}`} descripcion={`Aviso legal y condiciones de uso del sitio web ${dominio}.`} ruta="/aviso-legal/" noindex>
+  <section class="tramo claro">
     <div class="envoltura legal">
       <p class="rotulo">Información legal</p>
       <h1>Aviso legal</h1>
 
       <div class="prosa legal__cuerpo">
         <p>
-          En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la
-          Información y de Comercio Electrónico, se ponen a disposición del usuario los
-          siguientes datos identificativos.
+          En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio
+          Electrónico, se ponen a disposición del usuario los siguientes datos identificativos.
         </p>
 
         <h2>1. Datos identificativos del titular</h2>
         <ul>
-          <li>Titular: {empresa.titular}</li>
-          <li>Nombre comercial: {empresa.nombre}</li>
-          <li>NIF: {empresa.nif}</li>
-          <li>
-            Domicilio social: {empresa.direccion.calle}, {empresa.direccion.cp} {empresa.direccion.ciudad}
-            ({empresa.direccion.provincia})
-          </li>
-          <li>Teléfono de contacto (administración): {empresa.telefonoLegal}</li>
-          <li>Correo electrónico: {empresa.emailLegal}</li>
-          <li>Sitio web: {empresa.dominio}</li>
-          <li>Actividad: cerrajería y seguridad residencial</li>
+          <li>Titular: {l.titular}</li>
+          <li>NIF: {l.nif}</li>
+          <li>Domicilio social: {l.calle}, {l.cp} {l.ciudad} ({l.provincia})</li>
+          <li>Teléfono de contacto: {l.telefono}</li>
+          <li>Correo electrónico: {l.email}</li>
+          <li>Sitio web: {site.dominio}</li>
+          <li>Actividad: cerrajería</li>
         </ul>
 
         <h2>2. Objeto</h2>
         <p>
-          El presente aviso legal regula el uso del sitio web {empresa.dominio}, cuya titularidad
-          corresponde a {empresa.titular}. El acceso al sitio atribuye la condición de usuario e
-          implica la aceptación de estas condiciones.
+          El presente aviso legal regula el uso del sitio web {site.dominio}, cuya titularidad corresponde a {l.titular}. El
+          acceso al sitio atribuye la condición de usuario e implica la aceptación de estas condiciones.
         </p>
 
         <h2>3. Condiciones de uso</h2>
         <p>
-          El usuario se compromete a hacer un uso adecuado de los contenidos y a no emplearlos
-          para incurrir en actividades ilícitas, lesionar derechos de terceros o provocar daños
-          en los sistemas del titular o de otros usuarios.
+          El usuario se compromete a hacer un uso adecuado de los contenidos y a no emplearlos para incurrir en actividades
+          ilícitas, lesionar derechos de terceros o provocar daños en los sistemas del titular o de otros usuarios.
         </p>
 
-        <h2>4. Verificación de identidad antes de intervenir</h2>
+        <h2>4. Verificación antes de intervenir</h2>
         <p>
-          Por la naturaleza del servicio, antes de realizar una apertura o una intervención sobre
-          una cerradura se solicita al usuario acreditar de forma razonable su relación con el
-          inmueble. El titular puede negarse a prestar el servicio si no puede acreditarse dicha
-          relación.
+          Por la naturaleza del servicio, antes de realizar una apertura o una intervención sobre una cerradura se solicita
+          al usuario acreditar de forma razonable su relación con el inmueble. El titular puede negarse a prestar el servicio
+          si no puede acreditarse dicha relación.
         </p>
 
-        <h2>5. Información sobre precios y servicios</h2>
+        <h2>5. Información sobre precios</h2>
         <p>
-          Este sitio no publica tarifas: el precio de cada intervención se consulta por teléfono
-          y se confirma al cliente antes de ejecutar el trabajo, según el servicio y la
-          complejidad del caso.
+          Este sitio no publica tarifas: el precio de cada intervención se consulta por teléfono y se confirma al cliente
+          antes de ejecutar el trabajo, según el servicio y la complejidad del caso.
         </p>
 
         <h2>6. Propiedad intelectual e industrial</h2>
         <p>
-          Los contenidos del sitio, incluidos textos, fotografías, gráficos, diseño y código
-          fuente, son titularidad de {empresa.titular} o se utilizan con la autorización
-          correspondiente. Queda prohibida su reproducción o distribución sin consentimiento
+          Los contenidos del sitio, incluidos textos, gráficos, diseño y código fuente, son titularidad de {l.titular} o se
+          utilizan con la autorización correspondiente. Queda prohibida su reproducción o distribución sin consentimiento
           expreso.
         </p>
 
         <h2>7. Exclusión de responsabilidad</h2>
         <p>
-          El titular no se responsabiliza de las decisiones adoptadas por el usuario a partir de
-          la información divulgativa publicada en este sitio. Manipular una cerradura o un
-          sistema de seguridad sin la formación adecuada puede dañar la instalación o comprometer
-          la seguridad de la vivienda.
+          El titular no se responsabiliza de las decisiones adoptadas por el usuario a partir de la información divulgativa
+          publicada en este sitio. Manipular una cerradura sin la formación adecuada puede dañar la instalación o
+          comprometer la seguridad de la vivienda.
         </p>
 
         <h2>8. Legislación aplicable</h2>
         <p>
-          La relación entre el titular y el usuario se rige por la normativa española. Para la
-          resolución de controversias, las partes se someten a los juzgados y tribunales del
-          domicilio del usuario cuando este tenga la condición de consumidor.
-        </p>
-
-        <h2>9. Resolución de litigios en línea</h2>
-        <p>
-          Conforme al Reglamento (UE) 524/2013, el usuario puede acudir a la plataforma de
-          resolución de litigios en línea de la Comisión Europea.
+          La relación entre el titular y el usuario se rige por la normativa española. Para la resolución de controversias,
+          las partes se someten a los juzgados y tribunales del domicilio del usuario cuando este tenga la condición de
+          consumidor.
         </p>
       </div>
     </div>

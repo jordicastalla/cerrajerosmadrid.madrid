@@ -1,114 +1,70 @@
 ---
-import Dentado from '@components/ui/Dentado.astro';
-import BotonLlamar from '@components/ui/BotonLlamar.astro';
-import { empresa, telHref } from '@data/empresa';
+import CallButton from '@components/CallButton.astro';
+import Emblema from '@components/marca/Emblema.astro';
 
 interface Props {
   titulo?: string;
   texto?: string;
-  arriba?: string;
+  cta?: string;
 }
 
 const {
-  titulo = '¿La puerta no abre? <em>Mantén la calma.</em>',
-  texto = 'Te damos una respuesta clara, un presupuesto transparente y enviamos de inmediato a un técnico que llega en unos 20 minutos a cualquier punto de Chamartín.',
-  arriba = 'var(--papel-2)',
+  titulo = '¿Necesitas un cerrajero ahora?',
+  texto = 'Llámanos y cuéntanos qué ha pasado. Servicio 24 horas, también de noche y en festivos.',
+  cta = 'cta-final',
 } = Astro.props;
-
-const cifras = empresa.telefono.split(' ');
 ---
 
-<Dentado arriba={arriba} abajo="var(--tinta)" cortes={[5, 2, 6, 3, 7, 4, 2, 6, 1, 5, 3, 7, 2, 4, 6, 3, 5, 1, 6, 4, 2, 5]} />
-<section class="cta oscuro">
-  <div class="envoltura">
-    <p class="rotulo">Guardia 24 horas · 365 días</p>
-    <h2 class="cta__titulo" set:html={titulo} />
-
-    <a href={telHref} class="cta__numero" data-cta="telefono-cta-final" aria-label={`Llamar al ${empresa.telefono}`}>
-      {cifras.map((c) => <span>{c}</span>)}
-    </a>
-
-    <div class="cta__pie">
-      <p>{texto}</p>
-      <div class="cta__acciones">
-        <BotonLlamar cta="telefono-cta-final-boton" texto="Llamar ahora" />
-        <a href="/contacto/" class="enlace">Zona y horario →</a>
-      </div>
+<section class="final tramo tramo--profundo">
+  <div class="envoltura final__rejilla">
+    <Emblema tam={150} clase="final__emblema" />
+    <div>
+      <h2 class="final__titulo">{titulo}</h2>
+      <p class="final__texto">{texto}</p>
+      <CallButton cta={cta} sub="24 horas" clase="final__boton" />
     </div>
   </div>
 </section>
 
 <style>
-  .cta {
-    padding-block: clamp(3.5rem, 8vw, 7rem) clamp(3rem, 6vw, 5rem);
-    overflow: hidden;
+  .final {
+    background:
+      radial-gradient(40rem 22rem at 20% 50%, rgb(212 175 55 / 0.12), transparent 65%),
+      var(--obsidiana-profunda);
+    border-top: 1px solid var(--linea-oro);
   }
 
-  .cta__titulo {
-    margin-top: 1.25rem;
-    max-width: 18ch;
-    font-size: clamp(2.1rem, 1.4rem + 3vw, 4rem);
-  }
-
-  .cta__numero {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 0.28em;
-    margin: clamp(1.5rem, 4vw, 3rem) 0;
-    font-family: var(--f-display);
-    font-size: clamp(3.4rem, 1rem + 11vw, 11.5rem);
-    font-style: italic;
-    font-weight: 300;
-    line-height: 0.9;
-    letter-spacing: -0.045em;
-    color: var(--laton);
-    text-decoration: none;
-    font-variant-numeric: lining-nums;
-  }
-
-  .cta__numero span {
-    transition:
-      color 0.25s ease,
-      transform 0.35s cubic-bezier(0.3, 0.7, 0.2, 1.3);
-  }
-
-  .cta__numero:hover span {
-    color: var(--papel);
-  }
-
-  .cta__numero:hover span:nth-child(2) {
-    transform: translateY(-0.06em);
-  }
-
-  .cta__pie {
+  .final__rejilla {
     display: grid;
     gap: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--linea-clara);
+    align-items: center;
   }
 
-  @media (min-width: 860px) {
-    .cta__pie {
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 4rem;
+  @media (min-width: 760px) {
+    .final__rejilla {
+      grid-template-columns: auto 1fr;
+      gap: 3.5rem;
     }
   }
 
-  .cta__pie p {
-    max-width: 38rem;
-    color: var(--cromo);
+  :global(.final__emblema) {
+    width: clamp(110px, 18vw, 170px);
+    height: auto;
+    filter: drop-shadow(0 0 30px rgb(212 175 55 / 0.25));
+  }
+
+  .final__titulo {
+    font-size: clamp(1.9rem, 1.3rem + 2.2vw, 3rem);
+  }
+
+  .final__texto {
+    margin-top: 0.9rem;
+    max-width: 34rem;
     font-size: 1.125rem;
+    color: var(--plata-2);
   }
 
-  .cta__acciones {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.25rem 2rem;
-  }
-
-  .cta .enlace {
-    color: var(--papel);
+  :global(.final__boton) {
+    margin-top: 1.75rem;
   }
 </style>
