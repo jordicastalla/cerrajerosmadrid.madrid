@@ -12,6 +12,8 @@ npm run inventario     # fase 0: inventario de fotos reales (spec §34)
 npm run iconos         # regenera favicons e imagen OG desde el emblema
 ```
 
+`dist/` va al repositorio, como en cerrajeroschamartin.es: después de cada cambio, `npm run build` y se sube también `dist/`. El build es determinista, así que `dist/` solo cambia cuando cambia algo de verdad.
+
 Para publicar: `npm run build && npm run audit:strict` y subir el **contenido** de `dist/` a la raíz del hosting (el `.htaccess` va dentro).
 
 ## Dónde está cada cosa

@@ -5,6 +5,7 @@
  * imagen. Se sustituirá por el logotipo definitivo cuando esté (marca/).
  */
 import { geometriaEmblema } from './emblema-geometria.mjs';
+import { idUnico } from '@lib/ids';
 
 interface Props {
   tam?: number;
@@ -17,7 +18,7 @@ const { tam = 64, clase = '', titulo } = Astro.props;
 
 // id único por instancia: un degradado dentro de un <dialog> cerrado
 // (display: none) no se pinta en otras instancias que lo referencien
-const uid = `e${Math.random().toString(36).slice(2, 8)}`;
+const uid = idUnico(Astro.locals, 'e');
 const g = geometriaEmblema();
 ---
 

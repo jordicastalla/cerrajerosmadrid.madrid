@@ -6,6 +6,5 @@ node_modules/
 npm-debug.log*
 .vscode/
 
-# Eixida de compilació: es genera amb npm run build
-dist/
+# Generat per npm run inventario
 inventario.md
