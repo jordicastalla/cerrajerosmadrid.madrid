@@ -39,7 +39,10 @@ Las 16 localidades están en `status: draft`: existen, pero son `noindex`, no sa
 
 1. al menos 1 caso real verificado en `src/content/casos/`;
 2. una introducción propia de 100 palabras o más, escrita solo con datos reales de la zona;
-3. `seoTitle` y `seoDescription` propios.
+3. al menos 2 preguntas frecuentes reales de la zona (`faqs`);
+4. `seoTitle` y `seoDescription` propios.
+
+Además, cada ficha puede llevar un `consejo` práctico para la zona y sus zonas cercanas (`nearby`). Los bloques comunes de las páginas de zona (ventajas, banner, «Ten esto a mano», preguntas generales) están en `src/data/zona.ts`.
 
 Si se marca `ready` sin cumplirlo, el build falla y dice qué falta.
 

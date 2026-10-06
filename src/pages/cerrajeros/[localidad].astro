@@ -3,8 +3,9 @@
  * Plantilla de localidad (spec §28). Misma plantilla, contenido propio: cada
  * sección solo se pinta si la ficha de la empresa tiene datos reales.
  * La puerta de indexación (spec §5) decide noindex, sitemap y enlaces.
- * Los servicios se nombran sin la localidad, y las opiniones y las preguntas
- * frecuentes solo están en la Home (cambios del cliente, v2.2).
+ * Los servicios se nombran sin la localidad (v2.2). Bloques comunes de
+ * zona (v2.3): ventajas, banner de llamada, «Ten esto a mano», zonas cercanas
+ * y preguntas frecuentes (las propias de la ficha y las generales).
  */
 import { getCollection, getEntries, type CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
@@ -14,10 +15,16 @@ import CallButton from '@components/CallButton.astro';
 import EEATBadges from '@components/EEATBadges.astro';
 import TrabajosReales from '@components/TrabajosReales.astro';
 import InterlinkingGrid from '@components/InterlinkingGrid.astro';
+import Faq from '@components/Faq.astro';
 import CtaFinal from '@components/CtaFinal.astro';
+import Ventajas from '@components/zona/Ventajas.astro';
+import BannerLlamada from '@components/zona/BannerLlamada.astro';
+import TenAMano from '@components/zona/TenAMano.astro';
+import Cercanas from '@components/zona/Cercanas.astro';
 import { comprobarPuerta, esIndexable } from '@lib/gate';
 import { casosVerificados } from '@lib/casos';
 import { servicio as servicioSchema } from '@lib/schema';
+import { faqsGenerales } from '@data/zona';
 
 export async function getStaticPaths() {
   const localidades = await getCollection('localidades', (l) => l.data.cerrajeroPropio);
@@ -41,7 +48,10 @@ const ruta = `/cerrajeros/${entrada.id}/`;
 const indexable = esIndexable(d.status);
 
 const servicios = (await getCollection('servicios', (s) => s.data.status === 'ready')).sort((a, b) => a.data.orden - b.data.orden);
-const cercanas = (await getEntries(d.nearby)).filter((l) => l.data.status === 'ready' && l.data.cerrajeroPropio);
+const cercanas = (await getEntries(d.nearby)).filter((l) => l.data.cerrajeroPropio);
+
+// Primero las preguntas reales de la zona (ficha); después, las comunes
+const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.nombre))];
 ---
 
 <Layout
@@ -135,22 +145,17 @@ const cercanas = (await getEntries(d.nearby)).filter((l) => l.data.status === 'r
     </div>
   </div>
 
+  <Ventajas nombre={d.nombre} />
+
+  <BannerLlamada nombre={d.nombre} slug={entrada.id} />
+
+  <TenAMano nombre={d.nombre} consejo={d.consejo} />
+
   <TrabajosReales localidad={entrada.id} minimo={1} titulo={`Trabajos reales en ${d.nombre}`} />
 
-  {
-    cercanas.length > 0 && (
-      <section class="tramo" aria-labelledby="cercanas-titulo">
-        <div class="envoltura">
-          <h2 class="seccion__titulo" id="cercanas-titulo">
-            Zonas cercanas
-          </h2>
-          <div class="cuerpo-loc__grid">
-            <InterlinkingGrid items={cercanas.map((c) => ({ href: `/cerrajeros/${c.id}/`, titulo: `Cerrajeros en ${c.data.nombre}` }))} />
-          </div>
-        </div>
-      </section>
-    )
-  }
+  <Cercanas nombre={d.nombre} cercanas={cercanas} indexable={indexable} />
+
+  <Faq faqs={faqs} titulo={`Preguntas frecuentes en ${d.nombre}`} id="preguntas" />
 
   <CtaFinal titulo={`¿Necesitas un cerrajero en ${d.nombre}?`} cta={`final-zona-${entrada.id}`} />
 </Layout>

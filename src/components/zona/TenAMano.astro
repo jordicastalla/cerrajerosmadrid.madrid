@@ -1,0 +1,184 @@
+---
+/**
+ * «Ten esto a mano al llamar» (v2.3), con el aviso del 112 y, si la ficha lo
+ * trae, el consejo propio de la zona. El consejo lo escribe la empresa con
+ * su experiencia real en la zona (spec §38): sin él, no se pinta.
+ */
+import Icono from '@components/ui/Icono.astro';
+import { aMano } from '@data/zona';
+
+interface Props {
+  nombre: string;
+  consejo?: string;
+}
+
+const { nombre, consejo } = Astro.props;
+const items = aMano(nombre);
+---
+
+<section class="a-mano tramo claro" aria-labelledby="a-mano-titulo">
+  <div class="envoltura a-mano__rejilla">
+    <div>
+      <p class="rotulo">Para ir más rápido</p>
+      <h2 class="seccion__titulo" id="a-mano-titulo">Ten esto a mano al llamar</h2>
+
+      <ol class="a-mano__lista">
+        {
+          items.map((i) => (
+            <li>
+              <span class="a-mano__icono" aria-hidden="true">
+                <Icono nombre={i.icono} tam={20} />
+              </span>
+              <span>
+                <strong>{i.titulo}.</strong> {i.texto}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    <div class="a-mano__lateral">
+      <aside class="aviso-112" aria-label="Emergencias">
+        <p class="aviso-112__cifra" aria-hidden="true">112</p>
+        <p>
+          Si dentro hay un niño o una persona que no puede valerse sola, si has dejado algo al fuego o crees que hay alguien
+          en casa, <strong>llama primero al <a href="tel:112">112</a></strong>.
+        </p>
+      </aside>
+
+      {
+        consejo && (
+          <aside class="consejo" aria-labelledby="consejo-titulo">
+            <p class="consejo__titulo" id="consejo-titulo">
+              <Icono nombre="llave" tam={18} />
+              Consejo para {nombre}
+            </p>
+            <p>{consejo}</p>
+          </aside>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .a-mano__rejilla {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 980px) {
+    .a-mano__rejilla {
+      grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.8fr);
+      gap: 4rem;
+    }
+  }
+
+  .a-mano__lista {
+    display: grid;
+    gap: 1rem;
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .a-mano__lista li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding: 1.1rem 1.2rem;
+    color: var(--pizarra);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+  }
+
+  .a-mano__lista strong {
+    color: var(--obsidiana);
+  }
+
+  .a-mano__icono {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    color: var(--oro);
+    background: var(--obsidiana-profunda);
+  }
+
+  .a-mano__lateral {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 980px) {
+    .a-mano__lateral {
+      position: sticky;
+      top: 6.5rem;
+      margin-top: 4.5rem;
+    }
+  }
+
+  /* Aviso de emergencias: rojo oscuro sobre rosa claro (contraste > 7:1) */
+  .aviso-112 {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 1.25rem 1.4rem;
+    color: #7f1d1d;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-left: 4px solid #b91c1c;
+    border-radius: 12px;
+  }
+
+  .aviso-112__cifra {
+    font-family: var(--f-marca);
+    font-size: 1.9rem;
+    line-height: 1;
+    color: #b91c1c;
+  }
+
+  @media (max-width: 30rem) {
+    .aviso-112 {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .aviso-112__cifra {
+      font-size: 1.5rem;
+    }
+  }
+
+  .aviso-112 a {
+    color: inherit;
+    font-weight: 800;
+  }
+
+  /* Consejo de la zona. Sobre crema, el oro-texto #8b7324 se queda en 4,28:1: se oscurece a #7a6420 (5,34:1) */
+  .consejo {
+    padding: 1.3rem 1.4rem;
+    color: var(--obsidiana);
+    background: #fbf7ea;
+    border: 1px solid #efe3bd;
+    border-left: 4px solid var(--oro);
+    border-radius: 12px;
+  }
+
+  .consejo__titulo {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 0.6rem;
+    font-family: var(--f-marca);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #7a6420;
+  }
+</style>

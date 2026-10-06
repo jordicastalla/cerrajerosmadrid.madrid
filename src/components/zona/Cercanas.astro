@@ -1,0 +1,109 @@
+---
+/**
+ * «Cerrajeros cerca de <zona>» (v2.3): las zonas próximas de la ficha
+ * (`nearby`), todas con cerrajero propio. Puerta de indexación (spec §5):
+ * desde una página indexable solo se enlazan zonas ready; las demás van como
+ * texto. Desde una página draft (noindex) se enlazan todas.
+ */
+import type { CollectionEntry } from 'astro:content';
+import Icono from '@components/ui/Icono.astro';
+
+interface Props {
+  nombre: string;
+  cercanas: CollectionEntry<'localidades'>[];
+  /** La página actual es indexable */
+  indexable: boolean;
+}
+
+const { nombre, cercanas, indexable } = Astro.props;
+const enlazable = (l: CollectionEntry<'localidades'>) => !indexable || l.data.status === 'ready';
+---
+
+{
+  cercanas.length > 0 && (
+    <section class="cercanas tramo tramo--profundo" aria-labelledby="cercanas-titulo">
+      <div class="envoltura">
+        <p class="rotulo">También con cerrajero propio</p>
+        <h2 class="seccion__titulo" id="cercanas-titulo">
+          Cerrajeros cerca de {nombre}
+        </h2>
+
+        <ul class="cercanas__lista">
+          {cercanas.map((c) => {
+            const contenido = (
+              <>
+                <span class="cercanas__icono" aria-hidden="true">
+                  <Icono nombre="mapa" tam={20} />
+                </span>
+                <span class="cercanas__nombre">Cerrajeros en {c.data.nombre}</span>
+                <span class="cercanas__texto">Uno de nuestros cerrajeros trabaja en {c.data.nombre}.</span>
+              </>
+            );
+            return (
+              <li>
+                {enlazable(c) ? (
+                  <a class="tarjeta cercanas__item" href={`/cerrajeros/${c.id}/`}>
+                    {contenido}
+                  </a>
+                ) : (
+                  <div class="tarjeta cercanas__item">{contenido}</div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+
+        <p class="cercanas__mas">
+          ¿Tu zona no está? Trabajamos también en las de alrededor: <a class="enlace" href="/#zonas">ver todas las zonas →</a>
+        </p>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .cercanas__lista {
+    display: grid;
+    gap: 1rem;
+    margin: 2.25rem 0 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  }
+
+  .cercanas__item {
+    display: grid;
+    gap: 0.45rem;
+    height: 100%;
+    text-decoration: none;
+  }
+
+  a.cercanas__item:hover {
+    border-color: var(--oro);
+  }
+
+  .cercanas__icono {
+    color: var(--oro);
+  }
+
+  .cercanas__nombre {
+    font-size: 1.15rem;
+    font-weight: 750;
+    color: var(--blanco);
+  }
+
+  a.cercanas__item .cercanas__nombre::after {
+    content: ' →';
+    color: var(--oro);
+  }
+
+  .cercanas__texto {
+    font-size: 0.95rem;
+    color: var(--plata-2);
+  }
+
+  .cercanas__mas {
+    margin-top: 2rem;
+    color: var(--plata-2);
+  }
+</style>

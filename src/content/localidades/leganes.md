@@ -12,6 +12,8 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Leganés. Apertura de pue
 intro: ""
 barrios: []
 observacionesLocales: []
-nearby: [getafe, alcorcon, mostoles]
-updatedAt: 2026-10-05
+faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
+nearby: [getafe, alcorcon, mostoles, pinto] # zonas con cerrajero propio, de más a menos cerca
+updatedAt: 2026-10-06
 ---

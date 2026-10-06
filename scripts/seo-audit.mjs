@@ -13,6 +13,8 @@ import { join, relative, sep } from 'node:path';
 const DIST = 'dist';
 const STRICT = process.argv.includes('--strict');
 const TEL_COMERCIAL = 'tel:+34912918462';
+/** Único otro número permitido: emergencias (aviso «llama primero al 112») */
+const TEL_PERMITIDOS = [TEL_COMERCIAL, 'tel:112'];
 const PAGINAS_LEGALES = ['/aviso-legal/', '/politica-de-privacidad/', '/politica-de-cookies/'];
 
 /** Expresiones prohibidas sin prueba (spec §42). Las reseñas literales se excluyen. */
@@ -97,10 +99,10 @@ for (const p of paginas) {
   // Imágenes sin alt
   for (const img of html.match(/<img\b[^>]*>/gi) ?? []) if (attr(img, 'alt') === null) error(ruta, `imagen sin alt: ${img.slice(0, 80)}…`);
 
-  // Enlaces tel: siempre el comercial
+  // Enlaces tel: siempre el comercial (o el 112)
   for (const a of html.match(/<a\b[^>]*href="tel:[^"]*"[^>]*>/gi) ?? []) {
     const href = attr(a, 'href');
-    if (href !== TEL_COMERCIAL) error(ruta, `enlace tel: distinto del comercial (${href})`);
+    if (!TEL_PERMITIDOS.includes(href)) error(ruta, `enlace tel: distinto del comercial (${href})`);
   }
 
   // JSON-LD válido y sin reseñas marcadas

@@ -10,6 +10,21 @@
 >
 > **Se mantiene sin cambios:** la regla de no inventar reseñas, tiempos de llegada, credenciales ni garantías (§18, §19).
 
+## Cambios v2.3 (2026-10-06, pedidos por el cliente): páginas de localidad
+
+Prevalece sobre v2.2 en las páginas de localidad. Bloques nuevos, por este orden después de los servicios:
+
+| Bloque | Contenido | De dónde sale |
+|---|---|---|
+| Ventajas («Lo que tienes al llamarnos») | Cerrajero propio en la zona, 24 horas, presupuesto antes de empezar, sin romper si se puede, garantía por escrito (si está activa), opiniones de Google. Cada una enlaza a su prueba (§19). | `src/data/zona.ts` |
+| Banner de llamada | Banda dorada con el teléfono grande y botón (`data-cta="banner-zona-<slug>"`). Texto obsidiana sobre oro. | `src/components/zona/BannerLlamada.astro` |
+| «Ten esto a mano al llamar» | Dirección, qué ha pasado, tipo de puerta y algo que acredite la relación con la vivienda. Aviso: «llama primero al 112» (único `tel:` permitido además del comercial). | `src/data/zona.ts` |
+| «Consejo para <zona>» | Consejo práctico real del cerrajero de la zona. Sin texto, no se pinta. | Ficha: `consejo` |
+| «Cerrajeros cerca de <zona>» | Hasta 4 zonas próximas con cerrajero propio (`nearby`, de más a menos cerca). Desde una página indexable solo se enlazan las `ready` (§5). | Ficha: `nearby` |
+| Preguntas frecuentes | Primero las preguntas reales de la ficha; después 4 generales (cerrajero en la zona, 24 horas, precio, zonas cercanas). Microdatos `FAQPage`. | Ficha: `faqs` + `src/data/zona.ts` |
+
+Vuelve el mínimo de §5: **≥ 2 preguntas propias en la ficha** para pasar a `ready` (las generales no cuentan: son iguales en todas las zonas). Los bloques comunes llevan el nombre de la zona pero el mismo texto en todas: lo que hace única cada página sigue siendo la ficha (intro, barrios, consejo, preguntas propias, casos), y por eso la puerta de indexación se mantiene.
+
 ## Cambios v2.2 (2026-10-06, pedidos por el cliente)
 
 v2.2 prevalece sobre cualquier sección de v2.1 que la contradiga. Las secciones afectadas se dejan como estaban para conservar el historial; donde choquen, manda esta tabla.
@@ -18,7 +33,7 @@ v2.2 prevalece sobre cualquier sección de v2.1 que la contradiga. Las secciones
 |---|---|
 | 2, 10, 21, 33, 36 | **Sin páginas de hub.** Se eliminan `/servicios/` y `/cerrajeros/`. «Servicios» es un desplegable de la cabecera con enlace directo a cada servicio (apertura de puertas y urgente 24 h a sus secciones de la Home; cambio de cerraduras e instalación de cerrojos a sus páginas). Las migas quedan en «Inicio › página». |
 | 6, 17, 36 | **Zonas solo en la Home** (sección `#zonas`, con el mapa esquemático y el de Google bajo demanda). Texto: «Atendemos en todo Madrid. Aunque no esté tu zona en la lista, trabajamos en todas las de alrededor. Somos rápidos y tenemos un buen equipo listo para ayudarte.» |
-| 5, 7, 18, 28, 38 | **Opiniones y preguntas frecuentes solo en la Home.** Las páginas de servicio y de localidad no llevan FAQ; el campo `faqs` desaparece de las colecciones y la puerta de indexación deja de exigir FAQs locales. |
+| 5, 7, 18, 28, 38 | **Opiniones y preguntas frecuentes solo en la Home.** Las páginas de servicio y de localidad no llevan FAQ; el campo `faqs` desaparece de las colecciones y la puerta de indexación deja de exigir FAQs locales. *(Localidades: revertido en v2.3, vuelven las FAQ.)* |
 | 28 | En las páginas de localidad, los servicios se nombran sin la localidad («Cambio de cerraduras», no «Cambio de cerraduras en Alcorcón»). |
 | 10 | Migas: `padding-top: 5px; padding-bottom: 25px; text-align: center`. |
 | 22 | Pie: `padding-top: 60px` y el perfil de Madrid de fondo. |

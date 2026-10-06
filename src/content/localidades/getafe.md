@@ -12,6 +12,8 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Getafe. Apertura de puert
 intro: ""
 barrios: []
 observacionesLocales: []
-nearby: [leganes, pinto]
-updatedAt: 2026-10-05
+faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
+nearby: [leganes, pinto, alcorcon, mostoles] # zonas con cerrajero propio, de más a menos cerca
+updatedAt: 2026-10-06
 ---

@@ -12,6 +12,8 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Alcorcón. Apertura de pu
 intro: ""
 barrios: []
 observacionesLocales: []
-nearby: [leganes, mostoles, villaviciosa-de-odon]
-updatedAt: 2026-10-05
+faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
+nearby: [mostoles, leganes, villaviciosa-de-odon, boadilla-del-monte] # zonas con cerrajero propio, de más a menos cerca
+updatedAt: 2026-10-06
 ---

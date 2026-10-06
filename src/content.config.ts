@@ -7,6 +7,8 @@ import { defineCollection, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
+const faq = z.object({ p: z.string(), r: z.string() });
+
 const estado = z.enum(['draft', 'ready']).default('draft');
 
 const tiposDeTrabajo = z.enum(['apertura', 'cambio-cerradura', 'cerrojo', 'bombin', 'alta-seguridad', 'otro']);
@@ -31,6 +33,10 @@ const localidades = defineCollection({
       intro: z.string().optional(),
       barrios: z.array(z.string()).default([]),
       observacionesLocales: z.array(z.string()).default([]),
+      /** Preguntas reales de clientes de la zona, con su respuesta (spec §38) */
+      faqs: z.array(faq).default([]),
+      /** «Consejo para <zona>»: un consejo práctico real del cerrajero de la zona (v2.3) */
+      consejo: z.string().optional(),
       /** Solo si la empresa lo mide (spec §38). Si no, no se muestra. */
       tiempoLlegada: z.string().optional(),
       image: image().optional(),

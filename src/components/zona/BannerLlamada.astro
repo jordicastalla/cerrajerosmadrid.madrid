@@ -1,0 +1,152 @@
+---
+/**
+ * Banner de llamada de la página de zona (v2.3): banda dorada a todo el
+ * ancho con el teléfono grande. Texto obsidiana sobre oro (9,57:1); nunca
+ * texto blanco sobre oro (spec §23).
+ */
+import CallButton from '@components/CallButton.astro';
+import { site, telHref } from '@data/site';
+
+interface Props {
+  nombre: string;
+  /** Sufijo para data-cta (spec §41) */
+  slug: string;
+}
+
+const { nombre, slug } = Astro.props;
+---
+
+<section class="banner" aria-labelledby="banner-titulo">
+  <div class="envoltura banner__rejilla">
+    <div>
+      <p class="banner__rotulo">
+        <span class="banner__punto" aria-hidden="true"></span>
+        Atendemos ahora · 24 horas
+      </p>
+      <h2 class="banner__titulo" id="banner-titulo">¿Te has quedado fuera en {nombre}?</h2>
+      <p class="banner__texto">Llámanos y cuéntanos qué ha pasado. Uno de nuestros cerrajeros trabaja en {nombre}.</p>
+    </div>
+
+    <div class="banner__accion">
+      <a href={telHref} class="banner__numero" data-cta={`banner-zona-${slug}`}>{site.telefono}</a>
+      <CallButton cta={`banner-zona-${slug}-boton`} variante="oscuro" sub="Presupuesto sin compromiso" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .banner {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(2.75rem, 6vw, 4.5rem);
+    color: var(--obsidiana-profunda);
+    background: var(--grad-oro);
+  }
+
+  /* Perfil de cortes de llave, en relieve, de borde a borde */
+  .banner::before {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 1.4rem;
+    background: rgb(3 7 18 / 0.12);
+    clip-path: polygon(
+      0 60%, 18% 60%, 18% 20%, 22% 20%, 22% 60%, 30% 60%, 30% 0, 35% 0, 35% 60%, 44% 60%, 44% 35%, 48% 35%, 48% 60%,
+      58% 60%, 58% 10%, 63% 10%, 63% 60%, 72% 60%, 72% 40%, 76% 40%, 76% 60%, 100% 60%, 100% 100%, 0 100%
+    );
+  }
+
+  .banner__rejilla {
+    position: relative;
+    display: grid;
+    gap: 1.75rem;
+    align-items: center;
+  }
+
+  @media (min-width: 960px) {
+    .banner__rejilla {
+      grid-template-columns: minmax(0, 1.3fr) auto;
+      gap: 3rem;
+    }
+  }
+
+  .banner__rotulo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--f-marca);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* Punto «en directo»: late; quieto con prefers-reduced-motion (global.css) */
+  .banner__punto {
+    position: relative;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--obsidiana-profunda);
+  }
+
+  .banner__punto::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--obsidiana-profunda);
+    animation: latido 1.8s ease-out infinite;
+  }
+
+  @keyframes latido {
+    to {
+      transform: scale(2.6);
+      opacity: 0;
+    }
+  }
+
+  .banner__titulo {
+    margin-top: 0.8rem;
+    font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3rem);
+    color: var(--obsidiana-profunda);
+  }
+
+  .banner__texto {
+    margin-top: 0.75rem;
+    max-width: 36rem;
+    font-size: 1.1rem;
+    font-weight: 550;
+  }
+
+  .banner__accion {
+    display: grid;
+    justify-items: start;
+    gap: 1rem;
+  }
+
+  @media (min-width: 960px) {
+    .banner__accion {
+      justify-items: end;
+    }
+  }
+
+  .banner__numero {
+    font-family: var(--f-marca);
+    font-size: clamp(1.9rem, 1.3rem + 2.6vw, 3.2rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--obsidiana-profunda);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .banner__numero:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+  }
+
+  .banner :global(:focus-visible) {
+    outline-color: var(--obsidiana-profunda);
+  }
+</style>

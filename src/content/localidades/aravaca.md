@@ -12,6 +12,8 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Aravaca. Apertura de puer
 intro: ""
 barrios: []
 observacionesLocales: []
-nearby: [pozuelo-de-alarcon, majadahonda, las-rozas]
-updatedAt: 2026-10-05
+faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
+nearby: [pozuelo-de-alarcon, majadahonda, las-rozas, boadilla-del-monte] # zonas con cerrajero propio, de más a menos cerca
+updatedAt: 2026-10-06
 ---

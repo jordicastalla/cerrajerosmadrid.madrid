@@ -11,7 +11,7 @@ interface Props {
   /** Bloque de origen para la medición (data-cta) */
   cta: string;
   sub?: string;
-  variante?: 'oro' | 'contorno';
+  variante?: 'oro' | 'contorno' | 'oscuro';
   clase?: string;
 }
 
@@ -81,6 +81,22 @@ const { cta, sub, variante = 'oro', clase = '' } = Astro.props;
 
   .llamar--contorno:hover {
     border-color: var(--oro);
+  }
+
+  /* Sobre fondos dorados: obsidiana con texto blanco (17,74:1) */
+  .llamar--oscuro {
+    color: var(--blanco);
+    background: var(--obsidiana-profunda);
+    box-shadow: 0 16px 34px -18px rgb(3 7 18 / 0.9);
+  }
+
+  .llamar--oscuro:hover {
+    transform: translateY(-2px);
+  }
+
+  .llamar--oscuro .llamar__icono {
+    color: var(--obsidiana-profunda);
+    background: var(--grad-oro);
   }
 
   .llamar__icono {

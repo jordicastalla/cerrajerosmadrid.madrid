@@ -1,0 +1,105 @@
+---
+/**
+ * Ventajas de llamarnos en una zona (v2.3). Cada tarjeta es una afirmación
+ * respaldada y, si tiene prueba, enlaza a ella (spec §19). Textos en
+ * src/data/zona.ts.
+ */
+import Icono from '@components/ui/Icono.astro';
+import { ventajas } from '@data/zona';
+
+interface Props {
+  nombre: string;
+}
+
+const { nombre } = Astro.props;
+const items = ventajas(nombre);
+---
+
+<section class="ventajas tramo" aria-labelledby="ventajas-titulo">
+  <div class="envoltura">
+    <p class="rotulo">Cerrajería en {nombre}</p>
+    <h2 class="seccion__titulo" id="ventajas-titulo">Lo que tienes al llamarnos</h2>
+
+    <ul class="ventajas__lista">
+      {
+        items.map((v) => (
+          <li class="tarjeta ventaja">
+            <span class="ventaja__icono" aria-hidden="true">
+              <Icono nombre={v.icono} tam={22} relleno={v.icono === 'estrella'} />
+            </span>
+            <h3 class="ventaja__titulo">{v.titulo}</h3>
+            <p class="ventaja__texto">{v.texto}</p>
+            {v.href && (
+              <a
+                class="ventaja__prueba"
+                href={v.href}
+                {...(v.externo ? { target: '_blank', rel: 'noopener', 'data-evento': 'perfil_google', 'data-cta': 'ventaja' } : {})}
+              >
+                {v.externo ? 'Ver opiniones ↗' : 'Ver cómo →'}
+                <span class="solo-lector">: {v.titulo}</span>
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .ventajas {
+    background:
+      radial-gradient(40rem 22rem at 10% 0%, rgb(212 175 55 / 0.08), transparent 65%),
+      var(--obsidiana);
+  }
+
+  .ventajas__lista {
+    display: grid;
+    gap: 1.1rem;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
+  }
+
+  .ventaja {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .ventaja__icono {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.4rem;
+    border-radius: 0.85rem;
+    color: var(--oro);
+    background: rgb(212 175 55 / 0.1);
+    border: 1px solid var(--linea-oro);
+  }
+
+  .ventaja__titulo {
+    font-size: 1.2rem;
+    line-height: 1.25;
+  }
+
+  .ventaja__texto {
+    font-size: 0.98rem;
+    color: var(--plata-2);
+  }
+
+  .ventaja__prueba {
+    margin-top: auto;
+    padding-top: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 650;
+    color: var(--oro);
+    text-decoration: none;
+  }
+
+  .ventaja__prueba:hover {
+    text-decoration: underline;
+  }
+</style>
