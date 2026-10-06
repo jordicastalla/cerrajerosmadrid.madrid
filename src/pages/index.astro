@@ -12,7 +12,8 @@ import ZonasMapa from '@components/ZonasMapa.astro';
 import MapaCargaBajoDemanda from '@components/MapaCargaBajoDemanda.astro';
 import Reviews from '@components/Reviews.astro';
 import Faq from '@components/Faq.astro';
-import CtaFinal from '@components/CtaFinal.astro';
+import ImagenHome from '@components/ImagenHome.astro';
+import Icono from '@components/ui/Icono.astro';
 import KeyCutDivider from '@components/KeyCutDivider.astro';
 import Emblema from '@components/marca/Emblema.astro';
 import Skyline from '@components/marca/Skyline.astro';
@@ -23,6 +24,53 @@ import emblema from '@/assets/marca/emblema.webp';
 const emblemaPortada = await getImage({ src: emblema, width: 352, densities: [1, 2] });
 
 const localidades = await getCollection('localidades', (l) => l.data.cerrajeroPropio);
+
+// «¿Por qué elegir el concepto OpenServi?» y «¿Buscas un cerrajero cerca?»: textos del cliente (v2.5)
+const porque = [
+  {
+    icono: 'telefono',
+    titulo: 'Sin intermediarios externos',
+    texto:
+      'Hablas directamente con nuestro equipo de coordinación, que localiza y envía al cerrajero en Madrid más cercano a tu ubicación en cuestión de minutos, sin plataformas de terceros que encarecen el servicio.',
+  },
+  {
+    icono: 'mapa',
+    titulo: 'Hasta 16 técnicos en red por toda la Comunidad',
+    texto:
+      'Reducimos al mínimo el tiempo de espera al contar con unidades móviles distribuidas por los principales distritos y municipios colindantes.',
+  },
+  {
+    icono: 'escudo',
+    titulo: 'Cerrajería transparente y honesta',
+    texto: 'Te explicamos el problema en lenguaje sencillo, sin términos ambiguos ni costes sorpresa al finalizar el trabajo.',
+  },
+  {
+    icono: 'bombin',
+    titulo: 'Primeras marcas y formación continua',
+    texto:
+      'Trabajamos únicamente con materiales de alta calidad y componentes de los fabricantes líderes en seguridad (Mauer, Tesa, Kaba, Fichet, Cisa, etc.). Además, nuestros cerrajeros se forman de forma constante para dominar las últimas técnicas de apertura no destructiva y los nuevos sistemas antibumping y antiganzúa del mercado.',
+  },
+  {
+    icono: 'llave',
+    titulo: 'Talleres móviles equipados',
+    texto:
+      'Cada vehículo funciona como un taller completo con herramientas de precisión y recambios de las principales marcas de seguridad para solucionar la urgencia en una sola visita.',
+  },
+] as const;
+
+const pasosCerca = [
+  {
+    icono: 'telefono',
+    titulo: 'Atención inmediata',
+    texto: 'Nos explicas brevemente lo que ocurre y te damos una estimación del servicio.',
+  },
+  { icono: 'factura', titulo: 'Sin sorpresas', texto: 'Sabrás las condiciones claras antes de que salga el vehículo.' },
+  {
+    icono: 'rayo',
+    titulo: 'Llegada en tiempo récord',
+    texto: 'Asignamos al técnico que se encuentre más próximo a tu calle para abrir tu puerta sin esperas innecesarias.',
+  },
+] as const;
 const zonasReady = localidades.filter((l) => l.data.status === 'ready').map((l) => l.data.nombre);
 
 const faqs = [
@@ -114,20 +162,37 @@ const faqs = [
 
   <!-- Servicios: lectura en blanco -->
   <div class="claro servicios">
-    <section class="tramo envoltura servicio" aria-labelledby="cerrajeros-madrid">
-      <p class="rotulo">OpenServi</p>
-      <h2 class="seccion__titulo" id="cerrajeros-madrid">Cerrajeros en Madrid</h2>
-      <div class="prosa servicio__prosa">
-        <p>
-          Somos cerrajeros en Madrid y atendemos las 24 horas: aperturas de puertas, cambios de cerradura y de bombín, e
-          instalación de cerrojos de seguridad en viviendas, portales, trasteros, locales y oficinas.
-        </p>
-        <p>
-          Además de la ciudad, trabajamos en <a href="#zonas">16 zonas de alrededor</a> en las que uno de nuestros
-          cerrajeros trabaja en la propia zona.
-        </p>
-        <p>Antes de empezar cualquier trabajo te explicamos qué vamos a hacer y te damos el presupuesto, sin compromiso.</p>
+    <!-- Texto del cliente (v2.5) -->
+    <section class="tramo envoltura servicio con-imagen" aria-labelledby="cerrajeros-madrid">
+      <div>
+        <p class="rotulo">OpenServi</p>
+        <h2 class="seccion__titulo" id="cerrajeros-madrid">Cerrajeros en Madrid</h2>
+        <div class="prosa servicio__prosa">
+          <p>
+            Cerrajeros Madrid OpenServi somos la unión de un equipo de cerrajeros que trabaja por todo Madrid y provincia,
+            repartidos en diferentes barrios y localidades. Aunque nacimos como unión de cerrajeros en 2017, llevamos toda una
+            vida trabajando en el sector de la cerrajería y la seguridad en Madrid de forma individual.
+          </p>
+          <p>
+            En OpenServi hemos cambiado la forma de entender la cerrajería de urgencia. No somos una macroagencia ni una
+            plataforma con comisionistas. Somos una unión de hasta 16 cerrajeros profesionales repartidos por toda la
+            Comunidad de Madrid.
+          </p>
+          <p>
+            Ofrecemos un servicio abierto, transparente y directo: sin intermediarios ni comisiones. De todas formas, si tu
+            municipio o barrio no aparece en esta web y estás cerca, nos desplazamos a la mayor brevedad. Realizamos apertura
+            de puertas las 24 horas y los 365 días del año (y sí, si es bisiesto, también el 29 de febrero).
+          </p>
+          <p>
+            Si buscas un cerrajero en Madrid porque te has dejado las llaves dentro, la cerradura se ha atascado o necesitas
+            un cambio de bombín urgente, no hace falta que te leas todo este texto:
+            <a href={telHref} data-cta="presentacion">llámanos directamente al teléfono de contacto</a>. Te atenderá nuestro
+            equipo, que te pondrá en contacto con un técnico de tu zona, sin rodeos, con amabilidad y dándote la solución
+            adecuada antes de salir hacia tu dirección.
+          </p>
+        </div>
       </div>
+      <ImagenHome n={1} />
     </section>
 
     <KeyCutDivider />
@@ -214,19 +279,87 @@ const faqs = [
     </section>
   </div>
 
+  <!-- Texto del cliente (v2.5) -->
   <section class="urgente tramo tramo--profundo" id="cerrajero-urgente-24-horas" aria-labelledby="urgente-titulo">
     <div class="envoltura urgente__rejilla">
+      <ImagenHome n={2} clase="urgente__imagen" />
       <div>
         <p class="rotulo">De día y de noche</p>
-        <h2 class="seccion__titulo" id="urgente-titulo">Cerrajero Urgente 24 Horas</h2>
-        <p class="seccion__entrada">
-          Atendemos las 24 horas, todos los días: también de madrugada, en fin de semana y en festivos. Llámanos y cuéntanos
-          qué ha pasado; si no sabes por dónde empezar, <a class="enlace" href="#que-te-ha-pasado">mira qué te ha pasado</a>.
-        </p>
+        <h2 class="seccion__titulo" id="urgente-titulo">Cerrajería 24 horas y urgencias para imprevistos reales en Madrid</h2>
+        <div class="prosa urgente__prosa">
+          <p>
+            Sabemos que los problemas con las cerraduras nunca avisan y las urgencias de cerrajería aparecen en el momento más
+            inoportuno: salir con prisas por la mañana y dejarte las llaves puestas por dentro, perderlas de madrugada tras la
+            celebración del último derbi o encontrarte con la llave partida justo al volver de un concierto en el WiZink
+            Center.
+          </p>
+          <p>
+            En esos momentos de agobio parece que aquí se va a montar un 2 de mayo, y más aún si la emergencia te pilla en
+            pleno 2 de Mayo, Día de la Comunidad de Madrid. Pero no hace falta montar ninguna batalla ni perder los nervios:
+            como cerrajeros de urgencia 24 horas en Madrid, nos llamas, acudimos de inmediato y asunto resuelto.
+          </p>
+          <p>
+            Al estar integrados por un equipo de hasta 16 cerrajeros en Madrid, garantizamos una atención rápida y sin esperas
+            las 24 horas del día, los 365 días del año, sea festivo o laborable.
+          </p>
+        </div>
+        <div class="urgente__accion"><CallButton cta="urgente" sub="24 horas, todos los días" /></div>
       </div>
-      <CallButton cta="urgente" sub="24 horas, todos los días" />
     </div>
   </section>
+
+  <!-- Texto del cliente (v2.5) -->
+  <section class="porque tramo" id="por-que-openservi" aria-labelledby="porque-titulo">
+    <div class="envoltura">
+      <p class="rotulo">Sin rollos</p>
+      <h2 class="seccion__titulo" id="porque-titulo">¿Por qué elegir el concepto OpenServi?</h2>
+      <p class="seccion__entrada porque__entrada">
+        No te vamos a soltar el típico rollo de que somos «los mejores» o «el número 1 de Madrid», como leerás en otras
+        páginas de dudosa confianza. Preferimos trabajar bien, darte un trato justo y que lo compruebes tú mismo cuando nos
+        llames.
+      </p>
+      <ul class="porque__lista">
+        {
+          porque.map((v) => (
+            <li class="tarjeta porque__item">
+              <span class="porque__icono" aria-hidden="true">
+                <Icono nombre={v.icono} tam={22} />
+              </span>
+              <h3 class="porque__titulo">{v.titulo}</h3>
+              <p class="porque__texto">{v.texto}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Texto del cliente (v2.5) -->
+  <div class="claro">
+    <section class="tramo envoltura economico" id="cerrajero-economico" aria-labelledby="economico-titulo">
+      <p class="rotulo">Precio claro</p>
+      <h2 class="seccion__titulo" id="economico-titulo">¿Buscas un cerrajero económico en Madrid?</h2>
+      <div class="prosa economico__prosa">
+        <p>
+          Si estás buscando cerrajeros baratos en Madrid y de calidad contrastada,
+          <a href={telHref} data-cta="economico">llámanos y compruébalo</a>.
+        </p>
+        <p>
+          Sabemos que en el sector de la cerrajería de urgencia abundan las sorpresas desagradables en la factura final. Los
+          precios de los servicios son muy variados y dependen mucho del trabajo a realizar (no es lo mismo abrir una puerta
+          que se ha cerrado de un portazo que cambiar un bombín de alta seguridad a medianoche), pero en OpenServi siempre
+          encontrarás un precio justo, claro y sin letra pequeña.
+        </p>
+      </div>
+      <p class="economico__destacado">
+        <Icono nombre="factura" tam={22} />
+        <span>
+          Te informamos de la tarifa estimada por teléfono antes de desplazarnos para que sepas lo que vas a pagar desde el
+          primer minuto. Sin trucos ni sobrecostes ocultos.
+        </span>
+      </p>
+    </section>
+  </div>
 
   <ComoTrabajamos />
 
@@ -254,7 +387,45 @@ const faqs = [
 
   <Faq faqs={faqs} />
 
-  <CtaFinal />
+  <!-- Texto del cliente (v2.5) -->
+  <section class="cerca tramo tramo--profundo" id="cerrajero-cerca" aria-labelledby="cerca-titulo">
+    <Skyline clase="cerca__skyline" />
+    <div class="envoltura cerca__contenido">
+      <p class="rotulo">Estás a una llamada</p>
+      <h2 class="seccion__titulo" id="cerca-titulo">¿Buscas un cerrajero cerca en Madrid? Llámanos ahora</h2>
+      <div class="prosa cerca__prosa">
+        <p>
+          Si has llegado hasta aquí leyendo y sigues parado frente a tu puerta sin saber qué hacer, no lo pienses más. Estás a
+          una sola llamada de resolver la incidencia de forma rápida, limpia y sin sustos en la factura.
+        </p>
+        <p>
+          Al contar con una red de profesionales distribuidos por toda la Comunidad, siempre tenemos a un cerrajero cerca de ti
+          listo para ponerse en marcha en cualquier distrito o municipio de Madrid.
+        </p>
+      </div>
+      <ol class="cerca__pasos">
+        {
+          pasosCerca.map((p) => (
+            <li class="tarjeta cerca__paso">
+              <span class="cerca__icono" aria-hidden="true">
+                <Icono nombre={p.icono} tam={22} />
+              </span>
+              <h3 class="cerca__titulo">{p.titulo}</h3>
+              <p>{p.texto}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <p class="cerca__cierre">
+        <a href={telHref} data-cta="cerca-texto">Llama ahora al teléfono de contacto</a>, cuéntanos tu caso y tendrás a un
+        cerrajero cerca de ti solucionando el problema en cuestión de minutos.
+      </p>
+      <div class="cerca__accion">
+        <CallButton cta="cerca" sub="24 horas, todos los días" />
+        <a href={telHref} class="cerca__numero" data-cta="cerca-numero">{site.telefono}</a>
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <style>
@@ -410,11 +581,195 @@ const faqs = [
     align-items: center;
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 960px) {
     .urgente__rejilla {
-      grid-template-columns: 1fr auto;
-      gap: 3rem;
+      grid-template-columns: minmax(16rem, 0.85fr) minmax(0, 1.15fr);
+      gap: 4rem;
     }
+  }
+
+  /* Título largo del cliente: algo más pequeño que el resto de H2 para no ocupar cuatro líneas */
+  .urgente .seccion__titulo {
+    font-size: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem);
+  }
+
+  .urgente__prosa {
+    margin-top: 1.25rem;
+    color: var(--plata);
+  }
+
+  .urgente__accion {
+    margin-top: 2rem;
+  }
+
+  /* En móvil, la foto va después del texto */
+  @media (max-width: 959px) {
+    :global(.urgente__imagen) {
+      order: 1;
+    }
+  }
+
+  /* --- Presentación con foto ----------------------------------------- */
+  .con-imagen {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 960px) {
+    .con-imagen {
+      grid-template-columns: minmax(0, 1.2fr) minmax(16rem, 0.8fr);
+      gap: 4rem;
+    }
+  }
+
+  /* --- ¿Por qué elegir el concepto OpenServi? ------------------------ */
+  .porque {
+    background:
+      radial-gradient(40rem 22rem at 90% 0%, rgb(212 175 55 / 0.08), transparent 65%),
+      var(--obsidiana);
+  }
+
+  .porque__entrada {
+    max-width: 46rem;
+  }
+
+  /* Flex: con 5 tarjetas, la última fila se estira y no deja un hueco */
+  .porque__lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .porque__item {
+    display: grid;
+    flex: 1 1 19rem;
+    align-content: start;
+    gap: 0.6rem;
+  }
+
+  .porque__icono,
+  .cerca__icono {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.3rem;
+    border-radius: 0.85rem;
+    color: var(--oro);
+    background: rgb(212 175 55 / 0.1);
+    border: 1px solid var(--linea-oro);
+  }
+
+  .porque__titulo,
+  .cerca__titulo {
+    font-size: 1.2rem;
+    line-height: 1.25;
+  }
+
+  .porque__texto {
+    font-size: 0.98rem;
+    color: var(--plata-2);
+  }
+
+  /* --- ¿Buscas un cerrajero económico? ------------------------------- */
+  .economico__prosa {
+    margin-top: 1.25rem;
+  }
+
+  .economico__destacado {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    max-width: 42rem;
+    margin-top: 1.75rem;
+    padding: 1.2rem 1.4rem;
+    font-weight: 600;
+    color: var(--obsidiana);
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid var(--oro);
+    border-radius: 12px;
+  }
+
+  .economico__destacado :global(svg) {
+    flex: none;
+    margin-top: 0.15rem;
+    color: var(--oro-texto);
+  }
+
+  /* --- ¿Buscas un cerrajero cerca? (cierre de la Home) --------------- */
+  .cerca {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: clamp(8rem, 18vw, 14rem);
+    border-top: 1px solid var(--linea-oro);
+  }
+
+  .cerca :global(.cerca__skyline) {
+    --skyline-opacidad: 0.22;
+  }
+
+  .cerca__contenido {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cerca__prosa {
+    margin-top: 1.25rem;
+    color: var(--plata);
+  }
+
+  .cerca__pasos {
+    display: grid;
+    gap: 1.1rem;
+    margin: 2.25rem 0 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  }
+
+  .cerca__paso {
+    display: grid;
+    align-content: start;
+    gap: 0.55rem;
+    background: rgb(3 7 18 / 0.75);
+  }
+
+  .cerca__paso p {
+    font-size: 0.98rem;
+    color: var(--plata-2);
+  }
+
+  .cerca__cierre {
+    max-width: 42rem;
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    color: var(--plata);
+  }
+
+  .cerca__cierre a {
+    color: var(--oro);
+    font-weight: 700;
+  }
+
+  .cerca__accion {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.75rem;
+    margin-top: 1.75rem;
+  }
+
+  .cerca__numero {
+    font-family: var(--f-marca);
+    font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2rem);
+    color: var(--oro);
+    text-decoration: none;
+    white-space: nowrap;
   }
 
   /* --- Zonas --------------------------------------------------------- */

@@ -1,6 +1,6 @@
 # cerrajerosmadrid.madrid
 
-Web de **Cerrajeros Madrid OpenServi**, hecha con Astro 7 y Tailwind 4. La especificación completa está en [`docs/SPEC.md`](docs/SPEC.md) (v2.4).
+Web de **Cerrajeros Madrid OpenServi**, hecha con Astro 7 y Tailwind 4. La especificación completa está en [`docs/SPEC.md`](docs/SPEC.md) (v2.5).
 
 ```sh
 npm install
@@ -32,6 +32,7 @@ Para publicar: `npm run build && npm run audit:strict` y subir el **contenido** 
 | Paleta, tipografías y reglas de contraste | `src/styles/global.css` |
 | Logotipos (horizontal, vertical), emblema y perfil de Madrid en SVG | `src/assets/marca/` |
 | Original del perfil de Madrid (fuente de `npm run skyline`) | `marca/skyline-original.webp` |
+| Las dos fotos de la Home (y su texto alternativo) | `src/assets/home/` (instrucciones en `_LEEME.md`) y `src/data/home.ts` |
 
 ## Cómo se publica una localidad
 

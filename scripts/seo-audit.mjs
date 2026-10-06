@@ -17,10 +17,15 @@ const TEL_COMERCIAL = 'tel:+34912918462';
 const TEL_PERMITIDOS = [TEL_COMERCIAL, 'tel:112'];
 const PAGINAS_LEGALES = ['/aviso-legal/', '/politica-de-privacidad/', '/politica-de-cookies/'];
 
-/** Expresiones prohibidas sin prueba (spec §42). Las reseñas literales se excluyen. */
+/**
+ * Expresiones prohibidas sin prueba (spec §42). Las reseñas literales se excluyen,
+ * y también lo citado entre comillas angulares («…»): es lo que dicen otros, no
+ * una afirmación propia (v2.5: «No te vamos a soltar el rollo de que somos «los mejores»»).
+ */
 const PROHIBIDAS = [
   [/los mejores/i, '«los mejores»'],
-  [/\blíderes\b/i, '«líderes»'],
+  // «fabricantes líderes» habla de las marcas que se instalan, no de la empresa
+  [/(?<!fabricantes )\blíderes\b/i, '«líderes»'],
   [/técnicos certificados/i, '«técnicos certificados»'],
   [/llegamos en/i, '«llegamos en…» (tiempo de llegada)'],
   [/en \d+\s*(min|minutos)\b/i, 'tiempo de llegada en minutos'],
@@ -122,7 +127,8 @@ for (const p of paginas) {
     .replace(/<blockquote[\s\S]*?<\/blockquote>/gi, ' ')
     .replace(/<[^>]+>/g, ' ');
 
-  for (const [re, nombre] of PROHIBIDAS) if (re.test(visible)) error(ruta, `expresión prohibida sin prueba: ${nombre}`);
+  const propio = visible.replace(/«[^»]*»/g, ' ');
+  for (const [re, nombre] of PROHIBIDAS) if (re.test(propio)) error(ruta, `expresión prohibida sin prueba: ${nombre}`);
   for (const marca of ['lorem', 'TODO', 'XXX', '{{']) if (visible.includes(marca)) error(ruta, `marca de borrador en el HTML: ${marca}`);
   if (!PAGINAS_LEGALES.includes(ruta) && (/€/.test(visible) || /\beuros?\b/i.test(visible)))
     error(ruta, 'aparece un importe en euros (la web no publica precios)');

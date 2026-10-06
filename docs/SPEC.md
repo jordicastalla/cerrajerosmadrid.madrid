@@ -10,6 +10,14 @@
 >
 > **Se mantiene sin cambios:** la regla de no inventar reseñas, tiempos de llegada, credenciales ni garantías (§18, §19).
 
+## Cambios v2.5 (2026-10-06, pedidos por el cliente): textos de la Home
+
+- Textos del cliente en la Home, con correcciones de ortografía mínimas: presentación en «Cerrajeros en Madrid»; «Cerrajería 24 horas y urgencias para imprevistos reales en Madrid» (sustituye a «Cerrajero Urgente 24 Horas», mismo `id`); «¿Por qué elegir el concepto OpenServi?» (5 tarjetas); «¿Buscas un cerrajero económico en Madrid?» (antes de «Cómo trabajamos»); «¿Buscas un cerrajero cerca en Madrid? Llámanos ahora» (cierre de la Home, en lugar del CTA final común). El H1 no cambia.
+- Decisiones del cliente sobre el texto: «¡somos tu mejor opción!» pasa a «llámanos y compruébalo» (chocaba con «No te vamos a soltar el típico rollo de que somos «los mejores»»), y al teléfono atiende el equipo de coordinación, que pone en contacto con un técnico de la zona.
+- Dos huecos para fotos (`src/components/ImagenHome.astro`): se rellenan copiando `imagen-1` e `imagen-2` en `src/assets/home/` y su `alt` en `src/data/home.ts`. Sin foto, muestran un detalle del perfil de Madrid.
+- La auditoría (§43) no cuenta como afirmación propia lo citado entre comillas angulares («…») ni «fabricantes líderes» (habla de las marcas, no de la empresa).
+- El cliente asume ahora en la Home afirmaciones de §19/§42 que antes no se publicaban: formación continua de los cerrajeros, marcas con las que trabaja, «talleres móviles», tarifa estimada por teléfono antes de desplazarse, «acudimos de inmediato» y «llegada en tiempo récord» (sin cifras).
+
 ## Cambios v2.4 (2026-10-06, pedidos por el cliente)
 
 - Página «Quiénes somos» (`/quienes-somos/`): página de confianza (EEAT) con el texto del cliente, sin optimización de palabras clave. Enlazada desde la cabecera, el menú móvil, el pie y la sección «Quiénes Somos» de la Home. JSON-LD `AboutPage` y `foundingDate: 2017` en la entidad del negocio.

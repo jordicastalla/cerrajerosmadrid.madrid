@@ -1,0 +1,73 @@
+---
+/**
+ * Hueco para una foto de la Home (v2.5). Si existe src/assets/home/imagen-<n>.*,
+ * la pinta optimizada; si no, un detalle del perfil de Madrid en oro, con la
+ * misma proporción, para que el diseño no cambie al llegar la foto.
+ */
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { imagenesHome } from '@data/home';
+
+interface Props {
+  n: 1 | 2;
+  clase?: string;
+}
+
+const { n, clase = '' } = Astro.props;
+
+const archivos = import.meta.glob<{ default: ImageMetadata }>('../assets/home/imagen-*.{webp,jpg,jpeg,png,avif}', {
+  eager: true,
+});
+const clave = Object.keys(archivos).find((k) => new RegExp(`/imagen-${n}\\.[a-z]+$`).test(k));
+const foto = clave ? archivos[clave].default : null;
+const alt = imagenesHome[n].alt.trim();
+
+if (foto && !alt)
+  throw new Error(`Falta el texto alternativo de la imagen ${n} de la Home: escríbelo en src/data/home.ts (spec §8).`);
+---
+
+{
+  foto ? (
+    <Image
+      src={foto}
+      alt={alt}
+      widths={[480, 800, 1200]}
+      sizes="(min-width: 960px) 34rem, 100vw"
+      class={`imagen-home ${clase}`}
+    />
+  ) : (
+    <div class={`imagen-home imagen-home--hueco imagen-home--${n} ${clase}`} aria-hidden="true" />
+  )
+}
+
+<style>
+  .imagen-home {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 1rem;
+    border: 1px solid var(--linea-oro);
+    box-shadow: 0 30px 60px -40px rgb(3 7 18 / 0.7);
+  }
+
+  /* Sin foto: un detalle del perfil de Madrid, en oro sobre obsidiana */
+  .imagen-home--hueco {
+    background:
+      url('../assets/marca/skyline.svg') no-repeat,
+      radial-gradient(28rem 18rem at 50% 80%, rgb(212 175 55 / 0.16), transparent 70%),
+      var(--obsidiana-profunda);
+  }
+
+  /* Hueco 1: la cúpula del Metrópolis con la Victoria; hueco 2: los edificios de la derecha */
+  .imagen-home--1 {
+    background-size: 290% auto, auto, auto;
+    background-position: 14% 72%, center, center;
+  }
+
+  .imagen-home--2 {
+    background-size: 260% auto, auto, auto;
+    background-position: 88% 100%, center, center;
+  }
+</style>
