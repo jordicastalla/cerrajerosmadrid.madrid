@@ -1,23 +1,25 @@
 ---
 /**
- * «Quiénes somos» (v2.4). Texto del cliente (2026-10-06), con correcciones de
- * ortografía mínimas. Las cifras (2017, de 5 a más de 20 personas) y la
- * autoría del logotipo son datos del cliente; las 16 zonas, de las fichas.
+ * «Quiénes somos» (v2.4): página de confianza (EEAT), no de posicionamiento.
+ * Texto del cliente (2026-10-06) solo con correcciones de ortografía; sin
+ * palabras clave añadidas, a propósito. Las cifras (2017, de 5 a más de 20
+ * personas) y la autoría del logotipo son datos del cliente; las 16 zonas,
+ * de las fichas.
  */
 import { getCollection } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
-import CallButton from '@components/CallButton.astro';
 import CtaFinal from '@components/CtaFinal.astro';
-import Emblema from '@components/marca/Emblema.astro';
+import { Image } from 'astro:assets';
+import logoVertical from '@/assets/marca/logo-vertical.webp';
 import Skyline from '@components/marca/Skyline.astro';
 import { paginaSobreNosotros } from '@lib/schema';
 import { site } from '@data/site';
 
 const ruta = '/quienes-somos/';
-const titulo = 'Quiénes Somos | Cerrajeros Madrid OpenServi';
+const titulo = 'Quiénes somos | OpenServi';
 const descripcion =
-  'Cerrajeros Madrid OpenServi nació en 2017 de la unión de profesionales de la seguridad en Madrid. Hoy somos más de 20 personas repartidas por Madrid y alrededores.';
+  'Nacimos en 2017. Empezamos siendo 5 personas y hoy somos más de 20. Nuestra historia y la de nuestro logotipo, la Victoria Alada.';
 
 const zonas = (await getCollection('localidades', (l) => l.data.cerrajeroPropio)).length;
 
@@ -87,10 +89,12 @@ const cifras = [
   <section class="logotipo tramo tramo--profundo" aria-labelledby="logotipo-titulo">
     <Skyline clase="logotipo__skyline" />
     <div class="envoltura logotipo__rejilla">
-      <Emblema
-        tam={320}
-        clase="logotipo__emblema"
-        titulo="Logotipo de Cerrajeros Madrid OpenServi: la Victoria Alada con una llave dorada"
+      <Image
+        src={logoVertical}
+        width={320}
+        densities={[1, 2]}
+        class="logotipo__logo"
+        alt="Logotipo de Cerrajeros Madrid OpenServi: la Victoria Alada alzando una llave dorada, sobre el rótulo «Cerrajeros Madrid OpenServi»"
       />
       <div>
         <p class="rotulo">Nuestro emblema</p>
@@ -103,11 +107,10 @@ const cifras = [
           </p>
           <p>
             Niké, la diosa a la que representa esta estatua, ubicada en el emblemático edificio Metrópolis de la calle de
-            Alcalá, es la diosa de la victoria. Esa misma sensación de victoria cuando consigues entrar a tu casa en menos de
-            30 minutos, después de dejarte las llaves dentro, gracias al equipo de OpenServi.
+            Alcalá, es la diosa de la victoria. Esa misma sensación de victoria cuando, después de dejarte las llaves dentro,
+            consigues entrar a tu casa en un periquete gracias al equipo de OpenServi.
           </p>
         </div>
-        <div class="logotipo__accion"><CallButton cta="quienes-somos" sub="24 horas" /></div>
       </div>
     </div>
   </section>
@@ -189,7 +192,7 @@ const cifras = [
     }
   }
 
-  :global(.logotipo__emblema) {
+  .logotipo__logo {
     justify-self: center;
     width: min(100%, 20rem);
     height: auto;
@@ -199,9 +202,5 @@ const cifras = [
   .logotipo__prosa {
     margin-top: 1.25rem;
     color: var(--plata);
-  }
-
-  .logotipo__accion {
-    margin-top: 2rem;
   }
 </style>
