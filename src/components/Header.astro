@@ -27,6 +27,7 @@ const servicios = [
 
 const enlaces = [
   { href: '/#zonas', nombre: 'Zonas' },
+  { href: '/quienes-somos/', nombre: 'Quiénes somos' },
   { href: '/#opiniones', nombre: 'Opiniones' },
   { href: '/#faq', nombre: 'Preguntas' },
 ];
@@ -67,7 +68,9 @@ const enServicio = ruta.startsWith('/servicios/');
         {
           enlaces.map((e) => (
             <li>
-              <a href={e.href}>{e.nombre}</a>
+              <a href={e.href} aria-current={actual(e.href)}>
+                {e.nombre}
+              </a>
             </li>
           ))
         }
@@ -115,7 +118,7 @@ const enServicio = ruta.startsWith('/servicios/');
       {
         enlaces.map((e) => (
           <li>
-            <a href={e.href} data-cerrar-menu>
+            <a href={e.href} aria-current={actual(e.href)} data-cerrar-menu>
               {e.nombre}
             </a>
           </li>
@@ -170,6 +173,7 @@ const enServicio = ruta.startsWith('/servicios/');
   .desplegable__boton {
     display: block;
     padding: 0.6rem 0.85rem;
+    white-space: nowrap;
     font-weight: 600;
     font-size: 0.97rem;
     color: var(--plata);
@@ -272,6 +276,28 @@ const enServicio = ruta.startsWith('/servicios/');
 
   .cabecera__tel:hover {
     border-color: var(--oro);
+  }
+
+  .cabecera__tel-num {
+    white-space: nowrap;
+  }
+
+  /* Entre 1024 y 1200 px van justos los cinco enlaces y el teléfono */
+  @media (min-width: 1024px) and (max-width: 1199px) {
+    .cabecera__fila {
+      gap: 0.6rem;
+    }
+
+    .cabecera__nav a,
+    .desplegable__boton {
+      padding-inline: 0.6rem;
+      font-size: 0.92rem;
+    }
+
+    .cabecera__tel {
+      padding-right: 0.8rem;
+      font-size: 0.78rem;
+    }
   }
 
   .cabecera__tel-icono {

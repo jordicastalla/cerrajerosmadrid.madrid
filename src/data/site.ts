@@ -17,6 +17,9 @@ export const site = {
 
   horario: 'Servicio 24 horas, todos los días',
 
+  /** Datos de la empresa para «Quiénes somos» (aportados por el cliente, 2026-10-06) */
+  fundacion: 2017,
+
   /** Perfil de Google con las reseñas (spec §18) */
   perfilGoogle: 'https://maps.app.goo.gl/bqpm2kbzrnbY4dzp8',
 

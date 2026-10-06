@@ -27,6 +27,7 @@ export function negocio(zonasReady: string[]) {
     image: [absoluta(site.imagenOg)],
     logo: absoluta(site.logo),
     sameAs: [site.perfilGoogle],
+    foundingDate: String(site.fundacion),
     areaServed,
     knowsLanguage: ['es'],
     openingHoursSpecification: [
@@ -66,6 +67,20 @@ export function servicio(opts: { nombre: string; descripcion: string; ruta: stri
     areaServed: opts.area
       ? { '@type': 'City', name: opts.area }
       : { '@type': 'AdministrativeArea', name: 'Madrid' },
+  };
+}
+
+/** Página «Quiénes somos»: describe al negocio por su @id */
+export function paginaSobreNosotros(opts: { nombre: string; descripcion: string; ruta: string }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': absoluta(`${opts.ruta}#pagina`),
+    name: opts.nombre,
+    description: opts.descripcion,
+    url: absoluta(opts.ruta),
+    inLanguage: 'es',
+    about: { '@id': ID_NEGOCIO },
   };
 }
 

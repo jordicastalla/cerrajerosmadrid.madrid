@@ -1,0 +1,207 @@
+---
+/**
+ * «Quiénes somos» (v2.4). Texto del cliente (2026-10-06), con correcciones de
+ * ortografía mínimas. Las cifras (2017, de 5 a más de 20 personas) y la
+ * autoría del logotipo son datos del cliente; las 16 zonas, de las fichas.
+ */
+import { getCollection } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import CallButton from '@components/CallButton.astro';
+import CtaFinal from '@components/CtaFinal.astro';
+import Emblema from '@components/marca/Emblema.astro';
+import Skyline from '@components/marca/Skyline.astro';
+import { paginaSobreNosotros } from '@lib/schema';
+import { site } from '@data/site';
+
+const ruta = '/quienes-somos/';
+const titulo = 'Quiénes Somos | Cerrajeros Madrid OpenServi';
+const descripcion =
+  'Cerrajeros Madrid OpenServi nació en 2017 de la unión de profesionales de la seguridad en Madrid. Hoy somos más de 20 personas repartidas por Madrid y alrededores.';
+
+const zonas = (await getCollection('localidades', (l) => l.data.cerrajeroPropio)).length;
+
+const cifras = [
+  { valor: String(site.fundacion), texto: 'Año en que empezamos' },
+  { valor: '5 → +20', texto: 'De 5 personas a más de 20' },
+  { valor: String(zonas), texto: 'Zonas con cerrajero propio', href: '/#zonas' },
+];
+---
+
+<Layout
+  titulo={titulo}
+  descripcion={descripcion}
+  ruta={ruta}
+  schemas={[paginaSobreNosotros({ nombre: 'Quiénes Somos', descripcion, ruta })]}
+>
+  <Breadcrumbs
+    items={[
+      { nombre: 'Inicio', ruta: '/' },
+      { nombre: 'Quiénes somos', ruta },
+    ]}
+  />
+
+  <section class="cabeza-qs">
+    <div class="envoltura">
+      <p class="rotulo">Cerrajeros Madrid OpenServi</p>
+      <h1 class="titular cabeza-qs__h1 metal">Quiénes Somos</h1>
+
+      <ul class="cifras">
+        {
+          cifras.map((c) => (
+            <li class="tarjeta cifra">
+              <span class="cifra__valor dorado">{c.valor}</span>
+              {c.href ? (
+                <a class="cifra__texto" href={c.href}>
+                  {c.texto} →
+                </a>
+              ) : (
+                <span class="cifra__texto">{c.texto}</span>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <div class="claro">
+    <section class="tramo envoltura historia" aria-labelledby="historia-titulo">
+      <h2 class="solo-lector" id="historia-titulo">Nuestra historia</h2>
+      <div class="prosa historia__prosa">
+        <p>
+          Los de Cerrajeros Madrid OpenServi nacimos en el año 2017, fruto de la unión de trabajadores profesionales del
+          sector de la seguridad en Madrid. Tras años de currar codo con codo (juntos, como llave y cerradura), decidimos
+          formar un equipo con técnicos de diferentes partes de la Comunidad, para llegar a más gente y más rápido.
+        </p>
+        <p>
+          Empezamos solo 5 personas y hemos ido creciendo hasta ser más de 20, repartidas por Madrid, sus barrios y las
+          diferentes localidades que aparecen en la web. Algunos ya nos conocíamos de trabajar en diferentes empresas, y
+          otros se han incorporado ahora y ya forman parte de esta gran familia llamada OpenServi. Nuestro servicio es así,
+          abierto y cercano. <strong>Nuestra misión es que estés seguro en tu casa.</strong>
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <section class="logotipo tramo tramo--profundo" aria-labelledby="logotipo-titulo">
+    <Skyline clase="logotipo__skyline" />
+    <div class="envoltura logotipo__rejilla">
+      <Emblema
+        tam={320}
+        clase="logotipo__emblema"
+        titulo="Logotipo de Cerrajeros Madrid OpenServi: la Victoria Alada con una llave dorada"
+      />
+      <div>
+        <p class="rotulo">Nuestro emblema</p>
+        <h2 class="seccion__titulo" id="logotipo-titulo">Sobre el logotipo</h2>
+        <div class="prosa logotipo__prosa">
+          <p>
+            ¿Y el logotipo? ¡Qué decir del logotipo! Una auténtica delicia, imaginado por uno de nuestros compis y realizado
+            por la empresa Diània.dev. Se trata de la Victoria Alada, uno de los símbolos más bonitos de Madrid. Victoriosa,
+            con buen porte y castiza, como buena madrileña. Y con una llave dorada que señala al cielo.
+          </p>
+          <p>
+            Niké, la diosa a la que representa esta estatua, ubicada en el emblemático edificio Metrópolis de la calle de
+            Alcalá, es la diosa de la victoria. Esa misma sensación de victoria cuando consigues entrar a tu casa en menos de
+            30 minutos, después de dejarte las llaves dentro, gracias al equipo de OpenServi.
+          </p>
+        </div>
+        <div class="logotipo__accion"><CallButton cta="quienes-somos" sub="24 horas" /></div>
+      </div>
+    </div>
+  </section>
+
+  <CtaFinal cta="final-quienes-somos" />
+</Layout>
+
+<style>
+  .cabeza-qs {
+    padding-block: clamp(1.5rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem);
+    background:
+      radial-gradient(40rem 24rem at 85% 20%, rgb(212 175 55 / 0.12), transparent 62%),
+      var(--obsidiana-profunda);
+  }
+
+  .cabeza-qs__h1 {
+    margin-top: 0.9rem;
+    font-size: clamp(2rem, 1.2rem + 3.4vw, 4rem);
+  }
+
+  .cifras {
+    display: grid;
+    gap: 1rem;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  }
+
+  .cifra {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .cifra__valor {
+    font-family: var(--f-marca);
+    font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.6rem);
+    line-height: 1.1;
+  }
+
+  .cifra__texto {
+    font-weight: 600;
+    color: var(--plata);
+    text-decoration: none;
+  }
+
+  a.cifra__texto:hover {
+    color: var(--oro);
+  }
+
+  .historia__prosa {
+    max-width: 46rem;
+    margin-inline: auto;
+    font-size: 1.15rem;
+  }
+
+  .logotipo {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: clamp(8rem, 18vw, 14rem);
+  }
+
+  .logotipo :global(.logotipo__skyline) {
+    --skyline-opacidad: 0.22;
+  }
+
+  .logotipo__rejilla {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .logotipo__rejilla {
+      grid-template-columns: minmax(14rem, 0.8fr) minmax(0, 1.4fr);
+      gap: 4rem;
+    }
+  }
+
+  :global(.logotipo__emblema) {
+    justify-self: center;
+    width: min(100%, 20rem);
+    height: auto;
+    filter: drop-shadow(0 0 40px rgb(212 175 55 / 0.25));
+  }
+
+  .logotipo__prosa {
+    margin-top: 1.25rem;
+    color: var(--plata);
+  }
+
+  .logotipo__accion {
+    margin-top: 2rem;
+  }
+</style>
