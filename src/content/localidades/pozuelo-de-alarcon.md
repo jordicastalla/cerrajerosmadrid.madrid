@@ -7,7 +7,7 @@ status: draft
 cerrajeroPropio: true # «uno de nuestros cerrajeros» trabaja en la zona (dato del cliente)
 grupoMapa: noroeste
 ordenMapa: 2
-seoTitle: "Cerrajeros en Pozuelo de Alarcón 24 horas | Openservi"
+seoTitle: "Cerrajeros en Pozuelo de Alarcón 24 horas | OpenServi"
 seoDescription: "Uno de nuestros cerrajeros trabaja en Pozuelo de Alarcón. Apertura de puertas, cambio de cerraduras y cerrojos de seguridad, 24 horas. Llama al 912 918 462."
 intro: ""
 barrios: []

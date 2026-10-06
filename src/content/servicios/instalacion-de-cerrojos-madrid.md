@@ -2,7 +2,7 @@
 titulo: Instalación de cerrojos de seguridad
 h1: Instalación de Cerrojos de Seguridad en Madrid
 status: ready
-seoTitle: Instalación de Cerrojos de Seguridad en Madrid | Openservi
+seoTitle: Instalación de Cerrojos de Seguridad en Madrid | OpenServi
 seoDescription: Instalamos cerrojos de seguridad en Madrid para reforzar puertas de casa, locales y trasteros. Te explicamos las opciones y el presupuesto sin compromiso. 912 918 462.
 resumen: Instalamos cerrojos de seguridad para añadir un segundo punto de cierre a la puerta de casa, del local o del trastero.
 intro: Un cerrojo de seguridad añade un segundo punto de cierre a la puerta. Es una forma sencilla de reforzar una puerta que solo tiene una cerradura, y lo instalamos en viviendas, locales y trasteros de Madrid.

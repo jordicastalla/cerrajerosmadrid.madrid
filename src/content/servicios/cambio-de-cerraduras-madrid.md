@@ -2,7 +2,7 @@
 titulo: Cambio de cerraduras
 h1: Cambio de Cerraduras en Madrid
 status: ready
-seoTitle: Cambio de Cerraduras y Bombines en Madrid | Openservi
+seoTitle: Cambio de Cerraduras y Bombines en Madrid | OpenServi
 seoDescription: Cambio de cerradura o de bombín en Madrid tras perder las llaves, al mudarte o después de un intento de robo. Presupuesto sin compromiso. Llama al 912 918 462.
 resumen: Cambiamos la cerradura completa o solo el bombín cuando pierdes las llaves, te mudas o la cerradura falla.
 intro: Cambiar la cerradura, o solo el bombín, es la forma de volver a decidir quién puede abrir tu puerta. Lo hacemos en viviendas, portales, trasteros, locales y oficinas de Madrid.

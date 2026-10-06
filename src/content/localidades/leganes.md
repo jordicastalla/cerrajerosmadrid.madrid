@@ -7,7 +7,7 @@ status: draft
 cerrajeroPropio: true # «uno de nuestros cerrajeros» trabaja en la zona (dato del cliente)
 grupoMapa: sur
 ordenMapa: 1
-seoTitle: "Cerrajeros en Leganés 24 horas | Openservi"
+seoTitle: "Cerrajeros en Leganés 24 horas | OpenServi"
 seoDescription: "Uno de nuestros cerrajeros trabaja en Leganés. Apertura de puertas, cambio de cerraduras y cerrojos de seguridad, 24 horas. Llama al 912 918 462."
 intro: ""
 barrios: []

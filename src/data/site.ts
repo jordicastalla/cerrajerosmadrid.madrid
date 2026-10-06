@@ -6,8 +6,8 @@
  */
 
 export const site = {
-  nombre: 'Cerrajeros Madrid Openservi',
-  marca: 'Openservi',
+  nombre: 'Cerrajeros Madrid OpenServi',
+  marca: 'OpenServi',
   /** Sale de `site` en astro.config.mjs (única fuente del dominio) */
   dominio: import.meta.env.SITE as string,
 

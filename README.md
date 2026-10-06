@@ -1,6 +1,6 @@
 # cerrajerosmadrid.madrid
 
-Web de **Cerrajeros Madrid Openservi**, hecha con Astro 7 y Tailwind 4. La especificación completa está en [`docs/SPEC.md`](docs/SPEC.md) (v2.2).
+Web de **Cerrajeros Madrid OpenServi**, hecha con Astro 7 y Tailwind 4. La especificación completa está en [`docs/SPEC.md`](docs/SPEC.md) (v2.4).
 
 ```sh
 npm install

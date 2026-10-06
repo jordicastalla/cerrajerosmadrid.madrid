@@ -10,6 +10,11 @@
 >
 > **Se mantiene sin cambios:** la regla de no inventar reseñas, tiempos de llegada, credenciales ni garantías (§18, §19).
 
+## Cambios v2.4 (2026-10-06, pedidos por el cliente)
+
+- Página «Quiénes somos» (`/quienes-somos/`): página de confianza (EEAT) con el texto del cliente, sin optimización de palabras clave. Enlazada desde la cabecera, el menú móvil, el pie y la sección «Quiénes Somos» de la Home. JSON-LD `AboutPage` y `foundingDate: 2017` en la entidad del negocio.
+- La marca se escribe **OpenServi** (como en el logotipo) en toda la web. Excepciones: las reseñas literales de Google (§18), que no se editan, y el nombre del perfil de Google en el mapa («Cerrajeros Madrid Openservi Baratos», §17). Donde esta especificación escribe «Openservi», léase «OpenServi».
+
 ## Cambios v2.3 (2026-10-06, pedidos por el cliente): páginas de localidad
 
 Prevalece sobre v2.2 en las páginas de localidad. Bloques nuevos, por este orden después de los servicios:
