@@ -52,8 +52,9 @@ const rutaDe = (fichero) => {
   return `/${rel}`;
 };
 
+/** Valor de un atributo; '' si va sin valor (`<img alt>` equivale a alt=""), null si no está */
 const attr = (tag, nombre) => {
-  const m = tag.match(new RegExp(`\\s${nombre}\\s*=\\s*("([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i'));
+  const m = tag.match(new RegExp(`\\s${nombre}(?:\\s*=\\s*("([^"]*)"|'([^']*)'|([^\\s>]+)))?(?=[\\s/>])`, 'i'));
   return m ? (m[2] ?? m[3] ?? m[4] ?? '') : null;
 };
 const decodificar = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>');

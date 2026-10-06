@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Pozuelo de Alarcón. Aper
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [aravaca, majadahonda, boadilla-del-monte]
 updatedAt: 2026-10-05
 ---

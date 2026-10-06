@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Collado Villalba. Apertur
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [las-rozas]
 updatedAt: 2026-10-05
 ---

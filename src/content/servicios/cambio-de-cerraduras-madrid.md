@@ -12,21 +12,10 @@ proceso:
   - Te explicamos si basta con cambiar el bombín o conviene cambiar la cerradura, y te damos el presupuesto sin compromiso.
   - Hacemos el cambio y comprobamos que todo cierra bien con las llaves nuevas.
   - Recibes la factura con la garantía por escrito.
-faqs:
-  - p: ¿Cambio la cerradura completa o solo el bombín?
-    r: Si la cerradura funciona bien y lo que quieres es que las llaves antiguas dejen de abrir, normalmente basta con cambiar el bombín. Si el mecanismo está dañado o desgastado, o quieres más seguridad, conviene cambiar la cerradura completa. Te lo explicamos antes de empezar.
-  - p: He perdido las llaves. ¿Qué cerraduras tengo que cambiar?
-    r: Las de las puertas que abrían esas llaves. Si en el mismo llavero estaban también las del trastero o las de otra puerta, conviene cambiarlas igualmente.
-  - p: Vivo de alquiler. ¿Puedo cambiar la cerradura?
-    r: Coméntalo antes con la propiedad. Al cambiar de inquilino es habitual cambiar el bombín, porque nadie sabe cuántas copias de la llave hay en circulación.
-  - p: ¿Me dais llaves nuevas?
-    r: Sí. El bombín o la cerradura nueva vienen con sus propias llaves y te las entregamos al terminar.
-  - p: ¿Trabajáis también en locales y oficinas?
-    r: Sí. Cambiamos cerraduras en viviendas, portales, trasteros, locales y oficinas.
 tiposDeCaso: [cambio-cerradura, bombin, alta-seguridad]
 relacionados: [instalacion-de-cerrojos-madrid]
 orden: 1
-updatedAt: 2026-10-05
+updatedAt: 2026-10-06
 ---
 
 ## Cuándo conviene cambiar la cerradura

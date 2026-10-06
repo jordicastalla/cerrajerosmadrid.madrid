@@ -1,7 +1,8 @@
 /**
  * JSON-LD (spec §14). Una sola entidad de negocio con @id estable; el resto
- * de páginas la referencian. Sin AggregateRating ni Review (spec §18) y sin
- * FAQPage (no aporta resultados visibles).
+ * de páginas la referencian. Sin AggregateRating ni Review (spec §18). Las
+ * preguntas frecuentes de la Home llevan microdatos FAQPage en el propio
+ * HTML (Faq.astro), no JSON-LD.
  */
 import { site, absoluta } from '@data/site';
 

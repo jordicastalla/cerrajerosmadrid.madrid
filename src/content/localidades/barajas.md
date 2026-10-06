@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Barajas. Apertura de puer
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [coslada, alcala-de-henares]
 updatedAt: 2026-10-05
 ---

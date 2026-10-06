@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Aravaca. Apertura de puer
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [pozuelo-de-alarcon, majadahonda, las-rozas]
 updatedAt: 2026-10-05
 ---

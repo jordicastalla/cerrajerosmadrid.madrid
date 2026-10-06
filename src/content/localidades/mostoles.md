@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Móstoles. Apertura de pu
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [alcorcon, villaviciosa-de-odon, leganes]
 updatedAt: 2026-10-05
 ---

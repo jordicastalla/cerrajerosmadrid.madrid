@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Coslada. Apertura de puer
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [barajas, rivas-vaciamadrid, alcala-de-henares]
 updatedAt: 2026-10-05
 ---

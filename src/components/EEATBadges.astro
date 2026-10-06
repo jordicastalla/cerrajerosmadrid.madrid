@@ -19,7 +19,7 @@ type Insignia = { texto: string; href: string; icono: 'mapa' | 'estrella' | 'rel
 const zonas = (await getCollection('localidades', (l) => l.data.cerrajeroPropio)).length;
 
 const insignias: Insignia[] = [
-  { texto: `Cerrajeros propios en ${zonas} zonas`, href: '/cerrajeros/', icono: 'mapa' },
+  { texto: `Cerrajeros propios en ${zonas} zonas`, href: '/#zonas', icono: 'mapa' },
   { texto: 'Servicio 24 horas', href: '/#cerrajero-urgente-24-horas', icono: 'reloj' },
   { texto: 'Presupuesto sin compromiso', href: '/#como-trabajamos', icono: 'check' },
 ];

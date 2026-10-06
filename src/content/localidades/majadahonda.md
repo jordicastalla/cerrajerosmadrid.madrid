@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Majadahonda. Apertura de 
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [las-rozas, pozuelo-de-alarcon, boadilla-del-monte]
 updatedAt: 2026-10-05
 ---

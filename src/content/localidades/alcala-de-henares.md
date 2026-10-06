@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Alcalá de Henares. Apert
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [coslada, barajas]
 updatedAt: 2026-10-05
 ---

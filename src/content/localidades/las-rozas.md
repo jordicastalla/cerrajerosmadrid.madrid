@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Las Rozas. Apertura de pu
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [majadahonda, collado-villalba, aravaca]
 updatedAt: 2026-10-05
 ---

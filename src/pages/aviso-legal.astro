@@ -1,7 +1,7 @@
 ---
 /**
- * Aviso legal (spec §16): solo los datos legales facilitados; sin nombres
- * comerciales en el texto.
+ * Aviso legal (spec §16): solo los datos legales facilitados por el cliente
+ * (identidad del responsable, src/data/site.ts).
  */
 import Layout from '@layouts/Layout.astro';
 import { site } from '@data/site';
@@ -25,11 +25,11 @@ const dominio = new URL(site.dominio).host;
         <h2>1. Datos identificativos del titular</h2>
         <ul>
           <li>Titular: {l.titular}</li>
-          <li>NIF: {l.nif}</li>
-          <li>Domicilio social: {l.calle}, {l.cp} {l.ciudad} ({l.provincia})</li>
+          {l.nif && <li>NIF: {l.nif}</li>}
+          <li>Domicilio: {l.domicilio}</li>
+          <li>Correo electrónico: <a href={`mailto:${l.email}`}>{l.email}</a></li>
           <li>Teléfono de contacto: {l.telefono}</li>
-          <li>Correo electrónico: {l.email}</li>
-          <li>Sitio web: {site.dominio}</li>
+          <li>Sitio web: {l.web}</li>
           <li>Actividad: cerrajería</li>
         </ul>
 

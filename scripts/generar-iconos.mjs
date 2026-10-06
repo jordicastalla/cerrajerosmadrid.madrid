@@ -1,89 +1,125 @@
 #!/usr/bin/env node
 /**
- * Genera favicons, iconos del manifest e imagen Open Graph a partir del
- * emblema provisional (llave alada). Cuando llegue el logotipo definitivo,
- * se sustituye el SVG de aquí o se exportan los PNG desde el original.
+ * Genera favicons, iconos del manifest e imagen Open Graph a partir de los
+ * logotipos definitivos del cliente (src/assets/marca/):
+ *
+ *   · emblema.webp       → favicon.ico, favicon-32.png, apple-touch-icon e iconos del manifest
+ *   · logo-vertical.webp → imagen Open Graph (con el perfil de Madrid de fondo)
  *
  *   npm run iconos
  */
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import sharp from 'sharp';
 
-import { geometriaEmblema } from '../src/components/marca/emblema-geometria.mjs';
-
-// Misma geometría que src/components/marca/Emblema.astro
-const g = geometriaEmblema();
-
-const emblema = (id = 'o') => `
-  <defs><linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="240" y2="240">
-    <stop offset="0" stop-color="#F59E0B"/><stop offset="0.5" stop-color="#D4AF37"/><stop offset="1" stop-color="#F59E0B"/>
-  </linearGradient></defs>
-  <g transform="${g.encuadre}">
-    <g fill="url(#${id})" stroke="#030712" stroke-width="1.6" stroke-linejoin="round">
-      ${g.plumas.map((d) => `<path d="${d}"/>`).join('')}<path d="${g.hombro}"/>
-    </g>
-    <g transform="${g.llave}" fill="none" stroke="url(#${id})" stroke-width="5.5" stroke-linecap="round">
-      <circle cx="0" cy="-11" r="9.5"/><circle cx="-9.5" cy="5.5" r="9.5"/><circle cx="9.5" cy="5.5" r="9.5"/>
-      <path d="M0 18v100" stroke-width="7"/><path d="M-7 24h14"/>
-      <path d="M3 98h15v7H8v6h12v8H3" stroke-width="5" stroke-linejoin="round"/>
-    </g>
-  </g>`;
-
-/** Icono cuadrado: emblema sobre obsidiana, con margen opcional (maskable) */
-const icono = (margen = 0.1, redondeo = 0.18) => {
-  const s = 240;
-  const m = s * margen;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${s} ${s}">
-  <rect width="${s}" height="${s}" rx="${s * redondeo}" fill="#030712"/>
-  <circle cx="120" cy="120" r="110" fill="#D4AF37" opacity="0.08"/>
-  <g transform="translate(${m} ${m}) scale(${(s - 2 * m) / s})">${emblema()}</g>
-</svg>`;
-};
+const MARCA = 'src/assets/marca';
+const OBSIDIANA = '#030712';
 
 mkdirSync('public/og', { recursive: true });
 
-const svgFavicon = icono(0.04, 0.2);
-writeFileSync('public/favicon.svg', svgFavicon);
+/** Emblema recortado a su contenido (el aro), en un cuadrado transparente */
+const emblema = await sharp(`${MARCA}/emblema.webp`).trim({ threshold: 10 }).toBuffer();
+const { width: ew, height: eh } = await sharp(emblema).metadata();
+const lado = Math.max(ew, eh);
+const emblemaCuadrado = await sharp(emblema)
+  .extend({
+    top: Math.floor((lado - eh) / 2),
+    bottom: Math.ceil((lado - eh) / 2),
+    left: Math.floor((lado - ew) / 2),
+    right: Math.ceil((lado - ew) / 2),
+    background: { r: 0, g: 0, b: 0, alpha: 0 },
+  })
+  .png()
+  .toBuffer();
 
-const png = (svg, tam, destino) => sharp(Buffer.from(svg), { density: 384 }).resize(tam, tam).png().toFile(destino);
+const emblemaA = (tam) => sharp(emblemaCuadrado).resize(tam, tam, { kernel: 'lanczos3' }).sharpen({ sigma: 0.5 }).png().toBuffer();
 
-await png(svgFavicon, 32, 'public/favicon-32.png');
-await png(icono(0.06, 0), 180, 'public/apple-touch-icon.png');
-await png(icono(0.06, 0.18), 192, 'public/icon-192.png');
-await png(icono(0.06, 0.18), 512, 'public/icon-512.png');
-await png(icono(0.2, 0), 512, 'public/icon-maskable-512.png');
+/** Icono cuadrado: emblema sobre obsidiana, con margen (fracción del lado) y esquinas opcionales */
+async function icono(tam, margen, redondeo = 0) {
+  const r = tam * redondeo;
+  const fondo = Buffer.from(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${tam}" height="${tam}"><rect width="${tam}" height="${tam}" rx="${r}" fill="${OBSIDIANA}"/></svg>`,
+  );
+  const interior = Math.round(tam * (1 - 2 * margen));
+  return sharp(fondo)
+    .composite([{ input: await emblemaA(interior), gravity: 'centre' }])
+    .png({ palette: true, quality: 90, effort: 10, compressionLevel: 9 })
+    .toBuffer();
+}
 
-// favicon.ico (PNG embebido de 48 px: formato ICO con una sola imagen)
-const ico48 = await sharp(Buffer.from(svgFavicon), { density: 384 }).resize(48, 48).png().toBuffer();
-const cabecera = Buffer.alloc(22);
+// Favicons: emblema sin fondo (se ve en pestañas claras y oscuras)
+const favicon = { 16: await emblemaA(16), 32: await emblemaA(32), 48: await emblemaA(48) };
+writeFileSync('public/favicon-32.png', favicon[32]);
+
+// favicon.ico con PNG embebidos de 16, 32 y 48 px
+const tamanos = [16, 32, 48];
+const cabecera = Buffer.alloc(6 + 16 * tamanos.length);
 cabecera.writeUInt16LE(0, 0); // reservado
 cabecera.writeUInt16LE(1, 2); // tipo: icono
-cabecera.writeUInt16LE(1, 4); // nº de imágenes
-cabecera.writeUInt8(48, 6); // ancho
-cabecera.writeUInt8(48, 7); // alto
-cabecera.writeUInt8(0, 8); // paleta
-cabecera.writeUInt8(0, 9); // reservado
-cabecera.writeUInt16LE(1, 10); // planos
-cabecera.writeUInt16LE(32, 12); // bits por píxel
-cabecera.writeUInt32LE(ico48.length, 14); // tamaño de los datos
-cabecera.writeUInt32LE(22, 18); // desplazamiento
-writeFileSync('public/favicon.ico', Buffer.concat([cabecera, ico48]));
+cabecera.writeUInt16LE(tamanos.length, 4); // nº de imágenes
+let desplazamiento = cabecera.length;
+tamanos.forEach((t, i) => {
+  const o = 6 + 16 * i;
+  cabecera.writeUInt8(t, o); // ancho
+  cabecera.writeUInt8(t, o + 1); // alto
+  cabecera.writeUInt8(0, o + 2); // paleta
+  cabecera.writeUInt8(0, o + 3); // reservado
+  cabecera.writeUInt16LE(1, o + 4); // planos
+  cabecera.writeUInt16LE(32, o + 6); // bits por píxel
+  cabecera.writeUInt32LE(favicon[t].length, o + 8); // tamaño de los datos
+  cabecera.writeUInt32LE(desplazamiento, o + 12); // desplazamiento
+  desplazamiento += favicon[t].length;
+});
+writeFileSync('public/favicon.ico', Buffer.concat([cabecera, ...tamanos.map((t) => favicon[t])]));
 
-// Imagen Open Graph 1200×630
-const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <defs>
-    <radialGradient id="brillo" cx="0.28" cy="0.5" r="0.55"><stop offset="0" stop-color="#D4AF37" stop-opacity="0.28"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
-    <linearGradient id="plata" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.5" stop-color="#E2E8F0"/><stop offset="1" stop-color="#94A3B8"/></linearGradient>
-  </defs>
-  <rect width="1200" height="630" fill="#030712"/>
-  <rect width="1200" height="630" fill="url(#brillo)"/>
-  <g transform="translate(70 95) scale(1.85)">${emblema('og')}</g>
-  <text x="560" y="250" font-family="DejaVu Sans" font-size="30" letter-spacing="12" fill="#94A3B8">CERRAJEROS</text>
-  <text x="556" y="345" font-family="DejaVu Sans" font-weight="bold" font-size="104" letter-spacing="6" fill="url(#plata)">MADRID</text>
-  <text x="560" y="420" font-family="DejaVu Sans" font-weight="bold" font-style="italic" font-size="58"><tspan fill="#E2E8F0">Open</tspan><tspan fill="#D4AF37">Servi</tspan></text>
-  <rect x="560" y="462" width="480" height="2" fill="#D4AF37" opacity="0.6"/>
-  <text x="560" y="520" font-family="DejaVu Sans" font-weight="bold" font-size="40" fill="#FFFFFF">912 918 462 · 24 horas</text>
-</svg>`;
-await sharp(Buffer.from(og)).jpeg({ quality: 86, mozjpeg: true }).toFile('public/og/cerrajeros-madrid-openservi.jpg');
+// Iconos de pantalla de inicio y del manifest: sobre obsidiana
+writeFileSync('public/apple-touch-icon.png', await icono(180, 0.08));
+writeFileSync('public/icon-192.png', await icono(192, 0.08, 0.18));
+writeFileSync('public/icon-512.png', await icono(512, 0.08, 0.18));
+// Maskable: el contenido dentro de la zona segura (círculo del 80 %)
+writeFileSync('public/icon-maskable-512.png', await icono(512, 0.15));
+
+// Imagen Open Graph 1200 × 630: logotipo vertical y teléfono, con el perfil de Madrid de fondo
+const W = 1200;
+const H = 630;
+const fondo = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
+  <defs><radialGradient id="brillo" cx="0.27" cy="0.45" r="0.55"><stop offset="0" stop-color="#D4AF37" stop-opacity="0.22"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient></defs>
+  <rect width="${W}" height="${H}" fill="${OBSIDIANA}"/>
+  <rect width="${W}" height="${H}" fill="url(#brillo)"/>
+</svg>`);
+
+// Perfil de Madrid a todo el ancho, al 32 % de opacidad
+const skyline = await sharp(`${MARCA}/skyline.svg`, { density: 72 * (W / 1500) }).resize(W).png().toBuffer();
+const opacidad = Buffer.from([255, 255, 255, Math.round(255 * 0.32)]);
+const skylineTenue = await sharp(skyline)
+  .composite([{ input: opacidad, raw: { width: 1, height: 1, channels: 4 }, tile: true, blend: 'dest-in' }])
+  .png()
+  .toBuffer();
+const { height: sh } = await sharp(skylineTenue).metadata();
+
+// Velo de arriba abajo: el perfil se funde hacia arriba, como en la web
+const velo = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
+  <defs><linearGradient id="v" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${OBSIDIANA}" stop-opacity="1"/><stop offset="0.5" stop-color="${OBSIDIANA}" stop-opacity="0.5"/><stop offset="1" stop-color="${OBSIDIANA}" stop-opacity="0"/></linearGradient></defs>
+  <rect width="${W}" height="${H}" fill="url(#v)"/>
+</svg>`);
+
+const texto = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
+  <defs><linearGradient id="plata" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.5" stop-color="#E2E8F0"/><stop offset="1" stop-color="#94A3B8"/></linearGradient></defs>
+  <text x="640" y="240" font-family="DejaVu Sans" font-weight="bold" font-size="40" fill="url(#plata)">Cerrajeros en Madrid</text>
+  <text x="640" y="296" font-family="DejaVu Sans" font-weight="bold" font-size="40" fill="#D4AF37">24 horas</text>
+  <rect x="640" y="336" width="440" height="2" fill="#D4AF37" opacity="0.6"/>
+  <text x="640" y="410" font-family="DejaVu Sans" font-weight="bold" font-size="52" fill="#FFFFFF">912 918 462</text>
+</svg>`);
+
+const logo = await sharp(`${MARCA}/logo-vertical.webp`).resize(540, 540).png().toBuffer();
+
+await sharp(fondo)
+  .composite([
+    { input: skylineTenue, top: H - sh, left: 0 },
+    { input: velo, top: 0, left: 0 },
+    { input: logo, top: 45, left: 70 },
+    { input: texto, top: 0, left: 0 },
+  ])
+  .jpeg({ quality: 86, mozjpeg: true })
+  .toFile('public/og/cerrajeros-madrid-openservi.jpg');
 
 console.log('Iconos e imagen OG generados en public/.');

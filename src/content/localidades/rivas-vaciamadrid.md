@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Rivas-Vaciamadrid. Apertu
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [coslada]
 updatedAt: 2026-10-05
 ---

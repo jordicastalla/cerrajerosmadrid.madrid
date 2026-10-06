@@ -1,6 +1,9 @@
 ---
 /**
- * Perfil de Madrid con la cúpula del logotipo. Decorativo.
+ * Perfil de Madrid en oro (ilustración del cliente pasada a SVG con
+ * `npm run skyline`). Decorativo: se pinta como fondo pegado al borde
+ * inferior de su contenedor, que necesita `position: relative`. Se funde
+ * hacia arriba para que el texto que tenga encima se lea bien.
  */
 interface Props {
   clase?: string;
@@ -8,29 +11,33 @@ interface Props {
 const { clase = '' } = Astro.props;
 ---
 
-<svg
-  class={`skyline ${clase}`}
-  viewBox="0 0 1200 140"
-  preserveAspectRatio="xMidYMax slice"
-  aria-hidden="true"
-  focusable="false"
->
-  <defs>
-    <linearGradient id="skyline-oro" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#D4AF37" stop-opacity="0.55" />
-      <stop offset="1" stop-color="#D4AF37" stop-opacity="0.08" />
-    </linearGradient>
-  </defs>
-  <path
-    fill="url(#skyline-oro)"
-    d="M0 140V112h40V98h26v14h18V86h30v26h22V104h28V74h34v38h20V92h24v20h30V80h18V60h14v20h18v32h26V96h30v16h30V70h12V52h8V40h4v12h8v18h12v42h14V100h20V84h22V74h4V64h6V56l7-6h2l7 6v8h6v10h4v10h22v16h20V58h6V46h4v-8c0-20 13-34 30-38h1v-6h2v6h1c17 4 30 18 30 38v8h4v12h6v54h22V90h26V66h30v46h24V96h34v16h20V78h28v34h26V100h30V84h22v28h30V98h26v14H1200v28Z"
-  />
-</svg>
+<div class={`skyline ${clase}`} aria-hidden="true"></div>
 
 <style>
   .skyline {
-    width: 100%;
-    height: clamp(70px, 10vw, 140px);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 0;
+    width: min(100%, var(--skyline-ancho, 78rem));
+    aspect-ratio: 1500 / 655;
+    translate: -50% 0;
+    background: url('../../assets/marca/skyline.svg') center bottom / 100% 100% no-repeat;
+    opacity: var(--skyline-opacidad, 0.3);
+    -webkit-mask-image: linear-gradient(to top, #000 35%, transparent);
+    mask-image: linear-gradient(to top, #000 35%, transparent);
     pointer-events: none;
+  }
+
+  /* Cuando el contenedor es más ancho que el dibujo, se funden también los laterales */
+  @media (min-width: 76rem) {
+    .skyline {
+      -webkit-mask-image:
+        linear-gradient(to top, #000 35%, transparent), linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+      -webkit-mask-composite: source-in;
+      mask-image:
+        linear-gradient(to top, #000 35%, transparent), linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+      mask-composite: intersect;
+    }
   }
 </style>

@@ -26,9 +26,9 @@ const dominio = new URL(site.dominio).host;
         <h2>1. Responsable del tratamiento</h2>
         <ul>
           <li>Titular: {l.titular}</li>
-          <li>NIF: {l.nif}</li>
-          <li>Domicilio: {l.calle}, {l.cp} {l.ciudad} ({l.provincia})</li>
-          <li>Correo electrónico: {l.email}</li>
+          {l.nif && <li>NIF: {l.nif}</li>}
+          <li>Domicilio: {l.domicilio}</li>
+          <li>Correo electrónico: <a href={`mailto:${l.email}`}>{l.email}</a></li>
         </ul>
 
         <h2>2. Único canal de contacto: el teléfono</h2>

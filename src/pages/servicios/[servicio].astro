@@ -1,13 +1,13 @@
 ---
 /**
  * Plantilla de servicio (spec §7, §29). Página especialista: no repite la Home.
+ * Las opiniones y las preguntas frecuentes solo están en la Home.
  */
 import { getCollection, getEntries, render } from 'astro:content';
 import Layout from '@layouts/Layout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
 import CallButton from '@components/CallButton.astro';
 import EEATBadges from '@components/EEATBadges.astro';
-import Faq from '@components/Faq.astro';
 import InterlinkingGrid from '@components/InterlinkingGrid.astro';
 import CtaFinal from '@components/CtaFinal.astro';
 import { servicio as servicioSchema } from '@lib/schema';
@@ -39,7 +39,6 @@ const relacionados = (await getEntries(d.relacionados)).filter((r) => r.data.sta
   <Breadcrumbs
     items={[
       { nombre: 'Inicio', ruta: '/' },
-      { nombre: 'Servicios', ruta: '/servicios/' },
       { nombre: d.titulo, ruta },
     ]}
   />
@@ -75,8 +74,6 @@ const relacionados = (await getEntries(d.relacionados)).filter((r) => r.data.sta
       }
     </div>
   </div>
-
-  <Faq faqs={d.faqs} titulo={`Preguntas sobre ${d.titulo.toLowerCase()}`} />
 
   {
     relacionados.length > 0 && (

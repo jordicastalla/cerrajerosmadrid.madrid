@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Getafe. Apertura de puert
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [leganes, pinto]
 updatedAt: 2026-10-05
 ---

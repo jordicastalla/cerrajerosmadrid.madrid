@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Boadilla del Monte. Apert
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [pozuelo-de-alarcon, majadahonda, villaviciosa-de-odon]
 updatedAt: 2026-10-05
 ---

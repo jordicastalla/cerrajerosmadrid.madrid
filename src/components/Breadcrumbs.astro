@@ -1,7 +1,8 @@
 ---
 /**
- * Migas de pan discretas + BreadcrumbList en JSON-LD (spec §10). Los tramos
- * intermedios enlazan a páginas reales (hubs, spec §36); el último no enlaza.
+ * Migas de pan discretas + BreadcrumbList en JSON-LD (spec §10). Sin páginas
+ * de servicios ni de zonas (v2.2): Inicio › página actual. El último tramo no
+ * enlaza.
  */
 import { migas, type Miga } from '@lib/schema';
 
@@ -27,12 +28,15 @@ const { items } = Astro.props;
 
 <style>
   .migas {
-    padding-top: 1.25rem;
+    padding-top: 5px;
+    padding-bottom: 25px;
+    text-align: center;
   }
 
   .migas ol {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.35rem 0.5rem;
     margin: 0;
     padding: 0;

@@ -1,6 +1,6 @@
 # ASTRO WEBSITE DEVELOPMENT SPEC: CERRAJEROS MADRID OPENSERVI — v2
 
-> **Versión:** v2.1 · 2026-10-05 · Base: v1. v2.1 = v2 + paleta «Victoria Alada», fuentes disponibles y redacción precisa de la cobertura. Se mantiene la numeración §1–§35; las secciones nuevas son §36–§43 y los anexos A–D.
+> **Versión:** v2.2 · 2026-10-06 · Base: v1. v2.1 = v2 + paleta «Victoria Alada», fuentes disponibles y redacción precisa de la cobertura. v2.2 = cambios del cliente del 2026-10-06 (tabla «Cambios v2.2», justo debajo). Se mantiene la numeración §1–§35; las secciones nuevas son §36–§43 y los anexos A–D.
 >
 > **Alcance:** esta versión incluye únicamente los cambios que el cliente ha aprobado y los datos que ha facilitado. Todo lo que no aparece en el resumen siguiente **no ha cambiado** respecto a v1 (texto idéntico).
 >
@@ -9,6 +9,25 @@
 > **Fuera de esta revisión (decisión del cliente):** los textos legales (§16, sin cambios), las redirecciones (§31, eliminado) y los precios (§40: la web no los publica).
 >
 > **Se mantiene sin cambios:** la regla de no inventar reseñas, tiempos de llegada, credenciales ni garantías (§18, §19).
+
+## Cambios v2.2 (2026-10-06, pedidos por el cliente)
+
+v2.2 prevalece sobre cualquier sección de v2.1 que la contradiga. Las secciones afectadas se dejan como estaban para conservar el historial; donde choquen, manda esta tabla.
+
+| § | Cambio v2.2 |
+|---|---|
+| 2, 10, 21, 33, 36 | **Sin páginas de hub.** Se eliminan `/servicios/` y `/cerrajeros/`. «Servicios» es un desplegable de la cabecera con enlace directo a cada servicio (apertura de puertas y urgente 24 h a sus secciones de la Home; cambio de cerraduras e instalación de cerrojos a sus páginas). Las migas quedan en «Inicio › página». |
+| 6, 17, 36 | **Zonas solo en la Home** (sección `#zonas`, con el mapa esquemático y el de Google bajo demanda). Texto: «Atendemos en todo Madrid. Aunque no esté tu zona en la lista, trabajamos en todas las de alrededor. Somos rápidos y tenemos un buen equipo listo para ayudarte.» |
+| 5, 7, 18, 28, 38 | **Opiniones y preguntas frecuentes solo en la Home.** Las páginas de servicio y de localidad no llevan FAQ; el campo `faqs` desaparece de las colecciones y la puerta de indexación deja de exigir FAQs locales. |
+| 28 | En las páginas de localidad, los servicios se nombran sin la localidad («Cambio de cerraduras», no «Cambio de cerraduras en Alcorcón»). |
+| 10 | Migas: `padding-top: 5px; padding-bottom: 25px; text-align: center`. |
+| 22 | Pie: `padding-top: 60px` y el perfil de Madrid de fondo. |
+| 6 | Nueva sección «Quiénes Somos» (`#quienes-somos`) con el texto del cliente sobre el emblema de la Victoria Alada. |
+| 14, 19, 42 | FAQ de la Home con microdatos schema.org `FAQPage` (en el HTML; el JSON-LD sigue sin `FAQPage`). Dos preguntas nuevas del cliente, entre ellas el **tiempo medio de llegada a urgencias en Madrid: 20 a 30 minutos** (dato declarado por la empresa; es la única cifra de llegada publicada). |
+| 15, 16 | **Datos legales nuevos:** titular CerrajerosMadrid.Madrid · Calle Benito Gutiérrez 17, 28008 Madrid · info@cerrajerosmadrid.madrid · 912 918 462 · cerrajerosmadrid.madrid. Sustituyen a los de §16 (y al teléfono legal de §15). El cliente no ha facilitado NIF (`TODO-CLIENTE`). |
+| 23, 24 | **Logotipos definitivos** (`src/assets/marca/`): horizontal en la cabecera, vertical en el pie, emblema circular en la portada, «Quiénes Somos», CTA final, 404, favicon e iconos. Sustituyen al emblema provisional en SVG. |
+| 23 | **Perfil de Madrid**: la ilustración dorada del cliente (`marca/skyline-original.webp`), pasada a SVG de 5 tonos con potrace (`npm run skyline`), sustituye al perfil de bloques en la portada y en el pie. |
+| Anexo C | Dominio confirmado: `https://cerrajerosmadrid.madrid` (datos legales del cliente). |
 
 ## Resumen de cambios v2
 

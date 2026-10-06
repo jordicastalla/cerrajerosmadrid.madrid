@@ -1,7 +1,7 @@
 ---
 /**
- * Preguntas frecuentes en HTML visible (spec §6). Sin marcado FAQPage: no
- * aporta resultados visibles en Google (spec §14).
+ * Preguntas frecuentes en HTML visible (spec §6). Solo en la Home. Llevan
+ * microdatos schema.org FAQPage, a petición del cliente (v2.2).
  */
 import { site, telHref } from '@data/site';
 
@@ -37,17 +37,19 @@ const { faqs, titulo = 'Preguntas frecuentes', id = 'faq' } = Astro.props;
           </p>
         </div>
 
-        <div class="faq__lista">
+        <div class="faq__lista" itemscope itemtype="https://schema.org/FAQPage">
           {faqs.map((f) => (
-            <details class="faq__item">
+            <details class="faq__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
               <summary>
-                <h3>{f.p}</h3>
+                <h3 itemprop="name">{f.p}</h3>
                 <svg class="faq__llave" viewBox="0 0 44 18" width="44" height="18" aria-hidden="true">
                   <circle cx="8" cy="9" r="6" />
                   <path d="M14 9h28v3.5h-3.5V16h-4v-3.5h-3V17h-4v-4.5h-3" />
                 </svg>
               </summary>
-              <p>{f.r}</p>
+              <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">{f.r}</p>
+              </div>
             </details>
           ))}
         </div>

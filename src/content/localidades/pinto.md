@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Pinto. Apertura de puerta
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [getafe]
 updatedAt: 2026-10-05
 ---

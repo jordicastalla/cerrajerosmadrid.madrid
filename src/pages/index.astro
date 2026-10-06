@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
 import Layout from '@layouts/Layout.astro';
 import LocalBusinessSchema from '@components/LocalBusinessSchema.astro';
 import CallButton from '@components/CallButton.astro';
@@ -16,11 +17,20 @@ import KeyCutDivider from '@components/KeyCutDivider.astro';
 import Emblema from '@components/marca/Emblema.astro';
 import Skyline from '@components/marca/Skyline.astro';
 import { site, telHref } from '@data/site';
+import emblema from '@/assets/marca/emblema.webp';
+
+// Emblema de la portada: solo se descarga en pantallas anchas (en móvil no se muestra)
+const emblemaPortada = await getImage({ src: emblema, width: 352, densities: [1, 2] });
 
 const localidades = await getCollection('localidades', (l) => l.data.cerrajeroPropio);
 const zonasReady = localidades.filter((l) => l.data.status === 'ready').map((l) => l.data.nombre);
 
 const faqs = [
+  // Pregunta y respuesta aportadas por el cliente (2026-10-06): el tiempo medio es dato de la empresa
+  {
+    p: '¿Cuánto tardan en llegar ante una urgencia?',
+    r: 'Atendemos urgencias en Madrid en un tiempo medio de 20 a 30 minutos. Somos tu ángel de la guarda cuando no puedes entrar a tu hogar.',
+  },
   {
     p: '¿Atendéis de noche, en fin de semana y en festivos?',
     r: 'Sí. El servicio funciona las 24 horas, todos los días, también de madrugada, en fin de semana y en festivos.',
@@ -40,6 +50,11 @@ const faqs = [
   {
     p: '¿Dónde trabajáis?',
     r: 'En Madrid y en 16 zonas de alrededor. En cada una de esas zonas trabaja uno de nuestros cerrajeros.',
+  },
+  // Aportada por el cliente (2026-10-06)
+  {
+    p: '¿Atienden zonas cercanas si no aparecen en la lista de barrios?',
+    r: 'Sí, aunque no esté tu zona explícitamente listada, trabajamos en todas las de alrededor con total rapidez.',
   },
   ...(site.garantia.activa
     ? [
@@ -78,7 +93,18 @@ const faqs = [
       </div>
 
       <div class="portada__visual" aria-hidden="true">
-        <Emblema tam={360} clase="portada__emblema" />
+        <picture>
+          <source media="(min-width: 980px)" srcset={emblemaPortada.srcSet.attribute} type="image/webp" />
+          <img
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            alt=""
+            width="352"
+            height="352"
+            class="portada__emblema"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
       </div>
     </div>
     <Skyline clase="portada__skyline" />
@@ -97,7 +123,7 @@ const faqs = [
           instalación de cerrojos de seguridad en viviendas, portales, trasteros, locales y oficinas.
         </p>
         <p>
-          Además de la ciudad, trabajamos en <a href="/cerrajeros/">16 zonas de alrededor</a> en las que uno de nuestros
+          Además de la ciudad, trabajamos en <a href="#zonas">16 zonas de alrededor</a> en las que uno de nuestros
           cerrajeros trabaja en la propia zona.
         </p>
         <p>Antes de empezar cualquier trabajo te explicamos qué vamos a hacer y te damos el presupuesto, sin compromiso.</p>
@@ -156,6 +182,35 @@ const faqs = [
         <a class="enlace" href="/servicios/instalacion-de-cerrojos-madrid/">Instalación de cerrojos de seguridad en Madrid →</a>
       </section>
     </div>
+
+    <KeyCutDivider />
+
+    <!-- Texto del cliente (v2.2) -->
+    <section class="tramo envoltura" id="quienes-somos" aria-labelledby="quienes-titulo">
+      <div class="quienes-somos">
+        <Emblema
+          tam={240}
+          clase="quienes-somos__emblema"
+          titulo="Emblema de CerrajerosMadrid.Madrid: la Victoria Alada sosteniendo una llave dorada"
+        />
+        <div>
+          <p class="rotulo">Nuestro emblema</p>
+          <h2 class="seccion__titulo" id="quienes-titulo">Quiénes Somos</h2>
+          <div class="prosa quienes-somos__prosa">
+            <p>
+              En <strong>CerrajerosMadrid.Madrid</strong> combinamos rapidez, profesionalidad y confianza al servicio de los
+              madrileños. Nuestro emblema rinde homenaje a uno de los monumentos más populares e icónicos de Madrid:
+              <strong>La Victoria Alada</strong>, representada sosteniendo una llave dorada.
+            </p>
+            <p>
+              Para nosotros, la Victoria Alada representa la protección y la tranquilidad de recuperar el acceso a tu espacio
+              seguro. Nos gusta ser ese <em>ángel de la guarda</em> que está ahí cuando no puedes entrar a tu hogar o negocio,
+              respondiendo con eficacia en el momento que más lo necesitas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <section class="urgente tramo tramo--profundo" id="cerrajero-urgente-24-horas" aria-labelledby="urgente-titulo">
@@ -180,15 +235,16 @@ const faqs = [
     <div class="envoltura">
       <p class="rotulo">Cerrajeros propios en 16 zonas</p>
       <h2 class="seccion__titulo" id="zonas-titulo">Zonas donde trabajamos</h2>
-      <p class="seccion__entrada">
-        En Madrid y en estas 16 zonas. En cada una trabaja uno de nuestros cerrajeros: por eso aparecen aquí y no otras.
+      <!-- Texto del cliente (v2.2) -->
+      <p class="seccion__entrada zonas__entrada">
+        Atendemos en todo Madrid. <strong
+          >Aunque no esté tu zona en la lista, trabajamos en todas las de alrededor. Somos rápidos y tenemos un buen equipo
+          listo para ayudarte.</strong
+        >
       </p>
       <div class="zonas__rejilla">
         <ZonasMapa localidades={localidades} />
-        <div>
-          <MapaCargaBajoDemanda />
-          <p class="zonas__mas"><a class="enlace" href="/cerrajeros/">Zonas de servicio →</a></p>
-        </div>
+        <MapaCargaBajoDemanda />
       </div>
     </div>
   </section>
@@ -206,6 +262,8 @@ const faqs = [
     position: relative;
     overflow: hidden;
     padding-top: clamp(2rem, 6vw, 5rem);
+    /* Hueco para la calle del perfil de Madrid, que sube por detrás del texto */
+    padding-bottom: clamp(7rem, 17vw, 13rem);
     background:
       radial-gradient(42rem 28rem at 78% 38%, rgb(212 175 55 / 0.16), transparent 62%),
       radial-gradient(30rem 20rem at 8% 0%, rgb(148 163 184 / 0.08), transparent 70%),
@@ -273,15 +331,14 @@ const faqs = [
     }
   }
 
-  :global(.portada__emblema) {
+  .portada__emblema {
     width: min(100%, 22rem);
     height: auto;
     filter: drop-shadow(0 0 48px rgb(212 175 55 / 0.28));
   }
 
-  :global(.portada__skyline) {
-    display: block;
-    margin-top: clamp(1.5rem, 4vw, 3rem);
+  .portada :global(.portada__skyline) {
+    --skyline-opacidad: 0.34;
   }
 
   /* --- Servicios (blanco) -------------------------------------------- */
@@ -373,7 +430,37 @@ const faqs = [
     }
   }
 
-  .zonas__mas {
-    margin-top: 1.5rem;
+  .zonas__entrada strong {
+    color: var(--plata);
+  }
+
+  /* --- Quiénes somos (tarjeta con el formato que pide el cliente) ----- */
+  .quienes-somos {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    margin: 25px 0;
+    padding: 30px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+  }
+
+  @media (min-width: 860px) {
+    .quienes-somos {
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 3.5rem;
+      padding: 30px 3rem 30px 30px;
+    }
+  }
+
+  :global(.quienes-somos__emblema) {
+    justify-self: center;
+    width: clamp(10rem, 30vw, 15rem);
+    height: auto;
+  }
+
+  .quienes-somos__prosa {
+    margin-top: 1.25rem;
   }
 </style>

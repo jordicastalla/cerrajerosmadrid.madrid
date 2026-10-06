@@ -12,19 +12,10 @@ proceso:
   - Te explicamos qué tipo de cerrojo encaja y te damos el presupuesto sin compromiso.
   - Instalamos el cerrojo y comprobamos que cierra y abre bien.
   - Recibes las llaves y la factura con la garantía por escrito.
-faqs:
-  - p: ¿Qué aporta un cerrojo si ya tengo cerradura?
-    r: Un segundo punto de cierre. Quien quiera abrir la puerta tiene que superar dos mecanismos en lugar de uno.
-  - p: ¿Se puede poner un cerrojo en cualquier puerta?
-    r: En la mayoría de puertas de vivienda, local y trastero sí, pero depende del material y del grosor de la puerta. Te lo decimos al verla, antes de darte el presupuesto.
-  - p: ¿El cerrojo usa la misma llave que la cerradura?
-    r: Puede llevar su propio bombín o, en algunos casos, compartir llave con la cerradura. Te explicamos las opciones antes de instalarlo.
-  - p: ¿Instaláis cerrojos en locales y trasteros?
-    r: Sí. Instalamos cerrojos en viviendas, locales, oficinas y trasteros.
 tiposDeCaso: [cerrojo, alta-seguridad]
 relacionados: [cambio-de-cerraduras-madrid]
 orden: 2
-updatedAt: 2026-10-05
+updatedAt: 2026-10-06
 ---
 
 ## Cuándo tiene sentido instalar un cerrojo

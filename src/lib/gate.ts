@@ -11,7 +11,6 @@ import type { CollectionEntry } from 'astro:content';
 /** Mínimos orientativos para `ready`; ajustables aquí */
 export const MINIMOS = {
   casos: 1,
-  faqs: 2,
   palabrasIntro: 100,
 };
 
@@ -24,7 +23,6 @@ export function faltanParaReady(loc: CollectionEntry<'localidades'>, numCasos: n
   if (numCasos < MINIMOS.casos) faltan.push(`≥ ${MINIMOS.casos} caso(s) real(es) verificado(s) en src/content/casos`);
   if (contarPalabras(d.intro) < MINIMOS.palabrasIntro)
     faltan.push(`intro propia de ≥ ${MINIMOS.palabrasIntro} palabras (ahora ${contarPalabras(d.intro)})`);
-  if (d.faqs.length < MINIMOS.faqs) faltan.push(`≥ ${MINIMOS.faqs} FAQs locales reales (ahora ${d.faqs.length})`);
   if (!d.seoTitle.trim() || !d.seoDescription.trim()) faltan.push('seoTitle y seoDescription propios');
   return faltan;
 }

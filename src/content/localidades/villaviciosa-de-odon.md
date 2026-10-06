@@ -12,7 +12,6 @@ seoDescription: "Uno de nuestros cerrajeros trabaja en Villaviciosa de Odón. Ap
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: []
 nearby: [boadilla-del-monte, mostoles, alcorcon]
 updatedAt: 2026-10-05
 ---

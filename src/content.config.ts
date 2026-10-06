@@ -7,8 +7,6 @@ import { defineCollection, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const faq = z.object({ p: z.string(), r: z.string() });
-
 const estado = z.enum(['draft', 'ready']).default('draft');
 
 const tiposDeTrabajo = z.enum(['apertura', 'cambio-cerradura', 'cerrojo', 'bombin', 'alta-seguridad', 'otro']);
@@ -33,7 +31,6 @@ const localidades = defineCollection({
       intro: z.string().optional(),
       barrios: z.array(z.string()).default([]),
       observacionesLocales: z.array(z.string()).default([]),
-      faqs: z.array(faq).default([]),
       /** Solo si la empresa lo mide (spec §38). Si no, no se muestra. */
       tiempoLlegada: z.string().optional(),
       image: image().optional(),
@@ -55,7 +52,6 @@ const servicios = defineCollection({
       resumen: z.string(),
       intro: z.string(),
       proceso: z.array(z.string()).default([]),
-      faqs: z.array(faq).default([]),
       tiposDeCaso: z.array(tiposDeTrabajo).default([]),
       relacionados: z.array(reference('servicios')).default([]),
       image: image().optional(),

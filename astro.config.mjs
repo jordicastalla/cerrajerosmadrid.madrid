@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { leerEstadoContenido } from './scripts/contenido.mjs';
 
-/** TODO-CLIENTE: dominio definitivo. Única fuente: src/data/site.ts lo lee de aquí. */
+/** Dominio definitivo (confirmado en los datos legales del cliente). Única fuente: src/data/site.ts lo lee de aquí. */
 const SITE = 'https://cerrajerosmadrid.madrid';
 
 // Qué URLs son noindex (draft, legales, 404) y fecha real de cada contenido

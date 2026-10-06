@@ -1,8 +1,11 @@
 ---
 /**
- * Cabecera (spec §21): logo, navegación corta hacia los hubs y teléfono.
+ * Cabecera (spec §21): logo, navegación corta y teléfono. «Servicios» es un
+ * desplegable con enlace directo a cada servicio (no hay página de servicios);
+ * zonas, opiniones y preguntas son secciones de la Home.
  * En móvil, menú en un <dialog> (sin dependencias).
  */
+import { getCollection } from 'astro:content';
 import Logo from '@components/marca/Logo.astro';
 import CallButton from '@components/CallButton.astro';
 import Icono from '@components/ui/Icono.astro';
@@ -14,30 +17,57 @@ interface Props {
 
 const { ruta } = Astro.props;
 
+const fichas = (await getCollection('servicios', (s) => s.data.status === 'ready')).sort((a, b) => a.data.orden - b.data.orden);
+
+const servicios = [
+  { href: '/#apertura-de-puertas', nombre: 'Apertura de puertas' },
+  ...fichas.map((s) => ({ href: `/servicios/${s.id}/`, nombre: s.data.titulo })),
+  { href: '/#cerrajero-urgente-24-horas', nombre: 'Cerrajero urgente 24 horas' },
+];
+
 const enlaces = [
-  { href: '/servicios/', nombre: 'Servicios' },
-  { href: '/cerrajeros/', nombre: 'Zonas' },
+  { href: '/#zonas', nombre: 'Zonas' },
   { href: '/#opiniones', nombre: 'Opiniones' },
   { href: '/#faq', nombre: 'Preguntas' },
 ];
 
-const actual = (href: string) => (ruta.startsWith(href) && href !== '/' && !href.includes('#') ? 'page' : undefined);
+const actual = (href: string) => (href === ruta ? 'page' : undefined);
+const enServicio = ruta.startsWith('/servicios/');
 ---
 
 <header class="cabecera no-imprimir">
   <div class="cabecera__fila envoltura">
     <a href="/" class="cabecera__marca" aria-label={`${site.nombre}, inicio`}>
-      <Logo />
+      <Logo alt="" />
     </a>
 
     <nav class="cabecera__nav" aria-label="Principal">
       <ul>
+        <li class="desplegable" data-desplegable>
+          <button
+            type="button"
+            class:list={['desplegable__boton', { 'es-actual': enServicio }]}
+            aria-expanded="false"
+            aria-controls="submenu-servicios"
+          >
+            Servicios <span class="desplegable__flecha" aria-hidden="true"></span>
+          </button>
+          <ul class="desplegable__lista" id="submenu-servicios">
+            {
+              servicios.map((e) => (
+                <li>
+                  <a href={e.href} aria-current={actual(e.href)}>
+                    {e.nombre}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </li>
         {
           enlaces.map((e) => (
             <li>
-              <a href={e.href} aria-current={actual(e.href)}>
-                {e.nombre}
-              </a>
+              <a href={e.href}>{e.nombre}</a>
             </li>
           ))
         }
@@ -67,11 +97,25 @@ const actual = (href: string) => (ruta.startsWith(href) && href !== '/' && !href
 
   <nav aria-label="Menú">
     <ul class="menu__lista">
-      <li><a href="/">Inicio</a></li>
+      <li><a href="/" data-cerrar-menu>Inicio</a></li>
+      <li>
+        <p class="menu__grupo">Servicios</p>
+        <ul class="menu__sub">
+          {
+            servicios.map((e) => (
+              <li>
+                <a href={e.href} aria-current={actual(e.href)} data-cerrar-menu>
+                  {e.nombre}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </li>
       {
         enlaces.map((e) => (
           <li>
-            <a href={e.href} aria-current={actual(e.href)} data-cerrar-menu>
+            <a href={e.href} data-cerrar-menu>
               {e.nombre}
             </a>
           </li>
@@ -114,7 +158,7 @@ const actual = (href: string) => (ruta.startsWith(href) && href !== '/' && !href
     }
   }
 
-  .cabecera__nav ul {
+  .cabecera__nav > ul {
     display: flex;
     gap: 0.25rem;
     margin: 0;
@@ -122,7 +166,8 @@ const actual = (href: string) => (ruta.startsWith(href) && href !== '/' && !href
     list-style: none;
   }
 
-  .cabecera__nav a {
+  .cabecera__nav a,
+  .desplegable__boton {
     display: block;
     padding: 0.6rem 0.85rem;
     font-weight: 600;
@@ -136,9 +181,77 @@ const actual = (href: string) => (ruta.startsWith(href) && href !== '/' && !href
   }
 
   .cabecera__nav a:hover,
-  .cabecera__nav a[aria-current='page'] {
+  .cabecera__nav a[aria-current='page'],
+  .desplegable__boton:hover,
+  .desplegable__boton.es-actual,
+  .desplegable__boton[aria-expanded='true'] {
     color: var(--oro);
     background: rgb(212 175 55 / 0.08);
+  }
+
+  /* --- Desplegable de servicios ------------------------------------- */
+  .desplegable {
+    position: relative;
+  }
+
+  .desplegable__boton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .desplegable__flecha {
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-top: -0.2rem;
+    border-right: 2px solid var(--oro);
+    border-bottom: 2px solid var(--oro);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+
+  .desplegable__lista {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 70;
+    display: none;
+    min-width: 16.5rem;
+    margin: 0.4rem 0 0;
+    padding: 0.5rem;
+    list-style: none;
+    background: var(--obsidiana-profunda);
+    border: 1px solid var(--linea-oro);
+    border-radius: 0.9rem;
+    box-shadow: 0 24px 48px -24px rgb(0 0 0 / 0.8);
+  }
+
+  /* Puente invisible: el ratón no pierde el menú al bajar del botón */
+  .desplegable__lista::before {
+    content: '';
+    position: absolute;
+    inset: -0.6rem 0 100%;
+  }
+
+  /* Sin JS se abre con el ratón o con el foco; con JS (data-js), con el ratón o con el botón */
+  .desplegable:hover .desplegable__lista,
+  .desplegable:not([data-js]):focus-within .desplegable__lista,
+  .desplegable__boton[aria-expanded='true'] + .desplegable__lista {
+    display: grid;
+  }
+
+  .desplegable:hover .desplegable__flecha,
+  .desplegable__boton[aria-expanded='true'] .desplegable__flecha {
+    transform: rotate(225deg);
+    margin-top: 0.2rem;
+  }
+
+  .desplegable__lista a {
+    padding: 0.65rem 0.85rem;
+    border-radius: 0.6rem;
+    white-space: nowrap;
   }
 
   .cabecera__tel {
@@ -293,6 +406,28 @@ const actual = (href: string) => (ruta.startsWith(href) && href !== '/' && !href
     color: var(--oro);
   }
 
+  .menu__grupo {
+    padding: 0.85rem 0 0.35rem;
+    font-family: var(--f-marca);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--oro);
+  }
+
+  .menu__sub {
+    margin: 0;
+    padding: 0 0 0 1rem;
+    list-style: none;
+    border-left: 1px solid var(--linea-oro);
+  }
+
+  .menu__lista .menu__sub a {
+    padding: 0.6rem 0;
+    font-size: clamp(1.15rem, 5vw, 1.5rem);
+    font-weight: 650;
+  }
+
   :global(.menu__llamar) {
     align-self: flex-start;
     margin-top: auto;
@@ -303,4 +438,24 @@ const actual = (href: string) => (ruta.startsWith(href) && href !== '/' && !href
   const menu = document.getElementById('menu') as HTMLDialogElement | null;
   document.querySelector('[data-abrir-menu]')?.addEventListener('click', () => menu?.showModal());
   menu?.querySelectorAll('[data-cerrar-menu]').forEach((el) => el.addEventListener('click', () => menu.close()));
+
+  // Desplegable de servicios: el botón lo abre y lo cierra; Esc o salir de él lo cierran
+  for (const caja of document.querySelectorAll<HTMLElement>('[data-desplegable]')) {
+    caja.dataset.js = '';
+    const boton = caja.querySelector('button')!;
+    const poner = (abierto: boolean) => boton.setAttribute('aria-expanded', String(abierto));
+    boton.addEventListener('click', () => poner(boton.getAttribute('aria-expanded') !== 'true'));
+    caja.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        poner(false);
+        boton.focus();
+      }
+    });
+    caja.addEventListener('focusout', (e) => {
+      if (!caja.contains(e.relatedTarget as Node | null)) poner(false);
+    });
+    document.addEventListener('click', (e) => {
+      if (!caja.contains(e.target as Node)) poner(false);
+    });
+  }
 </script>

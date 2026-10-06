@@ -1,6 +1,6 @@
 # cerrajerosmadrid.madrid
 
-Web de **Cerrajeros Madrid Openservi**, hecha con Astro 7 y Tailwind 4. La especificación completa está en [`docs/SPEC.md`](docs/SPEC.md) (v2.1).
+Web de **Cerrajeros Madrid Openservi**, hecha con Astro 7 y Tailwind 4. La especificación completa está en [`docs/SPEC.md`](docs/SPEC.md) (v2.2).
 
 ```sh
 npm install
@@ -9,7 +9,8 @@ npm run build          # genera dist/ (incluye la puerta de indexación)
 npm run audit          # auditoría SEO del build (spec §43)
 npm run audit:strict   # además falla si quedan datos pendientes del cliente
 npm run inventario     # fase 0: inventario de fotos reales (spec §34)
-npm run iconos         # regenera favicons e imagen OG desde el emblema
+npm run iconos         # regenera favicons, iconos e imagen OG desde los logotipos
+npm run skyline        # vuelve a pasar a SVG el perfil de Madrid (necesita potrace)
 ```
 
 `dist/` va al repositorio, como en cerrajeroschamartin.es: después de cada cambio, `npm run build` y se sube también `dist/`. El build es determinista, así que `dist/` solo cambia cuando cambia algo de verdad.
@@ -29,7 +30,8 @@ Para publicar: `npm run build && npm run audit:strict` y subir el **contenido** 
 | Trabajos reales (fotos verificadas) | `src/content/casos/` (formato en `_LEEME.md`) |
 | Mínimos para indexar una localidad | `src/lib/gate.ts` |
 | Paleta, tipografías y reglas de contraste | `src/styles/global.css` |
-| Borrador del logotipo | `marca/logo-victoria-alada-borrador.webp` |
+| Logotipos (horizontal, vertical), emblema y perfil de Madrid en SVG | `src/assets/marca/` |
+| Original del perfil de Madrid (fuente de `npm run skyline`) | `marca/skyline-original.webp` |
 
 ## Cómo se publica una localidad
 
@@ -37,21 +39,20 @@ Las 16 localidades están en `status: draft`: existen, pero son `noindex`, no sa
 
 1. al menos 1 caso real verificado en `src/content/casos/`;
 2. una introducción propia de 100 palabras o más, escrita solo con datos reales de la zona;
-3. al menos 2 preguntas frecuentes reales;
-4. `seoTitle` y `seoDescription` propios.
+3. `seoTitle` y `seoDescription` propios.
 
 Si se marca `ready` sin cumplirlo, el build falla y dice qué falta.
 
 ## Reglas que no se saltan
 
-- La web **no publica precios** ni tiempos de llegada.
+- La web **no publica precios**. El único tiempo de llegada es el tiempo medio que ha dado la empresa (20 a 30 minutos, en las preguntas frecuentes de la Home).
 - Nada de «los mejores», «líderes», «técnicos certificados» ni similares sin prueba: la auditoría lo detecta.
 - Las reseñas se copian literales del perfil de Google y nunca se marcan con `AggregateRating`.
 - No se reutilizan textos de otros dominios propios.
 
 ## Pendiente del cliente
 
-- Confirmar el dominio definitivo (`astro.config.mjs`).
 - Token de verificación de Search Console (`src/data/site.ts`).
 - Decidir qué dirección se publica en schema.org (por defecto, ninguna).
-- Logotipo definitivo y fotos reales por localidad.
+- NIF del titular para el aviso legal (`src/data/site.ts`, `legal.nif`).
+- Fotos reales por localidad.

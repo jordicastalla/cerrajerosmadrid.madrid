@@ -29,7 +29,7 @@ export const site = {
 
   /**
    * TODO-CLIENTE (spec §14): qué dirección se publica en schema.org.
-   * Por defecto ninguna: el único domicilio conocido es el social.
+   * Por defecto ninguna: el único domicilio conocido es el del aviso legal.
    */
   publicarDireccionEnSchema: false,
 
@@ -46,16 +46,22 @@ export const site = {
   imagenOg: '/og/cerrajeros-madrid-openservi.jpg',
   logo: '/icon-512.png',
 
-  /** Datos legales (spec §16). Solo para las páginas legales y el pie. */
+  /**
+   * Identidad del responsable (spec §16, datos del cliente a 2026-10-06).
+   * Solo para las páginas legales y el pie.
+   */
   legal: {
-    titular: 'JIREH CAPITAL PARTNERS SL',
-    nif: 'B22969398',
-    calle: 'Paseo de la Estación, 33',
-    cp: '28904',
-    ciudad: 'Getafe',
+    titular: 'CerrajerosMadrid.Madrid',
+    /** TODO-CLIENTE: NIF del titular. Si se añade, aparece en el aviso legal, la privacidad y el pie. */
+    nif: null as string | null,
+    domicilio: 'Calle Benito Gutiérrez 17, 28008 Madrid',
+    calle: 'Calle Benito Gutiérrez 17',
+    cp: '28008',
+    ciudad: 'Madrid',
     provincia: 'Madrid',
-    email: 'solucionabba@gmail.com',
-    telefono: '675 259 819',
+    email: 'info@cerrajerosmadrid.madrid',
+    telefono: '912 918 462',
+    web: 'cerrajerosmadrid.madrid',
   },
 } as const;
 
