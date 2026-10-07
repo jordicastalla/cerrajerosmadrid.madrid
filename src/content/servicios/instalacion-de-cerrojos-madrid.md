@@ -58,7 +58,7 @@ En OpenServi apostamos por la transparencia total en las tarifas. No aplicamos c
 - **El modelo y la gama del cerrojo:** desde cerrojos de alta seguridad mecánicos hasta modelos de gama alta con escudo acorazado, casquillo antiextracción y tarjeta de propiedad para copias de llave.
 - **El tipo de puerta:** las puertas de madera maciza se mecanizan de forma rápida, mientras que las puertas blindadas o acorazadas requieren brocas especiales para atravesar las placas de acero interiores.
 
-Llámanos por teléfono, explícanos qué tipo de puerta tienes y te daremos el coste total estimado (material y mano de obra de instalación) antes de enviar al técnico.
+Llámanos por teléfono, explícanos qué tipo de puerta tienes y te daremos el coste total cerrado (material y mano de obra de instalación) antes de enviar al técnico.
 
 ## ¿Quieres reforzar tu puerta hoy mismo? Solicita tu presupuesto
 
