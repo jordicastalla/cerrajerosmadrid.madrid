@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { getImage } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 import Layout from '@layouts/Layout.astro';
 import LocalBusinessSchema from '@components/LocalBusinessSchema.astro';
 import CallButton from '@components/CallButton.astro';
@@ -18,6 +18,7 @@ import KeyCutDivider from '@components/KeyCutDivider.astro';
 import Skyline from '@components/marca/Skyline.astro';
 import { site, telHref } from '@data/site';
 import emblema from '@/assets/marca/emblema.webp';
+import cierrePersiana from '@/assets/home/cierre-persiana.webp';
 
 // Emblema de la portada: solo se descarga en pantallas anchas (en móvil no se muestra)
 const emblemaPortada = await getImage({ src: emblema, width: 352, densities: [1, 2] });
@@ -191,7 +192,7 @@ const faqs = [
           </p>
         </div>
       </div>
-      <ImagenHome n={1} />
+      <ImagenHome n={1} credito="Foto realizada por nuestro equipo" />
     </section>
 
     <KeyCutDivider />
@@ -251,7 +252,7 @@ const faqs = [
   <!-- Texto del cliente (v2.5) -->
   <section class="urgente tramo tramo--profundo" id="cerrajero-urgente-24-horas" aria-labelledby="urgente-titulo">
     <div class="envoltura urgente__rejilla">
-      <ImagenHome n={2} clase="urgente__imagen" />
+      <ImagenHome n={2} clase="urgente__imagen" credito="Foto realizada por nuestro equipo" />
       <div>
         <p class="rotulo">De día y de noche</p>
         <h2 class="seccion__titulo" id="urgente-titulo">Cerrajería 24 horas y urgencias para imprevistos reales en Madrid</h2>
@@ -309,6 +310,15 @@ const faqs = [
       <p class="rotulo">Precio claro</p>
       <h2 class="seccion__titulo" id="economico-titulo">¿Buscas un cerrajero económico en Madrid?</h2>
       <div class="prosa economico__prosa">
+        <figure class="figura-foto figura-foto--der figura-foto--ancha">
+          <Image
+            src={cierrePersiana}
+            alt="Cerradura metálica para puerta de persiana o cierre enrollable, con su juego de llaves."
+            widths={[320, 480]}
+            sizes="(min-width: 600px) 17rem, 60vw"
+          />
+          <figcaption class="credito">Foto realizada por nuestro equipo</figcaption>
+        </figure>
         <p>
           Si estás buscando cerrajeros baratos en Madrid y de calidad contrastada,
           <a href={telHref} data-cta="economico">llámanos y compruébalo</a>.
@@ -647,6 +657,7 @@ const faqs = [
   /* --- ¿Buscas un cerrajero económico? ------------------------------- */
   .economico__prosa {
     margin-top: 1.25rem;
+    display: flow-root;
   }
 
   .economico__destacado {

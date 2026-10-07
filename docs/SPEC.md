@@ -12,6 +12,9 @@
 
 ## Cambios v2.6 (2026-10-07, pedidos por el cliente)
 
+- Crédito de autoría «Foto realizada por nuestro equipo» (señal E-E-A-T, en `.credito`) bajo las fotos reales del cliente: las dos de la Home, la de la sección económica y las de las páginas de servicio.
+- Tercera foto en la Home: una cerradura de persiana con llaves (`src/assets/home/cierre-persiana.webp`), flotando en la sección «¿Buscas un cerrajero económico?», lejos de las otras dos.
+
 - Página «Instalación de cerrojos de seguridad»: nuevo texto del cliente (cerrojos antibumping y anti-impressioning, tipos, cuándo colocarlos, precio y cierre), con correcciones de ortografía mínimas y enlace a la UCES en la nota sobre el bumping. seoTitle con «Antibumping».
 - Fotos reales del cliente en «Instalación de cerrojos» (`public/servicios/cerrojo-seguridad.webp` y `escudos-cerrojo.webp`): los escudos protectores a la izquierda en la sección antibumping y un cerrojo de sobreponer a la derecha en «Tipos de cerrojos de seguridad».
 - El cliente mantiene su copia de venta con superlativos («fortaleza impenetrable», «la mejor barrera disuasoria», «los mejores cerrojos … del mercado»): excepción expresa a §42. La auditoría acepta esa frase concreta mediante una lista `PERMITIDAS_CLIENTE` en scripts/seo-audit.mjs, y sigue marcando cualquier otro uso nuevo de «los mejores».

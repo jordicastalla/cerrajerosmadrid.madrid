@@ -423,6 +423,18 @@
     margin-top: 0.6em;
   }
 
+  /* Crédito de autoría de una foto (E-E-A-T): la hizo el equipo */
+  .credito {
+    display: block;
+    font-size: 0.72rem;
+    font-style: italic;
+    color: var(--plata-2);
+  }
+
+  .claro .credito {
+    color: #64748b;
+  }
+
   /* Foto suelta dentro de un texto largo (flotante; se centra en móvil) */
   .prosa .figura-foto {
     width: min(42%, 11.5rem);

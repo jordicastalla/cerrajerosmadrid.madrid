@@ -3,6 +3,7 @@
  * Hueco para una foto de la Home (v2.5). Si existe src/assets/home/imagen-<n>.*,
  * la pinta optimizada; si no, un detalle del perfil de Madrid en oro, con la
  * misma proporción, para que el diseño no cambie al llegar la foto.
+ * Con `credito`, añade debajo un pie que acredita que la foto es del equipo.
  */
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
@@ -11,9 +12,11 @@ import { imagenesHome } from '@data/home';
 interface Props {
   n: 1 | 2;
   clase?: string;
+  /** Pie que acredita la autoría de la foto (E-E-A-T); solo si hay foto real */
+  credito?: string;
 }
 
-const { n, clase = '' } = Astro.props;
+const { n, clase = '', credito } = Astro.props;
 
 const archivos = import.meta.glob<{ default: ImageMetadata }>('../assets/home/imagen-*.{webp,jpg,jpeg,png,avif}', {
   eager: true,
@@ -28,19 +31,20 @@ if (foto && !alt)
 
 {
   foto ? (
-    <Image
-      src={foto}
-      alt={alt}
-      widths={[480, 800, 1200]}
-      sizes="(min-width: 960px) 34rem, 100vw"
-      class={`imagen-home ${clase}`}
-    />
+    <figure class={`imagen-home-fig ${clase}`}>
+      <Image src={foto} alt={alt} widths={[480, 800, 1200]} sizes="(min-width: 960px) 34rem, 100vw" class="imagen-home" />
+      {credito && <figcaption class="credito imagen-home-credito">{credito}</figcaption>}
+    </figure>
   ) : (
     <div class={`imagen-home imagen-home--hueco imagen-home--${n} ${clase}`} aria-hidden="true" />
   )
 }
 
 <style>
+  .imagen-home-fig {
+    margin: 0;
+  }
+
   .imagen-home {
     display: block;
     width: 100%;
@@ -50,6 +54,11 @@ if (foto && !alt)
     border-radius: 1rem;
     border: 1px solid var(--linea-oro);
     box-shadow: 0 30px 60px -40px rgb(3 7 18 / 0.7);
+  }
+
+  .imagen-home-credito {
+    margin-top: 0.6rem;
+    text-align: center;
   }
 
   /* Sin foto: un detalle del perfil de Madrid, en oro sobre obsidiana */

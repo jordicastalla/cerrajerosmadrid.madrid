@@ -25,7 +25,7 @@ Añadir un segundo punto de cierre de alta calidad es la mejor barrera disuasori
 
 <figure class="figura-foto figura-foto--izq">
   <img src="/servicios/escudos-cerrojo.webp" alt="Escudos protectores de latón de un cerrojo de seguridad, dentro de su embalaje." width="560" height="589" loading="lazy" />
-  <figcaption>Los escudos que protegen el cilindro por fuera.</figcaption>
+  <figcaption>Los escudos que protegen el cilindro por fuera. <span class="credito">Foto realizada por nuestro equipo</span></figcaption>
 </figure>
 
 Hoy en día, la inmensa mayoría de los robos en viviendas se cometen sin hacer ruido y sin forzar la estructura. Técnicas como el bumping (introducir una llave manipulada y golpearla para alinear los pistones) o el impressioning (moldear las muescas del cilindro con láminas de aluminio para crear una copia al instante) permiten abrir un bombín básico en menos de un minuto. Aunque, según la <a href="https://uces.es/consejos-de-cerrajera-espanola-de-uces-para-evitar-el-bumping/" target="_blank" rel="noopener nofollow">UCES</a>, no hay ninguna puerta infranqueable, debemos jugar con el tiempo y el ruido. Si un ladrón ve que una puerta tiene un sistema antibumping y un escudo macizo que no se puede manipular fácilmente, desistirá en el intento de acceder a nuestro hogar o negocio.
@@ -41,7 +41,7 @@ Para neutralizar estas técnicas de apertura silenciosa, en OpenServi recomendam
 
 <figure class="figura-foto figura-foto--der figura-foto--ancha">
   <img src="/servicios/cerrojo-seguridad.webp" alt="Cerrojo de seguridad de sobreponer de latón, con su cerradero, el escudo interior, las llaves no copiables y la tarjeta de propiedad." width="680" height="541" loading="lazy" />
-  <figcaption>Un cerrojo de sobreponer, con llave no copiable y tarjeta de propiedad.</figcaption>
+  <figcaption>Un cerrojo de sobreponer, con llave no copiable y tarjeta de propiedad. <span class="credito">Foto realizada por nuestro equipo</span></figcaption>
 </figure>
 
 No todos los cierres sirven para todas las puertas ni todas las necesidades de protección son iguales. En nuestros talleres móviles disponemos de una amplia gama de modelos y marcas de referencia (FAC, Lince, SAG, SAG EP30, Lince 7930R, etc.) para adaptarnos al milímetro a tu caso. Pero ¡no te preocupes entre tanta variedad! Nosotros te aconsejamos sobre el mejor modelo para tu puerta y tu caso:
