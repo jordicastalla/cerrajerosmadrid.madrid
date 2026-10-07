@@ -8,7 +8,7 @@ resumen: Instalamos cerrojos de seguridad para añadir un segundo punto de cierr
 intro: Convierte tu hogar en una fortaleza impenetrable con la instalación de un cerrojo de seguridad antibumping. Si quieres multiplicar la seguridad de tu vivienda o negocio sin necesidad de cambiar la puerta entera, esta es una opción muy interesante y eficaz contra ladrones y accesos no deseados. En OpenServi somos especialistas en la instalación de cerrojos antibumping para todo tipo de puertas, y ofrecemos este servicio de forma rápida y profesional en toda la Comunidad de Madrid.
 proceso:
   - Llamas al 912 918 462 y nos cuentas qué puerta quieres reforzar.
-  - Te damos un presupuesto por teléfono, sin compromiso.
+  - Te damos un presupuesto cerrado por teléfono, sin compromiso.
   - Revisamos la puerta, su material y la cerradura que ya tiene.
   - Te explicamos qué tipo de cerrojo encaja y lo instalamos.
   - Comprobamos que cierra y abre bien y te entregamos las llaves.
@@ -58,7 +58,7 @@ En OpenServi apostamos por la transparencia total en las tarifas. No aplicamos c
 - **El modelo y la gama del cerrojo:** desde cerrojos de alta seguridad mecánicos hasta modelos de gama alta con escudo acorazado, casquillo antiextracción y tarjeta de propiedad para copias de llave.
 - **El tipo de puerta:** las puertas de madera maciza se mecanizan de forma rápida, mientras que las puertas blindadas o acorazadas requieren brocas especiales para atravesar las placas de acero interiores.
 
-Llámanos por teléfono, explícanos qué tipo de puerta tienes y te daremos el coste total cerrado (material y mano de obra de instalación) antes de enviar al técnico.
+Llámanos por teléfono, explícanos qué tipo de puerta tienes y te daremos el coste total cerrado (material y mano de obra de instalación) en cuanto nos digas el modelo o nos envíes una foto del frontal de tu puerta, antes de enviar al técnico.
 
 ## ¿Quieres reforzar tu puerta hoy mismo? Solicita tu presupuesto
 

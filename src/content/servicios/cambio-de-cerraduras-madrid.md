@@ -8,7 +8,7 @@ resumen: Cambiamos la cerradura completa o solo el bombín cuando pierdes las ll
 intro: Si necesitas cambiar la cerradura de tu vivienda o sustituir el bombín de tu puerta por un modelo más seguro y moderno, en OpenServi te lo ponemos muy fácil. Somos un equipo de profesionales de la seguridad repartidos por toda la Comunidad de Madrid, organizados para darte una solución rápida, limpia, sin intermediarios y al precio justo.
 proceso:
   - Llamas al 912 918 462 y nos cuentas qué puerta tienes y qué ha pasado.
-  - Te damos un presupuesto orientativo por teléfono, sin compromiso.
+  - Te damos un presupuesto cerrado por teléfono, sin compromiso.
   - Revisamos la puerta y la cerradura y medimos el bombín antes de tocar nada.
   - Te explicamos si basta con cambiar el bombín o conviene cambiar la cerradura.
   - Hacemos el cambio, comprobamos que todo cierra bien y te entregamos las llaves.
@@ -76,7 +76,7 @@ El coste de sustituir una cerradura o un bombín depende principalmente de dos f
 - **El nivel de seguridad del material elegido:** no cuesta lo mismo un bombillo básico para una puerta interior que un cilindro de alta seguridad con llave no copiable, tarjeta de propiedad y protección antiextracción.
 - **El tipo de puerta y la mano de obra:** una sustitución sencilla de bombín europerfil es un proceso rápido, mientras que adaptar una puerta acorazada antigua a un sistema moderno requiere desmontar el panel y ajustar la herrería interna.
 
-Nuestra recomendación será siempre la mayor seguridad para tu hogar, pero al final tú decides qué marca de cerradura o bombín quieres que instalemos. Por eso te damos un presupuesto orientativo y claro por teléfono en cuanto nos indiques la marca de tu cerradura o nos envíes una foto del frontal de tu puerta. Sin letra pequeña, sin trampas y sin costes sorpresa.
+Nuestra recomendación será siempre la mayor seguridad para tu hogar, pero al final tú decides qué marca de cerradura o bombín quieres que instalemos. Por eso te damos un presupuesto cerrado y claro por teléfono en cuanto nos indiques la marca de tu cerradura o nos envíes una foto del frontal de tu puerta. Sin letra pequeña, sin trampas y sin costes sorpresa.
 
 ## ¿Necesitas cambiar tu cerradura hoy mismo? Pídenos presupuesto sin compromiso
 
