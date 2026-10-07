@@ -33,12 +33,18 @@ Hay situaciones en las que sustituir la cerradura no es solo un capricho persona
 
 ## ¿Cerradura completa o solo el bombín o cilindro?
 
-<figure class="figura-bombin">
-  <img src="/servicios/bombin-cilindro.svg" alt="Dibujo de un bombín o cilindro de seguridad de perfil europeo, con forma de petaca" width="150" height="180" loading="lazy" />
-  <figcaption>El bombín o cilindro: la pieza con forma de petaca donde entra la llave.</figcaption>
-</figure>
+<div class="figura-piezas">
+  <figure>
+    <img src="/servicios/cerradura-embutir.webp" alt="Cuerpo de una cerradura de embutir, con el hueco para el bombín y el agujero del picaporte." width="436" height="600" loading="lazy" />
+    <figcaption>La cerradura completa, de embutir.</figcaption>
+  </figure>
+  <figure>
+    <img src="/servicios/bombines.webp" alt="Seis bombines o cilindros de distintos modelos, cada uno con su juego de llaves." width="370" height="600" loading="lazy" />
+    <figcaption>El bombín o cilindro, con sus llaves.</figcaption>
+  </figure>
+</div>
 
-Esta es una de las dudas más frecuentes cuando nos llaman nuestros clientes, y la respuesta te puede ahorrar bastante dinero: en la mayoría de los casos no hace falta cambiar toda la cerradura, basta con sustituir únicamente el bombín (o cilindro). Sí, esa pieza con forma de petaca que ves en la imagen.
+Esta es una de las dudas más frecuentes cuando nos llaman nuestros clientes, y la respuesta te puede ahorrar bastante dinero: en la mayoría de los casos no hace falta cambiar toda la cerradura, basta con sustituir únicamente el bombín (o cilindro). Sí, esa pieza con forma de petaca que ves a la derecha, al lado de la cerradura completa.
 
 - **El bombín o bombillo:** es la pieza cilíndrica donde introduces la llave para girar. Si solo quieres cambiar de llaves porque las has perdido o buscas mejorar la protección con un modelo antibumping y antiganzúa, sustituir solo el bombín es la opción más rápida y económica.
 - **La cerradura completa:** es todo el mecanismo interno de barras, petacas y resbalón que va embutido o sobrepuesto en la puerta. Solo es necesario cambiar la caja completa si el mecanismo interior se ha roto, se ha desgastado por los años o quieres hacer una conversión total de sistema (por ejemplo, pasar de una llave de gorja antigua a un cilindro europerfil moderno).

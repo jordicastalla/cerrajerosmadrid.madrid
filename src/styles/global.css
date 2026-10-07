@@ -423,32 +423,32 @@
     margin-top: 0.6em;
   }
 
-  /* Figura flotante dentro de un texto largo (p. ej. el bombín de Cambio de Cerradura) */
-  .prosa .figura-bombin {
-    float: right;
-    width: min(42%, 10.5rem);
-    margin: 0.25rem 0 1rem 1.75rem;
+  /* Par de fotos (bombín y cerradura) dentro de un texto largo: bombín a la derecha */
+  .prosa .figura-piezas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-width: 30rem;
+    margin: 0.5rem 0 1.75rem;
+  }
+
+  .prosa .figura-piezas figure {
+    margin: 0;
     text-align: center;
   }
 
-  .prosa .figura-bombin img {
+  .prosa .figura-piezas img {
     width: 100%;
     height: auto;
+    border-radius: 0.75rem;
+    border: 1px solid var(--linea-clara);
   }
 
-  .prosa .figura-bombin figcaption {
-    margin-top: 0.55rem;
+  .prosa .figura-piezas figcaption {
+    margin-top: 0.5rem;
     font-size: 0.8rem;
-    line-height: 1.4;
+    line-height: 1.35;
     color: var(--pizarra);
-  }
-
-  @media (max-width: 36rem) {
-    .prosa .figura-bombin {
-      float: none;
-      width: min(13rem, 60%);
-      margin: 0 auto 1.25rem;
-    }
   }
 
   /* Viñeta: diente de llave dorado */
