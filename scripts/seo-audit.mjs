@@ -22,6 +22,14 @@ const PAGINAS_LEGALES = ['/aviso-legal/', '/politica-de-privacidad/', '/politica
  * y también lo citado entre comillas angulares («…»): es lo que dicen otros, no
  * una afirmación propia (v2.5: «No te vamos a soltar el rollo de que somos «los mejores»»).
  */
+/**
+ * Frases superlativas que el cliente ha decidido publicar a propósito en su
+ * texto de venta (excepción expresa a §42, documentada en el SPEC v2.6). Se
+ * descartan antes de comprobar las prohibidas, así que la red sigue cazando
+ * cualquier otro uso nuevo (p. ej. «somos los mejores»).
+ */
+const PERMITIDAS_CLIENTE = ['los mejores cerrojos antibumping y anti-impressioning del mercado'];
+
 const PROHIBIDAS = [
   [/los mejores/i, '«los mejores»'],
   // «fabricantes líderes» habla de las marcas que se instalan, no de la empresa
@@ -127,7 +135,8 @@ for (const p of paginas) {
     .replace(/<blockquote[\s\S]*?<\/blockquote>/gi, ' ')
     .replace(/<[^>]+>/g, ' ');
 
-  const propio = visible.replace(/«[^»]*»/g, ' ');
+  let propio = visible.replace(/«[^»]*»/g, ' ');
+  for (const frase of PERMITIDAS_CLIENTE) propio = propio.split(frase).join(' ');
   for (const [re, nombre] of PROHIBIDAS) if (re.test(propio)) error(ruta, `expresión prohibida sin prueba: ${nombre}`);
   for (const marca of ['lorem', 'TODO', 'XXX', '{{']) if (visible.includes(marca)) error(ruta, `marca de borrador en el HTML: ${marca}`);
   if (!PAGINAS_LEGALES.includes(ruta) && (/€/.test(visible) || /\beuros?\b/i.test(visible)))

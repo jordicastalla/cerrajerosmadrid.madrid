@@ -12,6 +12,9 @@
 
 ## Cambios v2.6 (2026-10-07, pedidos por el cliente)
 
+- Página «Instalación de cerrojos de seguridad»: nuevo texto del cliente (cerrojos antibumping y anti-impressioning, tipos, cuándo colocarlos, precio y cierre), con correcciones de ortografía mínimas y enlace a la UCES en la nota sobre el bumping. seoTitle con «Antibumping».
+- El cliente mantiene su copia de venta con superlativos («fortaleza impenetrable», «la mejor barrera disuasoria», «los mejores cerrojos … del mercado»): excepción expresa a §42. La auditoría acepta esa frase concreta mediante una lista `PERMITIDAS_CLIENTE` en scripts/seo-audit.mjs, y sigue marcando cualquier otro uso nuevo de «los mejores».
+
 - «Quiénes somos» se quita de la Home: queda solo en su página (`/quienes-somos/`), enlazada desde la cabecera y el pie.
 - Página «Cambio de cerraduras»: nuevo texto del cliente (cuándo cambiar, cerradura completa o bombín, por qué no vale cualquier recambio, marcas, precio y cierre). Correcciones de ortografía mínimas. El dato «más del 80 % de cerraduras obsoletas» va atribuido a la UCES (verificado: lo recogen varias fuentes). H1 en singular, «Cambio de Cerradura en Madrid».
 - Dibujo de un bombín (`public/servicios/bombin-cilindro.svg`) flotando junto a la sección del bombín, como marcador de posición hasta que el cliente aporte una foto real; se sustituye reemplazando ese archivo.
