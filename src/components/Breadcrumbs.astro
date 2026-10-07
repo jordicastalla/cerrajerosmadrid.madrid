@@ -28,40 +28,51 @@ const { items } = Astro.props;
 
 <style>
   .migas {
-    padding-top: 5px;
-    padding-bottom: 25px;
-    text-align: center;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--linea);
   }
 
   .migas ol {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.35rem 0.5rem;
+    align-items: center;
+    gap: 0.25rem 0.55rem;
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.01em;
     color: var(--plata-2);
   }
 
+  .migas li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
   .migas li + li::before {
-    content: '›';
-    margin-right: 0.5rem;
-    color: var(--oro);
+    content: '';
+    width: 0.4rem;
+    height: 0.4rem;
+    border-right: 1.5px solid var(--oro);
+    border-top: 1.5px solid var(--oro);
+    transform: rotate(45deg);
+    opacity: 0.8;
   }
 
   .migas a {
     color: var(--plata);
     text-decoration: none;
+    transition: color 0.2s ease;
   }
 
   .migas a:hover {
     color: var(--oro);
-    text-decoration: underline;
   }
 
   .migas [aria-current] {
-    color: var(--plata-2);
+    font-weight: 600;
+    color: var(--oro);
   }
 </style>

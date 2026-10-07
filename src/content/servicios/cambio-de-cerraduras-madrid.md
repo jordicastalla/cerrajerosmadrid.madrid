@@ -35,7 +35,7 @@ Hay situaciones en las que sustituir la cerradura no es solo un capricho persona
 
 <figure class="figura-foto figura-foto--der">
   <img src="/servicios/bombines.webp" alt="Seis bombines o cilindros de distintos modelos, cada uno con su juego de llaves." width="370" height="600" loading="lazy" />
-  <figcaption>El bombín o cilindro, con sus llaves. <span class="credito">Foto realizada por nuestro equipo</span></figcaption>
+  <figcaption>El bombín o cilindro, con sus llaves. <span class="credito">Foto realizada por el equipo de OpenServi</span></figcaption>
 </figure>
 
 Esta es una de las dudas más frecuentes cuando nos llaman nuestros clientes, y la respuesta te puede ahorrar bastante dinero: en la mayoría de los casos no hace falta cambiar toda la cerradura, basta con sustituir únicamente el bombín (o cilindro). Sí, esa pieza con forma de petaca que ves a la derecha.
@@ -49,7 +49,7 @@ En OpenServi no te vamos a vender una cerradura entera si solo necesitas cambiar
 
 <figure class="figura-foto figura-foto--izq">
   <img src="/servicios/cerradura-embutir.webp" alt="Cuerpo de una cerradura de embutir, con el hueco para el bombín y el agujero del picaporte." width="436" height="600" loading="lazy" />
-  <figcaption>El cuerpo de una cerradura de embutir. <span class="credito">Foto realizada por nuestro equipo</span></figcaption>
+  <figcaption>El cuerpo de una cerradura de embutir. <span class="credito">Foto realizada por el equipo de OpenServi</span></figcaption>
 </figure>
 
 Si eres un manitas, seguro que has pensado en cambiar la cerradura o el bombín tú mismo. ¡Cuidado! No es tan fácil y te puede salir caro. Comprar un bombín o una cerradura en una gran superficie de bricolaje puede parecer una buena idea… pero en este sector no existe una medida única ni un estándar universal.

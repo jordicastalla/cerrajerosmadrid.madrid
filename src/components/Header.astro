@@ -1,8 +1,8 @@
 ---
 /**
  * Cabecera (spec §21): logo, navegación corta y teléfono. «Servicios» es un
- * desplegable con enlace directo a cada servicio (no hay página de servicios);
- * zonas, opiniones y preguntas son secciones de la Home.
+ * desplegable con enlace directo a cada servicio (no hay página de servicios).
+ * El menú se reduce a lo esencial: Servicios, Quiénes somos y Opiniones.
  * En móvil, menú en un <dialog> (sin dependencias).
  */
 import { getCollection } from 'astro:content';
@@ -26,10 +26,8 @@ const servicios = [
 ];
 
 const enlaces = [
-  { href: '/#zonas', nombre: 'Zonas' },
   { href: '/quienes-somos/', nombre: 'Quiénes somos' },
-  { href: '/#opiniones', nombre: 'Opiniones' },
-  { href: '/#faq', nombre: 'Preguntas' },
+  { href: '/opiniones/', nombre: 'Opiniones' },
 ];
 
 const actual = (href: string) => (href === ruta ? 'page' : undefined);
@@ -282,7 +280,7 @@ const enServicio = ruta.startsWith('/servicios/');
     white-space: nowrap;
   }
 
-  /* Entre 1024 y 1200 px van justos los cinco enlaces y el teléfono */
+  /* Entre 1024 y 1200 px, el desplegable y los enlaces van más justos */
   @media (min-width: 1024px) and (max-width: 1199px) {
     .cabecera__fila {
       gap: 0.6rem;

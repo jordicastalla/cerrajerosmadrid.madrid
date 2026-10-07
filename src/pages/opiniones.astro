@@ -1,0 +1,274 @@
+---
+/**
+ * «Opiniones» (spec §18): página optimizada para «Opiniones OpenServi Madrid».
+ * Texto genérico de confianza (sin canibalizar las fichas de servicio) y las
+ * reseñas LITERALES del perfil de Google (src/data/resenas.ts). No se inventan
+ * reseñas ni se copian de terceros; sin AggregateRating ni Review en schema.org.
+ */
+import Layout from '@layouts/Layout.astro';
+import Breadcrumbs from '@components/Breadcrumbs.astro';
+import CtaFinal from '@components/CtaFinal.astro';
+import Skyline from '@components/marca/Skyline.astro';
+import { resenas, mediaTexto } from '@data/resenas';
+import { site, absoluta } from '@data/site';
+import { ID_NEGOCIO } from '@lib/schema';
+
+const ruta = '/opiniones/';
+const titulo = `Opiniones de ${site.marca} en Madrid | Reseñas de clientes`;
+const descripcion =
+  'Opiniones y reseñas reales de clientes de OpenServi en Madrid. Valoración media de 4,9 sobre 5 en Google. Lee lo que opinan de nuestro trato y nuestro trabajo.';
+
+const relleno = resenas.media ? (resenas.media / 5) * 100 : 0;
+
+// Página de la colección de opiniones. Describe al negocio por su @id; sin
+// AggregateRating ni Review (spec §18).
+const schemaPagina = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': absoluta(`${ruta}#pagina`),
+  name: `Opiniones de ${site.marca} en Madrid`,
+  description: descripcion,
+  url: absoluta(ruta),
+  inLanguage: 'es',
+  about: { '@id': ID_NEGOCIO },
+};
+---
+
+<Layout titulo={titulo} descripcion={descripcion} ruta={ruta} schemas={[schemaPagina]}>
+  <Breadcrumbs
+    items={[
+      { nombre: 'Inicio', ruta: '/' },
+      { nombre: 'Opiniones', ruta },
+    ]}
+  />
+
+  <section class="cabeza-op">
+    <Skyline clase="cabeza-op__skyline" />
+    <div class="envoltura cabeza-op__rejilla">
+      <div>
+        <p class="rotulo">Reseñas de Google</p>
+        <h1 class="titular cabeza-op__h1 metal">Opiniones de OpenServi en Madrid</h1>
+        <div class="prosa cabeza-op__prosa">
+          <p>
+            La mejor forma de saber si puedes confiar en un equipo de cerrajería es escuchar a quienes ya lo han llamado. En
+            esta página reunimos las opiniones de clientes de OpenServi en Madrid, tal y como las han escrito en nuestro perfil
+            de Google.
+          </p>
+          <p>
+            Son reseñas reales, sin retocar. Nos ayudan a seguir mejorando y, si estás pensando en llamarnos, te dan una idea
+            honesta de nuestro trato, de cómo trabajamos y de por qué nuestros clientes nos recomiendan.
+          </p>
+        </div>
+      </div>
+
+      <div class="nota tarjeta">
+        {
+          mediaTexto && (
+            <p class="nota__cifra">
+              <span class="dorado">{mediaTexto}</span>
+              <span class="nota__de">de 5</span>
+            </p>
+          )
+        }
+        {
+          resenas.media && (
+            <span class="estrellas" aria-hidden="true">
+              <span class="estrellas__fondo">★★★★★</span>
+              <span class="estrellas__oro" style={`width:${relleno}%`}>★★★★★</span>
+            </span>
+          )
+        }
+        <p class="nota__total">{resenas.total} opiniones en Google</p>
+        <a
+          class="enlace"
+          href={resenas.perfilUrl}
+          target="_blank"
+          rel="noopener"
+          data-evento="perfil_google"
+          data-cta="opiniones-pagina"
+        >
+          Ver todas las opiniones en Google Maps ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="claro">
+    <section class="tramo envoltura resenas" aria-labelledby="resenas-titulo">
+      <h2 class="solo-lector" id="resenas-titulo">Lo que dicen nuestros clientes</h2>
+      <ul class="resenas__lista">
+        {
+          resenas.items.map((r) => (
+            <li class="tarjeta resena">
+              <span class="resena__estrellas" aria-hidden="true">★★★★★</span>
+              <blockquote>
+                <p>{r.texto}</p>
+              </blockquote>
+              <p class="resena__autor">
+                {r.autor}
+                <span>Reseña de Google</span>
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="resenas__pie">
+        Estas son algunas de las opiniones publicadas en nuestro perfil.
+        <a href={resenas.perfilUrl} target="_blank" rel="noopener" data-cta="opiniones-pie">
+          Puedes leerlas todas en Google Maps ↗
+        </a>
+      </p>
+    </section>
+  </div>
+
+  <CtaFinal cta="final-opiniones" />
+</Layout>
+
+<style>
+  .cabeza-op {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(1.5rem, 4vw, 3rem) clamp(3rem, 6vw, 5rem);
+    background:
+      radial-gradient(40rem 24rem at 85% 20%, rgb(212 175 55 / 0.12), transparent 62%),
+      var(--obsidiana-profunda);
+  }
+
+  .cabeza-op :global(.cabeza-op__skyline) {
+    --skyline-opacidad: 0.2;
+  }
+
+  .cabeza-op__rejilla {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .cabeza-op__rejilla {
+      grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.7fr);
+      gap: 3.5rem;
+    }
+  }
+
+  .cabeza-op__h1 {
+    margin-top: 0.9rem;
+    font-size: clamp(1.9rem, 1.2rem + 3vw, 3.4rem);
+  }
+
+  .cabeza-op__prosa {
+    margin-top: 1.25rem;
+    color: var(--plata);
+  }
+
+  /* --- Nota media (resumen de Google) -------------------------------- */
+  .nota {
+    display: grid;
+    justify-items: start;
+    gap: 0.5rem;
+  }
+
+  .nota__cifra {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-family: var(--f-marca);
+    font-size: clamp(2.8rem, 2rem + 2.2vw, 3.8rem);
+    line-height: 1;
+  }
+
+  .nota__de {
+    font-family: var(--f-texto);
+    font-size: 1rem;
+    color: var(--plata-2);
+  }
+
+  .estrellas {
+    position: relative;
+    display: inline-block;
+    font-size: 1.5rem;
+    letter-spacing: 0.15em;
+    line-height: 1;
+  }
+
+  .estrellas__fondo {
+    color: rgb(148 163 184 / 0.35);
+  }
+
+  .estrellas__oro {
+    position: absolute;
+    inset: 0 auto 0 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--oro);
+  }
+
+  .nota__total {
+    font-weight: 600;
+    color: var(--plata);
+  }
+
+  /* --- Rejilla de reseñas -------------------------------------------- */
+  .resenas__lista {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  }
+
+  .resena {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .resena__estrellas {
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    color: var(--oro);
+  }
+
+  .resena blockquote {
+    margin: 0;
+    flex: 1;
+  }
+
+  .resena blockquote p {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--pizarra);
+  }
+
+  .resena__autor {
+    display: grid;
+    gap: 0.15rem;
+    font-weight: 700;
+    color: var(--obsidiana);
+  }
+
+  .resena__autor span {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--pizarra);
+  }
+
+  .resenas__pie {
+    margin-top: 2rem;
+    color: var(--pizarra);
+  }
+
+  .resenas__pie a {
+    color: var(--obsidiana);
+    font-weight: 650;
+    text-decoration: underline;
+    text-decoration-color: var(--oro-texto);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+  }
+</style>
