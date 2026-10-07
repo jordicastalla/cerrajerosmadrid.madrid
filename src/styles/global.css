@@ -440,6 +440,11 @@
     margin-right: 1.75rem;
   }
 
+  /* Variante más ancha para fotos apaisadas */
+  .prosa .figura-foto--ancha {
+    width: min(50%, 17rem);
+  }
+
   .prosa .figura-foto img {
     width: 100%;
     height: auto;
