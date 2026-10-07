@@ -33,18 +33,12 @@ Hay situaciones en las que sustituir la cerradura no es solo un capricho persona
 
 ## ¿Cerradura completa o solo el bombín o cilindro?
 
-<div class="figura-piezas">
-  <figure>
-    <img src="/servicios/cerradura-embutir.webp" alt="Cuerpo de una cerradura de embutir, con el hueco para el bombín y el agujero del picaporte." width="436" height="600" loading="lazy" />
-    <figcaption>La cerradura completa, de embutir.</figcaption>
-  </figure>
-  <figure>
-    <img src="/servicios/bombines.webp" alt="Seis bombines o cilindros de distintos modelos, cada uno con su juego de llaves." width="370" height="600" loading="lazy" />
-    <figcaption>El bombín o cilindro, con sus llaves.</figcaption>
-  </figure>
-</div>
+<figure class="figura-foto figura-foto--der">
+  <img src="/servicios/bombines.webp" alt="Seis bombines o cilindros de distintos modelos, cada uno con su juego de llaves." width="370" height="600" loading="lazy" />
+  <figcaption>El bombín o cilindro, con sus llaves.</figcaption>
+</figure>
 
-Esta es una de las dudas más frecuentes cuando nos llaman nuestros clientes, y la respuesta te puede ahorrar bastante dinero: en la mayoría de los casos no hace falta cambiar toda la cerradura, basta con sustituir únicamente el bombín (o cilindro). Sí, esa pieza con forma de petaca que ves a la derecha, al lado de la cerradura completa.
+Esta es una de las dudas más frecuentes cuando nos llaman nuestros clientes, y la respuesta te puede ahorrar bastante dinero: en la mayoría de los casos no hace falta cambiar toda la cerradura, basta con sustituir únicamente el bombín (o cilindro). Sí, esa pieza con forma de petaca que ves a la derecha.
 
 - **El bombín o bombillo:** es la pieza cilíndrica donde introduces la llave para girar. Si solo quieres cambiar de llaves porque las has perdido o buscas mejorar la protección con un modelo antibumping y antiganzúa, sustituir solo el bombín es la opción más rápida y económica.
 - **La cerradura completa:** es todo el mecanismo interno de barras, petacas y resbalón que va embutido o sobrepuesto en la puerta. Solo es necesario cambiar la caja completa si el mecanismo interior se ha roto, se ha desgastado por los años o quieres hacer una conversión total de sistema (por ejemplo, pasar de una llave de gorja antigua a un cilindro europerfil moderno).
@@ -52,6 +46,11 @@ Esta es una de las dudas más frecuentes cuando nos llaman nuestros clientes, y 
 En OpenServi no te vamos a vender una cerradura entera si solo necesitas cambiar el bombillo. Te asesoramos con total honestidad.
 
 ## No todas las cerraduras valen en todas las puertas
+
+<figure class="figura-foto figura-foto--izq">
+  <img src="/servicios/cerradura-embutir.webp" alt="Cuerpo de una cerradura de embutir, con el hueco para el bombín y el agujero del picaporte." width="436" height="600" loading="lazy" />
+  <figcaption>El cuerpo de una cerradura de embutir.</figcaption>
+</figure>
 
 Si eres un manitas, seguro que has pensado en cambiar la cerradura o el bombín tú mismo. ¡Cuidado! No es tan fácil y te puede salir caro. Comprar un bombín o una cerradura en una gran superficie de bricolaje puede parecer una buena idea… pero en este sector no existe una medida única ni un estándar universal.
 

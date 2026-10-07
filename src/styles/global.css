@@ -423,32 +423,48 @@
     margin-top: 0.6em;
   }
 
-  /* Par de fotos (bombín y cerradura) dentro de un texto largo: bombín a la derecha */
-  .prosa .figura-piezas {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    max-width: 30rem;
-    margin: 0.5rem 0 1.75rem;
-  }
-
-  .prosa .figura-piezas figure {
-    margin: 0;
+  /* Foto suelta dentro de un texto largo (flotante; se centra en móvil) */
+  .prosa .figura-foto {
+    width: min(42%, 11.5rem);
+    margin: 0.3rem 0 1rem;
     text-align: center;
   }
 
-  .prosa .figura-piezas img {
+  .prosa .figura-foto--der {
+    float: right;
+    margin-left: 1.75rem;
+  }
+
+  .prosa .figura-foto--izq {
+    float: left;
+    margin-right: 1.75rem;
+  }
+
+  .prosa .figura-foto img {
     width: 100%;
     height: auto;
     border-radius: 0.75rem;
     border: 1px solid var(--linea-clara);
   }
 
-  .prosa .figura-piezas figcaption {
+  .prosa .figura-foto figcaption {
     margin-top: 0.5rem;
     font-size: 0.8rem;
     line-height: 1.35;
     color: var(--pizarra);
+  }
+
+  /* Cada H2 empieza por debajo de las fotos flotantes de la sección anterior */
+  .prosa h2 {
+    clear: both;
+  }
+
+  @media (max-width: 36rem) {
+    .prosa .figura-foto {
+      float: none;
+      width: min(13rem, 65%);
+      margin: 0 auto 1.25rem;
+    }
   }
 
   /* Viñeta: diente de llave dorado */

@@ -17,7 +17,7 @@
 
 - «Quiénes somos» se quita de la Home: queda solo en su página (`/quienes-somos/`), enlazada desde la cabecera y el pie.
 - Página «Cambio de cerraduras»: nuevo texto del cliente (cuándo cambiar, cerradura completa o bombín, por qué no vale cualquier recambio, marcas, precio y cierre). Correcciones de ortografía mínimas. El dato «más del 80 % de cerraduras obsoletas» va atribuido a la UCES (verificado: lo recogen varias fuentes). H1 en singular, «Cambio de Cerradura en Madrid».
-- Fotos reales del cliente en «Cambio de cerraduras» (`public/servicios/bombines.webp` y `cerradura-embutir.webp`): par de imágenes en la sección «¿Cerradura completa o solo el bombín?», con el bombín a la derecha. Sustituyen al dibujo provisional.
+- Fotos reales del cliente en «Cambio de cerraduras» (`public/servicios/bombines.webp` y `cerradura-embutir.webp`), flotando dentro del texto: los bombines a la derecha en «¿Cerradura completa o solo el bombín?» y el cuerpo de la cerradura a la izquierda en «No todas las cerraduras valen en todas las puertas». Sustituyen al dibujo provisional.
 - El cierre de «Cambio de cerraduras» mantiene las afirmaciones del cliente tal cual («las mejores cerraduras del mercado», «impenetrables», «muros inquebrantables», «ni un ladrón en modo dios podrá abrir», «100 % protegida»): es su texto de venta, aprobado por él, y la auditoría no lo marca. Excepción a §19/§42 por decisión expresa del cliente (2026-10-07).
 
 ## Cambios v2.5 (2026-10-06, pedidos por el cliente): textos de la Home
