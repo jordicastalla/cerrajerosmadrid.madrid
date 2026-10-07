@@ -78,10 +78,10 @@ El coste de sustituir una cerradura o un bombín depende principalmente de dos f
 
 Nuestra recomendación será siempre la mayor seguridad para tu hogar, pero al final tú decides qué marca de cerradura o bombín quieres que instalemos. Por eso te damos un presupuesto orientativo y claro por teléfono en cuanto nos indiques la marca de tu cerradura o nos envíes una foto del frontal de tu puerta. Sin letra pequeña, sin trampas y sin costes sorpresa.
 
-## ¿Necesitas cambiar tu cerradura hoy mismo?
+## ¿Necesitas cambiar tu cerradura hoy mismo? Pídenos presupuesto sin compromiso
 
 ¿Con la mosca detrás de la oreja con tu cerradura? No dejes la protección de tu hogar en manos de la suerte ni pospongas el cambio de llaves por miedo al precio.
 
-En OpenServi contamos con un equipo de expertos en seguridad y con cerraduras de las marcas más populares del mercado. Nos desplazamos hasta tu domicilio para asesorarte y dejar tu puerta bien protegida en el mismo día.
+En OpenServi contamos con un equipo de expertos en seguridad y contamos con las mejores cerraduras del mercado, de las marcas más populares e impenetrables. Auténticos muros inquebrantables que ni un ladrón en «modo dios» (con trucos) podrá abrir. Nos desplazamos hasta tu domicilio para asesorarte y dejar tu puerta 100 % protegida en el mismo día.
 
 [Llama ahora al 912 918 462](tel:+34912918462), dinos qué necesitas y solicita tu presupuesto sin compromiso para cambiar la cerradura o el bombín con total garantía, rapidez y al mejor precio.

@@ -15,7 +15,7 @@
 - «Quiénes somos» se quita de la Home: queda solo en su página (`/quienes-somos/`), enlazada desde la cabecera y el pie.
 - Página «Cambio de cerraduras»: nuevo texto del cliente (cuándo cambiar, cerradura completa o bombín, por qué no vale cualquier recambio, marcas, precio y cierre). Correcciones de ortografía mínimas. El dato «más del 80 % de cerraduras obsoletas» va atribuido a la UCES (verificado: lo recogen varias fuentes). H1 en singular, «Cambio de Cerradura en Madrid».
 - Dibujo de un bombín (`public/servicios/bombin-cilindro.svg`) flotando junto a la sección del bombín, como marcador de posición hasta que el cliente aporte una foto real; se sustituye reemplazando ese archivo.
-- Las afirmaciones de seguridad absolutas del borrador («100 % protegida», «impenetrables», «muros inquebrantables», «las mejores cerraduras del mercado», «ni un ladrón en modo dios podrá abrir») se suavizaron por §19 y §42; pendiente de decisión del cliente si las quiere restaurar.
+- El cierre de «Cambio de cerraduras» mantiene las afirmaciones del cliente tal cual («las mejores cerraduras del mercado», «impenetrables», «muros inquebrantables», «ni un ladrón en modo dios podrá abrir», «100 % protegida»): es su texto de venta, aprobado por él, y la auditoría no lo marca. Excepción a §19/§42 por decisión expresa del cliente (2026-10-07).
 
 ## Cambios v2.5 (2026-10-06, pedidos por el cliente): textos de la Home
 
