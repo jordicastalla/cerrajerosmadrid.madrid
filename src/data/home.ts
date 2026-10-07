@@ -4,6 +4,6 @@
  * el build falla en cuanto se añade la foto.
  */
 export const imagenesHome: Record<1 | 2, { alt: string }> = {
-  1: { alt: '' },
-  2: { alt: '' },
+  1: { alt: 'Bombín de latón instalado en el escudo de una puerta de madera, visto de cerca.' },
+  2: { alt: 'Canto de una puerta acorazada abierta, con los bulones de acero de su sistema de cierre.' },
 };
