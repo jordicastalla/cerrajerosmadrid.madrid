@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 180" role="img" aria-label="Bombín o cilindro de seguridad de perfil europeo, con forma de petaca">
+  <defs>
+    <linearGradient id="laton" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F4E4B0"/>
+      <stop offset="0.55" stop-color="#E4C878"/>
+      <stop offset="1" stop-color="#C19A44"/>
+    </linearGradient>
+  </defs>
+  <!-- Leva (pestillo que mueve la cerradura) -->
+  <rect x="64" y="146" width="22" height="24" rx="3" fill="url(#laton)" stroke="#111827" stroke-width="2.4"/>
+  <!-- Cuerpo del bombín: círculo del rotor arriba y cuerpo en forma de petaca -->
+  <path d="M75 10a40 40 0 0 1 28 68l0 0 2 2a4 4 0 0 1 1 3v63a4 4 0 0 1-4 4H48a4 4 0 0 1-4-4V83a4 4 0 0 1 1-3l2-2A40 40 0 0 1 75 10Z"
+        fill="url(#laton)" stroke="#111827" stroke-width="2.6" stroke-linejoin="round"/>
+  <!-- Bocallave (por donde entra la llave) -->
+  <g fill="#111827">
+    <circle cx="75" cy="46" r="10"/>
+    <path d="M70.5 50h9l-2.5 26h-4Z"/>
+  </g>
+  <!-- Tornillo de fijación, dentro del cuerpo -->
+  <circle cx="75" cy="120" r="6" fill="#F4E4B0" stroke="#8B7324" stroke-width="2.4"/>
+  <path d="M71 120h8M75 116v8" stroke="#8B7324" stroke-width="2" stroke-linecap="round"/>
+</svg>

@@ -10,6 +10,13 @@
 >
 > **Se mantiene sin cambios:** la regla de no inventar reseñas, tiempos de llegada, credenciales ni garantías (§18, §19).
 
+## Cambios v2.6 (2026-10-07, pedidos por el cliente)
+
+- «Quiénes somos» se quita de la Home: queda solo en su página (`/quienes-somos/`), enlazada desde la cabecera y el pie.
+- Página «Cambio de cerraduras»: nuevo texto del cliente (cuándo cambiar, cerradura completa o bombín, por qué no vale cualquier recambio, marcas, precio y cierre). Correcciones de ortografía mínimas. El dato «más del 80 % de cerraduras obsoletas» va atribuido a la UCES (verificado: lo recogen varias fuentes). H1 en singular, «Cambio de Cerradura en Madrid».
+- Dibujo de un bombín (`public/servicios/bombin-cilindro.svg`) flotando junto a la sección del bombín, como marcador de posición hasta que el cliente aporte una foto real; se sustituye reemplazando ese archivo.
+- Las afirmaciones de seguridad absolutas del borrador («100 % protegida», «impenetrables», «muros inquebrantables», «las mejores cerraduras del mercado», «ni un ladrón en modo dios podrá abrir») se suavizaron por §19 y §42; pendiente de decisión del cliente si las quiere restaurar.
+
 ## Cambios v2.5 (2026-10-06, pedidos por el cliente): textos de la Home
 
 - Textos del cliente en la Home, con correcciones de ortografía mínimas: presentación en «Cerrajeros en Madrid»; «Cerrajería 24 horas y urgencias para imprevistos reales en Madrid» (sustituye a «Cerrajero Urgente 24 Horas», mismo `id`); «¿Por qué elegir el concepto OpenServi?» (5 tarjetas); «¿Buscas un cerrajero económico en Madrid?» (antes de «Cómo trabajamos»); «¿Buscas un cerrajero cerca en Madrid? Llámanos ahora» (cierre de la Home, en lugar del CTA final común). El H1 no cambia.
