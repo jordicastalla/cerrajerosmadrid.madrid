@@ -39,7 +39,7 @@ const localidades = defineCollection({
       consejo: z.string().optional(),
       /** Solo si la empresa lo mide (spec §38). Si no, no se muestra. */
       tiempoLlegada: z.string().optional(),
-      /** Foto del pueblo (4:3, ideal 1600×1200): va junto a la intro larga, bajo el hero */
+      /** Foto de la zona (vertical 3:4, ideal 1200×1600): va junto a la intro larga, bajo el hero */
       image: image().optional(),
       imageAlt: z.string().optional(),
       /** Autoría o licencia de la foto, si la pide (p. ej. Wikimedia Commons) */

@@ -135,8 +135,8 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
                 <Image
                   src={d.image!}
                   alt={d.imageAlt!}
-                  widths={[480, 960, 1440]}
-                  sizes="(min-width: 960px) 30rem, 100vw"
+                  widths={[400, 800, 1200]}
+                  sizes="(min-width: 960px) 24rem, min(100vw, 24rem)"
                   class="cuerpo-loc__foto"
                 />
                 {d.imageCredito && <figcaption class="credito cuerpo-loc__credito">{d.imageCredito}</figcaption>}
@@ -290,8 +290,8 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
     margin-top: 1.75rem !important;
   }
 
-  /* Foto del pueblo junto a la intro larga: a la derecha en escritorio (fija
-     mientras se lee el texto), debajo del texto en móvil */
+  /* Foto de la zona junto a la intro larga, en vertical (3:4): a la derecha en
+     escritorio (fija mientras se lee el texto), debajo del texto en móvil */
   .cuerpo-loc__intro--foto {
     display: grid;
     gap: 2.5rem;
@@ -300,7 +300,7 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
 
   @media (min-width: 960px) {
     .cuerpo-loc__intro--foto {
-      grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
+      grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.65fr);
       gap: 4rem;
     }
 
@@ -312,15 +312,23 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
   }
 
   .cuerpo-loc__figura {
-    margin: 0;
+    width: min(100%, 24rem);
+    margin: 0 auto;
+  }
+
+  @media (min-width: 960px) {
+    .cuerpo-loc__figura {
+      width: 100%;
+    }
   }
 
   :global(.cuerpo-loc__foto) {
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 4;
     object-fit: cover;
+    object-position: 50% 40%;
     border-radius: 1rem;
     border: 1px solid var(--linea-oro);
     box-shadow: 0 30px 60px -40px rgb(3 7 18 / 0.7);

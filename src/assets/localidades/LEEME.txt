@@ -1,2 +1,2 @@
-Fotos de los pueblos (4:3, ideal 1600x1200). Nombre = slug de la ficha, p. ej. alcala-de-henares.jpg.
-En la ficha: image: ../../assets/localidades/<slug>.jpg + imageAlt (+ imageCredito si hace falta).
+Fotos de las zonas, en vertical (3:4, ideal 1200x1600; si son 9:16 se recortan arriba y abajo).
+En la ficha: image: ../../assets/localidades/<archivo>.jpg + imageAlt (+ imageCredito).
