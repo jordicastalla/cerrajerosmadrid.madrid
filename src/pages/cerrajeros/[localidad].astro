@@ -58,6 +58,9 @@ const indexable = esIndexable(d.status);
 const cuerpo = trocearCuerpo(entrada.id, entrada.body);
 const introCorta = cuerpo?.introCorta.length ? cuerpo.introCorta : d.intro ? d.intro.split(/\n{2,}/) : [];
 
+// Foto del pueblo: al lado de la intro larga, justo bajo el hero (no en el hero)
+const hayFoto = Boolean(d.image && d.imageAlt);
+
 const servicios = (await getCollection('servicios', (s) => s.data.status === 'ready')).sort((a, b) => a.data.orden - b.data.orden);
 const cercanas = (await getEntries(d.nearby)).filter((l) => l.data.cerrajeroPropio);
 
@@ -107,11 +110,6 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
         <div class="cabeza-loc__accion"><CallButton cta={`zona-${entrada.id}`} sub="Servicio 24 horas" /></div>
         <EEATBadges clase="cabeza-loc__insignias" />
       </div>
-      {
-        d.image && d.imageAlt && (
-          <Image src={d.image} alt={d.imageAlt} widths={[480, 960]} sizes="(min-width: 1000px) 480px, 100vw" class="cabeza-loc__foto" loading="eager" fetchpriority="high" />
-        )
-      }
     </div>
   </section>
 
@@ -120,16 +118,30 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
     <div class="envoltura tramo cuerpo-loc">
       {
         cuerpo && (
-          <section aria-labelledby="loc-intro" class="cuerpo-loc__intro">
-            <p class="rotulo">OpenServi en {d.nombre}</p>
-            <h2 id="loc-intro" class="seccion__titulo cuerpo-loc__titulo">
-              {cuerpo.introLarga.titulo}
-            </h2>
-            <div class="prosa cuerpo-loc__prosa">
-              {cuerpo.introLarga.parrafos.map((p) => (
-                <p>{p}</p>
-              ))}
+          <section aria-labelledby="loc-intro" class:list={['cuerpo-loc__intro', { 'cuerpo-loc__intro--foto': hayFoto }]}>
+            <div>
+              <p class="rotulo">OpenServi en {d.nombre}</p>
+              <h2 id="loc-intro" class="seccion__titulo cuerpo-loc__titulo">
+                {cuerpo.introLarga.titulo}
+              </h2>
+              <div class="prosa cuerpo-loc__prosa">
+                {cuerpo.introLarga.parrafos.map((p) => (
+                  <p>{p}</p>
+                ))}
+              </div>
             </div>
+            {hayFoto && (
+              <figure class="cuerpo-loc__figura">
+                <Image
+                  src={d.image!}
+                  alt={d.imageAlt!}
+                  widths={[480, 960, 1440]}
+                  sizes="(min-width: 960px) 30rem, 100vw"
+                  class="cuerpo-loc__foto"
+                />
+                {d.imageCredito && <figcaption class="credito cuerpo-loc__credito">{d.imageCredito}</figcaption>}
+              </figure>
+            )}
           </section>
         )
       }
@@ -278,12 +290,45 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
     margin-top: 1.75rem !important;
   }
 
-  :global(.cabeza-loc__foto) {
+  /* Foto del pueblo junto a la intro larga: a la derecha en escritorio (fija
+     mientras se lee el texto), debajo del texto en móvil */
+  .cuerpo-loc__intro--foto {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  @media (min-width: 960px) {
+    .cuerpo-loc__intro--foto {
+      grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
+      gap: 4rem;
+    }
+
+    .cuerpo-loc__figura {
+      position: sticky;
+      top: 6.5rem;
+      margin-top: 3.25rem;
+    }
+  }
+
+  .cuerpo-loc__figura {
+    margin: 0;
+  }
+
+  :global(.cuerpo-loc__foto) {
+    display: block;
     width: 100%;
+    height: auto;
     aspect-ratio: 4 / 3;
     object-fit: cover;
     border-radius: 1rem;
     border: 1px solid var(--linea-oro);
+    box-shadow: 0 30px 60px -40px rgb(3 7 18 / 0.7);
+  }
+
+  .cuerpo-loc__credito {
+    margin-top: 0.6rem;
+    text-align: center;
   }
 
   .cuerpo-loc {
