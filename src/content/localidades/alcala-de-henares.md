@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerradura-sobreponer-multipunto.jpg
 imageAlt: "Cerradura de seguridad de sobreponer, con pomo, cinco bulones laterales y barras verticales hacia el suelo y el techo, en una puerta de madera en Alcalá de Henares."
 imageCredito: "Foto realizada por el equipo de OpenServi en Alcalá de Henares"
+imageOgFoco: 0.52 # altura (0-1) del recorte para compartir; npm run og
 nearby: [coslada, barajas, rivas-vaciamadrid] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

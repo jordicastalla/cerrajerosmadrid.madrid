@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/bombin-puerta-marron.jpg
 imageAlt: "Bombín redondo de latón en una puerta marrón en Collado Villalba, con arañazos en la pintura y el pestillo asomando por el canto."
 imageCredito: "Foto realizada por el equipo de OpenServi en Collado Villalba"
+imageOgFoco: 0.5 # altura (0-1) del recorte para compartir; npm run og
 nearby: [las-rozas, majadahonda] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

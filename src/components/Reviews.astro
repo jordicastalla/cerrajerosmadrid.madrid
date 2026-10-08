@@ -74,6 +74,16 @@ const relleno = resenas.media ? (resenas.media / 5) * 100 : 0;
         </ul>
       )
     }
+
+    {
+      resenas.items.length > tarjetas.length && (
+        <p class="opiniones__mas">
+          <a class="enlace" href="/opiniones/">
+            Leer las {resenas.items.length} opiniones de clientes →
+          </a>
+        </p>
+      )
+    }
   </div>
 </section>
 
@@ -143,6 +153,10 @@ const relleno = resenas.media ? (resenas.media / 5) * 100 : 0;
     padding: 0;
     list-style: none;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  }
+
+  .opiniones__mas {
+    margin-top: 2rem;
   }
 
   .opinion {

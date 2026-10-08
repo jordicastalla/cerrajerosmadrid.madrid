@@ -1,4 +1,7 @@
 @import 'tailwindcss';
+/* El SVG del skyline no es código: sus trazados («m-464»…) hacían que Tailwind
+   generase ~22 KB de clases .m-N inútiles en todas las páginas */
+@source not '../assets/marca/skyline.svg';
 
 /* ==================================================================
    Cerrajeros Madrid OpenServi · identidad «Victoria Alada»

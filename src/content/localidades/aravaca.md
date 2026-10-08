@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/piezas-bombin-seguridad.jpg
 imageAlt: "Piezas de un bombín de seguridad en la mano de uno de nuestros técnicos en Aravaca, con sus elementos de acero y tornillos a la vista."
 imageCredito: "Foto realizada por el equipo de OpenServi en Aravaca"
+imageOgFoco: 0.45 # altura (0-1) del recorte para compartir; npm run og
 nearby: [pozuelo-de-alarcon, majadahonda, las-rozas, boadilla-del-monte] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

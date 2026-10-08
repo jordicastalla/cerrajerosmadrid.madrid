@@ -22,6 +22,7 @@ export function negocio(zonasReady: string[]) {
     '@type': 'Locksmith',
     '@id': ID_NEGOCIO,
     name: site.nombre,
+    alternateName: [site.marca],
     url: absoluta('/'),
     telephone: site.telefonoLink,
     image: [absoluta(site.imagenOg)],
@@ -51,6 +52,25 @@ export function negocio(zonasReady: string[]) {
           },
         }
       : {}),
+  };
+}
+
+/**
+ * El sitio web (solo en la Home). Es la señal principal que usa Google para el
+ * nombre del sitio en los resultados: name debe coincidir con og:site_name y
+ * con el name del negocio. alternateName, por orden de preferencia; el dominio
+ * va el último, como respaldo (Google Search Central, «Nombres de sitio»).
+ */
+export function sitioWeb() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': absoluta('/#website'),
+    name: site.nombre,
+    alternateName: [site.marca, new URL(site.dominio).hostname],
+    url: absoluta('/'),
+    inLanguage: 'es',
+    publisher: { '@id': ID_NEGOCIO },
   };
 }
 

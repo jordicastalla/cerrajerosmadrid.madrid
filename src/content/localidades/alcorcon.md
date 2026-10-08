@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/puerta-reja-trabajo.jpg
 imageAlt: "Puerta de reja metálica negra abierta durante un trabajo de cerrajería en Alcorcón, con cajas de herramientas, herramientas eléctricas y cables en el suelo."
 imageCredito: "Foto realizada por el equipo de OpenServi en Alcorcón"
+imageOgFoco: 0.55 # altura (0-1) del recorte para compartir; npm run og
 nearby: [mostoles, leganes, villaviciosa-de-odon, boadilla-del-monte] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

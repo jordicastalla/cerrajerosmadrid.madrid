@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/puerta-blindada-multipunto.jpg
 imageAlt: "Puerta blindada abierta en Las Rozas, con el frontal de la cerradura multipunto, sus bulones y el escudo protector negro del bombín."
 imageCredito: "Foto realizada por el equipo de OpenServi en Las Rozas"
+imageOgFoco: 0.6 # altura (0-1) del recorte para compartir; npm run og
 nearby: [majadahonda, pozuelo-de-alarcon, aravaca, collado-villalba] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

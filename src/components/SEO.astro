@@ -2,6 +2,7 @@
 /**
  * Metadatos de cada página (spec §11, §12, §26): title único, description,
  * canonical absoluto, robots según la puerta de indexación, Open Graph y X.
+ * La 404 no lleva canonical ni og:url (no es una URL que se deba indexar).
  */
 import { site, absoluta } from '@data/site';
 
@@ -11,10 +12,25 @@ interface Props {
   ruta: string;
   imagen?: string;
   imagenAlt?: string;
+  /** Medidas reales de la imagen OG (por defecto, las de la imagen general 1200×630) */
+  imagenAncho?: number;
+  imagenAlto?: number;
   noindex?: boolean;
+  /** Sin canonical ni og:url (página de error) */
+  sinCanonical?: boolean;
 }
 
-const { titulo, descripcion, ruta, imagen = site.imagenOg, imagenAlt, noindex = false } = Astro.props;
+const {
+  titulo,
+  descripcion,
+  ruta,
+  imagen = site.imagenOg,
+  imagenAlt,
+  imagenAncho = 1200,
+  imagenAlto = 630,
+  noindex = false,
+  sinCanonical = false,
+} = Astro.props;
 
 const canonical = absoluta(ruta);
 const ogImagen = absoluta(imagen);
@@ -22,7 +38,7 @@ const ogImagen = absoluta(imagen);
 
 <title>{titulo}</title>
 <meta name="description" content={descripcion} />
-<link rel="canonical" href={canonical} />
+{!sinCanonical && <link rel="canonical" href={canonical} />}
 {
   noindex ? (
     <meta name="robots" content="noindex, follow" />
@@ -37,9 +53,9 @@ const ogImagen = absoluta(imagen);
 <meta property="og:site_name" content={site.nombre} />
 <meta property="og:title" content={titulo} />
 <meta property="og:description" content={descripcion} />
-<meta property="og:url" content={canonical} />
+{!sinCanonical && <meta property="og:url" content={canonical} />}
 <meta property="og:image" content={ogImagen} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+<meta property="og:image:width" content={String(imagenAncho)} />
+<meta property="og:image:height" content={String(imagenAlto)} />
 <meta property="og:image:alt" content={imagenAlt ?? `${site.nombre} · ${site.telefono}`} />
 <meta name="twitter:card" content="summary_large_image" />

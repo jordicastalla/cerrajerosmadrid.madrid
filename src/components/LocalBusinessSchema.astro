@@ -1,9 +1,10 @@
 ---
 /**
- * Entidad completa del negocio en JSON-LD (spec §14). Solo en la Home; el
- * resto de páginas la referencian por @id.
+ * Entidad completa del negocio en JSON-LD (spec §14) y el sitio web (WebSite,
+ * para el nombre del sitio en Google). Solo en la Home; el resto de páginas
+ * referencian el negocio por @id.
  */
-import { negocio } from '@lib/schema';
+import { negocio, sitioWeb } from '@lib/schema';
 
 interface Props {
   zonasReady: string[];
@@ -12,4 +13,5 @@ interface Props {
 const { zonasReady } = Astro.props;
 ---
 
+<script type="application/ld+json" set:html={JSON.stringify(sitioWeb())} />
 <script type="application/ld+json" set:html={JSON.stringify(negocio(zonasReady))} />

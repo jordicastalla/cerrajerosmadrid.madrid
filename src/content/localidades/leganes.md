@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerradura-embutir-tesa.jpg
 imageAlt: "Cerradura de embutir TESA en el canto de una puerta de madera en Leganés, con el escudo protector dorado del bombín y la moldura dañada a su lado."
 imageCredito: "Foto realizada por el equipo de OpenServi en Leganés"
+imageOgFoco: 0.5 # altura (0-1) del recorte para compartir; npm run og
 nearby: [getafe, alcorcon, mostoles, pinto] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

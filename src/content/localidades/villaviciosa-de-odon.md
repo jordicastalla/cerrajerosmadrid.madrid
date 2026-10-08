@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/escudo-seguridad-acero.jpg
 imageAlt: "Escudo de seguridad de acero satinado con disco protector, recién sacado del embalaje, en la mano de uno de nuestros técnicos en Villaviciosa de Odón."
 imageCredito: "Foto realizada por el equipo de OpenServi en Villaviciosa de Odón"
+imageOgFoco: 0.45 # altura (0-1) del recorte para compartir; npm run og
 nearby: [mostoles, boadilla-del-monte, alcorcon, pozuelo-de-alarcon] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

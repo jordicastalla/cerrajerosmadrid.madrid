@@ -1,7 +1,7 @@
 ---
 /**
  * Perfil de Madrid en oro (ilustración del cliente pasada a SVG con
- * `npm run skyline`). Decorativo: se pinta como fondo pegado al borde
+ * `npm run skyline`, que genera también las versiones AVIF y WebP que se sirven). Decorativo: se pinta como fondo pegado al borde
  * inferior de su contenedor, que necesita `position: relative`. Se funde
  * hacia arriba para que el texto que tenga encima se lea bien.
  */
@@ -22,11 +22,23 @@ const { clase = '' } = Astro.props;
     width: min(100%, var(--skyline-ancho, 78rem));
     aspect-ratio: 1500 / 655;
     translate: -50% 0;
-    background: url('../../assets/marca/skyline.svg') center bottom / 100% 100% no-repeat;
+    /* Raster ligero generado desde el SVG por npm run skyline: WebP para todos… */
+    background: url('../../assets/marca/skyline.webp') center bottom / 100% 100% no-repeat;
     opacity: var(--skyline-opacidad, 0.3);
     -webkit-mask-image: linear-gradient(to top, #000 35%, transparent);
     mask-image: linear-gradient(to top, #000 35%, transparent);
     pointer-events: none;
+  }
+
+  /* …y AVIF (más ligero) donde se admite. Va en @supports para que el minificador
+     no lo funda con la regla de arriba y se pierda el WebP de reserva. */
+  @supports (background-image: image-set(url('x.avif') type('image/avif'))) {
+    .skyline {
+      background-image: image-set(
+        url('../../assets/marca/skyline.avif') type('image/avif'),
+        url('../../assets/marca/skyline.webp') type('image/webp')
+      );
+    }
   }
 
   /* Cuando el contenedor es más ancho que el dibujo, se funden también los laterales */

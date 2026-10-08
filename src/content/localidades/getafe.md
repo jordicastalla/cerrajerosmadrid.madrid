@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerradura-sobreponer-cvl.jpg
 imageAlt: "Cerradura de sobreponer CVL oxidada en una puerta metálica gris con la pintura desconchada en Getafe, con su manilla de latón."
 imageCredito: "Foto realizada por el equipo de OpenServi en Getafe"
+imageOgFoco: 0.55 # altura (0-1) del recorte para compartir; npm run og
 nearby: [leganes, pinto, alcorcon, mostoles] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

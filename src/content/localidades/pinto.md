@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/bombin-retirado-llave.jpg
 imageAlt: "Bombín de perfil europeo retirado en Pinto, con la llave todavía puesta, en la mano de uno de nuestros técnicos."
 imageCredito: "Foto realizada por el equipo de OpenServi en Pinto"
+imageOgFoco: 0.68 # altura (0-1) del recorte para compartir; npm run og
 nearby: [getafe, leganes, alcorcon, mostoles] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

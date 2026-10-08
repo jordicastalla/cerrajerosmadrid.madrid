@@ -10,7 +10,9 @@
  * apilan las capas en oro con la opacidad de su nivel. Resultado: un SVG de
  * un solo color, sin fondo, que escala sin pixelarse.
  *
- * El SVG generado va al repositorio: el build no necesita potrace.
+ * El SVG generado va al repositorio: el build no necesita potrace. A partir
+ * del SVG se generan también skyline.avif y skyline.webp, que son los que usa
+ * la web (el SVG pesa demasiado para servirlo como fondo).
  */
 import { execFileSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
@@ -100,3 +102,12 @@ writeFileSync(
 
 const kb = (readFileSync(DESTINO).length / 1024).toFixed(0);
 console.log(`Skyline vectorizado: ${DESTINO} (${W}×${H}, ${NIVELES.length} niveles, ${kb} KB).`);
+
+// La web no sirve el SVG (633 KB, demasiado para un fondo decorativo que se
+// carga en todas las páginas): sirve estas dos versiones raster, AVIF para los
+// navegadores que lo admiten y WebP de reserva. Siempre se ven al 20-34 % de
+// opacidad y fundidas, así que no se nota la diferencia con el SVG.
+const raster = () => sharp(DESTINO, { density: 300 });
+const avif = await raster().resize({ width: 1600 }).avif({ quality: 40, effort: 7 }).toFile('src/assets/marca/skyline.avif');
+const webp = await raster().resize({ width: 1200 }).webp({ quality: 50, alphaQuality: 30, effort: 6 }).toFile('src/assets/marca/skyline.webp');
+console.log(`Versiones web: skyline.avif (${Math.round(avif.size / 1024)} KB) y skyline.webp (${Math.round(webp.size / 1024)} KB).`);

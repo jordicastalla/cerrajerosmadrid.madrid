@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/bombin-escudo-desmontado.jpg
 imageAlt: "Bombín de seguridad desmontado con su escudo protector en la mano de uno de nuestros técnicos en Rivas-Vaciamadrid, con el taladro y la radial sobre la encimera."
 imageCredito: "Foto realizada por el equipo de OpenServi en Rivas-Vaciamadrid"
+imageOgFoco: 0.5 # altura (0-1) del recorte para compartir; npm run og
 nearby: [coslada, barajas, pinto, getafe] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

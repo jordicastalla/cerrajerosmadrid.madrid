@@ -13,7 +13,8 @@
     "audit:strict": "node scripts/seo-audit.mjs --strict",
     "inventario": "node scripts/inventario-fotos.mjs",
     "iconos": "node scripts/generar-iconos.mjs",
-    "skyline": "node scripts/vectorizar-skyline.mjs"
+    "skyline": "node scripts/vectorizar-skyline.mjs",
+    "og": "node scripts/og-localidades.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

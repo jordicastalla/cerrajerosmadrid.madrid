@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerradura-desmontada-puerta-roja.jpg
 imageAlt: "Cerradura retirada de una puerta de madera roja en Boadilla del Monte, con el bombín dañado y el escudo todavía en la puerta."
 imageCredito: "Foto realizada por el equipo de OpenServi en Boadilla del Monte"
+imageOgFoco: 0.47 # altura (0-1) del recorte para compartir; npm run og
 nearby: [villaviciosa-de-odon, pozuelo-de-alarcon, majadahonda, alcorcon] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

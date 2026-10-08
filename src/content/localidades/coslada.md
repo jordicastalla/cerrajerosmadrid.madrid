@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/llave-keso.jpg
 imageAlt: "Llave de seguridad Keso, de Assa Abloy, con la cabeza roja y metida en su bombín, en un trabajo en Coslada."
 imageCredito: "Foto realizada por el equipo de OpenServi en Coslada"
+imageOgFoco: 0.5 # altura (0-1) del recorte para compartir; npm run og
 nearby: [barajas, rivas-vaciamadrid, alcala-de-henares, aravaca] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/llave-fichet.jpg
 imageAlt: "Llave de seguridad Fichet con la cabeza roja, en la mano enguantada de uno de nuestros técnicos en Móstoles."
 imageCredito: "Foto realizada por el equipo de OpenServi en Móstoles"
+imageOgFoco: 0.47 # altura (0-1) del recorte para compartir; npm run og
 nearby: [alcorcon, villaviciosa-de-odon, leganes, boadilla-del-monte] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

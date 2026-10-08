@@ -44,6 +44,8 @@ const localidades = defineCollection({
       imageAlt: z.string().optional(),
       /** Autoría o licencia de la foto, si la pide (p. ej. Wikimedia Commons) */
       imageCredito: z.string().optional(),
+      /** Altura (0-1) del recorte horizontal para compartir (scripts/og-localidades.mjs) */
+      imageOgFoco: z.number().min(0).max(1).optional(),
       nearby: z.array(reference('localidades')).default([]),
       updatedAt: z.coerce.date(),
     }),

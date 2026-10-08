@@ -72,7 +72,14 @@ const orden = [...estaciones].sort((a, b) => a.nombre.localeCompare(b.nombre, 'e
             </text>
           </>
         );
-        return e.ready ? <a href={`/cerrajeros/${e.id}/`}>{contenido}</a> : <g>{contenido}</g>;
+        // tabindex=-1: el SVG es role="img" y la lista de debajo ya da la navegación por teclado
+        return e.ready ? (
+          <a href={`/cerrajeros/${e.id}/`} tabindex="-1">
+            {contenido}
+          </a>
+        ) : (
+          <g>{contenido}</g>
+        );
       })
     }
   </svg>

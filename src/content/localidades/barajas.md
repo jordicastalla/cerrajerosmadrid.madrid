@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerradura-sobreponer-azbe.jpg
 imageAlt: "Cerradura de sobreponer AZBE en una puerta blanca en Barajas, con su cerradero y un tirador dorado debajo."
 imageCredito: "Foto realizada por el equipo de OpenServi en Barajas"
+imageOgFoco: 0.46 # altura (0-1) del recorte para compartir; npm run og
 nearby: [coslada, aravaca, rivas-vaciamadrid, alcala-de-henares] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

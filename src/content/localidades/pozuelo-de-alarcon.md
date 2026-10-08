@@ -22,6 +22,7 @@ tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/puerta-vivienda-escudo.jpg
 imageAlt: "Puerta de madera de una vivienda en Pozuelo de Alarcón, con escudo de seguridad en el bombín y la caja de herramientas y la radial de nuestro técnico en el suelo."
 imageCredito: "Foto realizada por el equipo de OpenServi en Pozuelo de Alarcón"
+imageOgFoco: 0.5 # altura (0-1) del recorte para compartir; npm run og
 nearby: [aravaca, boadilla-del-monte, majadahonda, las-rozas] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---
