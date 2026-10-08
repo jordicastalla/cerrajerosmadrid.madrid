@@ -1,0 +1,70 @@
+---
+/**
+ * Bloque de texto propio de la zona (esquema del cliente, 2026-10-08): rótulo,
+ * título y párrafos LITERALES de la ficha. El tono (claro u oscuro) depende de
+ * su posición en la página, para alternar con los bloques comunes.
+ */
+import CallButton from '@components/CallButton.astro';
+import type { SeccionZona } from '@lib/cuerpo-zona';
+
+interface Props {
+  seccion: SeccionZona;
+  id: string;
+  rotulo: string;
+  tono?: 'claro' | 'oscuro';
+  /** Si viene, pinta el botón de llamada al final (valor de data-cta) */
+  cta?: string;
+  sub?: string;
+}
+
+const { seccion, id, rotulo, tono = 'claro', cta, sub = 'Servicio 24 horas' } = Astro.props;
+---
+
+<section
+  class:list={['zona-texto tramo', tono === 'claro' ? 'claro' : 'zona-texto--oscuro']}
+  id={id}
+  aria-labelledby={`${id}-titulo`}
+>
+  <div class="envoltura">
+    <p class="rotulo">{rotulo}</p>
+    <h2 class="seccion__titulo zona-texto__titulo" id={`${id}-titulo`}>{seccion.titulo}</h2>
+    <div class="prosa zona-texto__prosa">
+      {seccion.parrafos.map((p) => <p>{p}</p>)}
+    </div>
+    {
+      cta && (
+        <div class="zona-texto__accion">
+          <CallButton cta={cta} sub={sub} />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  /* Títulos del cliente, a veces largos: algo más pequeños que el resto de H2 */
+  .zona-texto__titulo {
+    max-width: 48rem;
+    font-size: clamp(1.7rem, 1.25rem + 1.5vw, 2.5rem);
+  }
+
+  .zona-texto__prosa {
+    max-width: 46rem;
+    margin-top: 1.25rem;
+  }
+
+  .zona-texto--oscuro {
+    background:
+      radial-gradient(36rem 20rem at 85% 30%, rgb(245 158 11 / 0.1), transparent 65%),
+      var(--obsidiana-profunda);
+    border-block: 1px solid var(--linea-oro);
+  }
+
+  .zona-texto--oscuro .zona-texto__prosa {
+    color: var(--plata);
+  }
+
+  .zona-texto__accion {
+    margin-top: 2rem;
+  }
+</style>

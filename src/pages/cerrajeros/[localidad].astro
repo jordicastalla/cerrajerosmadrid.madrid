@@ -6,8 +6,13 @@
  * Los servicios se nombran sin la localidad (v2.2). Bloques comunes de
  * zona (v2.3): ventajas, banner de llamada, «Ten esto a mano», zonas cercanas
  * y preguntas frecuentes (las propias de la ficha y las generales).
+ *
+ * El texto propio de la ficha se reparte según el esquema del cliente
+ * (src/lib/cuerpo-zona.ts): intro corta bajo el H1, intro larga tras el hero,
+ * 24 horas tras «Servicios», precios tras «Lo que tienes al llamarnos» y
+ * «Llámanos» tras el banner «¿Te has quedado fuera en…?».
  */
-import { getCollection, getEntries, render, type CollectionEntry } from 'astro:content';
+import { getCollection, getEntries, type CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '@layouts/Layout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
@@ -21,6 +26,8 @@ import Ventajas from '@components/zona/Ventajas.astro';
 import BannerLlamada from '@components/zona/BannerLlamada.astro';
 import TenAMano from '@components/zona/TenAMano.astro';
 import Cercanas from '@components/zona/Cercanas.astro';
+import SeccionTexto from '@components/zona/SeccionTexto.astro';
+import { trocearCuerpo } from '@lib/cuerpo-zona';
 import { comprobarPuerta, esIndexable } from '@lib/gate';
 import { casosVerificados } from '@lib/casos';
 import { servicio as servicioSchema } from '@lib/schema';
@@ -47,10 +54,9 @@ const d = entrada.data;
 const ruta = `/cerrajeros/${entrada.id}/`;
 const indexable = esIndexable(d.status);
 
-// El texto propio de la zona vive en el cuerpo del .md (con sus subtítulos).
-// Si la ficha aún no lo trae, no se pinta nada (campo vacío = sección vacía).
-const hayCuerpo = Boolean(entrada.body?.trim());
-const { Content } = await render(entrada);
+// Texto propio de la zona, repartido por la página. Sin cuerpo, no se pinta.
+const cuerpo = trocearCuerpo(entrada.id, entrada.body);
+const introCorta = cuerpo?.introCorta.length ? cuerpo.introCorta : d.intro ? d.intro.split(/\n{2,}/) : [];
 
 const servicios = (await getCollection('servicios', (s) => s.data.status === 'ready')).sort((a, b) => a.data.orden - b.data.orden);
 const cercanas = (await getEntries(d.nearby)).filter((l) => l.data.cerrajeroPropio);
@@ -84,8 +90,20 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
     <div class="envoltura cabeza-loc__rejilla">
       <div>
         <h1 class="titular cabeza-loc__h1"><span class="metal">Cerrajeros en</span> <span class="dorado">{d.nombre}</span></h1>
-        <p class="cabeza-loc__propio">Uno de nuestros cerrajeros trabaja en {d.nombre}.</p>
-        {d.tiempoLlegada && <p class="cabeza-loc__dato">{d.tiempoLlegada}</p>}
+        {
+          introCorta.length > 0 ? (
+            <div class="cabeza-loc__intro">
+              {introCorta.map((p) => (
+                <p>{p}</p>
+              ))}
+            </div>
+          ) : (
+            <>
+              <p class="cabeza-loc__propio">Uno de nuestros cerrajeros trabaja en {d.nombre}.</p>
+              {d.tiempoLlegada && <p class="cabeza-loc__dato">{d.tiempoLlegada}</p>}
+            </>
+          )
+        }
         <div class="cabeza-loc__accion"><CallButton cta={`zona-${entrada.id}`} sub="Servicio 24 horas" /></div>
         <EEATBadges clase="cabeza-loc__insignias" />
       </div>
@@ -97,23 +115,22 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
     </div>
   </section>
 
+  <!-- Intro larga (tras el hero) y Servicios -->
   <div class="claro">
     <div class="envoltura tramo cuerpo-loc">
       {
-        d.intro && (
-          <div class="prosa">
-            {d.intro.split(/\n{2,}/).map((p) => (
-              <p>{p}</p>
-            ))}
-          </div>
-        )
-      }
-
-      {
-        hayCuerpo && (
-          <article class="prosa cuerpo-loc__texto">
-            <Content />
-          </article>
+        cuerpo && (
+          <section aria-labelledby="loc-intro" class="cuerpo-loc__intro">
+            <p class="rotulo">OpenServi en {d.nombre}</p>
+            <h2 id="loc-intro" class="seccion__titulo cuerpo-loc__titulo">
+              {cuerpo.introLarga.titulo}
+            </h2>
+            <div class="prosa cuerpo-loc__prosa">
+              {cuerpo.introLarga.parrafos.map((p) => (
+                <p>{p}</p>
+              ))}
+            </div>
+          </section>
         )
       }
 
@@ -128,39 +145,71 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
           />
         </div>
       </section>
-
-      {
-        (d.barrios.length > 0 || d.observacionesLocales.length > 0) && (
-          <section aria-labelledby="loc-cobertura" class="cuerpo-loc__cobertura">
-            <h2 id="loc-cobertura" class="cuerpo-loc__h2">
-              Dónde trabajamos en {d.nombre}
-            </h2>
-            {d.barrios.length > 0 && (
-              <ul class="cuerpo-loc__barrios">
-                {d.barrios.map((b) => (
-                  <li>{b}</li>
-                ))}
-              </ul>
-            )}
-            {d.observacionesLocales.length > 0 && (
-              <div class="prosa">
-                <h3>Lo que vemos a menudo en la zona</h3>
-                <ul>
-                  {d.observacionesLocales.map((o) => (
-                    <li>{o}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </section>
-        )
-      }
     </div>
   </div>
 
+  <!-- 24 horas / urgencias (tras Servicios) -->
+  {
+    cuerpo && (
+      <SeccionTexto
+        seccion={cuerpo.urgencias}
+        id="zona-urgencias"
+        rotulo="24 horas, 365 días"
+        tono="oscuro"
+        cta={`zona-urgencias-${entrada.id}`}
+        sub="24 horas, todos los días"
+      />
+    )
+  }
+
+  {
+    (d.barrios.length > 0 || d.observacionesLocales.length > 0) && (
+      <div class="claro">
+        <section aria-labelledby="loc-cobertura" class="envoltura tramo cuerpo-loc__cobertura">
+          <h2 id="loc-cobertura" class="cuerpo-loc__h2">
+            Dónde trabajamos en {d.nombre}
+          </h2>
+          {d.barrios.length > 0 && (
+            <ul class="cuerpo-loc__barrios">
+              {d.barrios.map((b) => (
+                <li>{b}</li>
+              ))}
+            </ul>
+          )}
+          {d.observacionesLocales.length > 0 && (
+            <div class="prosa">
+              <h3>Lo que vemos a menudo en la zona</h3>
+              <ul>
+                {d.observacionesLocales.map((o) => (
+                  <li>{o}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      </div>
+    )
+  }
+
   <Ventajas nombre={d.nombre} />
 
+  <!-- Precios y calidad (tras «Lo que tienes al llamarnos») -->
+  {cuerpo && <SeccionTexto seccion={cuerpo.precios} id="zona-precios" rotulo="Precios claros" tono="claro" />}
+
   <BannerLlamada nombre={d.nombre} slug={entrada.id} />
+
+  <!-- Llámanos / confianza (tras «¿Te has quedado fuera en…?») -->
+  {
+    cuerpo && (
+      <SeccionTexto
+        seccion={cuerpo.llamanos}
+        id="zona-llamanos"
+        rotulo="Llámanos"
+        tono="oscuro"
+        cta={`zona-llamanos-${entrada.id}`}
+      />
+    )
+  }
 
   <TenAMano nombre={d.nombre} consejo={d.consejo} />
 
@@ -209,6 +258,18 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
     color: var(--plata-2);
   }
 
+  /* Intro corta del cliente, bajo el H1 */
+  .cabeza-loc__intro {
+    max-width: 40rem;
+  }
+
+  .cabeza-loc__intro p {
+    margin-top: 1.1rem;
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+    line-height: 1.6;
+    color: var(--plata);
+  }
+
   .cabeza-loc__accion {
     margin-top: 1.75rem;
   }
@@ -234,12 +295,15 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
     font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem);
   }
 
-  .cuerpo-loc__texto {
+  /* Intro larga del cliente, tras el hero */
+  .cuerpo-loc__titulo {
     max-width: 48rem;
+    font-size: clamp(1.7rem, 1.25rem + 1.5vw, 2.5rem);
   }
 
-  .cuerpo-loc__texto > :first-child {
-    margin-top: 0;
+  .cuerpo-loc__prosa {
+    max-width: 46rem;
+    margin-top: 1.25rem;
   }
 
   .cuerpo-loc__grid {
