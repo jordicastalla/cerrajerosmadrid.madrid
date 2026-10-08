@@ -7,7 +7,7 @@
  * zona (v2.3): ventajas, banner de llamada, «Ten esto a mano», zonas cercanas
  * y preguntas frecuentes (las propias de la ficha y las generales).
  */
-import { getCollection, getEntries, type CollectionEntry } from 'astro:content';
+import { getCollection, getEntries, render, type CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '@layouts/Layout.astro';
 import Breadcrumbs from '@components/Breadcrumbs.astro';
@@ -46,6 +46,11 @@ const { entrada } = Astro.props;
 const d = entrada.data;
 const ruta = `/cerrajeros/${entrada.id}/`;
 const indexable = esIndexable(d.status);
+
+// El texto propio de la zona vive en el cuerpo del .md (con sus subtítulos).
+// Si la ficha aún no lo trae, no se pinta nada (campo vacío = sección vacía).
+const hayCuerpo = Boolean(entrada.body?.trim());
+const { Content } = await render(entrada);
 
 const servicios = (await getCollection('servicios', (s) => s.data.status === 'ready')).sort((a, b) => a.data.orden - b.data.orden);
 const cercanas = (await getEntries(d.nearby)).filter((l) => l.data.cerrajeroPropio);
@@ -101,6 +106,14 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
               <p>{p}</p>
             ))}
           </div>
+        )
+      }
+
+      {
+        hayCuerpo && (
+          <article class="prosa cuerpo-loc__texto">
+            <Content />
+          </article>
         )
       }
 
@@ -219,6 +232,14 @@ const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.n
 
   .cuerpo-loc__h2 {
     font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem);
+  }
+
+  .cuerpo-loc__texto {
+    max-width: 48rem;
+  }
+
+  .cuerpo-loc__texto > :first-child {
+    margin-top: 0;
   }
 
   .cuerpo-loc__grid {

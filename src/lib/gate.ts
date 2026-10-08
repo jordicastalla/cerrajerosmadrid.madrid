@@ -20,10 +20,13 @@ const contarPalabras = (texto = '') => texto.trim().split(/\s+/).filter(Boolean)
 export function faltanParaReady(loc: CollectionEntry<'localidades'>, numCasos: number): string[] {
   const d = loc.data;
   const faltan: string[] = [];
+  // El texto propio vive en el cuerpo del .md; si aún no lo hay, cae al campo intro (compatibilidad)
+  const textoPropio = (loc.body?.trim() ? loc.body : d.intro) ?? '';
+  const palabrasPropias = contarPalabras(textoPropio.replace(/[#>*_`[\]()!-]/g, ' '));
   if (!d.cerrajeroPropio) faltan.push('cerrajeroPropio: true (sin cerrajero propio no hay página)');
   if (numCasos < MINIMOS.casos) faltan.push(`≥ ${MINIMOS.casos} caso(s) real(es) verificado(s) en src/content/casos`);
-  if (contarPalabras(d.intro) < MINIMOS.palabrasIntro)
-    faltan.push(`intro propia de ≥ ${MINIMOS.palabrasIntro} palabras (ahora ${contarPalabras(d.intro)})`);
+  if (palabrasPropias < MINIMOS.palabrasIntro)
+    faltan.push(`texto propio de ≥ ${MINIMOS.palabrasIntro} palabras en el cuerpo del .md (ahora ${palabrasPropias})`);
   // Solo cuentan las preguntas propias de la ficha: las generales son iguales en todas las zonas
   if (d.faqs.length < MINIMOS.faqs) faltan.push(`≥ ${MINIMOS.faqs} FAQs locales reales en la ficha (ahora ${d.faqs.length})`);
   if (!d.seoTitle.trim() || !d.seoDescription.trim()) faltan.push('seoTitle y seoDescription propios');

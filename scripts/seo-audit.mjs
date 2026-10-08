@@ -35,7 +35,8 @@ const PROHIBIDAS = [
   // «fabricantes líderes» habla de las marcas que se instalan, no de la empresa
   [/(?<!fabricantes )\blíderes\b/i, '«líderes»'],
   [/técnicos certificados/i, '«técnicos certificados»'],
-  [/llegamos en/i, '«llegamos en…» (tiempo de llegada)'],
+  // \b tras «en»: caza «llegamos en 10 minutos» (promesa), no «llegamos entre 20 y 35» (rango real, spec §38)
+  [/\bllegamos en\b/i, '«llegamos en…» (tiempo de llegada)'],
   [/en \d+\s*(min|minutos)\b/i, 'tiempo de llegada en minutos'],
   [/garantía de \d+\s*meses/i, '«garantía de X meses»'],
   [/años de experiencia/i, '«años de experiencia»'],
