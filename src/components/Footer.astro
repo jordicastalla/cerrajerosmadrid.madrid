@@ -42,7 +42,6 @@ const l = site.legal;
       <nav class="pie__col" aria-label="Zonas">
         <p class="pie__rotulo">Zonas</p>
         <ul>
-          <li><a href="/#zonas">Zonas donde trabajamos</a></li>
           {zonas.map((z) => <li><a href={`/cerrajeros/${z.id}/`}>Cerrajeros en {z.data.nombre}</a></li>)}
         </ul>
       </nav>
