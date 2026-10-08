@@ -37,7 +37,7 @@ Las llaves no entienden de horarios. Se quedan dentro un domingo a las ocho de l
 
 Por eso nuestro servicio es de 24 horas, los 365 días del año. Hay guardia a cualquier hora, también festivos, también agosto, también Nochebuena. Llamas, nos cuentas qué ocurre y salimos. Así de simple.
 
-Un consejo, por si te sirve: antes de llamar, comprueba si la puerta está solo cerrada o con la llave echada por dentro, porque cambia mucho la forma de abrirla y también ayuda a que te demos un precio más ajustado desde el principio. No pasa nada si no lo sabes, ya lo veremos nosotros al llegar.
+Un consejo, por si te sirve: antes de llamar, comprueba si la puerta está solo cerrada o con la llave echada por dentro, porque cambia mucho la forma de abrirla y tambien ayuda a que te demos un precio más ajustado desde el principio. No pasa nada si no lo sabes, ya lo veremos nosotros al llegar.
 
 Y llegamos entre 20 y 35 minutos. Un rango, no una promesa de cronómetro: preferimos decirte la verdad antes que prometerte lo imposible. Lo que sí te aseguramos es que no te dejaremos tirado.
 

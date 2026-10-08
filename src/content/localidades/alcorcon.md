@@ -7,7 +7,7 @@ status: draft
 cerrajeroPropio: true # «uno de nuestros cerrajeros» trabaja en la zona (dato del cliente)
 grupoMapa: oeste
 ordenMapa: 1
-seoTitle: "Cerrajeros Alcorcón 24 horas | Llegamos 20-35 min"
+seoTitle: "Cerrajeros Alcorcón 24 horas | Llegamos en 20-35 min"
 seoDescription: "¿Llaves dentro y tú fuera? Cerrajeros en Alcorcón para aperturas, cambio de cerradura y bombín a precio justo. Llama al 912 918 462."
 intro: ""
 barrios: ["Casco Antiguo", "San José de Valderas", "Parque Lisboa", "Ondarreta", "Prado Santo Domingo", "Parque Oeste", "Ensanche Sur"]
@@ -35,7 +35,7 @@ Y porque en lo importante seguimos siendo de los de antes: te explicamos qué le
 
 Las llaves tienen un don: desaparecen justo cuando peor viene. Volviendo de ver los fuegos de la noche del 7 de septiembre, en plenas fiestas de la Virgen de los Remedios. Un domingo por la tarde, con la compra en el rellano. O un lunes a las siete, con el abrigo puesto y una cerradura que de repente no gira.
 
-Por eso tenemos cerrajeros urgentes en Alcorcón las 24 horas, los 365 días del año, con técnicos de guardia listos para salir. Aquí no existe el «llama mañana». Hay alguien que coge el teléfono, te escucha y se pone en marcha.
+Por eso tenemos cerrajeros urgentes en Alcorcón las 24 horas, los 365 días del año, con técnicos de guardia listos para salir. Aquí no existe el "llama mañana". Hay alguien que coge el teléfono, te escucha y se pone en marcha.
 
 Nos movemos por todo el municipio: el Casco Antiguo, San José de Valderas, Parque Lisboa, Ondarreta, Prado Santo Domingo, Parque Oeste, el Ensanche Sur… Lo normal es que estemos contigo en un plazo de entre 20 y 35 minutos, según la hora y el tráfico.
 
@@ -49,7 +49,7 @@ Lo sensato, y lo más económico, es llamar a un cerrajero en Alcorcón. Nuestro
 
 Queremos que el servicio salga barato sin que sea una chapuza. Una apertura bien hecha, un cambio de cerradura en Alcorcón con material que aguante o un cambio de bombín en Alcorcón cuando el tuyo ya no da más de sí. Pagar poco está bien. Pagar dos veces por lo mismo, no.
 
-Y sí, sabemos que «cerrajero económico» le suena a contradicción a mucha gente. Por eso preferimos demostrarlo con hechos: precios económicos, trabajo de calidad y una factura que se entiende a la primera.
+Y si, sabemos que "cerrajero económico" le suena a contradicción a mucha gente. Por eso preferimos demostrarlo con hechos: precios económicos, trabajo de calidad y una factura que se entiende a la primera.
 
 ## Si el Alcorcón le metió cuatro al Madrid, tu cerradura tiene arreglo
 

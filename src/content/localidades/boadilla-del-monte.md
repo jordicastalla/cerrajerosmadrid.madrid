@@ -35,7 +35,7 @@ Las urgencias no piden cita. Por eso atendemos 24 horas, los 365 días del año,
 
 Y ojo, que estos días el pueblo está en fiestas. Las patronales, en honor a Nuestra Señora del Rosario, se alargan hasta el 18 de octubre, con encierros por la calle de la Fragua y mucha gente por la calle. Entre una cosa y otra, más de uno vuelve tarde y con las llaves en el fondo del bolsillo equivocado. Pasa en las mejores familias. Si te toca, no pasa nada: llamas y lo arreglamos.
 
-Cuando llegamos, primero valoramos la puerta y después abrimos. Intentamos no dañarla. A veces no es posible, además de que cada cerradura tiene su carácter, pero te lo decimos antes y decides tú.
+Cuando llegamos, primero valoramos la puerta y después abrimos. Intentamos no dañarla. A veces no es posible, ademas de que cada cerradura tiene su carácter, pero te lo decimos antes y decides tú.
 
 ## Lo que vas a pagar, antes de que empecemos
 

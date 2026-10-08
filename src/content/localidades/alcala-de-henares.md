@@ -25,7 +25,7 @@ Cerrajeros Alcalá de Henares para abrir puertas, cambiar cerraduras y bombines 
 
 Le pasa a cualquiera. Bajas a tirar la basura, una corriente cierra la puerta de golpe y ahí está la llave, colgada en el recibidor, al otro lado. O llegas de currar, giras la llave y el bombín decide que hasta aquí. Para ese momento estamos los cerrajeros en Alcalá de Henares de este equipo: para que el mal rato dure lo menos posible.
 
-Somos una cerrajería en Alcalá de Henares de las de oficio. De las que abren sin destrozar, cambian lo que hay que cambiar y no tocan lo que funciona. Aparte de las aperturas, hacemos cambio de cerradura en Alcalá de Henares, cambio de bombín en Alcalá de Henares e instalación de cerraduras nuevas, en todos los barrios: del casco histórico a Espartales, pasando por El Chorrillo, La Garena, Reyes Católicos o El Val. ¿Un piso bajo los soportales de la calle Mayor o un adosado en el Ensanche? Vamos igual.
+Somos una cerrajería en Alcalá de Henares de las de oficio. De las que abren sin destrozar, cambian lo que hay que cambiar y no tocan lo que funciona. A parte de las aperturas, hacemos cambio de cerradura en Alcalá de Henares, cambio de bombín en Alcalá de Henares e instalación de cerraduras nuevas, en todos los barrios: del casco histórico a Espartales, pasando por El Chorrillo, La Garena, Reyes Católicos o El Val. ¿Un piso bajo los soportales de la calle Mayor o un adosado en el Ensanche? Vamos igual.
 
 ¿Por qué fiarte de unos cerrajeros Alcalá de Henares a los que no conoces de nada? Pregunta lógica. Porque te explicamos qué vamos a hacer antes de hacerlo. Porque si tu puerta se puede abrir sin romper nada, se abre sin romper nada. Y porque cuando nos vamos, la cerradura funciona y tú puedes dormir tranquilo.
 
@@ -47,7 +47,7 @@ Hablemos de dinero, que es en lo que todo el mundo piensa y casi nadie pregunta 
 
 ¿Buscas un cerrajero barato en Alcalá de Henares? Normal. Pero barato de verdad es que la cerradura que te ponemos dure años, no tener que volver a llamar al mes siguiente. Pagar una vez, no dos.
 
-En tu factura no vas a encontrar conceptos que nadie te explicó ni «suplementos» que aparecen al final como por arte de magia. Si hay una opción más económica que cumple, te la ofrecemos. Si no te conviene porque tu puerta necesita algo más seguro, también te lo decimos, con argumentos y sin presionarte.
+En tu factura no vas a encontrar conceptos que nadie te explicó ni "suplementos" que aparecen al final como por arte de magia. Si hay una opción más económica que cumple, te la ofrecemos. Si no te conviene porque tu puerta necesita algo más seguro, tambien te lo decimos, con argumentos y sin presionarte.
 
 En Alcalá cada 13 de diciembre se queman trastos viejos en la hoguera de Santa Lucía. Esa cerradura que lleva años haciendo un ruido raro tiene toda la pinta de trasto, pero cambiarla no tiene por qué ser un gasto grande. Precios justos, claros y económicos, sin letra pequeña.
 

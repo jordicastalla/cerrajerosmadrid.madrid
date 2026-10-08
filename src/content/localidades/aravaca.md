@@ -7,7 +7,7 @@ status: draft
 cerrajeroPropio: true # «uno de nuestros cerrajeros» trabaja en la zona (dato del cliente)
 grupoMapa: noroeste
 ordenMapa: 1
-seoTitle: "Cerrajeros Aravaca 24 horas | Llegamos 20-35 min"
+seoTitle: "Cerrajeros Aravaca 24 horas | Llegamos en 20-35 min"
 seoDescription: "¿Te has quedado fuera de casa? Aperturas urgentes, cambio de cerradura y bombín en Aravaca. Llama al 912 918 462: llegamos en 20-35 minutos."
 intro: ""
 barrios: ["Casco histórico", "Valdemarín", "El Plantío"]
@@ -27,7 +27,7 @@ Trabajamos en todo el barrio, del casco histórico (sí, también en esas calles
 
 ¿Por qué fiarte? Porque somos rápidos, resolutivos y porque abrimos sin destrozar nada siempre que la puerta lo permite, que es casi siempre. Antes de tocar la cerradura te explicamos qué vamos a hacer. Después, lo hacemos. Así de simple.
 
-Y ojo, que cerca de ti no es un eslogan: estamos organizados por zonas para que lleguemos entre 20 y 35 minutos, un rango real y no una promesa de feria. Cuando la cosa va de cerrajero en Aravaca, el reloj importa más que cualquier folleto.
+Y ojo, que cerca de ti no es un eslogan: estamos organizados por zonas para que llegamos en 20-35 minutos, un rango real y no una promesa de feria. Cuando la cosa va de cerrajero en Aravaca, el reloj importa más que cualquier folleto.
 
 ## Urgencias 24 horas: porque las llaves se olvidan a cualquier hora
 
@@ -47,7 +47,7 @@ Te damos el presupuesto antes de empezar, con lo que incluye y lo que no. Si por
 
 Nuestros precios son económicos porque no inflamos el servicio: cobramos por lo que hacemos, no por lo que se pueda sacar de un cliente con prisa. Un cerrajero barato que luego te cambia el bombín por uno de mala calidad no es barato, es un problema que vuelve en tres meses. Preferimos ser baratos de los que cuidan el material y la mano de obra.
 
-Resultado: un servicio económico, honrado y bien hecho. Además, si nos pides cambiar la cerradura o el bombín, te recomendamos el modelo que de verdad necesitas, no el más caro de la tienda.
+Resultado: un servicio económico, honrado y bien hecho. Ademas, si nos pides cambiar la cerradura o el bombín, te recomendamos el modelo que de verdad necesitas, no el más caro de la tienda.
 
 ## Llámanos: al otro lado hay un cerrajero, no un contestador
 
@@ -57,4 +57,4 @@ Hablamos claro y sin prisas. Si estás nervioso (es normal), te tranquilizamos p
 
 Así que ya sabes. Si necesitas cerrajeros Aravaca de confianza, sin sorpresas y con respuesta rápida, no lo pienses más.
 
-Llama ahora al 912 918 462. Te cogemos el teléfono, te decimos cuándo llegamos (entre 20 y 35 minutos) y nos ponemos en marcha. Lo demás, déjalo en nuestras manos.
+Llama ahora al +34 912 918 462. Te cogemos el teléfono, te decimos cuándo llegamos (entre 20 y 35 minutos) y nos ponemos en marcha. Lo demás, déjalo en nuestras manos.
