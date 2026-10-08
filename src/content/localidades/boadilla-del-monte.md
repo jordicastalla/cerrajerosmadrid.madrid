@@ -12,7 +12,11 @@ seoDescription: "Cerrajeros Boadilla del Monte urgentes, rápidos y con precios 
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
+  - p: "En mi chalet de la urbanización Las Lomas tenemos una puerta que da al jardín, ¿qué cerradura extra resiste bien la lluvia?"
+    r: "Para puertas exteriores y cancelas en Boadilla recomendamos cerrojos de acero inoxidable o con tratamientos marinos anticorrosión, equipados con cilindros que no se bloqueen con la humedad o los cambios de temperatura."
+  - p: "¿Puedo amaestrar las llaves de mi casa en Viñas Viejas para abrir la valla, el garaje y la principal con una sola llave?"
+    r: "Por supuesto. Hacemos estudios de amaestramiento e igualamiento a medida para que no lleves un llavero enorme, manteniendo los más altos niveles de seguridad en los accesos de tu parcela."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerradura-desmontada-puerta-roja.jpg

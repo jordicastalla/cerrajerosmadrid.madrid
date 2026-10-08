@@ -12,7 +12,11 @@ seoDescription: "¿Llaves dentro o cerradura rota? Cerrajeros en Rivas-Vaciamadr
 intro: ""
 barrios: ["Covibar", "Pablo Iglesias", "Rivas Futura", "Bellavista", "Casco Antiguo", "La Luna"]
 observacionesLocales: []
-faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
+  - p: "Con tantas obras en Rivas Futura hay mucho trasiego. ¿Qué pongo en mi adosado para evitar robos silenciosos?"
+    r: "Para evitar métodos como el bumping o la ganzúa, recomendamos cambiar el bombillo básico por uno certificado de alta seguridad (SKG***) y, sobre todo, protegerlo con un escudo acorazado para evitar que lo partan con mordazas."
+  - p: "Tenemos un local cerca del auditorio Miguel Ríos y nos piden barras antipánico para la salida cortafuegos. ¿Las instaláis?"
+    r: "Sí. Instalamos barras antipánico con marcado CE conforme a la norma europea EN 1125, y cerraduras y herrajes aptos para puertas cortafuegos, como los que se exigen en locales de pública concurrencia en Rivas."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/bombin-escudo-desmontado.jpg

@@ -65,7 +65,14 @@ const servicios = (await getCollection('servicios', (s) => s.data.status === 're
 const cercanas = (await getEntries(d.nearby)).filter((l) => l.data.cerrajeroPropio);
 
 // Primero las preguntas reales de la zona (ficha); después, las comunes
-const faqs = [...d.faqs, ...faqsGenerales(d.nombre, cercanas.map((c) => c.data.nombre))];
+const faqs = [
+  ...d.faqs,
+  ...faqsGenerales(
+    d.nombre,
+    cercanas.map((c) => c.data.nombre),
+    { barrios: d.barrios, semilla: entrada.id },
+  ),
+];
 ---
 
 <Layout

@@ -12,7 +12,11 @@ seoDescription: "¿Llaves dentro y puerta cerrada? Cerrajeros Villaviciosa de Od
 intro: ""
 barrios: ["Casco antiguo", "El Bosque", "El Castillo"]
 observacionesLocales: []
-faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
+  - p: "Alquilo un chalet a estudiantes de la UEM en El Bosque y hacen copias sin permiso. ¿Cómo lo evito?"
+    r: "Instalando un cilindro con perfil patentado incopiable. Para hacer un duplicado, es obligatorio presentar una tarjeta de propiedad física que tú te quedas. Sin ella no pueden encargar una copia oficial de la llave."
+  - p: "Mi casa en Campodón tiene puertas rústicas de madera muy pesadas. ¿Qué cerrojo estético puedo poner?"
+    r: "Instalamos cerrojos de seguridad de estilo rústico en acabados como forja negra, latón pulido o bronce envejecido. Ofrecen protección moderna sin romper la estética campestre de las viviendas de la zona."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/escudo-seguridad-acero.jpg

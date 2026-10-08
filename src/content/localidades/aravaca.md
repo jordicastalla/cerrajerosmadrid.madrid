@@ -12,7 +12,11 @@ seoDescription: "¿Te has quedado fuera de casa? Aperturas urgentes, cambio de c
 intro: ""
 barrios: ["Casco histórico", "Valdemarín", "El Plantío"]
 observacionesLocales: []
-faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
+  - p: "Vivo en un chalet por Valdemarín, ¿qué son los escudos magnéticos y por qué los recomendáis en portones exteriores?"
+    r: "Un escudo magnético oculta totalmente la entrada de la llave. Para los chalets aislados en Aravaca son la mejor opción porque impiden que metan pegamento, silicona o ganzúas en el cilindro desde la calle. Solo se abre deslizando una llave magnética codificada."
+  - p: "He perdido la llave del buzón de mi comunidad cerca de la estación de tren de Aravaca, ¿cambiáis cerraduras tan pequeñas?"
+    r: "Sí, es un servicio rápido y muy económico. Retiramos la leva antigua del buzón y te instalamos una cerradura nueva entregándote un juego de llaves en el momento."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/piezas-bombin-seguridad.jpg

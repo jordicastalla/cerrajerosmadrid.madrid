@@ -12,7 +12,11 @@ seoDescription: "¿Te has quedado fuera de casa en Barajas? Cerrajeros Barajas a
 intro: ""
 barrios: ["Casco Histórico", "Alameda de Osuna", "Timón", "Corralejos", "Aeropuerto"]
 observacionesLocales: []
-faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
+  - p: "Tengo un apartamento turístico en la Alameda de Osuna y los huéspedes se llevan las llaves al aeropuerto, ¿ponéis cerraduras con código temporal?"
+    r: "Es nuestra especialidad para pisos turísticos cerca del Adolfo Suárez. Instalamos cerraduras inteligentes (smart locks) y cilindros electrónicos controlados por Wi-Fi o Bluetooth para que generes códigos PIN caducables sin tener que entregar llaves físicas."
+  - p: "Trabajo en el Aeropuerto y me he dejado las llaves del coche dentro del maletero. ¿Abrís vehículos en los parkings de las terminales?"
+    r: "Sí, nos desplazamos a los aparcamientos de corta o larga estancia de Barajas y abrimos tu vehículo sin dañar la chapa, la pintura ni romper las ventanillas, usando herramientas de cerrajería de automoción."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerradura-sobreponer-azbe.jpg

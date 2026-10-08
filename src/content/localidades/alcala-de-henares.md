@@ -12,7 +12,11 @@ seoDescription: "¿Te has quedado fuera? Cerrajeros en Alcalá de Henares a cual
 intro: ""
 barrios: ["Casco histórico", "El Chorrillo", "La Garena", "Espartales", "Reyes Católicos", "El Val", "El Ensanche", "Nueva Alcalá"]
 observacionesLocales: []
-faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
+  - p: "¿Puedo instalar una cerradura invisible si mi piso está en el casco histórico cerca de la Plaza de Cervantes?"
+    r: "Sí, las cerraduras invisibles se instalan por el interior de la vivienda. Son ideales para no alterar la estética de las puertas antiguas o protegidas por Patrimonio en el centro de Alcalá, sumando un extra de seguridad sin que se vea desde fuera."
+  - p: "Vivo en un piso de estudiantes por la zona de Reyes Católicos y hemos perdido las llaves, ¿podéis abrir sin romper para no avisar al casero?"
+    r: "Claro, utilizamos técnicas de apertura no destructivas (como ganzuado o lámina) siempre que la cerradura no esté bloqueada internamente. El objetivo es abrir la puerta sin dañar el bombillo para que puedas seguir usando las copias que tengas en casa. Eso sí, antes de abrir te pediremos algo que acredite que vives allí, como el contrato de alquiler o el DNI."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerradura-sobreponer-multipunto.jpg

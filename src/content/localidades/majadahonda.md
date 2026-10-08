@@ -12,7 +12,11 @@ seoDescription: "¿Llave dentro y puerta cerrada? Cerrajeros Majadahonda de guar
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
+  - p: "Vivo por Roza Martín y quiero domotizar la entrada. ¿Instaláis cerraduras compatibles con Alexa o Google Home?"
+    r: "Sí, trabajamos con marcas punteras de smart locks (como Nuki o Yale) que se instalan sobre tu puerta sin modificarla por fuera. Te permitirán abrir con el móvil y crear rutinas domóticas."
+  - p: "Me han intentado robar en mi local de la Gran Vía echando ácido en el bombín. ¿Tenéis cerraduras que resistan eso?"
+    r: "Lo primero es cambiar el bombín dañado cuanto antes. Te instalamos un cilindro de alta seguridad (con certificaciones como VdS, según el modelo), con puentes de acero reforzado y protecciones internas contra la extracción, el taladro y el bumping. Y lo completamos con un escudo que tapa la entrada de la llave, para que no puedan volver a echar nada dentro."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerrojo-sobreponer-sag.jpg

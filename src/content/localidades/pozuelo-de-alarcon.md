@@ -12,7 +12,11 @@ seoDescription: "¿Te has quedado en la calle? Cerrajeros en Pozuelo de Alarcón
 intro: ""
 barrios: ["Pozuelo Pueblo", "La Estación", "Húmera", "Somosaguas", "Monteclaro", "Prado de Somosaguas", "La Cabaña", "Avenida de Europa"]
 observacionesLocales: []
-faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
+  - p: "En mi parcela de La Finca tengo un sistema de apertura por huella dactilar que falla. ¿Tenéis técnicos para biometría?"
+    r: "Sí, nuestros técnicos en Pozuelo están especializados en cerrajería de alta tecnología y control de accesos. Revisamos lectores biométricos, cerraduras motorizadas y teclados de acceso para recintos residenciales."
+  - p: "Tengo una puerta acorazada Fichet en mi piso de la Avenida de Europa. ¿Tenéis recambios para llaves de pompa?"
+    r: "Trabajamos con componentes originales y compatibles para Fichet, Mottura, Mia y otras marcas de alta seguridad. Podemos sustituir la caja central, el bombillo o el bloque de pompas sin cambiar la estructura de tu puerta."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/puerta-vivienda-escudo.jpg

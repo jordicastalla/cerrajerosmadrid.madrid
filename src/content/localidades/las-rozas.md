@@ -12,7 +12,11 @@ seoDescription: "Cerrajeros en Las Rozas para aperturas urgentes, cambio de cerr
 intro: ""
 barrios: ["Las Matas", "Los Peñascales"]
 observacionesLocales: []
-faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
+  - p: "Tengo una tienda en el polígono Európolis y me han forzado la persiana. ¿Podéis instalar un cierre de suelo hoy mismo?"
+    r: "Sí, nuestros talleres móviles llevan cierres de tipo cabezal de seguridad para persianas comerciales. Lo soldamos o anclamos en el mismo día para que puedas cerrar tu negocio con tranquilidad esa misma noche."
+  - p: "Las cristaleras de mi chalet en Punta Galea dan al jardín trasero. ¿Se pueden asegurar mejor contra apalancamientos?"
+    r: "Sí, para las puertas correderas de cristal de gran tamaño instalamos bloqueadores de riel y pasadores específicos para carpintería de aluminio y PVC, frenando el levantamiento de la hoja desde el exterior."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/puerta-blindada-multipunto.jpg

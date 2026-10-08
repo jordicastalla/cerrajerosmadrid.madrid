@@ -100,29 +100,64 @@ export function aMano(nombre: string): { icono: IconoAMano; titulo: string; text
   ];
 }
 
-/** Preguntas comunes a todas las zonas; van después de las preguntas propias de la ficha */
-export function faqsGenerales(nombre: string, cercanas: string[]): PreguntaFaq[] {
+/**
+ * Las dos preguntas comunes de cada zona (cerrajero propio y zonas cercanas),
+ * después de las propias de la ficha. Para que no salgan idénticas en las 16
+ * páginas, cada zona usa una de cuatro redacciones (según su slug) y la
+ * respuesta lleva sus barrios y sus zonas cercanas.
+ */
+export function faqsGenerales(
+  nombre: string,
+  cercanas: string[],
+  opciones: { barrios?: string[]; semilla?: string } = {},
+): PreguntaFaq[] {
   const lista = (nombres: string[]) =>
     nombres.length > 1 ? `${nombres.slice(0, -1).join(', ')} y ${nombres.at(-1)}` : (nombres[0] ?? '');
+  const n = [...(opciones.semilla ?? nombre)].reduce((a, c) => a + c.charCodeAt(0), 0);
+  const barrios = (opciones.barrios ?? []).slice(0, 3);
+  const enBarrios = barrios.length ? ` y trabaja en barrios como ${lista(barrios)}` : '';
+  const tel = site.telefono;
 
-  return [
+  const propio = [
     {
-      p: `¿Tenéis cerrajero en ${nombre}?`,
-      r: `Sí. Uno de nuestros cerrajeros trabaja en ${nombre}. Llama al ${site.telefono} y cuéntanos qué ha pasado.`,
+      p: `¿Tenéis cerrajero propio en ${nombre}?`,
+      r: `Sí. Uno de nuestros cerrajeros trabaja en ${nombre}${enBarrios}. Es del equipo de OpenServi, no un intermediario. Llama al ${tel} y cuéntanos qué ha pasado.`,
     },
     {
-      p: `¿Atendéis en ${nombre} de noche y en festivos?`,
-      r: `Sí. El servicio funciona las 24 horas, todos los días, también de madrugada, en fin de semana y en festivos.`,
+      p: `¿El cerrajero que viene es de ${nombre} o de una empresa de fuera?`,
+      r: `Es de la zona. Uno de nuestros cerrajeros trabaja en ${nombre}${enBarrios}, y forma parte del equipo de OpenServi: sin plataformas ni comisionistas de por medio.`,
     },
     {
-      p: `¿Cuánto cuesta un cerrajero en ${nombre}?`,
-      r: 'Depende del trabajo, de la puerta y de la cerradura. Antes de empezar te explicamos qué hay que hacer y te damos el presupuesto, sin compromiso.',
+      p: `¿Trabaja alguno de vuestros cerrajeros en ${nombre}?`,
+      r: `Sí. En ${nombre} trabaja uno de nuestros cerrajeros${enBarrios ? `,${enBarrios.slice(1)}` : ''}. Cuando llamas al ${tel}, te ponemos en contacto con el técnico de la zona.`,
     },
     {
-      p: `¿Trabajáis también cerca de ${nombre}?`,
-      r: cercanas.length
-        ? `Sí. También tenemos cerrajero en ${lista(cercanas)}, y trabajamos en el resto de zonas de alrededor aunque no aparezcan en la lista.`
-        : 'Sí. Trabajamos en las zonas de alrededor aunque no aparezcan en la lista.',
+      p: `¿Mandáis a un cerrajero de ${nombre} o viene alguien de Madrid?`,
+      r: `De ${nombre}. Uno de nuestros cerrajeros trabaja en la propia zona${enBarrios} y es del equipo de OpenServi. Llama al ${tel} y le pasamos tu aviso en un momento.`,
     },
   ];
+
+  const L = lista(cercanas);
+  const cerca = cercanas.length
+    ? [
+        {
+          p: `¿Trabajáis también cerca de ${nombre}?`,
+          r: `Sí. También tenemos cerrajero en ${L}, y trabajamos en el resto de zonas de alrededor aunque no aparezcan en la lista.`,
+        },
+        {
+          p: `Si no estoy en ${nombre} sino en un pueblo de al lado, ¿también venís?`,
+          r: `Claro. Cerca de ${nombre} también tenemos cerrajero propio en ${L}. Y si tu zona no aparece en la web, llámanos igual: trabajamos en todas las de alrededor.`,
+        },
+        {
+          p: `¿Qué otras zonas cerca de ${nombre} cubrís?`,
+          r: `Además de ${nombre}, tenemos cerrajero en ${L}. Si estás en otra zona cercana que no sale en la lista, también vamos.`,
+        },
+        {
+          p: `¿Llegáis a los alrededores de ${nombre}?`,
+          r: `Sí. Desde ${nombre} cubrimos los alrededores, y en ${L} tenemos también cerrajero propio. Aunque tu zona no aparezca en la web, llámanos.`,
+        },
+      ]
+    : [{ p: `¿Trabajáis también cerca de ${nombre}?`, r: 'Sí. Trabajamos en las zonas de alrededor aunque no aparezcan en la lista.' }];
+
+  return [propio[n % propio.length], cerca[(n + 1) % cerca.length]];
 }

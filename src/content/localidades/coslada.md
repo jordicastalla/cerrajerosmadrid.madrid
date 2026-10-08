@@ -12,7 +12,11 @@ seoDescription: "Cerrajeros en Coslada urgentes y rápidos: aperturas, cambio de
 intro: ""
 barrios: []
 observacionesLocales: []
-faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
+  - p: "Tengo una nave en el Puerto Seco y las barras antipánico de la salida de emergencia van duras. ¿Las podéis reparar?"
+    r: "Sí, somos expertos en normativas de evacuación para polígonos industriales. Ajustamos, reparamos o sustituimos los herrajes antipánico en el mismo día para que cumplas con la inspección de riesgos laborales."
+  - p: "Me he dejado las llaves puestas por dentro en mi piso del Barrio del Puerto. ¿Es muy caro abrirla un domingo?"
+    r: "Aplicamos una tarifa de urgencia, pero siempre te daremos el presupuesto por teléfono antes de ir. Si solo está la puerta \"de portazo\" y sin la llave girada, solemos abrirla muy rápido con el método del resbalón."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/llave-keso.jpg

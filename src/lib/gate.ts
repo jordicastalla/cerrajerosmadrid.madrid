@@ -10,14 +10,13 @@ import type { CollectionEntry } from 'astro:content';
 
 /**
  * Mínimos para `ready`; ajustables aquí.
- * Decisión del cliente (2026-10-08): se publican las 16 zonas con su texto
- * propio y las FAQs generales, sin esperar al caso real con foto ni a las FAQs
- * locales. Por eso casos y faqs quedan a 0. Cuando lleguen fotos y preguntas
- * reales de cada zona, se suben estos mínimos otra vez.
+ * Decisión del cliente (2026-10-08): se publican las 16 zonas sin esperar al
+ * caso real con foto en src/content/casos (casos: 0). Las FAQs locales sí se
+ * exigen: cada ficha lleva al menos 2 preguntas propias de la zona.
  */
 export const MINIMOS = {
   casos: 0,
-  faqs: 0,
+  faqs: 2,
   palabrasIntro: 100,
 };
 

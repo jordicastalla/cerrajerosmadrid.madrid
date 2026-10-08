@@ -12,7 +12,11 @@ seoDescription: "Cerrajeros en Pinto para abrir tu puerta o cambiar cerradura y 
 intro: ""
 barrios: ["Casco antiguo", "La Tenería", "Parque Europa", "La Cristina"]
 observacionesLocales: []
-faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
+faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
+  - p: "En los chalets de La Tenería muchos ponen rejas, pero yo prefiero una puerta más segura. ¿Sirve una cerradura multipunto?"
+    r: "Una cerradura multipunto (de 3 o 5 anclajes) refuerza enormemente la puerta principal porque ancla en la parte superior, inferior y lateral. Eso sí, recuerda asegurar también el acceso de puertas traseras o ventanales bajos si decides no poner rejas."
+  - p: "Mi abuela vive cerca de la Torre de Eboli y a veces se deja la llave cruzada por dentro. ¿Podemos poner un bombín especial?"
+    r: "La solución ideal es instalar un cilindro de doble embrague. Este sistema te permitirá abrir la puerta desde fuera con tu copia de la llave, aunque tu abuela se haya dejado la suya metida por el interior."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/bombin-retirado-llave.jpg
