@@ -3,7 +3,7 @@
 # se escribe SOLO con lo que haya aquí. Campo vacío = sección que no se pinta.
 # Pasa a "ready" cuando cumple los mínimos de src/lib/gate.ts (spec §5).
 nombre: Collado Villalba
-status: draft
+status: ready
 cerrajeroPropio: true # «uno de nuestros cerrajeros» trabaja en la zona (dato del cliente)
 grupoMapa: noroeste
 ordenMapa: 5

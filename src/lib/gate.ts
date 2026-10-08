@@ -8,10 +8,16 @@
  */
 import type { CollectionEntry } from 'astro:content';
 
-/** Mínimos orientativos para `ready`; ajustables aquí */
+/**
+ * Mínimos para `ready`; ajustables aquí.
+ * Decisión del cliente (2026-10-08): se publican las 16 zonas con su texto
+ * propio y las FAQs generales, sin esperar al caso real con foto ni a las FAQs
+ * locales. Por eso casos y faqs quedan a 0. Cuando lleguen fotos y preguntas
+ * reales de cada zona, se suben estos mínimos otra vez.
+ */
 export const MINIMOS = {
-  casos: 1,
-  faqs: 2,
+  casos: 0,
+  faqs: 0,
   palabrasIntro: 100,
 };
 
