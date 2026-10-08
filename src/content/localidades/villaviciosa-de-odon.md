@@ -15,6 +15,9 @@ observacionesLocales: []
 faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
+image: ../../assets/localidades/escudo-seguridad-acero.jpg
+imageAlt: "Escudo de seguridad de acero satinado con disco protector, recién sacado del embalaje, en la mano de uno de nuestros técnicos en Villaviciosa de Odón."
+imageCredito: "Foto realizada por el equipo de OpenServi en Villaviciosa de Odón"
 nearby: [mostoles, boadilla-del-monte, alcorcon, pozuelo-de-alarcon] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---
