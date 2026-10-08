@@ -13,10 +13,10 @@ intro: ""
 barrios: ["Casco Histórico", "Alameda de Osuna", "Timón", "Corralejos", "Aeropuerto"]
 observacionesLocales: []
 faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
-  - p: "Tengo un apartamento turístico en la Alameda de Osuna y los huéspedes se llevan las llaves al aeropuerto, ¿ponéis cerraduras con código temporal?"
-    r: "Es nuestra especialidad para pisos turísticos cerca del Adolfo Suárez. Instalamos cerraduras inteligentes (smart locks) y cilindros electrónicos controlados por Wi-Fi o Bluetooth para que generes códigos PIN caducables sin tener que entregar llaves físicas."
-  - p: "Trabajo en el Aeropuerto y me he dejado las llaves del coche dentro del maletero. ¿Abrís vehículos en los parkings de las terminales?"
-    r: "Sí, nos desplazamos a los aparcamientos de corta o larga estancia de Barajas y abrimos tu vehículo sin dañar la chapa, la pintura ni romper las ventanillas, usando herramientas de cerrajería de automoción."
+  - p: "Tengo un apartamento turístico en la Alameda de Osuna y los huéspedes no siempre devuelven las llaves. ¿Qué me recomendáis?"
+    r: "Cambiar el bombín cada vez que se pierde un juego sale caro a la larga. Lo práctico es instalar un bombín de seguridad con tarjeta de propiedad: sin ella nadie puede encargar copias oficiales y tú controlas cuántas llaves hay en circulación. Si un huésped se lleva una, valoramos contigo si compensa cambiar el bombín."
+  - p: "Trabajo en el aeropuerto con turnos de noche. Si vuelvo a casa de madrugada y me quedo fuera, ¿venís?"
+    r: "Sí. El servicio funciona las 24 horas, todos los días, también de madrugada y en festivos. Llámanos, cuéntanos si la puerta está solo cerrada de golpe o con la llave echada, y te decimos cómo la abriremos y cuánto cuesta antes de salir."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerradura-sobreponer-azbe.jpg

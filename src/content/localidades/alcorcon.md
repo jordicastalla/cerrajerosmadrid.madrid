@@ -15,8 +15,8 @@ observacionesLocales: []
 faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
   - p: "He comprado un piso de obra nueva en el Ensanche Sur, ¿cuánto tardáis en cambiar el bombín de obra por uno antibumping?"
     r: "Llevamos stock permanente en nuestros vehículos. Tardamos unos 20 minutos en sustituir el perfil europeo estándar de las constructoras por un cilindro de alta seguridad certificado que te proteja frente a técnicas de robo actuales."
-  - p: "Tengo un local comercial cerca de Los Castillos y la persiana metálica se ha atascado, ¿hacéis reparaciones de motores?"
-    r: "Sí, disponemos de servicio para negocios en todo Alcorcón. Reparamos cierres metálicos, cambiamos lamas dobladas y ajustamos o sustituimos el motor de la persiana para que no pierdas ni un día de ventas."
+  - p: "Tengo un local comercial cerca de Los Castillos y la cerradura de la persiana metálica se ha atascado. ¿Podéis abrirla?"
+    r: "Sí. Abrimos y cambiamos las cerraduras de persianas y cierres metálicos de locales. Si está rota o la han forzado, te ponemos una nueva en el momento para que puedas cerrar el negocio esa misma noche."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/puerta-reja-trabajo.jpg

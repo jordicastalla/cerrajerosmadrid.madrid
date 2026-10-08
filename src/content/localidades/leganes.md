@@ -15,8 +15,8 @@ observacionesLocales: []
 faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
   - p: "En mi piso antiguo de Zarzaquemada la puerta es de madera fina. ¿Pongo un cerrojo FAC o cambio la puerta entera?"
     r: "Si el presupuesto no te permite instalar una puerta acorazada nueva, poner un cerrojo tipo FAC original con cilindro antibumping es una excelente forma de multiplicar la resistencia de tu puerta actual en Leganés de manera económica y rápida."
-  - p: "He perdido las llaves del coche cerca de Parquesur. ¿Hacéis copias desde cero de llaves con chip?"
-    r: "Sí. Acudimos al aparcamiento con maquinaria de diagnosis automotriz, leemos la centralita de tu coche, tallamos la llave mecánica in situ y programamos el chip inmovilizador para que puedas arrancar y marcharte."
+  - p: "He perdido las llaves de casa cerca de Parquesur y en el llavero iba algo con mi dirección. ¿Qué hago?"
+    r: "Cambia el bombín cuanto antes: quien encuentre las llaves podría saber de qué puerta son. Lo hacemos el mismo día, y si te has quedado fuera, primero abrimos la puerta y después cambiamos el bombín para que las llaves perdidas dejen de servir."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerradura-embutir-tesa.jpg

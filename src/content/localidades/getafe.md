@@ -15,8 +15,8 @@ observacionesLocales: []
 faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
   - p: "Vivo en un unifamiliar en el Sector III y quiero mejorar la puerta del garaje basculante, ¿qué me aconsejáis?"
     r: "Para los garajes adosados de Getafe, lo más disuasorio es instalar cierres laterales de alta seguridad para puertas basculantes o anclajes al suelo tipo \"cabezal\". Evitan que puedan apalancar la puerta desde abajo."
-  - p: "Tengo un piso alquilado a universitarios de la Carlos III por Getafe Norte y cambian cada año. ¿Mejor cambiar bombín o poner cerradura electrónica?"
-    r: "A largo plazo, una cerradura con teclado electrónico o apertura por móvil te saldrá más rentable. Evitas el riesgo de copias no controladas y solo tienes que revocar el acceso a los antiguos inquilinos desde tu app."
+  - p: "Tengo un piso alquilado a universitarios de la Carlos III por Getafe Norte y cambian cada año. ¿Tengo que cambiar la cerradura cada vez?"
+    r: "No hace falta cambiar la cerradura entera: basta con cambiar el bombín, que es más rápido y económico. Y si pones uno con tarjeta de propiedad, nadie podrá encargar copias sin tu permiso mientras dure el alquiler."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerradura-sobreponer-cvl.jpg

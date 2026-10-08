@@ -15,8 +15,8 @@ observacionesLocales: []
 faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
   - p: "Con las heladas que caen en Fontenebro, la cerradura de mi cancela se traba mucho en invierno. ¿Hay soluciones para el frío?"
     r: "En zonas de sierra como Villalba instalamos cilindros preparados para bajas temperaturas y evitamos lubricantes aceitosos que se congelan. Si el problema persiste, ajustamos el resbalón y aplicamos grafito en polvo para que vaya suave en pleno invierno."
-  - p: "Tengo una casa vacía cerca del Parque de Los Belgas y vengo poco. ¿Instaláis puertas anti-okupas?"
-    r: "Es un servicio muy demandado. Podemos colocar una puerta de acero anti-okupa sobre el marco exterior de tu casa sin hacer obra. Cuando decidas volver a usar la vivienda con frecuencia, la retiramos."
+  - p: "Tengo una casa vacía cerca del Parque de Los Belgas y vengo poco. ¿Cómo la protejo mejor?"
+    r: "Para una vivienda que pasa temporadas vacía, lo más eficaz es sumar un segundo punto de cierre: un cerrojo de seguridad antibumping, con escudo protector para el cilindro. Y si no sabes cuántas copias de la llave hay por ahí, cambia también el bombín por uno con tarjeta de propiedad."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/bombin-puerta-marron.jpg

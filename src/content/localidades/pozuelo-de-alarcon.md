@@ -13,10 +13,10 @@ intro: ""
 barrios: ["Pozuelo Pueblo", "La Estación", "Húmera", "Somosaguas", "Monteclaro", "Prado de Somosaguas", "La Cabaña", "Avenida de Europa"]
 observacionesLocales: []
 faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
-  - p: "En mi parcela de La Finca tengo un sistema de apertura por huella dactilar que falla. ¿Tenéis técnicos para biometría?"
-    r: "Sí, nuestros técnicos en Pozuelo están especializados en cerrajería de alta tecnología y control de accesos. Revisamos lectores biométricos, cerraduras motorizadas y teclados de acceso para recintos residenciales."
+  - p: "En mi casa de La Finca tengo puerta acorazada en la entrada, pero la puerta de servicio tiene una cerradura sencilla. ¿Merece la pena reforzarla?"
+    r: "Sí: quien intenta entrar busca el punto más débil, y suele ser la puerta secundaria. Te recomendamos instalar un cerrojo de seguridad o cambiar el bombín por uno antibumping y antiextracción, para que esa puerta no se quede por detrás de la principal."
   - p: "Tengo una puerta acorazada Fichet en mi piso de la Avenida de Europa. ¿Tenéis recambios para llaves de pompa?"
-    r: "Trabajamos con componentes originales y compatibles para Fichet, Mottura, Mia y otras marcas de alta seguridad. Podemos sustituir la caja central, el bombillo o el bloque de pompas sin cambiar la estructura de tu puerta."
+    r: "Trabajamos con componentes originales y compatibles para Fichet, Mottura, Kaba, Keso y otras marcas de alta seguridad. Podemos sustituir la caja central, el bombillo o el bloque de pompas sin cambiar la estructura de tu puerta."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/puerta-vivienda-escudo.jpg

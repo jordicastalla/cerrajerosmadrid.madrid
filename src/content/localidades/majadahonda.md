@@ -13,8 +13,8 @@ intro: ""
 barrios: []
 observacionesLocales: []
 faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
-  - p: "Vivo por Roza Martín y quiero domotizar la entrada. ¿Instaláis cerraduras compatibles con Alexa o Google Home?"
-    r: "Sí, trabajamos con marcas punteras de smart locks (como Nuki o Yale) que se instalan sobre tu puerta sin modificarla por fuera. Te permitirán abrir con el móvil y crear rutinas domóticas."
+  - p: "Vivo por Roza Martín y la llave de casa entra y sale con dificultad. ¿Es la cerradura o el bombín?"
+    r: "Casi siempre es el bombín: con los años se desgastan los pitones o se acumula suciedad, y la llave empieza a rascar. Conviene cambiarlo antes de que la llave se parta dentro. Si el fallo es del mecanismo de la cerradura, te lo explicamos y te damos el presupuesto antes de tocar nada."
   - p: "Me han intentado robar en mi local de la Gran Vía echando ácido en el bombín. ¿Tenéis cerraduras que resistan eso?"
     r: "Lo primero es cambiar el bombín dañado cuanto antes. Te instalamos un cilindro de alta seguridad (con certificaciones como VdS, según el modelo), con puentes de acero reforzado y protecciones internas contra la extracción, el taladro y el bumping. Y lo completamos con un escudo que tapa la entrada de la llave, para que no puedan volver a echar nada dentro."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)

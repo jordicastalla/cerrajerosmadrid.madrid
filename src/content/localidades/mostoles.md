@@ -15,8 +15,8 @@ observacionesLocales: []
 faqs: # preguntas reales de clientes de la zona (aportadas por el cliente, 2026-10-08)
   - p: "He comprado un piso nuevo en el PAU-4 y las llaves se las han pasado los obreros. ¿Debería cambiar algo?"
     r: "Siempre recomendamos sustituir el bombín en viviendas de nueva entrega. Las llaves de obra pasan por muchas manos. Cambiar el cilindro por uno incopiable te garantiza ser la única persona con acceso a tu casa."
-  - p: "Mi chalet en Parque Coimbra está alejado del centro de Móstoles. ¿Cobráis recargo de desplazamiento?"
-    r: "No cobramos extras por ir a Parque Coimbra. Nuestras tarifas de desplazamiento son fijas para toda la zona y te las detallaremos con total transparencia en tu primera llamada."
+  - p: "Mi chalet en Parque Coimbra tiene la puerta de la parcela con una cerradura vieja que cuesta abrir. ¿La podéis cambiar?"
+    r: "Sí. Cambiamos cerraduras de puertas de parcela, cancelas y portones, no solo de la puerta de casa. Para exterior conviene un cilindro que aguante bien la lluvia y el polvo; te explicamos las opciones y te damos el presupuesto antes de empezar."
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/llave-fichet.jpg
