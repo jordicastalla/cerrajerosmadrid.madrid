@@ -15,6 +15,9 @@ observacionesLocales: []
 faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
+image: ../../assets/localidades/bombin-escudo-desmontado.jpg
+imageAlt: "Bombín de seguridad desmontado con su escudo protector en la mano de uno de nuestros técnicos en Rivas-Vaciamadrid, con el taladro y la radial sobre la encimera."
+imageCredito: "Foto realizada por el equipo de OpenServi en Rivas-Vaciamadrid"
 nearby: [coslada, barajas, pinto, getafe] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---
