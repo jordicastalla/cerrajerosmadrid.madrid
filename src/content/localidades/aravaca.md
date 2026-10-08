@@ -16,8 +16,8 @@ faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/piezas-bombin-seguridad.jpg
-imageAlt: "Piezas de un bombín de seguridad en la mano de un técnico, con sus elementos de acero y tornillos a la vista."
-imageCredito: "Foto realizada por el equipo de OpenServi"
+imageAlt: "Piezas de un bombín de seguridad en la mano de uno de nuestros técnicos en Aravaca, con sus elementos de acero y tornillos a la vista."
+imageCredito: "Foto realizada por el equipo de OpenServi en Aravaca"
 nearby: [pozuelo-de-alarcon, majadahonda, las-rozas, boadilla-del-monte] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

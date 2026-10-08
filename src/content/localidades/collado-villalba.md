@@ -15,6 +15,9 @@ observacionesLocales: []
 faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
+image: ../../assets/localidades/bombin-puerta-marron.jpg
+imageAlt: "Bombín redondo de latón en una puerta marrón en Collado Villalba, con arañazos en la pintura y el pestillo asomando por el canto."
+imageCredito: "Foto realizada por el equipo de OpenServi en Collado Villalba"
 nearby: [las-rozas, majadahonda] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

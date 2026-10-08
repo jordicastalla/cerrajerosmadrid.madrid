@@ -16,8 +16,8 @@ faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/cerradura-sobreponer-multipunto.jpg
-imageAlt: "Cerradura de seguridad de sobreponer, con pomo, cinco bulones laterales y barras verticales hacia el suelo y el techo, en una puerta de madera."
-imageCredito: "Foto realizada por el equipo de OpenServi"
+imageAlt: "Cerradura de seguridad de sobreponer, con pomo, cinco bulones laterales y barras verticales hacia el suelo y el techo, en una puerta de madera en Alcalá de Henares."
+imageCredito: "Foto realizada por el equipo de OpenServi en Alcalá de Henares"
 nearby: [coslada, barajas, rivas-vaciamadrid] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

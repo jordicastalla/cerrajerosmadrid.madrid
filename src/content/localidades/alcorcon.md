@@ -16,8 +16,8 @@ faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
 image: ../../assets/localidades/puerta-reja-trabajo.jpg
-imageAlt: "Puerta de reja metálica negra abierta durante un trabajo de cerrajería, con cajas de herramientas, herramientas eléctricas y cables en el suelo."
-imageCredito: "Foto realizada por el equipo de OpenServi"
+imageAlt: "Puerta de reja metálica negra abierta durante un trabajo de cerrajería en Alcorcón, con cajas de herramientas, herramientas eléctricas y cables en el suelo."
+imageCredito: "Foto realizada por el equipo de OpenServi en Alcorcón"
 nearby: [mostoles, leganes, villaviciosa-de-odon, boadilla-del-monte] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

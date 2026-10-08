@@ -15,6 +15,9 @@ observacionesLocales: []
 faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
+image: ../../assets/localidades/llave-keso.jpg
+imageAlt: "Llave de seguridad Keso, de Assa Abloy, con la cabeza roja y metida en su bombín, en un trabajo en Coslada."
+imageCredito: "Foto realizada por el equipo de OpenServi en Coslada"
 nearby: [barajas, rivas-vaciamadrid, alcala-de-henares, aravaca] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

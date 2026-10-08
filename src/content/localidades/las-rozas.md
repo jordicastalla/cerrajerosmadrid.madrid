@@ -15,6 +15,9 @@ observacionesLocales: []
 faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
+image: ../../assets/localidades/puerta-blindada-multipunto.jpg
+imageAlt: "Puerta blindada abierta en Las Rozas, con el frontal de la cerradura multipunto, sus bulones y el escudo protector negro del bombín."
+imageCredito: "Foto realizada por el equipo de OpenServi en Las Rozas"
 nearby: [majadahonda, pozuelo-de-alarcon, aravaca, collado-villalba] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---

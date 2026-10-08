@@ -15,6 +15,9 @@ observacionesLocales: []
 faqs: [] # preguntas reales de clientes de la zona: - p: ¿…?  r: …
 consejo: "" # consejo práctico real del cerrajero de la zona (sin él no se pinta)
 tiempoLlegada: "Solemos llegar entre 20 y 35 minutos"
+image: ../../assets/localidades/cerradura-sobreponer-cvl.jpg
+imageAlt: "Cerradura de sobreponer CVL oxidada en una puerta metálica gris con la pintura desconchada en Getafe, con su manilla de latón."
+imageCredito: "Foto realizada por el equipo de OpenServi en Getafe"
 nearby: [leganes, pinto, alcorcon, mostoles] # zonas con cerrajero propio, de más a menos cerca
 updatedAt: 2026-10-08
 ---
