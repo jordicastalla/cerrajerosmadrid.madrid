@@ -212,10 +212,11 @@ import { analitica } from '@data/analitica';
       aviso.hidden = true;
     });
 
-    // Desde la política de cookies se puede reabrir para cambiar la decisión
-    window.abrirPreferenciasCookies = function () {
-      abrir(true);
-    };
+    // Cualquier botón con data-abrir-cookies (pie de página, política de
+    // cookies) reabre el aviso para cambiar la decisión
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('[data-abrir-cookies]')) abrir(true);
+    });
 
     var decision = leer();
     if (decision === 'aceptar') cargarAnalitica();

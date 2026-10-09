@@ -1671,7 +1671,7 @@ Sin medición no se puede optimizar.
 
 - Todo enlace `tel:` lleva `data-cta` con el bloque de origen: `header`, `hero`, `sticky`, `triage-<situacion>`, `faq`, `zona-<slug>`, `servicio-<slug>` o `footer`.
 - Un único módulo, `src/lib/track.ts`, registra el clic de llamada con `{ cta, pagina }` y lo envía a Google Analytics 4 como evento `llamada` (con `gtag('event', …)`), solo si el visitante ha aceptado la analítica.
-- **Analítica (2026-10-09):** Google Analytics 4, `G-T47VCPPF6E` (`src/data/analitica.ts`). Bloqueo previo: el script de Google no se pide hasta que el visitante pulsa «Aceptar» en el aviso de cookies (`src/components/Cookies.astro`). «Rechazar» pesa lo mismo que «Aceptar», el aviso no tapa el teléfono y la decisión se puede cambiar desde la política de cookies; al revocar se borran las cookies `_ga*`.
+- **Analítica (2026-10-09):** Google Analytics 4, `G-T47VCPPF6E` (`src/data/analitica.ts`). Bloqueo previo: el script de Google no se pide hasta que el visitante pulsa «Aceptar» en el aviso de cookies (`src/components/Cookies.astro`). «Rechazar» pesa lo mismo que «Aceptar», el aviso no tapa el teléfono y la decisión se puede cambiar desde «Configurar cookies», al pie de todas las páginas, o desde la política de cookies; al revocar se borran las cookies `_ga*`. Consentimiento válido 12 meses.
 - Eventos adicionales: clic en «Ver mapa» y clic en el enlace al perfil de Google.
 
 ## Search Console

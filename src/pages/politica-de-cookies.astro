@@ -88,8 +88,8 @@ const tabla = [
       <div class="legal__decision">
         <h2 class="legal__grupo">Cambiar su decisión</h2>
         <p>
-          Puede conceder o retirar el permiso en cualquier momento. Al rechazar, las cookies de analítica que hubiera se
-          eliminan de su navegador.
+          Puede conceder o retirar el permiso en cualquier momento, con este botón o con «Configurar cookies» al pie de
+          cualquier página. Al rechazar, las cookies de analítica que hubiera se eliminan de su navegador.
         </p>
         <button type="button" class="boton-sec" data-abrir-cookies>Configurar cookies</button>
       </div>
@@ -122,13 +122,6 @@ const tabla = [
         </p>
       </div>
 
-      <script is:inline>
-        document.querySelectorAll('[data-abrir-cookies]').forEach(function (b) {
-          b.addEventListener('click', function () {
-            if (window.abrirPreferenciasCookies) window.abrirPreferenciasCookies();
-          });
-        });
-      </script>
     </div>
   </section>
 </Layout>
