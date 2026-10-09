@@ -368,8 +368,7 @@ const faqs = [
 
   <!-- Texto del cliente (v2.5) -->
   <section class="cerca tramo tramo--profundo" id="cerrajero-cerca" aria-labelledby="cerca-titulo">
-    <Skyline clase="cerca__skyline" />
-    <div class="envoltura cerca__contenido">
+    <div class="envoltura">
       <p class="rotulo">Estás a una llamada</p>
       <h2 class="seccion__titulo" id="cerca-titulo">¿Buscas un cerrajero cerca en Madrid? Llámanos ahora</h2>
       <div class="prosa cerca__prosa">
@@ -682,20 +681,9 @@ const faqs = [
   }
 
   /* --- ¿Buscas un cerrajero cerca? (cierre de la Home) --------------- */
+  /* Sin perfil de Madrid: justo debajo va el pie, que ya lo lleva */
   .cerca {
-    position: relative;
-    overflow: hidden;
-    padding-bottom: clamp(8rem, 18vw, 14rem);
     border-top: 1px solid var(--linea-oro);
-  }
-
-  .cerca :global(.cerca__skyline) {
-    --skyline-opacidad: 0.22;
-  }
-
-  .cerca__contenido {
-    position: relative;
-    z-index: 1;
   }
 
   .cerca__prosa {
