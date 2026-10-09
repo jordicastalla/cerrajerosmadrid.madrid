@@ -114,9 +114,22 @@ for (const p of paginas) {
   for (const img of html.match(/<img\b[^>]*>/gi) ?? []) if (attr(img, 'alt') === null) error(ruta, `imagen sin alt: ${img.slice(0, 80)}…`);
 
   // Enlaces tel: siempre el comercial (o el 112)
-  for (const a of html.match(/<a\b[^>]*href="tel:[^"]*"[^>]*>/gi) ?? []) {
+  // Tramos con data-cta-bloque (textos en Markdown): sus tel: heredan esa etiqueta
+  const bloques = [...html.matchAll(/<article\b[^>]*data-cta-bloque="[^"]+"[^>]*>[\s\S]*?<\/article>/gi)].map((m) => [
+    m.index,
+    m.index + m[0].length,
+  ]);
+  for (const m of html.matchAll(/<a\b[^>]*href="tel:[^"]*"[^>]*>/gi)) {
+    const a = m[0];
     const href = attr(a, 'href');
     if (!TEL_PERMITIDOS.includes(href)) error(ruta, `enlace tel: distinto del comercial (${href})`);
+    // Medición (spec §41): cada llamada a la empresa dice de qué bloque sale, y
+    // las de otros números no cuentan como llamada (inflarían la conversión)
+    const enBloque = bloques.some(([i, f]) => m.index > i && m.index < f);
+    if (href === TEL_COMERCIAL && attr(a, 'data-cta') === null && !enBloque)
+      error(ruta, `enlace tel: sin data-cta: ${a.slice(0, 80)}…`);
+    if (href !== TEL_COMERCIAL && attr(a, 'data-sin-medir') === null)
+      error(ruta, `enlace ${href} sin data-sin-medir: se mediría como llamada a la empresa`);
   }
 
   // JSON-LD válido y sin reseñas marcadas

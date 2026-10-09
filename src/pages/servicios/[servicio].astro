@@ -56,7 +56,8 @@ const relacionados = (await getEntries(d.relacionados)).filter((r) => r.data.sta
 
   <div class="claro">
     <div class="envoltura tramo cuerpo-servicio">
-      <article class="prosa">
+      <!-- Los tel: del Markdown no llevan data-cta: la medición toma el del bloque -->
+      <article class="prosa" data-cta-bloque={`servicio-texto-${entrada.id}`}>
         <Content />
       </article>
 

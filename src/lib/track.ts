@@ -25,11 +25,13 @@ document.addEventListener(
   'click',
   (e) => {
     const el = (e.target as Element | null)?.closest?.('a[href^="tel:"], [data-evento]');
-    if (!el) return;
+    // data-sin-medir: enlaces que no son de la empresa (el 112 de «Ten esto a mano»)
+    if (!el || el.hasAttribute('data-sin-medir')) return;
     const esLlamada = el.matches('a[href^="tel:"]');
     registrar({
       evento: esLlamada ? 'llamada' : (el.getAttribute('data-evento') ?? 'clic'),
-      cta: el.getAttribute('data-cta') ?? 'sin-etiqueta',
+      // Sin data-cta propio (enlaces escritos en Markdown), el del bloque que lo contiene
+      cta: el.getAttribute('data-cta') ?? el.closest('[data-cta-bloque]')?.getAttribute('data-cta-bloque') ?? 'sin-etiqueta',
       pagina: location.pathname,
     });
   },
