@@ -67,6 +67,9 @@ const {
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+
+    <!-- Precargas propias de cada página (p. ej. la imagen LCP de la portada) -->
+    <slot name="cabeza" />
   </head>
 
   <body>

@@ -16,6 +16,8 @@ import ImagenHome from '@components/ImagenHome.astro';
 import Icono from '@components/ui/Icono.astro';
 import KeyCutDivider from '@components/KeyCutDivider.astro';
 import Skyline from '@components/marca/Skyline.astro';
+// Marca de agua de la portada: es el elemento LCP, así que se precarga (?url = el mismo archivo que pide el CSS)
+import marcaAguaAvif from '@/assets/marca/skyline-linea.avif?url';
 import { site, telHref } from '@data/site';
 import emblema from '@/assets/marca/emblema.webp';
 import cierrePersiana from '@/assets/home/cierre-persiana.webp';
@@ -120,6 +122,7 @@ const faqs = [
   descripcion="Cerrajeros en Madrid 24 horas: apertura de puertas, cambio de cerraduras y cerrojos de seguridad. Cerrajeros propios en 16 zonas. Llama al 912 918 462."
   ruta="/"
 >
+  <link slot="cabeza" rel="preload" as="image" type="image/avif" href={marcaAguaAvif} fetchpriority="high" />
   <LocalBusinessSchema zonasReady={zonasReady} />
 
   <!-- Hero: empieza por el problema (spec §6) -->
@@ -155,7 +158,7 @@ const faqs = [
         </picture>
       </div>
     </div>
-    <Skyline clase="portada__skyline" />
+    <Skyline clase="portada__skyline" dibujo="linea" />
   </section>
 
   <Triage />
@@ -487,8 +490,21 @@ const faqs = [
     filter: drop-shadow(0 0 48px rgb(212 175 55 / 0.28));
   }
 
+  /* Marca de agua: el perfil en línea, tenue, sin competir con el titular */
   .portada :global(.portada__skyline) {
-    --skyline-opacidad: 0.34;
+    --skyline-opacidad: 0.24;
+    --skyline-ancho: 100rem;
+  }
+
+  /* En móvil, a lo ancho de la pantalla quedaría en una franja tras la barra de
+     llamada: se amplía y se centra en la cúpula del Metrópolis */
+  @media (max-width: 767px) {
+    .portada :global(.portada__skyline) {
+      --skyline-opacidad: 0.2;
+      width: 250%;
+      left: -18%;
+      translate: none;
+    }
   }
 
   /* --- Servicios (blanco) -------------------------------------------- */

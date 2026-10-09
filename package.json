@@ -14,6 +14,7 @@
     "inventario": "node scripts/inventario-fotos.mjs",
     "iconos": "node scripts/generar-iconos.mjs",
     "skyline": "node scripts/vectorizar-skyline.mjs",
+    "skyline:linea": "node scripts/skyline-linea.mjs",
     "og": "node scripts/og-localidades.mjs"
   },
   "dependencies": {

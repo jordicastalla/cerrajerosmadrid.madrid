@@ -1,17 +1,23 @@
 ---
 /**
- * Perfil de Madrid en oro (ilustración del cliente pasada a SVG con
- * `npm run skyline`, que genera también las versiones AVIF y WebP que se sirven). Decorativo: se pinta como fondo pegado al borde
+ * Perfil de Madrid en oro. Decorativo: se pinta como fondo pegado al borde
  * inferior de su contenedor, que necesita `position: relative`. Se funde
  * hacia arriba para que el texto que tenga encima se lea bien.
+ *
+ * Dos dibujos del cliente:
+ * - «clasico»: la ilustración con árboles, pasada a SVG con `npm run skyline`,
+ *   que genera también las versiones AVIF y WebP que se sirven (pie, etc.).
+ * - «linea»: el perfil en línea dorada, sin árboles, que va de marca de agua
+ *   en la portada (`npm run skyline:linea`).
  */
 interface Props {
   clase?: string;
+  dibujo?: 'clasico' | 'linea';
 }
-const { clase = '' } = Astro.props;
+const { clase = '', dibujo = 'clasico' } = Astro.props;
 ---
 
-<div class={`skyline ${clase}`} aria-hidden="true"></div>
+<div class={`skyline skyline--${dibujo} ${clase}`} aria-hidden="true"></div>
 
 <style>
   .skyline {
@@ -37,6 +43,21 @@ const { clase = '' } = Astro.props;
       background-image: image-set(
         url('../../assets/marca/skyline.avif') type('image/avif'),
         url('../../assets/marca/skyline.webp') type('image/webp')
+      );
+    }
+  }
+
+  /* Perfil en línea dorada (marca de agua de la portada) */
+  .skyline--linea {
+    aspect-ratio: 2000 / 767;
+    background-image: url('../../assets/marca/skyline-linea.webp');
+  }
+
+  @supports (background-image: image-set(url('x.avif') type('image/avif'))) {
+    .skyline--linea {
+      background-image: image-set(
+        url('../../assets/marca/skyline-linea.avif') type('image/avif'),
+        url('../../assets/marca/skyline-linea.webp') type('image/webp')
       );
     }
   }
