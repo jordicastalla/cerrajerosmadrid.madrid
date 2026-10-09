@@ -1,8 +1,15 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import { site } from '@data/site';
+import { cookiesAnaliticas, cookiesTecnicas, cookiesMapa } from '@data/analitica';
 
 const dominio = new URL(site.dominio).host;
+
+const tabla = [
+  { grupo: 'Técnicas (no requieren consentimiento)', filas: cookiesTecnicas },
+  { grupo: 'Analíticas (solo si las acepta)', filas: cookiesAnaliticas },
+  { grupo: 'De terceros (solo si abre el mapa)', filas: cookiesMapa },
+];
 ---
 
 <Layout
@@ -20,31 +27,137 @@ const dominio = new URL(site.dominio).host;
         <h2>Qué es una cookie</h2>
         <p>
           Una cookie es un archivo pequeño que una web guarda en su navegador para recordar algo entre una visita y otra.
+          Unas son imprescindibles para que el sitio funcione y otras sirven para medir el uso; estas últimas solo se
+          instalan si usted da permiso.
         </p>
 
         <h2>Qué hace {dominio}</h2>
         <p>
-          <strong>Este sitio no instala cookies propias ni utiliza herramientas de analítica o publicidad.</strong> Navegar
-          por él no deja ninguna cookie en su navegador.
+          Al entrar por primera vez aparece un aviso con dos botones iguales: aceptar o rechazar. <strong
+            >Hasta que usted acepta, no se instala ninguna cookie de analítica ni se contacta con los servidores de
+            Google.</strong
+          > Si rechaza, o si no responde, la web funciona exactamente igual: no se pierde ninguna función, y no hay formularios
+          ni publicidad en ningún caso.
         </p>
 
         <h2>El mapa de Google</h2>
         <p>
-          En la página de inicio hay un mapa de Google Maps que <strong>no se carga con la página</strong>. Lo que se ve de entrada es un recuadro propio con un botón; el mapa solo se inserta si usted lo
-          pulsa. Mientras no lo haga, Google no recibe su dirección IP ni instala ninguna cookie.
+          En la página de inicio hay un mapa de Google Maps que <strong>no se carga con la página</strong>. Lo que se ve de
+          entrada es un recuadro propio con un botón; el mapa solo se inserta si usted lo pulsa. Mientras no lo haga,
+          Google no recibe su dirección IP ni instala ninguna cookie.
         </p>
         <p>
-          Si lo abre, Google puede instalar sus propias cookies, gobernadas por sus condiciones. El detalle está en
+          Si lo abre, Google puede instalar las cookies de la tercera tabla. Esa decisión es independiente de la del aviso
+          de cookies: aunque haya rechazado la analítica, puede abrir el mapa, y al revés. Para deshacerla basta con borrar
+          las cookies del navegador.
+        </p>
+      </div>
+
+      {
+        tabla.map((bloque) => (
+          <div class="legal__bloque">
+            <h2 class="legal__grupo">{bloque.grupo}</h2>
+            <div class="legal__tabla">
+              <table class="tabla-legal">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Titular</th>
+                    <th scope="col">Finalidad</th>
+                    <th scope="col">Duración</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {bloque.filas.map((c) => (
+                    <tr>
+                      <td>
+                        <code>{c.nombre}</code>
+                      </td>
+                      <td>{c.titular}</td>
+                      <td>{c.finalidad}</td>
+                      <td>{c.duracion}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))
+      }
+
+      <div class="legal__decision">
+        <h2 class="legal__grupo">Cambiar su decisión</h2>
+        <p>
+          Puede conceder o retirar el permiso en cualquier momento. Al rechazar, las cookies de analítica que hubiera se
+          eliminan de su navegador.
+        </p>
+        <button type="button" class="boton-sec" data-abrir-cookies>Configurar cookies</button>
+      </div>
+
+      <div class="prosa legal__cuerpo">
+        <p>
+          Google no publica una lista cerrada de las cookies del mapa, y pueden variar según el país o si usted tiene la
+          sesión de Google iniciada. Arriba figura la principal; el detalle completo y actualizado está en
           <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener nofollow"
             >la documentación de cookies de Google</a
-          >. Para eliminarlas basta con borrar las cookies del navegador.
+          >.
+        </p>
+
+        <h2>Quién trata los datos de analítica</h2>
+        <p>
+          La herramienta es Google Analytics 4, de Google Ireland Ltd. Recoge datos de navegación de forma agregada
+          (páginas vistas, procedencia, tipo de dispositivo y clics en el teléfono) y puede implicar transferencias
+          internacionales de datos amparadas en el Marco de Privacidad de Datos UE-EE. UU. Puede consultar su
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener nofollow">política de privacidad</a>
+          y, si lo prefiere, instalar el
+          <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener nofollow"
+            >complemento de inhabilitación</a
+          > para bloquearla en todas las webs.
         </p>
 
         <h2>Gestión desde el navegador</h2>
         <p>
-          Puede bloquear o eliminar las cookies desde las preferencias de su navegador (Chrome, Firefox, Safari, Edge).
+          Con independencia de lo que haga cada sitio web, puede bloquear o eliminar las cookies desde las preferencias de
+          su navegador (Chrome, Firefox, Safari, Edge).
         </p>
       </div>
+
+      <script is:inline>
+        document.querySelectorAll('[data-abrir-cookies]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            if (window.abrirPreferenciasCookies) window.abrirPreferenciasCookies();
+          });
+        });
+      </script>
     </div>
   </section>
 </Layout>
+
+<style>
+  .legal__bloque,
+  .legal__decision {
+    margin-top: 3rem;
+  }
+
+  .legal__grupo {
+    font-size: 1.35rem;
+  }
+
+  .legal__tabla {
+    margin-top: 1rem;
+    overflow-x: auto;
+  }
+
+  .legal__decision p {
+    margin-top: 0.75rem;
+    color: var(--pizarra);
+  }
+
+  .legal__decision .boton-sec {
+    margin-top: 1.1rem;
+    font: inherit;
+    font-weight: 650;
+    background: transparent;
+    cursor: pointer;
+  }
+</style>

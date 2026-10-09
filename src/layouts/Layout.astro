@@ -5,6 +5,7 @@ import SEO from '@components/SEO.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import MobileStickyCall from '@components/MobileStickyCall.astro';
+import Cookies from '@components/Cookies.astro';
 
 interface Props {
   titulo: string;
@@ -79,6 +80,7 @@ const {
 
     <Footer />
     <MobileStickyCall />
+    <Cookies />
 
     <script>
       import '@lib/track.ts';

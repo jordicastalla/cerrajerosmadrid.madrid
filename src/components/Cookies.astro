@@ -1,0 +1,224 @@
+---
+/**
+ * Aviso de cookies con bloqueo previo (spec §41). Adaptado del de
+ * cerrajeroschamartin.es.
+ *
+ * Google Analytics NO se carga hasta que el visitante acepta: el script ni
+ * siquiera se pide a los servidores de Google. Es lo que exige el artículo
+ * 22.2 de la LSSI: consentimiento *antes* de instalar cookies que no sean
+ * estrictamente necesarias.
+ *
+ * Aceptar y rechazar son dos botones iguales, en la misma capa, como pide la
+ * guía de cookies de la AEPD. A diferencia del de Chamartín, el aviso no
+ * bloquea la página: quien se ha quedado en la calle tiene que poder llamar
+ * sin decidir antes nada sobre cookies, así que en móvil se coloca encima de
+ * la barra de llamada y no la tapa. Sin decisión no se instala nada.
+ */
+import { analitica } from '@data/analitica';
+---
+
+<div
+  id="aviso-cookies"
+  class="aviso-cookies no-imprimir"
+  role="region"
+  aria-labelledby="cookies-titulo"
+  aria-describedby="cookies-texto"
+  hidden
+>
+  <p id="cookies-titulo" class="aviso-cookies__titulo">Cookies de analítica</p>
+  <p id="cookies-texto" class="aviso-cookies__texto">
+    Usamos Google Analytics para saber cuántas personas visitan la web y qué páginas les sirven. Solo se activa si lo
+    aceptas, y rechazarlo no cambia nada más. <a href="/politica-de-cookies/">Política de cookies</a>
+  </p>
+  <div class="aviso-cookies__botones">
+    <button type="button" class="aviso-cookies__btn" data-cookies="aceptar">Aceptar</button>
+    <button type="button" class="aviso-cookies__btn" data-cookies="rechazar">Rechazar</button>
+  </div>
+</div>
+
+<style>
+  .aviso-cookies {
+    position: fixed;
+    right: 1rem;
+    bottom: calc(1rem + var(--barra-movil) + 0.75rem + env(safe-area-inset-bottom));
+    left: 1rem;
+    z-index: 60;
+    padding: 1.1rem 1.15rem 1.15rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--plata);
+    background: var(--obsidiana-profunda);
+    border: 1px solid var(--linea-oro);
+    border-top: 3px solid var(--oro);
+    border-radius: 0.9rem;
+    box-shadow: 0 24px 48px -16px rgb(0 0 0 / 0.85);
+  }
+
+  .aviso-cookies[hidden] {
+    display: none;
+  }
+
+  /* Sin barra de llamada fija: el aviso baja a la esquina */
+  @media (min-width: 768px) {
+    .aviso-cookies {
+      right: auto;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      max-width: 25rem;
+      padding: 1.4rem 1.5rem 1.5rem;
+    }
+  }
+
+  .aviso-cookies__titulo {
+    font-family: var(--f-marca);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--oro);
+  }
+
+  .aviso-cookies__texto {
+    margin-top: 0.5rem;
+  }
+
+  .aviso-cookies__texto a {
+    color: var(--blanco);
+    text-decoration: underline;
+    text-decoration-color: var(--oro);
+    text-underline-offset: 0.2em;
+    white-space: nowrap;
+  }
+
+  .aviso-cookies__botones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-top: 0.95rem;
+  }
+
+  /* Los dos botones, idénticos: ninguno empuja hacia una respuesta */
+  .aviso-cookies__btn {
+    min-height: 2.9rem;
+    padding: 0 1rem;
+    font: inherit;
+    font-weight: 700;
+    color: var(--blanco);
+    background: transparent;
+    border: 1px solid var(--oro);
+    border-radius: 999px;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .aviso-cookies__btn:hover {
+    color: var(--obsidiana-profunda);
+    background: var(--oro);
+  }
+</style>
+
+<script is:inline define:vars={{ ID: analitica.id, CLAVE: analitica.clave, MESES: analitica.mesesVigencia }}>
+  (function () {
+    var aviso = document.getElementById('aviso-cookies');
+    if (!aviso) return;
+
+    function guardar(valor) {
+      var caduca = new Date();
+      caduca.setMonth(caduca.getMonth() + MESES);
+      try {
+        localStorage.setItem(CLAVE, JSON.stringify({ valor: valor, caduca: caduca.getTime() }));
+      } catch (e) {
+        /* navegación privada con almacenamiento bloqueado: se preguntará otra vez */
+      }
+    }
+
+    function leer() {
+      try {
+        var dato = JSON.parse(localStorage.getItem(CLAVE) || 'null');
+        if (!dato || Date.now() > dato.caduca) return null;
+        return dato.valor;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // La etiqueta de Google que facilitó el cliente, pero insertada solo tras
+    // aceptar. El modo de consentimiento deja la publicidad denegada: la web
+    // no usa Google Ads y no hay por qué conceder más de lo que se pide.
+    function cargarAnalitica() {
+      window['ga-disable-' + ID] = false;
+      if (window.__analiticaEnMarcha) {
+        window.gtag('consent', 'update', { analytics_storage: 'granted' });
+        return;
+      }
+      window.__analiticaEnMarcha = true;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+      };
+      window.gtag('consent', 'default', {
+        analytics_storage: 'granted',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+      });
+      window.gtag('js', new Date());
+      window.gtag('config', ID);
+
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
+      document.head.appendChild(s);
+    }
+
+    // Al revocar hay que parar la etiqueta y borrar lo ya instalado; si no,
+    // las cookies de Google seguirían ahí hasta caducar dentro de dos años.
+    function retirarAnalitica() {
+      window['ga-disable-' + ID] = true;
+      if (window.gtag) window.gtag('consent', 'update', { analytics_storage: 'denied' });
+
+      var host = location.hostname;
+      var base = host.replace(/^www\./, '');
+      document.cookie.split(';').forEach(function (c) {
+        var nombre = c.split('=')[0].trim();
+        if (nombre.indexOf('_ga') !== 0) return;
+        [host, '.' + host, base, '.' + base, ''].forEach(function (d) {
+          document.cookie =
+            nombre + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (d ? '; domain=' + d : '');
+        });
+      });
+    }
+
+    function abrir(enfocar) {
+      aviso.hidden = false;
+      // Solo se lleva el foco al aviso si lo ha abierto el visitante: al
+      // cargar la página no se le roba a nadie
+      if (enfocar) {
+        requestAnimationFrame(function () {
+          aviso.querySelector('[data-cookies="aceptar"]').focus();
+        });
+      }
+    }
+
+    aviso.addEventListener('click', function (e) {
+      var boton = e.target.closest('[data-cookies]');
+      if (!boton) return;
+      var eleccion = boton.getAttribute('data-cookies');
+      guardar(eleccion);
+      if (eleccion === 'aceptar') cargarAnalitica();
+      else retirarAnalitica();
+      aviso.hidden = true;
+    });
+
+    // Desde la política de cookies se puede reabrir para cambiar la decisión
+    window.abrirPreferenciasCookies = function () {
+      abrir(true);
+    };
+
+    var decision = leer();
+    if (decision === 'aceptar') cargarAnalitica();
+    else if (decision !== 'rechazar') abrir(false);
+  })();
+</script>

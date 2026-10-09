@@ -71,7 +71,7 @@ v2.2 prevalece sobre cualquier sección de v2.1 que la contradiga. Las secciones
 | 15, 16 | **Datos legales nuevos:** titular CerrajerosMadrid.Madrid · Calle Benito Gutiérrez 17, 28008 Madrid · info@cerrajerosmadrid.madrid · 912 918 462 · cerrajerosmadrid.madrid. Sustituyen a los de §16 (y al teléfono legal de §15). El cliente no ha facilitado NIF (`TODO-CLIENTE`). |
 | 23, 24 | **Logotipos definitivos** (`src/assets/marca/`): horizontal en la cabecera, vertical en el pie, emblema circular en la portada, «Quiénes Somos», CTA final, 404, favicon e iconos. Sustituyen al emblema provisional en SVG. |
 | 23 | **Perfil de Madrid**: la ilustración dorada del cliente (`marca/skyline-original.webp`), pasada a SVG de 5 tonos con potrace (`npm run skyline`), sustituye al perfil de bloques en la portada y en el pie. |
-| Anexo C | Dominio confirmado: `https://cerrajerosmadrid.madrid` (datos legales del cliente). |
+| Anexo C | Dominio confirmado: `https://www.cerrajerosmadrid.madrid`, con www (decisión del cliente, 2026-10-09; antes sin www). La versión sin www redirige con 301 desde `public/.htaccess`. |
 
 ## Resumen de cambios v2
 
@@ -1224,7 +1224,7 @@ La web debe aprovechar al máximo la arquitectura de Astro.
 
 - LCP ≤ 2,5 s · INP ≤ 200 ms · CLS ≤ 0,1, medidos en móvil y evaluados en el percentil 75 [5].
 - La imagen del LCP lleva `fetchpriority="high"` y no `loading="lazy"`; el resto de imágenes, lazy loading.
-- JavaScript permitido: «clic para cargar» del mapa (§17), mejora opcional del triaje (§39) y `track.ts` (§41). Nada más sin justificación.
+- JavaScript permitido: «clic para cargar» del mapa (§17), mejora opcional del triaje (§39), `track.ts` y el aviso de cookies (§41). Google Analytics solo tras aceptar. Nada más sin justificación.
 - Verificación automática: §43.
 
 ---
@@ -1670,12 +1670,13 @@ Sin medición no se puede optimizar.
 ## Eventos de llamada
 
 - Todo enlace `tel:` lleva `data-cta` con el bloque de origen: `header`, `hero`, `sticky`, `triage-<situacion>`, `faq`, `zona-<slug>`, `servicio-<slug>` o `footer`.
-- Un único módulo, `src/lib/track.ts`, registra el clic de llamada con `{ cta, pagina }`. Hasta que la empresa elija herramienta de analítica (`TODO-CLIENTE`), el módulo no carga ningún script de terceros.
+- Un único módulo, `src/lib/track.ts`, registra el clic de llamada con `{ cta, pagina }` y lo envía a Google Analytics 4 como evento `llamada` (con `gtag('event', …)`), solo si el visitante ha aceptado la analítica.
+- **Analítica (2026-10-09):** Google Analytics 4, `G-T47VCPPF6E` (`src/data/analitica.ts`). Bloqueo previo: el script de Google no se pide hasta que el visitante pulsa «Aceptar» en el aviso de cookies (`src/components/Cookies.astro`). «Rechazar» pesa lo mismo que «Aceptar», el aviso no tapa el teléfono y la decisión se puede cambiar desde la política de cookies; al revocar se borran las cookies `_ga*`.
 - Eventos adicionales: clic en «Ver mapa» y clic en el enlace al perfil de Google.
 
 ## Search Console
 
-- Verificar la propiedad (DNS, o meta de verificación configurable en `site.ts`).
+- Verificar la propiedad (DNS, o meta de verificación configurable en `site.ts`). **Hecho (2026-10-09):** meta `google-site-verification` del cliente en `site.verificacionGoogle`.
 - Enviar `/sitemap-index.xml`.
 - Revisar las consultas por URL para detectar canibalización entre la Home y las páginas de servicio o de localidad.
 
@@ -1771,8 +1772,8 @@ Variante si `garantiaMeses` está definido: la primera frase pasa a «…con sus
 2. **Garantía:** confirmar la política del Anexo B y, si se desea, la duración.
 3. **Schema:** qué dirección se publica (`address` / `geo`). Por defecto, ninguna.
 4. **Imagen y mapa:** el nombre del perfil incluye «Baratos» y varias reseñas dicen «barato» o «económico» (Google marca «precio» 13 veces y «económico» 5 entre los temas), mientras que v1 §23 pide estética «premium». Decidir qué cuenta la web para que Home y reseñas digan lo mismo, y si el mapa se muestra con ese nombre o se deja solo el enlace al perfil.
-5. **Analítica:** herramienta elegida (§41).
-6. **Dominio definitivo** (`site` en la configuración de Astro). Supuesto: `https://cerrajerosmadrid.madrid`, por el nombre del repositorio.
+5. ~~**Analítica:** herramienta elegida (§41).~~ Resuelto: Google Analytics 4 con bloqueo previo (§41).
+6. ~~**Dominio definitivo**~~ Resuelto: `https://www.cerrajerosmadrid.madrid`, con www (cliente, 2026-10-09).
 7. **Tiempo de llegada:** no se muestra mientras la empresa no lo mida.
 8. **Lote 1 de localidades** (§34): confirmar o cambiar la selección.
 9. **Coherencia teléfono–web:** la web promete presupuesto sin compromiso antes de empezar (§40). Una reseña pública del perfil critica que, al preguntar el precio por teléfono, no se lo dieron. Quien atienda el 912 918 462 debe poder explicar cómo se presupuesta.

@@ -27,8 +27,8 @@ export const site = {
   mapaEmbed:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d914875.9598179081!2d-3.81602975!3d40.525282000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42295d634f1d77%3A0x36f7862aa131e1bf!2sCerrajeros%20Madrid%20Openservi%20Baratos!5e1!3m2!1ses!2ses!4v1791193222054!5m2!1ses!2ses',
 
-  /** TODO-CLIENTE: token de verificación de Search Console (spec §41) */
-  verificacionGoogle: null as string | null,
+  /** Token de verificación de Search Console (spec §41, facilitado por el cliente el 2026-10-09) */
+  verificacionGoogle: 'KoHZMPKsBuokaKQNLOzGdJotGitFqkbZlWG2xn1lAXQ' as string | null,
 
   /**
    * TODO-CLIENTE (spec §14): qué dirección se publica en schema.org.
@@ -64,7 +64,7 @@ export const site = {
     provincia: 'Madrid',
     email: 'info@cerrajerosmadrid.madrid',
     telefono: '912 918 462',
-    web: 'cerrajerosmadrid.madrid',
+    web: 'www.cerrajerosmadrid.madrid',
   },
 } as const;
 

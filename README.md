@@ -22,7 +22,9 @@ Para publicar: `npm run build && npm run audit:strict` y subir el **contenido** 
 | Qué | Dónde |
 |---|---|
 | Datos del negocio (teléfono, perfil de Google, garantía, datos legales) | `src/data/site.ts` |
-| Dominio | `astro.config.mjs` (`site`) |
+| Dominio (con www; la versión sin www redirige en `public/.htaccess`) | `astro.config.mjs` (`site`) |
+| Google Analytics 4 y cookies que instala | `src/data/analitica.ts` |
+| Aviso de cookies (bloqueo previo de la analítica) | `src/components/Cookies.astro` |
 | Reseñas literales del perfil de Google | `src/data/resenas.ts` |
 | Situaciones del triaje «¿Qué te ha pasado?» | `src/data/situaciones.ts` |
 | Fichas de las 16 localidades | `src/content/localidades/*.md` |
@@ -37,12 +39,11 @@ Para publicar: `npm run build && npm run audit:strict` y subir el **contenido** 
 
 ## Cómo se publica una localidad
 
-Las 16 localidades están en `status: draft`: existen, pero son `noindex`, no salen en el sitemap y no se enlazan. Para pasar una a `ready`, su ficha necesita, como mínimo:
+Las 16 localidades están en `status: ready`. Una ficha en `draft` existe, pero es `noindex`, no sale en el sitemap y no se enlaza. Para pasar una a `ready`, su ficha necesita, como mínimo (`src/lib/gate.ts`):
 
-1. al menos 1 caso real verificado en `src/content/casos/`;
-2. una introducción propia de 100 palabras o más, escrita solo con datos reales de la zona;
-3. al menos 2 preguntas frecuentes reales de la zona (`faqs`);
-4. `seoTitle` y `seoDescription` propios.
+1. un texto propio de 100 palabras o más, escrito solo con datos reales de la zona;
+2. al menos 2 preguntas frecuentes reales de la zona (`faqs`);
+3. `seoTitle` y `seoDescription` propios.
 
 Además, cada ficha puede llevar un `consejo` práctico para la zona y sus zonas cercanas (`nearby`). Los bloques comunes de las páginas de zona (ventajas, banner, «Ten esto a mano», preguntas generales) están en `src/data/zona.ts`.
 
@@ -50,14 +51,12 @@ Si se marca `ready` sin cumplirlo, el build falla y dice qué falta.
 
 ## Reglas que no se saltan
 
-- La web **no publica precios**. El único tiempo de llegada es el tiempo medio que ha dado la empresa (20 a 30 minutos, en las preguntas frecuentes de la Home).
+- La web **no publica precios**. Los tiempos de llegada son solo los que da la empresa: 20 a 30 minutos de media en Madrid (preguntas frecuentes de la Home) y entre 20 y 35 minutos en los textos de cada localidad.
 - Nada de «los mejores», «líderes», «técnicos certificados» ni similares sin prueba: la auditoría lo detecta.
 - Las reseñas se copian literales del perfil de Google y nunca se marcan con `AggregateRating`.
 - No se reutilizan textos de otros dominios propios.
 
 ## Pendiente del cliente
 
-- Token de verificación de Search Console (`src/data/site.ts`).
 - Decidir qué dirección se publica en schema.org (por defecto, ninguna).
 - NIF del titular para el aviso legal (`src/data/site.ts`, `legal.nif`).
-- Fotos reales por localidad.

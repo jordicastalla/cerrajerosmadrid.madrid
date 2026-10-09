@@ -2,22 +2,23 @@
  * Medición de llamadas (spec §41). Cada enlace tel: lleva data-cta con el
  * bloque de origen (hero, sticky, header, triage-<situacion>…).
  *
- * Mientras la empresa no elija herramienta de analítica (TODO-CLIENTE), aquí
- * no se carga ningún script de terceros: solo se emite un evento del
- * navegador y, si algún día existe window.dataLayer, se empuja ahí también.
+ * Este módulo no carga nada de terceros. Emite un evento del navegador y, si
+ * el visitante ha aceptado la analítica (el aviso de cookies define entonces
+ * window.gtag), lo envía también a Google Analytics 4. Sin consentimiento no
+ * sale nada del navegador.
  */
 
 type Detalle = { evento: string; cta: string; pagina: string };
 
 declare global {
   interface Window {
-    dataLayer?: Record<string, unknown>[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
 function registrar(detalle: Detalle) {
   window.dispatchEvent(new CustomEvent('openservi:evento', { detail: detalle }));
-  window.dataLayer?.push({ event: detalle.evento, cta: detalle.cta, pagina: detalle.pagina });
+  window.gtag?.('event', detalle.evento, { cta: detalle.cta, pagina: detalle.pagina });
 }
 
 document.addEventListener(
